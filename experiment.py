@@ -3,7 +3,7 @@ from wooting_utils import WootingPython, HID_CODE_SPACE
 import numpy as np
 import sys
 
-
+PRESS_SCALER = 1/8
 
 # constants with units in the visual degrees or degrees/loop
 STARTING_POS = [-15, 0]
@@ -18,7 +18,7 @@ MAX_SSD = 4.9
 
 INSTRUCTIONS = 'Welcome to the task!\n\n' +\
     'On each trial, your job is to keep a ball inside of a moving ring by controlling its speed.\n\n' +\
-    'After a countdown, the ring will begin to move from left to right. Press the sbacebar to move the ball.\n\n' +\
+    'After a countdown, the ring will begin to move from left to right. Press the spacebar to move the ball.\n\n' +\
     'The harder your press the spacebar, the faster the ball will move. Please try your best to keep the ball within the ring.\n\n' +\
     'On some trials, a box will appear around the ring. If the box appears, please stop moving the ball as quickly as possible.\n\n' +\
     'When you are ready to begin, press the spacebar.'
@@ -104,8 +104,8 @@ if __name__ == "__main__":
         stopsignal = visual.Rect(win=mywin, width=5, height=5, pos=(0, 0),
                                  lineWidth=50, lineColor='white')
         finishline = visual.Line(win=mywin, lineWidth=2,
-                                 start=(FINISH_LINE+ring.radius, -12.5),
-                                 end=(FINISH_LINE+ring.radius, 12.5))
+                                 start=(FINISH_LINE+ring.radius, -20),
+                                 end=(FINISH_LINE+ring.radius, 20))
 
         # Init Trial Data
         SSD = sample_SSD()
@@ -138,7 +138,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 ring.pos += RING_PACE
                 if analog_codes:
-                    ball.pos += (np.max(analog_codes)/10, 0)
+                    ball.pos += (np.max(analog_codes)*PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
@@ -164,7 +164,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 if analog_codes:
                     not_moving_timer = core.CountdownTimer(1)
-                    ball.pos += (np.max(analog_codes)/10, 0)
+                    ball.pos += (np.max(analog_codes)*PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
@@ -197,7 +197,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 ring.pos += RING_PACE
                 if analog_codes:
-                    ball.pos += (np.max(analog_codes)/10, 0)
+                    ball.pos += (np.max(analog_codes)*PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
