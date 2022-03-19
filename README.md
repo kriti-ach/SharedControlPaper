@@ -13,8 +13,8 @@ The key components of this repor include:
     <li>tweak_SSD_sampler.ipynb - notebook running simulations to test sample_SSD funciton in exp file</li>
 </ul>
 ## To setup keyboard:
-    1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
-    2. Install appropriate dynamic libraries (dylibs). 
+    `1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
+    `2. Install appropriate dynamic libraries (dylibs). 
     
         2.1 install [libusb](https://libusb.info/):
             `brew install libusb` 
