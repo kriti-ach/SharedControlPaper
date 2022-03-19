@@ -14,16 +14,16 @@ The key components of this repo include:
 </ul>
 
 ## To setup keyboard:
-    1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
-    2. Install appropriate dynamic libraries (dylibs). 
-    
-        2.1 install [libusb](https://libusb.info/):
+1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
+2. Install appropriate dynamic libraries (dylibs). 
+
+    2.1 install [libusb](https://libusb.info/):
             `brew install libusb` 
 
-        2.2 install [hidapi](https://formulae.brew.sh/formula/hidapi):
+    2.2 install [hidapi](https://formulae.brew.sh/formula/hidapi):
             `brew install hidapi` 
     
-        2.3 install [Wooting Analog SDK](https://github.com/WootingKb/wooting-analog-sdk):
+    2.3 install [Wooting Analog SDK](https://github.com/WootingKb/wooting-analog-sdk):
             `brew install wootingkb/wooting/wooting-analog-sdk`
 or follow the instructions for manual installation on the Github Readme linked above.
 
