@@ -12,6 +12,7 @@ The key components of this repo include:
     <li>schematics.py - not relevent, i believe this is a test verison or unfinished verison of exp</li>
     <li>tweak_SSD_sampler.ipynb - notebook running simulations to test sample_SSD funciton in exp file</li>
 </ul>
+
 ## To setup keyboard:
     1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
     2. Install appropriate dynamic libraries (dylibs). 
