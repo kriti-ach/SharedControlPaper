@@ -13,17 +13,17 @@ The key components of this repor include:
     <li>tweak_SSD_sampler.ipynb - notebook running simulations to test sample_SSD funciton in exp file</li>
 </ul>
 ## To setup keyboard:
-1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
-2. Install appropriate dynamic libraries (dylibs). 
+    1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
+    2. Install appropriate dynamic libraries (dylibs). 
     
-    2.1 install [libusb](https://libusb.info/):
-        `brew install libusb` 
+        2.1 install [libusb](https://libusb.info/):
+            `brew install libusb` 
 
-    2.2 install [hidapi](https://formulae.brew.sh/formula/hidapi):
-        `brew install hidapi` 
+        2.2 install [hidapi](https://formulae.brew.sh/formula/hidapi):
+            `brew install hidapi` 
     
-    2.1 install [Wooting Analog SDK](https://github.com/WootingKb/wooting-analog-sdk):
-        `brew install wootingkb/wooting/wooting-analog-sdk`
+        2.3 install [Wooting Analog SDK](https://github.com/WootingKb/wooting-analog-sdk):
+            `brew install wootingkb/wooting/wooting-analog-sdk`
 or follow the instructions for manual installation on the Github Readme linked above.
 
 
