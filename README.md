@@ -6,11 +6,12 @@ which has the user control the height of a {} by using a pressure sensitive keyb
 
 ## Contents of repo:
 The key components of this repor include:
-experiment.py - the main experiment script to run the task
-wooting_utils.py - contains the keyboard specific utility functions
-schematics.py - not relevent, i believe this is a test verison or unfinished verison of exp
-tweak_SSD_sampler.ipynb - notebook running simulations to test sample_SSD funciton in exp file
-
+<ul>
+    <li>experiment.py - the main experiment script to run the task</li>
+    <li>wooting_utils.py - contains the keyboard specific utility functions</li>
+    <li>schematics.py - not relevent, i believe this is a test verison or unfinished verison of exp</li>
+    <li>tweak_SSD_sampler.ipynb - notebook running simulations to test sample_SSD funciton in exp file</li>
+</ul>
 ## To setup keyboard:
 1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
 2. Install appropriate dynamic libraries (dylibs). 
