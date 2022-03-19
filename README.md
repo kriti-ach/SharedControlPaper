@@ -5,7 +5,7 @@ This project is looking to see the effects of shared control on stop inhibition 
 which has the user control the height of a {} by using a pressure sensitive keyboard.
 
 ## Contents of repo:
-The key components of this repor include:
+The key components of this repo include:
 <ul>
     <li>experiment.py - the main experiment script to run the task</li>
     <li>wooting_utils.py - contains the keyboard specific utility functions</li>
@@ -13,8 +13,8 @@ The key components of this repor include:
     <li>tweak_SSD_sampler.ipynb - notebook running simulations to test sample_SSD funciton in exp file</li>
 </ul>
 ## To setup keyboard:
-    `1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
-    `2. Install appropriate dynamic libraries (dylibs). 
+    1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
+    2. Install appropriate dynamic libraries (dylibs). 
     
         2.1 install [libusb](https://libusb.info/):
             `brew install libusb` 
