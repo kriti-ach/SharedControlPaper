@@ -25,6 +25,7 @@ The key components of this repo include:
     
     2.3 install [Wooting Analog SDK](https://github.com/WootingKb/wooting-analog-sdk):
             `brew install wootingkb/wooting/wooting-analog-sdk`
+
 or follow the instructions for manual installation on the Github Readme linked above.
 
 
