@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
     # create a window
     mywin = visual.Window(monitor="testMonitor",
-                          units="deg", fullscr=True)
+                          units="deg", fullscr=False)
     # Trial Setup
     stims = ['go', 'go', 'go', 'go', 'stop', 'stop'] * 1
     stimlist = [{'condition': i} for i in stims]
@@ -96,8 +96,8 @@ if __name__ == "__main__":
     for trial in trials:
         # Init stimuli
         countdown = visual.TextStim(win=mywin, text='', height=1, pos=[0, 0])
-        ring = visual.Circle(win=mywin, radius=2, edges=32, pos=STARTING_POS,
-                             lineWidth=15, lineColor='white')
+        ring = visual.Circle(win=mywin, radius=2, edges=32, potttttttttttttt,
+                lineWidth=15, lineColor='white', fillColor=None)
         ball = visual.Circle(win=mywin, radius=.8, edges=32,
                              pos=STARTING_POS, lineWidth=10, lineColor='white',
                              fillColor='white')
