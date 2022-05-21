@@ -44,10 +44,6 @@ def getInput(id_text="s999", sess_text='001'):
     else:
         return text1, text2
 
-def prob_dist(go = 70, stop = 15, ai = 15, n=10):
-    prob_dist = gui.Dlg(title = "Probability Distribution of Conditions")
-    prob_dist.addText('Enter the probability of each condition in whole numbers ##.')
-    prib_dist.addField('Number of Trials')
 
 if __name__ == "__main__":
     # SET UP WOOTING KB
