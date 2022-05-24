@@ -97,6 +97,7 @@ if __name__ == "__main__":
         stopsignal = visual.Rect(win=mywin, width=5, height=5, pos=(0, 0),
                                  lineWidth=50, lineColor='white', fillColor=None)
         finishline = visual.Line(win=mywin, lineWidth=2, start=(FINISH_LINE + ring.radius, -20), end=(FINISH_LINE + ring.radius, 20))
+        aiWarning = visual.Rect(win=mywin, size=(55, 31), pos=(0, 0), lineWidth=20, lineColor='red', fillColor=None, interpolate=True)
 
         # Init Trial Data
         SSD = sample_SSD()
@@ -221,7 +222,6 @@ if __name__ == "__main__":
                 ring.pos += RING_PACE
                 ball.pos += RING_PACE
                 if analog_codes:
-                    #ball.pos == ring.pos
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
@@ -231,7 +231,7 @@ if __name__ == "__main__":
                     Hit = True
                 if np.abs(ring.pos[0]) >= FINISH_LINE:
                     FinishLine = True
-                # fixation.draw()
+                aiWarning.draw()
                 ball.draw()
                 ring.draw()
                 finishline.draw()
