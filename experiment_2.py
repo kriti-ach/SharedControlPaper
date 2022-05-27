@@ -255,7 +255,7 @@ if __name__ == "__main__":
                 finishline.draw()
                 mywin.flip()
 
-        elif trial['condition'] == 'AI':
+        elif trial['condition'] == 'ai':
             trial_start = core.getTime()
             # SSD
             SSD_timer = core.CountdownTimer(SSD)
@@ -290,7 +290,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 if analog_codes:
                     not_moving_timer = core.CountdownTimer(1)
-                    ball.pos = stopsignal.pos
+                    ball.pos == (np.max(analog_codes) * PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)

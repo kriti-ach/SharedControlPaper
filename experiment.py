@@ -44,6 +44,7 @@ def getInput(id_text="s999", sess_text='001'):
     else:
         return text1, text2
 
+
 def getProbDist(go_text=.5, stop_text=.5, n_text=10):
     prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
     prob_dist.addText('Enter the probability of each condition and number of trials.')
@@ -76,6 +77,7 @@ def getProbDist(go_text=.5, stop_text=.5, n_text=10):
 
     return conditions
 
+
 if __name__ == "__main__":
     # SET UP WOOTING KB
     print('setting up kb')
@@ -93,9 +95,10 @@ if __name__ == "__main__":
 
     # create a window
     mywin = visual.Window(monitor="testMonitor",
-                          units="deg", fullscr=False)
+                          units="deg", fullscr=True)
     # Trial Setup
-    stims = ['go', 'go', 'go', 'go', 'stop', 'stop'] * 1
+    conditions = getProbDist()
+    stims = conditions.tolist() * 1
     stimlist = [{'condition': i} for i in stims]
     trials = data.TrialHandler(stimlist, 1, method='random',
                                extraInfo={'participant': subid,
@@ -135,8 +138,8 @@ if __name__ == "__main__":
         stopsignal = visual.Rect(win=mywin, width=5, height=5, pos=(0, 0),
                                  lineWidth=50, lineColor='white', fillColor=None)
         finishline = visual.Line(win=mywin, lineWidth=2,
-                                 start=(FINISH_LINE+ring.radius, -20),
-                                 end=(FINISH_LINE+ring.radius, 20))
+                                 start=(FINISH_LINE + ring.radius, -20),
+                                 end=(FINISH_LINE + ring.radius, 20))
 
         # Init Trial Data
         SSD = sample_SSD()
@@ -169,11 +172,11 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 ring.pos += RING_PACE
                 if analog_codes:
-                    ball.pos += (np.max(analog_codes)*PRESS_SCALER, 0)
+                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
-                dist = ball.pos[0]-ring.pos[0]
+                dist = ball.pos[0] - ring.pos[0]
                 distances.append(dist)
                 if dist > 1.05:
                     Hit = True
@@ -195,12 +198,12 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 if analog_codes:
                     not_moving_timer = core.CountdownTimer(1)
-                    ball.pos += (np.max(analog_codes)*PRESS_SCALER, 0)
+                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
 
-                dist = ball.pos[0]-ring.pos[0]
+                dist = ball.pos[0] - ring.pos[0]
                 distances.append(dist)
                 if dist > 1.05:
                     Hit = True
@@ -228,11 +231,11 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 ring.pos += RING_PACE
                 if analog_codes:
-                    ball.pos += (np.max(analog_codes)*PRESS_SCALER, 0)
+                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
-                dist = ball.pos[0]-ring.pos[0]
+                dist = ball.pos[0] - ring.pos[0]
                 distances.append(dist)
                 if dist > 1.05:
                     Hit = True

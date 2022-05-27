@@ -44,6 +44,7 @@ def getInput(id_text="s999", sess_text='001'):
     else:
         return text1, text2
 
+
 def getProbDist(go_text=.33, stop_text=.33, ai_text=.34, n_text=15):
     prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
     prob_dist.addText('Enter the probability of each condition and number of trials.')
@@ -95,12 +96,13 @@ if __name__ == "__main__":
 
     # subject info
     subid, sess = getInput()
+    conditions = getProbDist()
 
     # create a window
     mywin = visual.Window(monitor='testMonitor',
                           units="deg", fullscr=True)
     # Trial Setup
-    stims = ['AI'] * 1
+    stims = conditions.tolist()
     stimlist = [{'condition': i} for i in stims]
     trials = data.TrialHandler(stimlist, 1, method='random',
                                extraInfo={'participant': subid,
@@ -248,7 +250,7 @@ if __name__ == "__main__":
                 finishline.draw()
                 mywin.flip()
 
-        elif trial['condition'] == 'AI':
+        elif trial['condition'] == 'ai':
             trial_start = core.getTime()
             # SSD
             SSD_timer = core.CountdownTimer(SSD)
@@ -283,7 +285,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 if analog_codes:
                     not_moving_timer = core.CountdownTimer(1)
-                    ball.pos = stopsignal.pos
+                    ball.pos == (np.max(analog_codes) * PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
