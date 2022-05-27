@@ -1,0 +1,2 @@
+['go' 'stop' 'go' 'stop' 'stop' 'ai' 'ai' 'ai' 'stop' 'go' 'go' 'ai'
+ 'stop' 'go' 'ai']

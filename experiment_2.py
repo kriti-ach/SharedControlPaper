@@ -156,7 +156,8 @@ if __name__ == "__main__":
         # Countdown / ITI
         timer = core.CountdownTimer(COUNTDOWN_TIME)
         while timer.getTime() > 0:  # after 5s will become negative
-            countdown.text = f'{timer.getTime():.0f}'
+            count = timer.getTime()
+            countdown.text = f'{count:.0f}'
             ball.draw()
             ring.draw()
             countdown.draw()
@@ -290,7 +291,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 if analog_codes:
                     not_moving_timer = core.CountdownTimer(1)
-                    ball.pos == (np.max(analog_codes) * PRESS_SCALER, 0)
+                    ball.pos = stopsignal.pos
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)

@@ -44,6 +44,42 @@ def getInput(id_text="s999", sess_text='001'):
     else:
         return text1, text2
 
+def getProbDist(go_text=.33, stop_text=.33, ai_text=.34, n_text=15):
+    prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
+    prob_dist.addText('Enter the probability of each condition and number of trials.')
+    prob_dist.addText('Trial types should add to 1.0')
+    prob_dist.addField('Number of Trials (Total): ', n_text)
+    prob_dist.addField('Go Trials: ', go_text)
+    prob_dist.addField('Stop Trials: ', stop_text)
+    prob_dist.addField('AI Trials: ', ai_text)
+    prob_dist.show()
+    if prob_dist.OK:
+        nTrials = prob_dist.data[0]
+        go = prob_dist.data[1]
+        stop = prob_dist.data[2]
+        ai = prob_dist.data[3]
+    else:
+        print('nothing was entered')
+
+    # Obtaining number of each condition
+    goTrials = round(nTrials * go)
+    stopTrials = round(nTrials * stop)
+    aiTrials = round(nTrials * ai)
+
+    assert nTrials == (goTrials + stopTrials + aiTrials)
+
+    # Creating array of conditions then shuffling
+    conditions = np.array([0] * goTrials + [1] * stopTrials + [2] * aiTrials)
+    np.random.shuffle(conditions)
+
+    # Replacing values with trial types
+    conditions = conditions.astype('object')
+    conditions[conditions == 0] = 'go'
+    conditions[conditions == 1] = 'stop'
+    conditions[conditions == 2] = 'ai'
+
+    return conditions
+
 
 if __name__ == "__main__":
     # SET UP WOOTING KB
