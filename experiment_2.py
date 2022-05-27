@@ -156,8 +156,7 @@ if __name__ == "__main__":
         # Countdown / ITI
         timer = core.CountdownTimer(COUNTDOWN_TIME)
         while timer.getTime() > 0:  # after 5s will become negative
-            count = timer.getTime()
-            countdown.text = f'{count:.0f}'
+            countdown.text = f'{timer.getTime():.0f}'
             ball.draw()
             ring.draw()
             countdown.draw()

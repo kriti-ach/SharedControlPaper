@@ -283,7 +283,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 if analog_codes:
                     not_moving_timer = core.CountdownTimer(1)
-                    ball.pos == (np.max(analog_codes) * PRESS_SCALER, 0)
+                    ball.pos = stopsignal.pos
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)

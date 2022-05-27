@@ -44,39 +44,35 @@ def getInput(id_text="s999", sess_text='001'):
     else:
         return text1, text2
 
-def getProbDist(go_text=.33, stop_text=.33, ai_text=.34, n_text=15):
+def getProbDist(go_text=.5, stop_text=.5, n_text=10):
     prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
     prob_dist.addText('Enter the probability of each condition and number of trials.')
     prob_dist.addText('Trial types should add to 1.0')
     prob_dist.addField('Number of Trials (Total): ', n_text)
     prob_dist.addField('Go Trials: ', go_text)
     prob_dist.addField('Stop Trials: ', stop_text)
-    prob_dist.addField('AI Trials: ', ai_text)
     prob_dist.show()
     if prob_dist.OK:
         nTrials = prob_dist.data[0]
         go = prob_dist.data[1]
         stop = prob_dist.data[2]
-        ai = prob_dist.data[3]
     else:
         print('nothing was entered')
 
     # Obtaining number of each condition
     goTrials = round(nTrials * go)
     stopTrials = round(nTrials * stop)
-    aiTrials = round(nTrials * ai)
 
-    assert nTrials == (goTrials + stopTrials + aiTrials)
+    assert nTrials == (goTrials + stopTrials)
 
     # Creating array of conditions then shuffling
-    conditions = np.array([0] * goTrials + [1] * stopTrials + [2] * aiTrials)
+    conditions = np.array([0] * goTrials + [1] * stopTrials)
     np.random.shuffle(conditions)
 
     # Replacing values with trial types
     conditions = conditions.astype('object')
     conditions[conditions == 0] = 'go'
     conditions[conditions == 1] = 'stop'
-    conditions[conditions == 2] = 'ai'
 
     return conditions
 
@@ -131,13 +127,13 @@ if __name__ == "__main__":
     for trial in trials:
         # Init stimuli
         countdown = visual.TextStim(win=mywin, text='', height=1, pos=[0, 0])
-        ring = visual.Circle(win=mywin, radius=2, edges=32, potttttttttttttt,
+        ring = visual.Circle(win=mywin, radius=2, edges=32, pos=STARTING_POS,
                 lineWidth=15, lineColor='white', fillColor=None)
         ball = visual.Circle(win=mywin, radius=.8, edges=32,
                              pos=STARTING_POS, lineWidth=10, lineColor='white',
                              fillColor='white')
         stopsignal = visual.Rect(win=mywin, width=5, height=5, pos=(0, 0),
-                                 lineWidth=50, lineColor='white')
+                                 lineWidth=50, lineColor='white', fillColor=None)
         finishline = visual.Line(win=mywin, lineWidth=2,
                                  start=(FINISH_LINE+ring.radius, -20),
                                  end=(FINISH_LINE+ring.radius, 20))
