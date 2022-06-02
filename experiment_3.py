@@ -179,6 +179,7 @@ if __name__ == "__main__":
                 if np.abs(ring.pos[0]) >= FINISH_LINE:
                     FinishLine = True
                 # fixation.draw()
+                aiWarning.draw()
                 ball.draw()
                 ring.draw()
                 finishline.draw()
@@ -269,7 +270,6 @@ if __name__ == "__main__":
                     Hit = True
                 if np.abs(ring.pos[0]) >= FINISH_LINE:
                     FinishLine = True
-                aiWarning.draw()
                 ball.draw()
                 ring.draw()
                 finishline.draw()
