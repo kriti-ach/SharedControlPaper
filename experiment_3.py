@@ -95,8 +95,8 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     # subject info
-    subid, sess = getInput()
     conditions = getProbDist()
+    subid, sess = getInput()
 
     # create a window
     mywin = visual.Window(monitor='testMonitor',

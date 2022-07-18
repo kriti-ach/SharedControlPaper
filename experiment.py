@@ -90,14 +90,14 @@ if __name__ == "__main__":
         print('> ERROR: No keyboard found! Connect it and try again.')
         sys.exit(-1)
 
-    # subject info
+    # subject/trial info
+    conditions = getProbDist()
     subid, sess = getInput()
 
     # create a window
     mywin = visual.Window(monitor="testMonitor",
                           units="deg", fullscr=True)
     # Trial Setup
-    conditions = getProbDist()
     stims = conditions.tolist() * 1
     stimlist = [{'condition': i} for i in stims]
     trials = data.TrialHandler(stimlist, 1, method='random',
