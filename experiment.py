@@ -3,7 +3,10 @@ from wooting_utils import WootingPython, HID_CODE_SPACE
 import numpy as np
 import sys
 
-PRESS_SCALER = 1/8
+import wx
+app = wx.App(False)
+
+PRESS_SCALER = 1 / 10
 
 # constants with units in the visual degrees or degrees/loop
 STARTING_POS = [-15, 0]
