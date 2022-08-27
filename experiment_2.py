@@ -2,8 +2,12 @@ from psychopy import visual, core, gui, data
 from wooting_utils import WootingPython, HID_CODE_SPACE
 import numpy as np
 import sys
+import random
 
 PRESS_SCALER = 1 / 10
+
+import wx
+app = wx.App(False)
 
 # constants with units in the visual degrees or degrees/loop
 STARTING_POS = [-15, 0]
@@ -263,7 +267,8 @@ if __name__ == "__main__":
                 scan_codes, analog_codes, _ = wp.read_full_buffer()
                 timings.append(core.getTime() - trial_start)
                 ring.pos += RING_PACE
-                ball.pos += RING_PACE
+                ball.pos += (RING_PACE[0] + [-.04, .04][random.randrange(2)], RING_PACE[1])
+                print(ring.pos)
                 if analog_codes:
                     pressures.append(np.max(analog_codes))
                 else:
@@ -290,7 +295,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 if analog_codes:
                     not_moving_timer = core.CountdownTimer(1)
-                    ball.pos == (np.max(analog_codes) * PRESS_SCALER, 0)
+                    ball.pos == (np.max(analog_codes) *  PRESS_SCALER)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)
