@@ -3,6 +3,7 @@ from wooting_utils import WootingPython, HID_CODE_SPACE
 import numpy as np
 import sys
 import wx
+import random
 
 app = wx.App(False)
 
@@ -16,10 +17,10 @@ RING_PACE = (0.085, 0)
 # constants with units in the seconds
 COUNTDOWN_TIME = 3
 FEEDBACK_TIME = 2.0
+BREAK_TIME = 10.0
+BLOCK_END_TIME = 10.0
 MIN_SSD = 2
 MAX_SSD = 4.9
-
-BLOCKS = 2
 
 INSTRUCTIONS = 'Welcome to the task!\n\n' +\
     'On each trial, your job is to keep a ball inside of a moving ring by controlling its speed.\n\n' +\
@@ -50,7 +51,7 @@ def getInput(id_text="s999", sess_text='001'):
         return text1, text2
 
 
-def setupTrials(block1=0, block2=.90, n_text=15):
+def setupTrials(block1=0.1, block2=.90, n_text=20):
     prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
     prob_dist.addText('Enter total number of trials and % of AI trials in each block.')
     prob_dist.addText('There will be 2 blocks only. (0% AI and 90% AI.)')
@@ -75,8 +76,8 @@ def setupTrials(block1=0, block2=.90, n_text=15):
         prob_dist.addText('There will be 2 blocks only. (0% AI and 90% AI.)')
         prob_dist.addText('Number of trials should be divisible by 2')
         prob_dist.addField('Number of Trials (Total): ', n_text)
-        prob_dist.addField('Block 1 AI % in proportions: ', stop_text)
-        prob_dist.addField('Block 2 AI % in proportions: ', ai_text)
+        prob_dist.addField('Block 1 AI % in proportions: ', block1)
+        prob_dist.addField('Block 2 AI % in proportions: ', block2)
         prob_dist.show()
         if prob_dist.OK:
             nTrials = prob_dist.data[0]
@@ -88,17 +89,17 @@ def setupTrials(block1=0, block2=.90, n_text=15):
     block = nTrials / 2
 
     # Obtaining number of each condition
-    aiTrials_block1 = round(nTrials * block1)
+    aiTrials_block1 = int(block * block1)
     stopTrials_block1 = block - aiTrials_block1
-    aiTrials_block2 = round(nTrials * block2)
+    aiTrials_block2 = int(block * block2)
     stopTrials_block2 = block - aiTrials_block2
-    
+        
     assert nTrials == (aiTrials_block1 + stopTrials_block1 + aiTrials_block2 + stopTrials_block2)
 
     # Creating array of conditions then shuffling
     conditions_block1 = np.array([0] * int(stopTrials_block1) + [1] * int(aiTrials_block1))
     np.random.shuffle(conditions_block1)
-
+    
     # Replacing values with trial types
     conditions_block1 = conditions_block1.astype('object')
     conditions_block1[conditions_block1 == 0] = 'stop'
@@ -113,11 +114,14 @@ def setupTrials(block1=0, block2=.90, n_text=15):
     conditions_block2[conditions_block2 == 0] = 'stop'
     conditions_block2[conditions_block2 == 1] = 'ai'
     
+    
     # randomizing the blocks
-    conditions = [conditions_block1, conditions_block2]
-    np.random.shuffle(conditions)
+    if random.randint(0, 1) == 0:
+        conditions = list(conditions_block1) + list(conditions_block2)
+    else:
+        conditions = list(conditions_block2) + list(conditions_block1)
 
-    return conditions
+    return conditions, block
 
 
 if __name__ == "__main__":
@@ -134,17 +138,29 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     # subject info
-    conditions = setupTrials()
+    conditions, block = setupTrials()
     subid, sess = getInput()
+    
+    # Trial Setup
+    stims = conditions
+    stimlist = [{'condition': i} for i in stims]
+    trials = data.TrialHandler(stimlist, 1, method='sequential',
+                                   extraInfo={'participant': subid,
+                                              'session': sess})
 
     # create a window
     mywin = visual.Window(monitor='testMonitor',
                           units="deg", fullscr=True)
+    
 
     # CONSTANT TEXT
     intro_stim = visual.TextStim(win=mywin, text=INSTRUCTIONS, height=.85, pos=[0, 0], wrapWidth=30)
     end_stim = visual.TextStim(win=mywin, text=END_TEXT, height=.75, pos=[0, 0])
     feedback = visual.TextStim(win=mywin, text='Trial Complete',
+                               height=1.5, pos=[0, 3.5])
+    break_feedback = visual.TextStim(win=mywin, text='Take a 10 second break',
+                               height=1.5, pos=[0, 3.5])
+    block_feedback = visual.TextStim(win=mywin, text='The first block is complete. Get ready to complete the second block',
                                height=1.5, pos=[0, 3.5])
 
     # INSTRUCTIONS
@@ -155,212 +171,222 @@ if __name__ == "__main__":
         scan_codes, analog_codes, _ = wp.read_full_buffer()
         if HID_CODE_SPACE in scan_codes:
             waitingForSpace = False
-    
-    for block in range(0, BLOCKS):
         
-        # Trial Setup
-        stimlist = [{'condition': i} for i in stims]
-        trials = data.TrialHandler(stimlist, 1, method='random',
-                                   extraInfo={'participant': subid,
-                                              'session': sess})
+    # TRIAL LOOP
+    
+    for count, trial in enumerate(trials):
+        
+        if count and count % 20 == 0:
+            break_timer = core.CountdownTimer(BREAK_TIME)
+            while break_timer.getTime() > 0:
+                mywin.color = 'grey'
+                break_feedback.draw()
+                mywin.flip()
+                
+        # Init stimuli
+        countdown = visual.TextStim(win=mywin, text='', height=1, pos=[0, 0])
+        ring = visual.Circle(win=mywin, radius=2, edges=32, pos=STARTING_POS,
+                             lineWidth=15, lineColor='white', fillColor=None)
+        ball = visual.Circle(win=mywin, radius=.8, edges=32,
+                             pos=STARTING_POS, lineWidth=10, lineColor='white',
+                             fillColor='white')
+        stopsignal = visual.Rect(win=mywin, width=5, height=5, pos=(0, 0),
+                                 lineWidth=50, lineColor='white', fillColor=None)
+        finishline = visual.Line(win=mywin, lineWidth=2, start=(FINISH_LINE + ring.radius, -20), end=(FINISH_LINE + ring.radius, 20))
 
-        # TRIAL LOOP
-        for trial in trials:
-            # Init stimuli
-            countdown = visual.TextStim(win=mywin, text='', height=1, pos=[0, 0])
-            ring = visual.Circle(win=mywin, radius=2, edges=32, pos=STARTING_POS,
-                                 lineWidth=15, lineColor='white', fillColor=None)
-            ball = visual.Circle(win=mywin, radius=.8, edges=32,
-                                 pos=STARTING_POS, lineWidth=10, lineColor='white',
-                                 fillColor='white')
-            stopsignal = visual.Rect(win=mywin, width=5, height=5, pos=(0, 0),
-                                     lineWidth=50, lineColor='white', fillColor=None)
-            finishline = visual.Line(win=mywin, lineWidth=2, start=(FINISH_LINE + ring.radius, -20), end=(FINISH_LINE + ring.radius, 20))
+        # Init Trial Data
+        SSD = sample_SSD()
+        trials.data.add('SSD', SSD)
+        waitingForSpace = True
+        Hit = False
+        FinishLine = False
+        stillMoving = True
+        pressures = []
+        distances = []
+        timings = []
 
-            # Init Trial Data
-            SSD = sample_SSD()
-            trials.data.add('SSD', SSD)
-            waitingForSpace = True
-            Hit = False
-            FinishLine = False
-            stillMoving = True
-            pressures = []
-            distances = []
-            timings = []
+        # Countdown / ITI
+        timer = core.CountdownTimer(COUNTDOWN_TIME)
+        while timer.getTime() > 0:  # after 5s will become negative
+            countdown.text = f'{timer.getTime():.0f}'
+            ball.draw()
+            ring.draw()
+            countdown.draw()
+            finishline.draw()
+            mywin.flip()
 
-            # Countdown / ITI
-            timer = core.CountdownTimer(COUNTDOWN_TIME)
-            while timer.getTime() > 0:  # after 5s will become negative
-                countdown.text = f'{timer.getTime():.0f}'
+        # START
+        if trial['condition'] == 'stop':
+            trial_start = core.getTime()
+            # SSD
+            SSD_timer = core.CountdownTimer(SSD)
+            while (SSD_timer.getTime() > 0):
+                scan_codes, analog_codes, _ = wp.read_full_buffer()
+                timings.append(core.getTime() - trial_start)
+                ring.pos += RING_PACE
+                if analog_codes:
+                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
+                    pressures.append(np.max(analog_codes))
+                else:
+                    pressures.append(0)
+                dist = ball.pos[0] - ring.pos[0]
+                distances.append(dist)
+                if dist > 1.05:
+                    Hit = True
+                if np.abs(ring.pos[0]) >= FINISH_LINE:
+                    FinishLine = True
+                # fixation.draw()
                 ball.draw()
                 ring.draw()
-                countdown.draw()
                 finishline.draw()
                 mywin.flip()
 
-            # START
-            if trial['condition'] == 'stop':
-                trial_start = core.getTime()
-                # h
-                SSD_timer = core.CountdownTimer(SSD)
-                while (SSD_timer.getTime() > 0):
-                    scan_codes, analog_codes, _ = wp.read_full_buffer()
-                    timings.append(core.getTime() - trial_start)
-                    ring.pos += RING_PACE
-                    if analog_codes:
-                        ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
-                        pressures.append(np.max(analog_codes))
-                    else:
-                        pressures.append(0)
-                    dist = ball.pos[0] - ring.pos[0]
-                    distances.append(dist)
-                    if dist > 1.05:
-                        Hit = True
-                    if np.abs(ring.pos[0]) >= FINISH_LINE:
-                        FinishLine = True
-                    # fixation.draw()
-                    ball.draw()
-                    ring.draw()
-                    finishline.draw()
-                    mywin.flip()
+            # StopSignal
+            #stopsignal.pos = ring.pos
+            end_trial_timer = core.CountdownTimer(1)
+            #not_moving_timer = core.CountdownTimer(1)
+            while (end_trial_timer.getTime() > 0):
+                scan_codes, analog_codes, _ = wp.read_full_buffer()
+                timings.append(core.getTime() - trial_start)
+                if analog_codes:
+                    not_moving_timer = core.CountdownTimer(1)
+                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
+                    pressures.append(np.max(analog_codes))
+                else:
+                    pressures.append(0)
 
-                # StopSignal
-                #stopsignal.pos = ring.pos
-                end_trial_timer = core.CountdownTimer(1)
-                not_moving_timer = core.CountdownTimer(1)
-                while (end_trial_timer.getTime() > 0) or\
-                        (not_moving_timer.getTime() > 0):
-                    scan_codes, analog_codes, _ = wp.read_full_buffer()
-                    timings.append(core.getTime() - trial_start)
-                    if analog_codes:
-                        not_moving_timer = core.CountdownTimer(1)
-                        ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
-                        pressures.append(np.max(analog_codes))
-                    else:
-                        pressures.append(0)
+                dist = ball.pos[0] - ring.pos[0]
+                distances.append(dist)
+                if dist > 1.05:
+                    Hit = True
 
-                    dist = ball.pos[0] - ring.pos[0]
-                    distances.append(dist)
-                    if dist > 1.05:
-                        Hit = True
+                #stopsignal.draw()
+                mywin.color = 'red'
+                ball.draw()
+                ring.draw()
+                finishline.draw()
+                mywin.flip()
 
-                    #stopsignal.draw()
-                    mywin.color = 'red'
-                    ball.draw()
-                    ring.draw()
-                    finishline.draw()
-                    mywin.flip()
+            feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
+            while feedback_timer.getTime() > 0:
+                #stopsignal.draw()
+                mywin.color = 'grey'
+                ball.draw()
+                ring.draw()
+                finishline.draw()
+                feedback.draw()
+                mywin.flip()
 
-                feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
-                while feedback_timer.getTime() > 0:
-                    #stopsignal.draw()
-                    mywin.color = 'grey'
-                    ball.draw()
-                    ring.draw()
-                    finishline.draw()
-                    feedback.draw()
-                    mywin.flip()
+        elif trial['condition'] == 'go':
+            trial_start = core.getTime()
 
-            elif trial['condition'] == 'go':
-                trial_start = core.getTime()
+            while not FinishLine:
+                scan_codes, analog_codes, _ = wp.read_full_buffer()
+                timings.append(core.getTime() - trial_start)
+                ring.pos += RING_PACE
+                if analog_codes:
+                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
+                    pressures.append(np.max(analog_codes))
+                else:
+                    pressures.append(0)
+                dist = ball.pos[0] - ring.pos[0]
+                distances.append(dist)
+                if dist > 1.05:
+                    Hit = True
+                if np.abs(ring.pos[0]) >= FINISH_LINE:
+                    FinishLine = True
+                ball.draw()
+                ring.draw()
+                finishline.draw()
+                mywin.flip()
 
-                while not FinishLine:
-                    scan_codes, analog_codes, _ = wp.read_full_buffer()
-                    timings.append(core.getTime() - trial_start)
-                    ring.pos += RING_PACE
-                    if analog_codes:
-                        ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
-                        pressures.append(np.max(analog_codes))
-                    else:
-                        pressures.append(0)
-                    dist = ball.pos[0] - ring.pos[0]
-                    distances.append(dist)
-                    if dist > 1.05:
-                        Hit = True
-                    if np.abs(ring.pos[0]) >= FINISH_LINE:
-                        FinishLine = True
-                    ball.draw()
-                    ring.draw()
-                    finishline.draw()
-                    mywin.flip()
+            feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
+            while feedback_timer.getTime() > 0:
+                ball.draw()
+                ring.draw()
+                feedback.draw()
+                finishline.draw()
+                mywin.flip()
 
-                feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
-                while feedback_timer.getTime() > 0:
-                    ball.draw()
-                    ring.draw()
-                    feedback.draw()
-                    finishline.draw()
-                    mywin.flip()
+        elif trial['condition'] == 'ai':
+            trial_start = core.getTime()
+            # SSD
+            SSD_timer = core.CountdownTimer(SSD)
+            while (SSD_timer.getTime() > 0):
+                scan_codes, analog_codes, _ = wp.read_full_buffer()
+                timings.append(core.getTime() - trial_start)
+                ring.pos += RING_PACE
+                if analog_codes:
+                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
+                    pressures.append(np.max(analog_codes))
+                else:
+                    pressures.append(0)
+                dist = ball.pos[0] - ring.pos[0]
+                distances.append(dist)
+                if dist > 1.05:
+                    Hit = True
+                if np.abs(ring.pos[0]) >= FINISH_LINE:
+                    FinishLine = True
+                # fixation.draw()
+                ball.draw()
+                ring.draw()
+                finishline.draw()
+                mywin.flip()
 
-            elif trial['condition'] == 'ai':
-                trial_start = core.getTime()
-                # SSD
-                SSD_timer = core.CountdownTimer(SSD)
-                while (SSD_timer.getTime() > 0):
-                    scan_codes, analog_codes, _ = wp.read_full_buffer()
-                    timings.append(core.getTime() - trial_start)
-                    ring.pos += RING_PACE
-                    if analog_codes:
-                        ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
-                        pressures.append(np.max(analog_codes))
-                    else:
-                        pressures.append(0)
-                    dist = ball.pos[0] - ring.pos[0]
-                    distances.append(dist)
-                    if dist > 1.05:
-                        Hit = True
-                    if np.abs(ring.pos[0]) >= FINISH_LINE:
-                        FinishLine = True
-                    # fixation.draw()
-                    ball.draw()
-                    ring.draw()
-                    finishline.draw()
-                    mywin.flip()
+            # StopSignal
+            #stopsignal.pos = ring.pos
+            end_trial_timer = core.CountdownTimer(1)
+            #not_moving_timer = core.CountdownTimer(1)
+            while (end_trial_timer.getTime() > 0):
+                scan_codes, analog_codes, _ = wp.read_full_buffer()
+                timings.append(core.getTime() - trial_start)
+                if analog_codes:
+                    not_moving_timer = core.CountdownTimer(1)
+                    ball.pos == (np.max(analog_codes) * PRESS_SCALER, 0)
+                    pressures.append(np.max(analog_codes))
+                else:
+                    pressures.append(0)
 
-                # StopSignal
-                #stopsignal.pos = ring.pos
-                end_trial_timer = core.CountdownTimer(1)
-                not_moving_timer = core.CountdownTimer(1)
-                while (end_trial_timer.getTime() > 0) or\
-                        (not_moving_timer.getTime() > 0):
-                    scan_codes, analog_codes, _ = wp.read_full_buffer()
-                    timings.append(core.getTime() - trial_start)
-                    if analog_codes:
-                        not_moving_timer = core.CountdownTimer(1)
-                        ball.pos == (np.max(analog_codes) * PRESS_SCALER, 0)
-                        pressures.append(np.max(analog_codes))
-                    else:
-                        pressures.append(0)
+                dist = ball.pos[0] - ring.pos[0]
+                distances.append(dist)
+                if dist > 1.05:
+                    Hit = True
 
-                    dist = ball.pos[0] - ring.pos[0]
-                    distances.append(dist)
-                    if dist > 1.05:
-                        Hit = True
+                #stopsignal.draw()
+                mywin.color = 'red'
+                ball.draw()
+                ring.draw()
+                finishline.draw()
+                mywin.flip()
 
-                    #stopsignal.draw()
-                    mywin.color = 'red'
-                    ball.draw()
-                    ring.draw()
-                    finishline.draw()
-                    mywin.flip()
+            feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
+            while feedback_timer.getTime() > 0:
+                #stopsignal.draw()
+                mywin.color = 'grey'
+                ball.draw()
+                ring.draw()
+                finishline.draw()
+                feedback.draw()
+                mywin.flip()
 
-                feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
-                while feedback_timer.getTime() > 0:
-                    #stopsignal.draw()
-                    mywin.color = 'grey'
-                    ball.draw()
-                    ring.draw()
-                    finishline.draw()
-                    feedback.draw()
-                    mywin.flip()
-
-            # Save Data
-            trials.data.add('time_stamps',
-                            ' '.join([str(elem) for elem in timings]))
-            trials.data.add('pressures',
-                            ' '.join([str(elem) for elem in pressures]))
-            trials.data.add('distances',
-                            ' '.join([str(elem) for elem in distances]))
+        # Save Data
+        trials.data.add('time_stamps',
+                        ' '.join([str(elem) for elem in timings]))
+        trials.data.add('pressures',
+                        ' '.join([str(elem) for elem in pressures]))
+        trials.data.add('distances',
+                        ' '.join([str(elem) for elem in distances]))
+        if count < block:
+            trials.data.add('block', 'block 1')
+        else:
+            trials.data.add('block', 'block 2')
+        
+        if count + 1 == block:
+            block_end_timer = core.CountdownTimer(BLOCK_END_TIME)
+            while block_end_timer.getTime() > 0:
+                mywin.color = 'grey'
+                block_feedback.draw()
+                mywin.flip()
 
     # FINISH
     end_stim.draw()
