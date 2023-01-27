@@ -19,6 +19,7 @@ COUNTDOWN_TIME = 3
 FEEDBACK_TIME = 2.0
 BREAK_TIME = 10.0
 BLOCK_END_TIME = 10.0
+PRACTICE_END_TIME = 5.0
 MIN_SSD = 2
 MAX_SSD = 4.9
 
@@ -26,9 +27,16 @@ INSTRUCTIONS = 'Welcome to the task!\n\n' +\
     'On each trial, your job is to keep a ball inside of a moving ring by controlling its speed.\n\n' +\
     'After a countdown, the ring will begin to move from left to right. Press the spacebar to move the ball.\n\n' +\
     'The harder your press the spacebar, the faster the ball will move. Please try your best to keep the ball within the ring.\n\n' +\
-    'On some trials, a box will appear around the ring. If the box appears, please stop moving the ball as quickly as possible.\n\n' +\
+    'A box will appear around the ring. If the box appears, please stop moving the ball as quickly as possible.\n\n' +\
+    'On some trials the ball will freeze and stop as soon as the box appears. \n' +\
+    'Please try to keep the space bar pressed the entire time and not let go of the space bar. \n' +\
     'When you are ready to begin, press the spacebar.'
 END_TEXT = 'Thank you. Please press the spacebar to end this task.'
+PRESSURE_TEXT = 'Remember to try and always have the space bar pressed.'
+LATE_TEXT = 'You are starting to late. Try and press the space bar as soon as the ring starts moving.'
+
+# feedback text options
+
 
 
 def sample_SSD(scale=1):
@@ -123,6 +131,19 @@ def setupTrials(block1=0.1, block2=.90, n_text=20):
 
     return conditions, block
 
+def setupPractice():
+    practice_block = np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+    
+    np.random.shuffle(practice_block)
+    
+    # Replacing values with trial types
+    practice_block = practice_block.astype('object')
+    practice_block[practice_block == 0] = 'stop'
+    practice_block[practice_block == 1] = 'ai'
+    
+    return list(practice_block), len(practice_block)
+    
 
 if __name__ == "__main__":
 
@@ -139,10 +160,11 @@ if __name__ == "__main__":
 
     # subject info
     conditions, block = setupTrials()
+    practice, practice_len = setupPractice()
     subid, sess = getInput()
     
     # Trial Setup
-    stims = conditions
+    stims = practice + conditions
     stimlist = [{'condition': i} for i in stims]
     trials = data.TrialHandler(stimlist, 1, method='sequential',
                                    extraInfo={'participant': subid,
@@ -158,9 +180,15 @@ if __name__ == "__main__":
     end_stim = visual.TextStim(win=mywin, text=END_TEXT, height=.75, pos=[0, 0])
     feedback = visual.TextStim(win=mywin, text='Trial Complete',
                                height=1.5, pos=[0, 3.5])
+    pressure_feedback = visual.TextStim(win=mywin, text=PRESSURE_TEXT,
+                               height=1.5, pos=[0, 6.5])
+    late_start_feedback = visual.TextStim(win=mywin, text=LATE_TEXT,
+                               height=1.5, pos=[0, 9.5])
     break_feedback = visual.TextStim(win=mywin, text='Take a 10 second break',
                                height=1.5, pos=[0, 3.5])
     block_feedback = visual.TextStim(win=mywin, text='The first block is complete. Get ready to complete the second block',
+                               height=1.5, pos=[0, 3.5])
+    practice_end = visual.TextStim(win=mywin, text='Testing Phase will now begin.',
                                height=1.5, pos=[0, 3.5])
 
     # INSTRUCTIONS
@@ -172,8 +200,8 @@ if __name__ == "__main__":
         if HID_CODE_SPACE in scan_codes:
             waitingForSpace = False
         
+        
     # TRIAL LOOP
-    
     for count, trial in enumerate(trials):
         
         if count and count % 20 == 0:
@@ -275,37 +303,21 @@ if __name__ == "__main__":
                 ring.draw()
                 finishline.draw()
                 feedback.draw()
-                mywin.flip()
-
-        elif trial['condition'] == 'go':
-            trial_start = core.getTime()
-
-            while not FinishLine:
-                scan_codes, analog_codes, _ = wp.read_full_buffer()
-                timings.append(core.getTime() - trial_start)
-                ring.pos += RING_PACE
-                if analog_codes:
-                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
-                    pressures.append(np.max(analog_codes))
-                else:
-                    pressures.append(0)
-                dist = ball.pos[0] - ring.pos[0]
-                distances.append(dist)
-                if dist > 1.05:
-                    Hit = True
-                if np.abs(ring.pos[0]) >= FINISH_LINE:
-                    FinishLine = True
-                ball.draw()
-                ring.draw()
-                finishline.draw()
-                mywin.flip()
-
-            feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
-            while feedback_timer.getTime() > 0:
-                ball.draw()
-                ring.draw()
-                feedback.draw()
-                finishline.draw()
+                
+                if np.mean(pressures[:10]) == 0:
+                    late_start_feedback.draw()
+                
+                unique, counts = np.unique(pressures, return_counts=True)
+                feedback_data = dict(zip(unique, counts))
+                pressure_len = len(pressures)
+                zeros = feedback_data[0]
+                ones = feedback_data[1]
+                percent_zeros = zeros/pressure_len
+                percent_ones = ones/pressure_len
+                
+                if percent_zeros >= .3:
+                    pressure_feedback.draw()
+                    
                 mywin.flip()
 
         elif trial['condition'] == 'ai':
@@ -367,6 +379,21 @@ if __name__ == "__main__":
                 ring.draw()
                 finishline.draw()
                 feedback.draw()
+                if np.mean(pressures[:10]) == 0:
+                    late_start_feedback.draw()
+                
+                unique, counts = np.unique(pressures, return_counts=True)
+                feedback_data = dict(zip(unique, counts))
+                pressure_len = len(pressures)
+                print(pressures)
+                zeros = feedback_data[0]
+                ones = feedback_data[1]
+                percent_zeros = zeros/pressure_len
+                percent_ones = ones/pressure_len
+                
+                if percent_zeros >= .3:
+                    pressure_feedback.draw()
+                    
                 mywin.flip()
 
         # Save Data
@@ -376,16 +403,33 @@ if __name__ == "__main__":
                         ' '.join([str(elem) for elem in pressures]))
         trials.data.add('distances',
                         ' '.join([str(elem) for elem in distances]))
-        if count < block:
+        if count < practice_len:
+            trials.data.add('block', 'practice')
+            trials.data.add('phase', 'practice')
+        elif pracice < count < practice + block:
             trials.data.add('block', 'block 1')
-        else:
+            trials.data.add('phase', 'test')
+        elif practice + block <= count:
             trials.data.add('block', 'block 2')
+            trials.data.add('phase', 'test')
         
-        if count + 1 == block:
+            practice_end_timer = core.CountdownTimer(PRACTICE_END_TIME)
+            while practice_end_timer.getTime() > 0:
+                mywin.color = 'grey'
+                practice_end.draw()
+                mywin.flip()
+        
+        if count + 1 == practice+block:
             block_end_timer = core.CountdownTimer(BLOCK_END_TIME)
             while block_end_timer.getTime() > 0:
                 mywin.color = 'grey'
                 block_feedback.draw()
+                mywin.flip()
+        elif count + 1 == practice:
+            practice_end_timer = core.CountdownTimer(PRACTICE_END_TIME)
+            while practice_end_timer.getTime() > 0:
+                mywin.color = 'grey'
+                practice_end.draw()
                 mywin.flip()
 
     # FINISH
