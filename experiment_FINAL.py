@@ -32,11 +32,14 @@ INSTRUCTIONS = 'Welcome to the task!\n\n' +\
     'Please try to keep the space bar pressed the entire time and not let go of the space bar. \n' +\
     'When you are ready to begin, press the spacebar.'
 END_TEXT = 'Thank you. Please press the spacebar to end this task.'
-PRESSURE_TEXT = 'Remember to try and always have the space bar pressed.'
-LATE_TEXT = 'You are starting to late. Try and press the space bar as soon as the ring starts moving.'
 
 # feedback text options
+PRESSURE_FEEDBACK = 'Remember to try and always have the space bar pressed, but not fully pressed.'
+LATE_FEEDBACK = 'You are starting to late. Try to press the space bar as soon as the ring starts moving.'
 
+NO_PRESS_TEXT = "Keep space bar pressed!"
+TOO_MUCH_PRESS_TEXT = "Don't press all the way!"
+LATE_TEXT = "You are starting too late!"
 
 
 def sample_SSD(scale=1):
@@ -132,8 +135,7 @@ def setupTrials(block1=0.1, block2=.90, n_text=20):
     return conditions, block
 
 def setupPractice():
-    practice_block = np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+    practice_block = np.array([0, 1, 0, 1])
     
     np.random.shuffle(practice_block)
     
@@ -179,18 +181,27 @@ if __name__ == "__main__":
     intro_stim = visual.TextStim(win=mywin, text=INSTRUCTIONS, height=.85, pos=[0, 0], wrapWidth=30)
     end_stim = visual.TextStim(win=mywin, text=END_TEXT, height=.75, pos=[0, 0])
     feedback = visual.TextStim(win=mywin, text='Trial Complete',
-                               height=1.5, pos=[0, 3.5])
-    pressure_feedback = visual.TextStim(win=mywin, text=PRESSURE_TEXT,
-                               height=1.5, pos=[0, 6.5])
-    late_start_feedback = visual.TextStim(win=mywin, text=LATE_TEXT,
-                               height=1.5, pos=[0, 9.5])
+                               height=1.5, pos=[0, -5])
+    pressure_alert = visual.TextStim(win=mywin, text=TOO_MUCH_PRESS_TEXT,
+                               height=1, pos=[0, 5])
+    late_start_alert = visual.TextStim(win=mywin, text=LATE_TEXT,
+                               height=1, pos=[0, 6])
+    no_pressure_alert = visual.TextStim(win=mywin, text=NO_PRESS_TEXT,
+                               height=1, pos=[0, 7])
     break_feedback = visual.TextStim(win=mywin, text='Take a 10 second break',
                                height=1.5, pos=[0, 3.5])
-    block_feedback = visual.TextStim(win=mywin, text='The first block is complete. Get ready to complete the second block',
+    block_feedback = visual.TextStim(win=mywin, text='The first block is complete. Take a short break, the second block will begin shortly',
                                height=1.5, pos=[0, 3.5])
-    practice_end = visual.TextStim(win=mywin, text='Testing Phase will now begin.',
-                               height=1.5, pos=[0, 3.5])
-
+    practice_end = visual.TextStim(win=mywin, text='Please review your feedback, testing phase will begin shortly...',
+                               height=.5, pos=[-3, 5], wrapWidth = 30, alignText = 'left')
+    practice_feedback_pressure = visual.TextStim(win=mywin, text=PRESSURE_FEEDBACK,
+                               height=1, pos=[0, 2], wrapWidth = 50)
+    practice_feedback_late = visual.TextStim(win=mywin, text=LATE_FEEDBACK,
+                               height=1, pos=[0, 0], wrapWidth = 50)
+    
+    # Practice Feedback Count
+    feedback_tracker = []
+    
     # INSTRUCTIONS
     intro_stim.draw()
     mywin.flip()
@@ -263,16 +274,13 @@ if __name__ == "__main__":
                     Hit = True
                 if np.abs(ring.pos[0]) >= FINISH_LINE:
                     FinishLine = True
-                # fixation.draw()
                 ball.draw()
                 ring.draw()
                 finishline.draw()
                 mywin.flip()
 
             # StopSignal
-            #stopsignal.pos = ring.pos
             end_trial_timer = core.CountdownTimer(1)
-            #not_moving_timer = core.CountdownTimer(1)
             while (end_trial_timer.getTime() > 0):
                 scan_codes, analog_codes, _ = wp.read_full_buffer()
                 timings.append(core.getTime() - trial_start)
@@ -288,7 +296,6 @@ if __name__ == "__main__":
                 if dist > 1.05:
                     Hit = True
 
-                #stopsignal.draw()
                 mywin.color = 'red'
                 ball.draw()
                 ring.draw()
@@ -297,26 +304,40 @@ if __name__ == "__main__":
 
             feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
             while feedback_timer.getTime() > 0:
-                #stopsignal.draw()
                 mywin.color = 'grey'
                 ball.draw()
                 ring.draw()
                 finishline.draw()
                 feedback.draw()
                 
-                if np.mean(pressures[:10]) == 0:
-                    late_start_feedback.draw()
-                
+                # for practice
                 unique, counts = np.unique(pressures, return_counts=True)
                 feedback_data = dict(zip(unique, counts))
                 pressure_len = len(pressures)
-                zeros = feedback_data[0]
-                ones = feedback_data[1]
+                if 0 in feedback_data.keys():
+                    zeros = feedback_data[0]
+                else:
+                    zeros = 0
+                if 1 in feedback_data.keys():
+                    ones = feedback_data[1]
+                else:
+                    ones = 0
+                    
                 percent_zeros = zeros/pressure_len
                 percent_ones = ones/pressure_len
                 
-                if percent_zeros >= .3:
-                    pressure_feedback.draw()
+                if count < practice_len:
+                    if percent_zeros >= .3:
+                        no_pressure_alert.draw()
+                        feedback_tracker.append('pressure')
+                        
+                    if percent_ones >= .1:
+                        pressure_alert.draw()
+                        feedback_tracker.append('pressure')
+                        
+                    if np.mean(pressures[:15]) == 0:
+                        late_start_alert.draw()
+                        feedback_tracker.append('late')
                     
                 mywin.flip()
 
@@ -339,16 +360,13 @@ if __name__ == "__main__":
                     Hit = True
                 if np.abs(ring.pos[0]) >= FINISH_LINE:
                     FinishLine = True
-                # fixation.draw()
                 ball.draw()
                 ring.draw()
                 finishline.draw()
                 mywin.flip()
 
             # StopSignal
-            #stopsignal.pos = ring.pos
             end_trial_timer = core.CountdownTimer(1)
-            #not_moving_timer = core.CountdownTimer(1)
             while (end_trial_timer.getTime() > 0):
                 scan_codes, analog_codes, _ = wp.read_full_buffer()
                 timings.append(core.getTime() - trial_start)
@@ -373,27 +391,41 @@ if __name__ == "__main__":
 
             feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
             while feedback_timer.getTime() > 0:
-                #stopsignal.draw()
                 mywin.color = 'grey'
                 ball.draw()
                 ring.draw()
                 finishline.draw()
                 feedback.draw()
-                if np.mean(pressures[:10]) == 0:
-                    late_start_feedback.draw()
                 
+                # for practice
                 unique, counts = np.unique(pressures, return_counts=True)
                 feedback_data = dict(zip(unique, counts))
                 pressure_len = len(pressures)
-                print(pressures)
-                zeros = feedback_data[0]
-                ones = feedback_data[1]
+                if 0 in feedback_data.keys():
+                    zeros = feedback_data[0]
+                else:
+                    zeros = 0
+                if 1 in feedback_data.keys():
+                    ones = feedback_data[1]
+                else:
+                    ones = 0
+                    
                 percent_zeros = zeros/pressure_len
                 percent_ones = ones/pressure_len
                 
-                if percent_zeros >= .3:
-                    pressure_feedback.draw()
-                    
+                if count < practice_len:
+                    if percent_zeros >= .3:
+                        no_pressure_alert.draw()
+                        feedback_tracker.append('pressure')
+                        
+                    if percent_ones >= .3:
+                        pressure_alert.draw()
+                        feedback_tracker.append('pressure')
+                        
+                    if np.mean(pressures[:15]) == 0:
+                        late_start_alert.draw()
+                        feedback_tracker.append('late')
+                        
                 mywin.flip()
 
         # Save Data
@@ -403,33 +435,34 @@ if __name__ == "__main__":
                         ' '.join([str(elem) for elem in pressures]))
         trials.data.add('distances',
                         ' '.join([str(elem) for elem in distances]))
+        
         if count < practice_len:
             trials.data.add('block', 'practice')
             trials.data.add('phase', 'practice')
-        elif pracice < count < practice + block:
+        elif practice_len < count and count < practice_len + block:
             trials.data.add('block', 'block 1')
             trials.data.add('phase', 'test')
-        elif practice + block <= count:
+        elif practice_len + block <= count:
             trials.data.add('block', 'block 2')
             trials.data.add('phase', 'test')
         
-            practice_end_timer = core.CountdownTimer(PRACTICE_END_TIME)
-            while practice_end_timer.getTime() > 0:
-                mywin.color = 'grey'
-                practice_end.draw()
-                mywin.flip()
-        
-        if count + 1 == practice+block:
+        if (count + 1 == practice_len+block):
             block_end_timer = core.CountdownTimer(BLOCK_END_TIME)
             while block_end_timer.getTime() > 0:
                 mywin.color = 'grey'
                 block_feedback.draw()
                 mywin.flip()
-        elif count + 1 == practice:
+        elif count + 1 == practice_len:
             practice_end_timer = core.CountdownTimer(PRACTICE_END_TIME)
             while practice_end_timer.getTime() > 0:
                 mywin.color = 'grey'
                 practice_end.draw()
+                if 'late' in set(feedback_tracker):
+                    practice_feedback_late.draw()
+                
+                if 'pressure' in set(feedback_tracker):
+                    practice_feedback_pressure.draw()
+                    
                 mywin.flip()
 
     # FINISH
