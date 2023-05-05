@@ -192,7 +192,6 @@ if __name__ == "__main__":
                 mywin.flip()
 
             # StopSignal
-            #stopsignal.pos = ring.pos
             end_trial_timer = core.CountdownTimer(1)
             not_moving_timer = core.CountdownTimer(1)
             while (end_trial_timer.getTime() > 0) or\
@@ -220,13 +219,13 @@ if __name__ == "__main__":
 
             feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
             while feedback_timer.getTime() > 0:
-                #stopsignal.draw()
                 mywin.color = 'grey'
                 ball.draw()
                 ring.draw()
                 finishline.draw()
                 feedback.draw()
                 mywin.flip()
+                
         elif trial['condition'] == 'go':
             trial_start = core.getTime()
 
