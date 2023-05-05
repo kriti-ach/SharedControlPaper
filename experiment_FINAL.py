@@ -76,78 +76,56 @@ def getInput(id_text="s999", sess_text="001"):
     else:
         return text1, text2
 
+    
+def get_prob_dist_inputs(n_trials=20, block1=0.1, block2=0.9):
+    while True:
+        prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
+        prob_dist.addText('Enter total number of trials and % of AI trials in each block.')
+        prob_dist.addText('There will be 2 blocks only. (0% AI and 90% AI.)')
+        prob_dist.addText('Number of trials should be divisible by 2')
+        prob_dist.addField('Number of Trials (Total): ', n_trials)
+        prob_dist.addField('Block 1 AI % in proportions: ', block1)
+        prob_dist.addField('Block 2 AI % in proportions: ', block2)
+        prob_dist.show()
 
-def setupTrials(block1=0.1, block2=0.90, n_text=20):
-    prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
-    prob_dist.addText("Enter total number of trials and % of AI trials in each block.")
-    prob_dist.addText("There will be 2 blocks only. (0% AI and 90% AI.)")
-    prob_dist.addText("Number of trials should be divisible by 2")
-    prob_dist.addField("Number of Trials (Total): ", n_text)
-    prob_dist.addField("Block 1 AI % in proportions: ", block1)
-    prob_dist.addField("Block 2 AI % in proportions: ", block2)
-    prob_dist.show()
-    if prob_dist.OK:
-        nTrials = prob_dist.data[0]
+        if not prob_dist.OK:
+            print('nothing was entered')
+            break
+
+        n_trials = prob_dist.data[0]
         block1 = prob_dist.data[1]
         block2 = prob_dist.data[2]
-    else:
-        print("nothing was entered")
 
-    assert nTrials != 0
-    while nTrials % 2 != 0:
-        prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
-        prob_dist.addText(
-            "Error - Please enter a number of total trials divisible by 2."
-        )
-        prob_dist.addText(
-            "Enter total number of trials and % of AI trials in each block."
-        )
-        prob_dist.addText("There will be 2 blocks only. (0% AI and 90% AI.)")
-        prob_dist.addText("Number of trials should be divisible by 2")
-        prob_dist.addField("Number of Trials (Total): ", n_text)
-        prob_dist.addField("Block 1 AI % in proportions: ", block1)
-        prob_dist.addField("Block 2 AI % in proportions: ", block2)
-        prob_dist.show()
-        if prob_dist.OK:
-            nTrials = prob_dist.data[0]
-            block1 = prob_dist.data[1]
-            block2 = prob_dist.data[2]
+        if n_trials % 2 == 0:
+            break
         else:
-            print("nothing was entered")
-    block = nTrials / 2
+            print("Error - Please enter a number of total trials divisible by 2.")
+    
+    return n_trials, block1, block2
 
-    # Obtaining number of each condition
-    aiTrials_block1 = int(block * block1)
-    stopTrials_block1 = block - aiTrials_block1
-    aiTrials_block2 = int(block * block2)
-    stopTrials_block2 = block - aiTrials_block2
-    assert nTrials == (
-        aiTrials_block1 + stopTrials_block1 + aiTrials_block2 + stopTrials_block2
-    )
+def create_conditions_array(stop_trials, ai_trials):
+    conditions = np.array([0] * stop_trials + [1] * ai_trials)
+    np.random.shuffle(conditions)
+    conditions = conditions.astype('object')
+    conditions[conditions == 0] = 'stop'
+    conditions[conditions == 1] = 'ai'
+    return conditions
 
-    # Creating array of conditions then shuffling
-    conditions_block1 = np.array(
-        [0] * int(stopTrials_block1) + [1] * int(aiTrials_block1)
-    )
-    np.random.shuffle(conditions_block1)
 
-    # Replacing values with trial types
-    conditions_block1 = conditions_block1.astype("object")
-    conditions_block1[conditions_block1 == 0] = "stop"
-    conditions_block1[conditions_block1 == 1] = "ai"
+def setup_trials():
+    n_trials, block1, block2 = get_prob_dist_inputs()
+    if n_trials == 0:
+        return [], 0
 
-    # Creating array of conditions then shuffling
-    conditions_block2 = np.array(
-        [0] * int(stopTrials_block2) + [1] * int(aiTrials_block2)
-    )
-    np.random.shuffle(conditions_block2)
+    block = n_trials // 2
+    ai_trials_block1 = int(block * block1)
+    ai_trials_block2 = int(block * block2)
+    stop_trials_block1 = block - ai_trials_block1
+    stop_trials_block2 = block - ai_trials_block2
 
-    # Replacing values with trial types
-    conditions_block2 = conditions_block2.astype("object")
-    conditions_block2[conditions_block2 == 0] = "stop"
-    conditions_block2[conditions_block2 == 1] = "ai"
+    conditions_block1 = create_conditions_array(stop_trials_block1, ai_trials_block1)
+    conditions_block2 = create_conditions_array(stop_trials_block2, ai_trials_block2)
 
-    # randomizing the blocks
     if random.randint(0, 1) == 0:
         conditions = list(conditions_block1) + list(conditions_block2)
     else:
@@ -156,17 +134,11 @@ def setupTrials(block1=0.1, block2=0.90, n_text=20):
     return conditions, block
 
 
-def setupPractice():
-    practice_block = np.array([0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+def setupPractice(num_stop=1, num_ai=9):
+    practice_conditions = ["stop"] * num_stop + ["ai"] * num_ai
+    np.random.shuffle(practice_conditions)
 
-    np.random.shuffle(practice_block)
-
-    # Replacing values with trial types
-    practice_block = practice_block.astype("object")
-    practice_block[practice_block == 0] = "stop"
-    practice_block[practice_block == 1] = "ai"
-
-    return list(practice_block), len(practice_block)
+    return practice_conditions, len(practice_conditions)
 
 
 if __name__ == "__main__":
@@ -182,7 +154,7 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     # subject info
-    conditions, block = setupTrials()
+    conditions, block = setup_trials()
     practice, practice_len = setupPractice()
     subid, sess = getInput()
 
@@ -232,6 +204,12 @@ if __name__ == "__main__":
     )
     practice_feedback_late = visual.TextStim(
         win=mywin, text=LATE_FEEDBACK, height=0.7, pos=[0, -2], wrapWidth=50
+    )
+    practice_go = visual.TextStim(
+        win=mywin, text=PRACTICE_INSTRUCTIONS_GO, height=0.7, pos=[0, -2], wrapWidth=50
+    )
+    practice_stop = visual.TextStim(
+        win=mywin, text=PRACTICE_INSTRUCTIONS_STOP, height=0.7, pos=[0, -2], wrapWidth=50
     )
 
     # Practice Feedback Count
@@ -294,14 +272,26 @@ if __name__ == "__main__":
     )
     
     # Go Practice
+    practice_go.draw()
+    
     trial_start = core.getTime()
-
+    # Countdown / ITI
+    timer = core.CountdownTimer(COUNTDOWN_TIME)
+    while timer.getTime() > 0:  # after 5s will become negative
+        countdown.text = f"{timer.getTime():.0f}"
+        ball.draw()
+        ring.draw()
+        fixation.draw()
+        finishline.draw()
+        mywin.flip()
+            
     while not FinishLine:
         scan_codes, analog_codes, _ = wp.read_full_buffer()
         ring.pos += RING_PACE
         if analog_codes:
             ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
-            
+        
+        dist = ball.pos[0] - ring.pos[0]
         if dist > 1.05:
             Hit = True
         if np.abs(ring.pos[0]) >= FINISH_LINE:
@@ -315,53 +305,9 @@ if __name__ == "__main__":
     while feedback_timer.getTime() > 0:
         ball.draw()
         ring.draw()
-        feedback.draw()
+        practice_stop.draw()
         finishline.draw()
         mywin.flip()
-
-    # Stop Practice
-    if trial['condition'] == 'stop':
-        trial_start = core.getTime()
-        # SSD
-        SSD_timer = core.CountdownTimer(SSD)
-        while (SSD_timer.getTime() > 0):
-            scan_codes, analog_codes, _ = wp.read_full_buffer()
-            ring.pos += RING_PACE
-            if analog_codes:
-                ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
-
-            dist = ball.pos[0] - ring.pos[0]
-            if dist > 1.05:
-                Hit = True
-            if np.abs(ring.pos[0]) >= FINISH_LINE:
-                FinishLine = True
-            # fixation.draw()
-            ball.draw()
-            ring.draw()
-            finishline.draw()
-            mywin.flip()
-
-        # StopSignal
-        #stopsignal.pos = ring.pos
-        end_trial_timer = core.CountdownTimer(1)
-        not_moving_timer = core.CountdownTimer(1)
-        while (end_trial_timer.getTime() > 0) or\
-                (not_moving_timer.getTime() > 0):
-            scan_codes, analog_codes, _ = wp.read_full_buffer()
-            if analog_codes:
-                not_moving_timer = core.CountdownTimer(1)
-                ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
-
-            dist = ball.pos[0] - ring.pos[0]
-            if dist > 1.05:
-                Hit = True
-
-            #stopsignal.draw()
-            mywin.color = "red"
-            ball.draw()
-            ring.draw()
-            finishline.draw()
-            mywin.flip()
                 
     # TRIAL LOOP
     for count, trial in enumerate(trials):
