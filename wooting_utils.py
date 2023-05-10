@@ -6,8 +6,11 @@ import time
 dylib_dir = 'dylibs'
 
 SCAN_CODE_ESC = 0x00
-HID_CODE_SPACE = 0x2C
+HID_CODE_SPACE = 44
 SLEEP_TIME = 0.0001
+HID_CODE_ENTER = 40
+HID_CODE_LEFT_ARROW = 80
+HID_CODE_RIGHT_ARROW = 79
 
 
 class WootingPython(object):
