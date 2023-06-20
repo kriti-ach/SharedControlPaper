@@ -7,7 +7,7 @@ import random
 
 app = wx.App(False)
 
-PRESS_SCALER = 1 / 10
+PRESS_SCALER = 1 / 10.1
 
 practice_clock = core.Clock()
 testing_clock = core.Clock()
@@ -28,31 +28,30 @@ MIN_SSD = 2
 MAX_SSD = 4.9
 
 INSTRUCTIONS_GO = (
-    "Welcome to the task!\n\n"
-    + "On each trial, your job is to keep a dot inside of a moving ring by controlling its speed.\n\n"
-    + "After a brief period, the ring will begin to move from left to right. Press the spacebar to move the dot.\n\n"
-    + "The harder your press the spacebar, the faster the dot will move. Please try your best to keep the dot within the ring.\n\n"
+    "Welcome to the task!\n\n" + "Please read the instructions for the task carefully.\n\n"
+    + "On each trial, your job is to keep a dot inside of a moving ring by controlling its speed with your spacebar press.\n\n"
+    + "For a brief period you will see a plus sign on the screen and then the ring will begin to move from left to right. Press the spacebar to move the dot across the screen.\n\n"
+    + "The harder you press the spacebar, the faster the dot will move. Please try your best to keep the dot within the ring.\n\n"
     + "Let's practice moving the ball across the screen. When you are ready to begin, press enter."
 )
 
 INSTRUCTIONS_STOP = (
-    "At some point while you move the ball across the screen it will turn red.\n\n"
+    "At some point while you move the dot across the screen it will turn red.\n\n"
     + "When the screen turns red, this indicates that you should stop the movement of the dot by quickly stopping your spacebar press.\n\n"
-    + "Let's have you practice stopping while you move the ball across the screen.\n\n"
+    + "Let's have you practice stopping the dot as you move it across the screen.\n\n"
     + "When you are ready to begin, press enter"
 )
 
 INSTRUCTIONS_PRACTICE = (
-    "Great, now that you've practiced going and stopping let's walk through the rest of the task."
-    + "On a subset of trials, the computer will intervene and stop the dot irrespective of your behavior.\n\n"
+    "Great, now that you've practiced going and stopping let's put everything together and walk through the rest of the task."
+    + "On a subset of trials, the computer will intervene and stop the dots movement irrespective of your behavior.\n\n"
     + "As you move the ball try to keep the space bar pressed the entire time and not let go of the space bar unless the screen turns red. \n\n"
-    + "The task is broken up into a practice phase where you will get feedback and a testing phase which will not give you feedback. \n\n"
+    + "The task is broken up into a practice phase where you will get feedback on your behavior and a testing phase which will not give you feedback. \n\n"
     + "When you are ready to begin the practice phase, press enter.")
 
 INSTRUCTIONS_TESTING = (
     "We will now begin the testing phase. To summarize...\n\n"
     + "On each trial, your job is to keep a dot inside of a moving ring by controlling its speed.\n\n"
-    + "After a brief period, the ring will begin to move from left to right. Press the spacebar to move the dot.\n\n"
     +  "On a subset of trials, the computer will intervene and stop the dot irrespective of your behavior.\n\n"
     + "Please try to keep the space bar pressed the entire time and not let go of the space bar unless the screen turns red. \n\n"
     + "When you are ready to begin the testing phase, press enter.")
@@ -87,7 +86,7 @@ def getInput(id_text="s999", sess_text="001"):
         return text1, text2
 
     
-def get_prob_dist_inputs(n_trials=20, block1=0.1, block2=0.9):
+def get_prob_dist_inputs(n_trials=200, block1=0, block2=0.9):
     while True:
         prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
         prob_dist.addText('Enter total number of trials and % of AI trials in each block.')
@@ -399,7 +398,7 @@ if __name__ == "__main__":
             practice_clock.reset()
 
         if count == practice_len:
-            intro_stim_stop.draw()
+            intro_stim_testing.draw()
             mywin.flip()
             waitingForSpace == True
             while waitingForSpace:
@@ -591,7 +590,7 @@ if __name__ == "__main__":
                 percent_ones = ones / pressure_len
 
                 if count < practice_len:
-                    if percent_zeros >= 0.25:
+                    if percent_zeros >= 0.20:
                         no_pressure_alert.draw()
                         feedback_tracker.append("pressure")
 
