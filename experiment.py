@@ -18,6 +18,7 @@ COUNTDOWN_TIME = 3
 FEEDBACK_TIME = 2.0
 MIN_SSD = 2
 MAX_SSD = 4.9
+HIT_BOX = [-1, 1.5]
 
 INSTRUCTIONS = 'Welcome to the task!\n\n' +\
     'On each trial, your job is to keep a ball inside of a moving ring by controlling its speed.\n\n' +\

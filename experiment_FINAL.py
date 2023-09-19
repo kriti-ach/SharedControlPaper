@@ -7,7 +7,7 @@ import random
 
 app = wx.App(False)
 
-PRESS_SCALER = 1 / 10.1
+PRESS_SCALER = 1 / 10
 
 practice_clock = core.Clock()
 testing_clock = core.Clock()
@@ -26,37 +26,46 @@ BLOCK_END_TIME = 30.0
 PRACTICE_END_TIME = 5.0
 MIN_SSD = 2
 MAX_SSD = 4.9
+HIT_BOX = [-1.20, 1.15]
 
 INSTRUCTIONS_GO = (
     "Welcome to the task!\n\n" + "Please read the instructions for the task carefully.\n\n"
     + "On each trial, your job is to keep a dot inside of a moving ring by controlling its speed with your spacebar press.\n\n"
-    + "For a brief period you will see a plus sign on the screen and then the ring will begin to move from left to right. Press the spacebar to move the dot across the screen.\n\n"
-    + "The harder you press the spacebar, the faster the dot will move. Please try your best to keep the dot within the ring.\n\n"
+    + "Press the spacebar to move the dot across the screen.\n\n"
+    + "The harder you press the spacebar, the faster the dot will move.\n\n"
+    + "Please try your best to keep the dot within the ring. If you find the ball is going too fast, press the spacebar with less pressure  to reduce the dot’s speed.\n\n"
+    + "For a brief period you will see a plus sign on the screen signifying that the trial is about to start and then the ring will begin to move from left to right. \n\n"
+    + "As soon as the ring starts to move, you should press the spacebar to move the dot alongside it.\n\n"
+    + "Try to keep the dot within the ring as it moves across the screen.\n\n"
     + "Let's practice moving the ball across the screen. When you are ready to begin, press enter."
 )
 
 INSTRUCTIONS_STOP = (
-    "At some point while you move the dot across the screen it will turn red.\n\n"
+    "At some point while you move the dot across the screen, the screen will turn red.\n\n"
     + "When the screen turns red, this indicates that you should stop the movement of the dot by quickly stopping your spacebar press.\n\n"
-    + "Let's have you practice stopping the dot as you move it across the screen.\n\n"
-    + "When you are ready to begin, press enter"
+    + "As you move the ball try to keep the space bar pressed the entire time and not let go of the space bar unless the screen turns red.\n\n"
+    + "Let's have you practice stopping the dot as you move it across the screen.\n\nWhen you are ready to begin, press enter."
 )
 
 INSTRUCTIONS_PRACTICE = (
-    "Great, now that you've practiced going and stopping let's put everything together and walk through the rest of the task."
-    + "On a subset of trials, the computer will intervene and stop the dots movement irrespective of your behavior.\n\n"
-    + "As you move the ball try to keep the space bar pressed the entire time and not let go of the space bar unless the screen turns red. \n\n"
-    + "The task is broken up into a practice phase where you will get feedback on your behavior and a testing phase which will not give you feedback. \n\n"
-    + "When you are ready to begin the practice phase, press enter.")
+    "Great, now that you've practiced going and stopping let's put everything together and walk through the rest of the task.\n\n"
+    + "The experiment is broken up in blocks, which are sets of trials. On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an artificial intelligence (AI) algorithm that will attempt to stop the dot when the screen turns red. On most trials it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. Before each block, you will be told whether you are in a block that is AI-assisted or not. \n\n"
+    + "The task is broken up into a practice phase where you will get feedback on your behavior and a testing phase which will not give you feedback.\n\n"
+    + "When you are ready to begin the practice phase, press enter. \n\n")
 
 INSTRUCTIONS_TESTING = (
     "We will now begin the testing phase. To summarize...\n\n"
     + "On each trial, your job is to keep a dot inside of a moving ring by controlling its speed.\n\n"
-    +  "On a subset of trials, the computer will intervene and stop the dot irrespective of your behavior.\n\n"
+    +  "On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an artificial intelligence (AI) algorithm that will attempt to stop the dot when the screen turns red. On most trials it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. Before each block, you will be told whether you are in a block that is AI-assisted or not.\n\n"
     + "Please try to keep the space bar pressed the entire time and not let go of the space bar unless the screen turns red. \n\n"
     + "When you are ready to begin the testing phase, press enter.")
 
 END_TEXT = "Thank you for participating in this experiment!\n\nPlease press the spacebar to end this task."
+
+NON_AI_TEXT = "In this block the artificial intelligence algorithm is not engaged. You are solely responsible for stopping the dots movement as quickly as possible when the screen turns red.
+"
+AI_TEXT = "In this block the artificial intelligence algorithm will be engaged. On most trials, the AI algorithm will stop the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail. When it fails,  you must stop the dot’s movement yourself. 
+"
 
 # feedback text options
 PRESSURE_FEEDBACK = "Remember to keep the space pressed throughout the trial."
@@ -65,6 +74,19 @@ LATE_FEEDBACK = "You are starting too late...\n Press the space bar as soon as t
 NO_PRESS_TEXT = "Keep space bar pressed!"
 LATE_TEXT = "You are starting too late!"
 
+DEPRESS_FEEDBACK = "Remember to stop your pressing of the spacebar as soon as the background turns red."
+HIT_FEEDBACK = "Please try to keep the dot within the circle as it moves across the screen."
+
+def find_sequence(lst, target, sequence_length):
+    count = 0
+    for num in lst:
+        if num == target:
+            count += 1
+            if count >= sequence_length:
+                return True
+        else:
+            count = 0
+    return False
 
 def sample_SSD(scale=1):
     SSD = np.random.exponential(scale=scale) + MIN_SSD
@@ -86,7 +108,7 @@ def getInput(id_text="s999", sess_text="001"):
         return text1, text2
 
     
-def get_prob_dist_inputs(n_trials=200, block1=0, block2=0.9):
+def get_prob_dist_inputs(n_trials=200, block1=0, block2=0.8):
     while True:
         prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
         prob_dist.addText('Enter total number of trials and % of AI trials in each block.')
@@ -143,7 +165,7 @@ def setup_trials():
     return conditions, block
 
 
-def setupPractice(num_stop=2, num_ai=18):
+def setupPractice(num_stop=15, num_ai=5):
     practice_conditions = ["stop"] * num_stop + ["ai"] * num_ai
     np.random.shuffle(practice_conditions)
 
@@ -191,7 +213,7 @@ def initStims():
     )
     finishline = visual.Line(
         win=mywin,
-        lineWidth=2,
+         lineWidth=2,
         start=(FINISH_LINE + ring.radius, -20),
         end=(FINISH_LINE + ring.radius, 20),
     )
@@ -272,6 +294,19 @@ if __name__ == "__main__":
     practice_feedback_late = visual.TextStim(
         win=mywin, text=LATE_FEEDBACK, height=0.7, pos=[0, -2], wrapWidth=50
     )
+    outside_circle_alert = visual.TextStim(
+        win=mywin, text="keep the dot in the circle!", height=1, pos=[0, 5]
+    )
+    no_depress_alert = visual.TextStim(
+        win=mywin, text="stop pressing when you see red!", height=1, pos=[0, 8]
+    )
+    practice_feedback_depress = visual.TextStim(
+        win=mywin, text=DEPRESS_FEEDBACK, height=0.7, pos=[0, -4], wrapWidth=50
+    )
+    practice_feedback_hit = visual.TextStim(
+        win=mywin, text=HIT_FEEDBACK, height=0.7, pos=[0, -6], wrapWidth=50
+    )
+
     
     # INSTRUCTIONS
     pre_practice_clock.reset()
@@ -285,11 +320,12 @@ if __name__ == "__main__":
     
     # Go Practice
     timer = core.CountdownTimer(COUNTDOWN_TIME)
-    while timer.getTime() > 0:  # after 5s will become negative
+    while timer.getTime() > 0:  # after 3s will become negative
         countdown.text = f"{timer.getTime():.0f}"
         ball.draw()
         ring.draw()
-        fixation.draw()
+        if timer.getTime() < .5 and timer.getTime() > 0:
+            fixation.draw()
         finishline.draw()
         mywin.flip()
     
@@ -331,7 +367,8 @@ if __name__ == "__main__":
         countdown.text = f"{timer.getTime():.0f}"
         ball.draw()
         ring.draw()
-        fixation.draw()
+        if timer.getTime() < .5 and timer.getTime() > 0:
+            fixation.draw()
         finishline.draw()
         mywin.flip()
         
@@ -431,7 +468,8 @@ if __name__ == "__main__":
             countdown.text = f"{timer.getTime():.0f}"
             ball.draw()
             ring.draw()
-            fixation.draw()
+            if timer.getTime() < .5 and timer.getTime() > 0:
+                   fixation.draw()
             finishline.draw()
             mywin.flip()
 
@@ -491,30 +529,26 @@ if __name__ == "__main__":
                 finishline.draw()
                 feedback.draw()
 
-                # for practice
-                unique, counts = np.unique(pressures[15:-15], return_counts=True)
-                feedback_data = dict(zip(unique, counts))
-                pressure_len = len(pressures)
-                if 0 in feedback_data.keys():
-                    zeros = feedback_data[0]
-                else:
-                    zeros = 0
-                if 1 in feedback_data.keys():
-                    ones = feedback_data[1]
-                else:
-                    ones = 0
-
-                percent_zeros = zeros / pressure_len
-                percent_ones = ones / pressure_len
-
                 if count < practice_len:
-                    if percent_zeros >= 0.25:
+                    if find_sequence(pressures[25:-70], 0, 4):
+                        print(pressures)
                         no_pressure_alert.draw()
                         feedback_tracker.append("pressure")
-
-                    if np.mean(pressures[:15]) == 0:
+                    
+                    if find_sequence(pressures[-60:],1, 3):
+                        no_depress_alert.draw()
+                        feedback_tracker.append("no_depress")
+                        
+                    if find_sequence(pressures[:25], 0, 8):
                         late_start_alert.draw()
                         feedback_tracker.append("late")
+                    
+                    if distances[-1] < HIT_BOX[0]:
+                        outside_circle_alert.draw()
+                        feedback_tracker.append("hit")
+                    elif distances[-1] > HIT_BOX[1]:
+                        outside_circle_alert.draw()
+                        feedback_tracker.append("hit")
 
                 mywin.flip()
 
@@ -573,31 +607,28 @@ if __name__ == "__main__":
                 finishline.draw()
                 feedback.draw()
 
-                # for practice
-                unique, counts = np.unique(pressures[15:-15], return_counts=True)
-                feedback_data = dict(zip(unique, counts))
-                pressure_len = len(pressures)
-                if 0 in feedback_data.keys():
-                    zeros = feedback_data[0]
-                else:
-                    zeros = 0
-                if 1 in feedback_data.keys():
-                    ones = feedback_data[1]
-                else:
-                    ones = 0
-
-                percent_zeros = zeros / pressure_len
-                percent_ones = ones / pressure_len
-
                 if count < practice_len:
-                    if percent_zeros >= 0.20:
+
+                    
+                    if find_sequence(pressures[25:-70], 0, 4):
                         no_pressure_alert.draw()
                         feedback_tracker.append("pressure")
+                    
+                    if find_sequence(pressures[-60:],1, 3):
+                        no_depress_alert.draw()
+                        feedback_tracker.append("no_depress")
 
-                    if np.mean(pressures[:15]) == 0:
+                    if find_sequence(pressures[:25], 0, 8):
                         late_start_alert.draw()
                         feedback_tracker.append("late")
-
+                    
+                    if distances[-1] < HIT_BOX[0]:
+                        outside_circle_alert.draw()
+                        feedback_tracker.append("hit")
+                    elif distances[-1] > HIT_BOX[1]:
+                        outside_circle_alert.draw()
+                        feedback_tracker.append("hit")
+                    
                 mywin.flip()
 
         # Save Data
@@ -633,6 +664,12 @@ if __name__ == "__main__":
 
                 if "pressure" in set(feedback_tracker):
                     practice_feedback_pressure.draw()
+                    
+                if "hit" in set(feedback_tracker):
+                    practice_feedback_hit.draw()
+                    
+                if "no_depress" in set(feedback_tracker):
+                    practice_feedback_depress.draw()
 
                 mywin.flip()
 
