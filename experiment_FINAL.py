@@ -4,6 +4,8 @@ import numpy as np
 import sys
 import wx
 import random
+import time
+
 
 app = wx.App(False)
 
@@ -49,7 +51,7 @@ INSTRUCTIONS_STOP = (
 
 INSTRUCTIONS_PRACTICE = (
     "Great, now that you've practiced going and stopping let's put everything together and walk through the rest of the task.\n\n"
-    + "The experiment is broken up in blocks, which are sets of trials. On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an artificial intelligence (AI) algorithm that will attempt to stop the dot when the screen turns red. On most trials it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. Before each block, you will be told whether you are in a block that is AI-assisted or not. \n\n"
+    + "The experiment is broken up into blocks, which are sets of trials. On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an artificial intelligence (AI) algorithm that will attempt to stop the dot when the screen turns red. On most trials it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. Before each block, you will be told whether you are in a block that is AI-assisted or not. \n\n"
     + "The task is broken up into a practice phase where you will get feedback on your behavior and a testing phase which will not give you feedback.\n\n"
     + "When you are ready to begin the practice phase, press enter. \n\n")
 
@@ -62,10 +64,14 @@ INSTRUCTIONS_TESTING = (
 
 END_TEXT = "Thank you for participating in this experiment!\n\nPlease press the spacebar to end this task."
 
-NON_AI_TEXT = "In this block the artificial intelligence algorithm is not engaged. You are solely responsible for stopping the dots movement as quickly as possible when the screen turns red.
-"
-AI_TEXT = "In this block the artificial intelligence algorithm will be engaged. On most trials, the AI algorithm will stop the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail. When it fails,  you must stop the dot’s movement yourself. 
-"
+NON_AI_TEXT = ("In this block the artificial intelligence algorithm is not engaged."
+            + "\n\nYou are solely responsible for stopping the dots movement as quickly as possible when the screen turns red."
+    + "\n\n Press enter to begin...")
+
+AI_TEXT = ("In this block the artificial intelligence algorithm will be engaged. \n\n"
+        + "On most trials, the AI algorithm will stop the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail."
+        + "\n\nWhen it fails, you must stop the dot’s movement yourself." 
+        + "\n\n Press Enter to begin...")
 
 # feedback text options
 PRESSURE_FEEDBACK = "Remember to keep the space pressed throughout the trial."
@@ -142,7 +148,6 @@ def create_conditions_array(stop_trials, ai_trials):
     conditions[conditions == 1] = 'ai'
     return conditions
 
-
 def setup_trials():
     n_trials, block1, block2 = get_prob_dist_inputs()
     if n_trials == 0:
@@ -159,13 +164,18 @@ def setup_trials():
 
     if random.randint(0, 1) == 0:
         conditions = list(conditions_block1) + list(conditions_block2)
+        
+        block_labels = ['non-ai', 'ai']
+        
     else:
         conditions = list(conditions_block2) + list(conditions_block1)
+        
+        block_labels = ['ai', 'non-ai']
 
-    return conditions, block
+    return conditions, block, block_labels
 
 
-def setupPractice(num_stop=15, num_ai=5):
+def setupPractice(num_stop=1, num_ai=1):
     practice_conditions = ["stop"] * num_stop + ["ai"] * num_ai
     np.random.shuffle(practice_conditions)
 
@@ -234,7 +244,7 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     # subject info
-    conditions, block = setup_trials()
+    conditions, block, block_labels = setup_trials()
     practice, practice_len = setupPractice()
     subid, sess = getInput()
 
@@ -273,14 +283,41 @@ if __name__ == "__main__":
         win=mywin, text=NO_PRESS_TEXT, height=1, pos=[0, 7]
     )
     break_feedback = visual.TextStim(
-        win=mywin, text="Take a 10 second break", height=1.5, pos=[0, 3.5]
+        win=mywin, text="Take a 10 second break, the block will resume shortly.", height=1.5, pos=[0, 3.5], wrapWidth=30
     )
+    
     block_feedback = visual.TextStim(
         win=mywin,
-        text="You have completed the first block of the experiment! \n Block 2 will start after a 30 second break...",
-        height=1.5,
+        text="You have completed the first block of the experiment! \n Block 2 will start after a 30 second break. Please review your feedback if there is any...",
+        height=1,
         pos=[0, 3.5],
+        wrapWidth=30
     )
+    
+    ending_block_feedback = visual.TextStim(
+        win=mywin,
+        text="You have completed the second block of the experiment! \n Please review your feedback shown below if there is any...",
+        height=1,
+        pos=[0, 3.5],
+        wrapWidth=30
+    )
+    
+    AI_block_text = visual.TextStim(
+        win=mywin,
+        text=AI_TEXT,
+        height=1,
+        pos=[0, 0],
+        wrapWidth=30
+    )
+    
+    Non_AI_block_text = visual.TextStim(
+        win=mywin,
+        text=NON_AI_TEXT,
+        height=1,
+        pos=[0, 0],
+        wrapWidth=30
+    )  
+    
     practice_end = visual.TextStim(
         win=mywin,
         text="Please review your feedback if there is any...",
@@ -435,14 +472,40 @@ if __name__ == "__main__":
             practice_clock.reset()
 
         if count == practice_len:
+            feedback_tracker = []
             intro_stim_testing.draw()
             mywin.flip()
-            waitingForSpace == True
+            waitingForSpace = True
             while waitingForSpace:
                 scan_codes, analog_codes, _ = wp.read_full_buffer()
                 if HID_CODE_ENTER in scan_codes:
                     waitingForSpace = False
             
+
+            testing_clock.reset()
+            
+            if block_labels[0] == 'ai':
+                AI_block_text.draw()
+                mywin.flip()
+                time.sleep(1)
+                waitingForSpace = True
+                while waitingForSpace:
+                    scan_codes, analog_codes, _ = wp.read_full_buffer()
+                    scan_codes, analog_codes, _ = wp.read_full_buffer()
+                    if HID_CODE_ENTER in scan_codes:
+                        waitingForSpace = False
+                        
+            elif block_labels[0] == 'non-ai':
+                Non_AI_block_text.draw()
+                mywin.flip()
+                time.sleep(1)
+                waitingForSpace = True
+                while waitingForSpace:
+                    scan_codes, analog_codes, _ = wp.read_full_buffer()
+                    scan_codes, analog_codes, _ = wp.read_full_buffer()
+                    if HID_CODE_ENTER in scan_codes:
+                        waitingForSpace = False
+                        
             testing_clock.reset()
 
         if count == practice_len + (block / 2) or count == practice_len + (
@@ -531,24 +594,18 @@ if __name__ == "__main__":
 
                 if count < practice_len:
                     if find_sequence(pressures[25:-70], 0, 4):
-                        print(pressures)
                         no_pressure_alert.draw()
-                        feedback_tracker.append("pressure")
                     
                     if find_sequence(pressures[-60:],1, 3):
                         no_depress_alert.draw()
-                        feedback_tracker.append("no_depress")
                         
                     if find_sequence(pressures[:25], 0, 8):
                         late_start_alert.draw()
-                        feedback_tracker.append("late")
                     
                     if distances[-1] < HIT_BOX[0]:
                         outside_circle_alert.draw()
-                        feedback_tracker.append("hit")
                     elif distances[-1] > HIT_BOX[1]:
                         outside_circle_alert.draw()
-                        feedback_tracker.append("hit")
 
                 mywin.flip()
 
@@ -608,33 +665,58 @@ if __name__ == "__main__":
                 feedback.draw()
 
                 if count < practice_len:
-
                     
                     if find_sequence(pressures[25:-70], 0, 4):
                         no_pressure_alert.draw()
-                        feedback_tracker.append("pressure")
                     
                     if find_sequence(pressures[-60:],1, 3):
                         no_depress_alert.draw()
-                        feedback_tracker.append("no_depress")
 
                     if find_sequence(pressures[:25], 0, 8):
                         late_start_alert.draw()
-                        feedback_tracker.append("late")
                     
                     if distances[-1] < HIT_BOX[0]:
                         outside_circle_alert.draw()
-                        feedback_tracker.append("hit")
                     elif distances[-1] > HIT_BOX[1]:
                         outside_circle_alert.draw()
-                        feedback_tracker.append("hit")
                     
                 mywin.flip()
+                
 
         # Save Data
         trials.data.add("time_stamps", " ".join([str(elem) for elem in timings]))
         trials.data.add("pressures", " ".join([str(elem) for elem in pressures]))
         trials.data.add("distances", " ".join([str(elem) for elem in distances]))
+        
+        if count < practice_len:
+
+            if find_sequence(pressures[25:-70], 0, 4):
+                feedback_tracker.append("pressure")
+
+            if find_sequence(pressures[-60:],1, 3):
+                feedback_tracker.append("no_depress")
+
+            if find_sequence(pressures[:25], 0, 8):
+                feedback_tracker.append("late")
+
+            if distances[-1] < HIT_BOX[0]:
+                feedback_tracker.append("hit")
+            elif distances[-1] > HIT_BOX[1]:
+                feedback_tracker.append("hit")
+        elif count >= practice_len:
+            if find_sequence(pressures[25:-70], 0, 4):
+                feedback_tracker.append("pressure")
+
+            if find_sequence(pressures[-60:],1, 3):
+                feedback_tracker.append("no_depress")
+
+            if find_sequence(pressures[:25], 0, 8):
+                feedback_tracker.append("late")
+
+            if distances[-1] < HIT_BOX[0]:
+                feedback_tracker.append("hit")
+            elif distances[-1] > HIT_BOX[1]:
+                feedback_tracker.append("hit")
 
         if count < practice_len:
             trials.data.add("block", "practice")
@@ -647,33 +729,103 @@ if __name__ == "__main__":
             trials.data.add("phase", "test")
 
         if count + 1 == practice_len + block:
+            print(feedback_tracker)
+            print(len(feedback_tracker))
+            
+            pressure_proportions = feedback_tracker.count("pressure") / (practice_len + block)
+            late_proportions = feedback_tracker.count("late") / (practice_len + block)
+            hit_proportions = feedback_tracker.count("hit") / (practice_len + block)
+            no_depress_proportions = feedback_tracker.count("no_depress") / (practice_len + block)
+            
             block_end_timer = core.CountdownTimer(BLOCK_END_TIME)
             while block_end_timer.getTime() > 0:
                 mywin.color = "grey"
                 block_feedback.draw()
+                if late_proportions >= .25:
+                    practice_feedback_late.draw()
+
+                if pressure_proportions >= .25:
+                    practice_feedback_pressure.draw()
+                    
+                if hit_proportions >= .25:
+                    practice_feedback_hit.draw()
+                    
+                if no_depress_proportions >= .25:
+                    practice_feedback_depress.draw()
                 mywin.flip()
+            
+            if block_labels[1] == 'ai':
+                AI_block_text.draw()
+                mywin.flip()
+                waitingForSpace = True
+                while waitingForSpace:
+                    scan_codes, analog_codes, _ = wp.read_full_buffer()
+                    if HID_CODE_ENTER in scan_codes:
+                        waitingForSpace = False
+                        
+            elif block_labels[1] == 'non-ai':
+                Non_AI_block_text.draw()
+                mywin.flip()
+                waitingForSpace = True
+                while waitingForSpace:
+                    scan_codes, analog_codes, _ = wp.read_full_buffer()
+                    if HID_CODE_ENTER in scan_codes:
+                        waitingForSpace = False
+            
+            #reseting feedback
+            feedback_tracker = []
+                        
         elif count + 1 == practice_len:
+            print(feedback_tracker)
+            print(len(feedback_tracker))
             practice_end_timer = core.CountdownTimer(PRACTICE_END_TIME)
             practice_duration = practice_clock.getTime()
+            
+            pressure_proportions = feedback_tracker.count("pressure") / practice_len
+            late_proportions = feedback_tracker.count("late") / practice_len
+            hit_proportions = feedback_tracker.count("hit") / practice_len
+            no_depress_proportions = feedback_tracker.count("no_depress") / practice_len
 
             while practice_end_timer.getTime() > 0:
                 mywin.color = "grey"
                 practice_end.draw()
-                if "late" in set(feedback_tracker):
+                if late_proportions >= .25:
                     practice_feedback_late.draw()
 
-                if "pressure" in set(feedback_tracker):
+                if pressure_proportions >= .25:
                     practice_feedback_pressure.draw()
                     
-                if "hit" in set(feedback_tracker):
+                if hit_proportions >= .25:
                     practice_feedback_hit.draw()
                     
-                if "no_depress" in set(feedback_tracker):
+                if no_depress_proportions >= .25:
                     practice_feedback_depress.draw()
 
                 mywin.flip()
-
     # FINISH
+    
+    pressure_proportions = feedback_tracker.count("pressure") / (practice_len + block)
+    late_proportions = feedback_tracker.count("late") / (practice_len + block)
+    hit_proportions = feedback_tracker.count("hit") / (practice_len + block)
+    no_depress_proportions = feedback_tracker.count("no_depress") / (practice_len + block)
+    
+    block_end_timer = core.CountdownTimer(BLOCK_END_TIME)
+    while block_end_timer.getTime() > 0:
+        mywin.color = "grey"
+        ending_block_feedback.draw()
+        if late_proportions >= .25:
+            practice_feedback_late.draw()
+
+        if pressure_proportions >= .25:
+            practice_feedback_pressure.draw()
+
+        if hit_proportions >= .25:
+            practice_feedback_hit.draw()
+
+        if no_depress_proportions >= .25:
+            practice_feedback_depress.draw()
+        mywin.flip()
+    
     end_stim.draw()
     mywin.flip()
     waitingForSpace = True
@@ -681,7 +833,7 @@ if __name__ == "__main__":
         scan_codes, analog_codes, _ = wp.read_full_buffer()
         if HID_CODE_SPACE in scan_codes:
             waitingForSpace = False
-
+    
     testing_duration = testing_clock.getTime()
     trials.saveAsText(fileName="data_sub-%s_ses-%s" % (subid, sess), delim=",")
     print(f"Practice phase duration: {practice_duration} seconds")
