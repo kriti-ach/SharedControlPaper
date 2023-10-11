@@ -37,7 +37,7 @@ INSTRUCTIONS_GO = (
     + "The harder you press the spacebar, the faster the dot will move.\n\n"
     + "Please try your best to keep the dot within the ring. If you find the ball is going too fast, press the spacebar with less pressure  to reduce the dot’s speed.\n\n"
     + "For a brief period you will see a plus sign on the screen signifying that the trial is about to start and then the ring will begin to move from left to right. \n\n"
-    + "As soon as the ring starts to move, you should press the spacebar to move the dot alongside it.\n\n"
+    + "As soon as the ring starts to move, you should press the spacebar to move the dot with it.\n\n"
     + "Try to keep the dot within the ring as it moves across the screen.\n\n"
     + "Let's practice moving the ball across the screen. When you are ready to begin, press enter."
 )
@@ -53,6 +53,7 @@ INSTRUCTIONS_PRACTICE = (
     "Great, now that you've practiced going and stopping let's put everything together and walk through the rest of the task.\n\n"
     + "The experiment is broken up into blocks, which are sets of trials. On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an artificial intelligence (AI) algorithm that will attempt to stop the dot when the screen turns red. On most trials it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. Before each block, you will be told whether you are in a block that is AI-assisted or not. \n\n"
     + "The task is broken up into a practice phase where you will get feedback on your behavior and a testing phase which will not give you feedback.\n\n"
+    + "In this practice phase the artificial intelligence algorithm will be engaged. On most trials, the AI algorithm will stop the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail. When it fails,  you must stop the dot’s movement yourself. \n\n"
     + "When you are ready to begin the practice phase, press enter. \n\n")
 
 INSTRUCTIONS_TESTING = (
@@ -175,7 +176,7 @@ def setup_trials():
     return conditions, block, block_labels
 
 
-def setupPractice(num_stop=1, num_ai=1):
+def setupPractice(num_stop=5, num_ai=15):
     practice_conditions = ["stop"] * num_stop + ["ai"] * num_ai
     np.random.shuffle(practice_conditions)
 
@@ -283,7 +284,7 @@ if __name__ == "__main__":
         win=mywin, text=NO_PRESS_TEXT, height=1, pos=[0, 7]
     )
     break_feedback = visual.TextStim(
-        win=mywin, text="Take a 10 second break, the block will resume shortly.", height=1.5, pos=[0, 3.5], wrapWidth=30
+        win=mywin, text="Take a 10 second break and review your feedback if there is any. The task will resume shortly...", height=1, pos=[0, 3.5], wrapWidth=30
     )
     
     block_feedback = visual.TextStim(
@@ -508,15 +509,6 @@ if __name__ == "__main__":
                         
             testing_clock.reset()
 
-        if count == practice_len + (block / 2) or count == practice_len + (
-            (block / 2) + block
-        ):
-            break_timer = core.CountdownTimer(BREAK_TIME)
-            while break_timer.getTime() > 0:
-                mywin.color = "grey"
-                break_feedback.draw()
-                mywin.flip()
-
         # Init Trial Data
         SSD = sample_SSD()
         trials.data.add("SSD", SSD)
@@ -731,11 +723,12 @@ if __name__ == "__main__":
         if count + 1 == practice_len + block:
             print(feedback_tracker)
             print(len(feedback_tracker))
+            print(count + 1)
             
-            pressure_proportions = feedback_tracker.count("pressure") / (practice_len + block)
-            late_proportions = feedback_tracker.count("late") / (practice_len + block)
-            hit_proportions = feedback_tracker.count("hit") / (practice_len + block)
-            no_depress_proportions = feedback_tracker.count("no_depress") / (practice_len + block)
+            pressure_proportions = feedback_tracker.count("pressure") / block
+            late_proportions = feedback_tracker.count("late") / block
+            hit_proportions = feedback_tracker.count("hit") / block
+            no_depress_proportions = feedback_tracker.count("no_depress") / block
             
             block_end_timer = core.CountdownTimer(BLOCK_END_TIME)
             while block_end_timer.getTime() > 0:
@@ -774,6 +767,39 @@ if __name__ == "__main__":
             
             #reseting feedback
             feedback_tracker = []
+            
+        elif count+1 == practice_len + (block / 2) or count+1 == practice_len + (
+            (block / 2) + block
+        ):
+            print(feedback_tracker)
+            print(len(feedback_tracker))
+            print(count+1)
+            print("BRUH YESS!")
+            
+            pressure_proportions = feedback_tracker.count("pressure") / (block / 2)
+            late_proportions = feedback_tracker.count("late") / (block / 2)
+            hit_proportions = feedback_tracker.count("hit") / (block / 2)
+            no_depress_proportions = feedback_tracker.count("no_depress") / (block / 2)
+            
+            break_timer = core.CountdownTimer(BREAK_TIME)
+            while break_timer.getTime() > 0:
+                mywin.color = "grey"
+                break_feedback.draw()
+                if late_proportions >= .25:
+                    practice_feedback_late.draw()
+
+                if pressure_proportions >= .25:
+                    practice_feedback_pressure.draw()
+                    
+                if hit_proportions >= .25:
+                    practice_feedback_hit.draw()
+                    
+                if no_depress_proportions >= .25:
+                    practice_feedback_depress.draw()
+                mywin.flip()
+            
+            #reseting feedback
+            feedback_tracker = []
                         
         elif count + 1 == practice_len:
             print(feedback_tracker)
@@ -802,6 +828,8 @@ if __name__ == "__main__":
                     practice_feedback_depress.draw()
 
                 mywin.flip()
+                
+            feedback_tracker = []
     # FINISH
     
     pressure_proportions = feedback_tracker.count("pressure") / (practice_len + block)
