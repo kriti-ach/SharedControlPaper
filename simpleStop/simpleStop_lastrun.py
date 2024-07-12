@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.2),
-    on Thu Jun 29 12:47:57 2023
+    on Fri Jul 12 13:41:49 2024
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -85,7 +85,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/poldracklab/Documents/jahrios/SharedControl/Code/SharedControl/simpleStop/simpleStop_lastrun.py',
+    originPath='/Users/poldracklab/Documents/jahrios/SharedControl/Code/simpleStop/simpleStop_lastrun.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -156,13 +156,13 @@ numTestBlocks = int(stopTaskTrials / numTrialsPerBlock)
 stopTrialList = []
 stopPracTrialList = []
 possible_responses = [
-  ["circle", 'z'],
-  ["circle", 'z'],
-  ["square", 'm'],
-  ["square", 'm'],
+  ["circle", 'left'],
+  ["circle", 'left'],
+  ["square", 'right'],
+  ["square", 'right'],
 ]
 
-InitSSD = .25
+InitSSD = .35
 SSD = InitSSD
 
 def createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed):
@@ -201,7 +201,7 @@ thisExp.addData("stopPracTrialList", stopPracTrialList)
 
 # --- Initialize components for Routine "instructions" ---
 instrStopText = visual.TextStim(win=win, name='instrStopText',
-    text='In this task you will see shapes appear on the screen one at a time.\n\nOnly one response is correct for each shape.\n\nIf the shape is a square press the “M” key.\nIf the shape is a circle press the “Z” key.\n\nYou should respond as quickly and accurately as possible to each shape.\n\nOn some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.\nIf you see a star appear, please try your best to withhold your response on that trial. If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.\n\nPlease do not slow down your responses to wait for the star.  Continue to respond as quickly and accurately as possible.\n\nWe will start the practice when you finish the instructions. Please make sure you understand the rules before moving on. During practice, you will see a reminder of the rules. This will be removed for test.\n\nPress enter to continue.\n\n',
+    text='In this task you will see shapes appear on the screen one at a time.\n\nOnly one response is correct for each shape.\n\nIf the shape is a circle press the index finger.\nIf the shape is a square press the middle finger.\n\nYou should respond as quickly and accurately as possible to each shape.\n\nOn some trials, a star will appear around the shape.  The star can appear with, or shortly after the shape appears.\n\nIf you see a star appear, please try your best to withhold your response on that trial. If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.\n\nPlease do not slow down your responses to wait for the star to appear.  Continue to respond as quickly and accurately as possible.\n\nWe will start the practice when you finish the instructions. Please make sure you understand the rules before moving on. During practice, you will see a reminder of the rules in the top left of the screen and receive feedback on your performance. This will be removed for test.\n\nPress enter to continue.\n\n',
     font='Arial',
     pos=[0, 0], height=0.025, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
@@ -210,6 +210,9 @@ instrStopText = visual.TextStim(win=win, name='instrStopText',
 start_prac = keyboard.Keyboard()
 
 # --- Initialize components for Routine "practiceBlockSetup" ---
+# Run 'Begin Experiment' code from practice_block
+block = 1
+
 
 # --- Initialize components for Routine "newPracticeStim" ---
 
@@ -239,7 +242,7 @@ stopSignal = visual.ImageStim(
     flipHoriz=False, flipVert=False,
     texRes=128.0, interpolate=True, depth=-3.0)
 rules = visual.TextStim(win=win, name='rules',
-    text="Circle: 'Z' Key\nSquare: 'M' Key\nDo not respond if a star appears!",
+    text='Circle: Index Finger\nSquare: Middle Finger\nDo not respond if a star appears!',
     font='Open Sans',
     pos=(-.6, .4), height=0.03, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -262,7 +265,7 @@ text = visual.TextStim(win=win, name='text',
     languageStyle='LTR',
     depth=-1.0);
 rules_2 = visual.TextStim(win=win, name='rules_2',
-    text="Circle: 'Z' Key\nSquare: 'M' Key\nDo not respond if a star appears!",
+    text='Circle: Index Finger\nSquare: Middle Finger\nDo not respond if a star appears!',
     font='Open Sans',
     pos=(-.6, .4), height=0.03, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -286,7 +289,7 @@ key_resp_3 = keyboard.Keyboard()
 # --- Initialize components for Routine "testInstructions" ---
 key_resp = keyboard.Keyboard()
 testText = visual.TextStim(win=win, name='testText',
-    text='We will now begin the testing phase. To summarize the instructions.\n\nOnly one response is correct for each shape.\n\nIf the shape is a square press the “M” key.\nIf the shape is a circle press the “Z” key.\n\nYou should respond as quickly and accurately as possible to each shape. \nOn some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears. If you see a star appear, please try your best to withhold your response on that trial.\n\nIf the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.\n\nPlease do not slow down your responses to wait for the star.  Continue to respond as quickly and accurately as possible.\n\nPress enter to start the testing.\n\n',
+    text='We will now begin the testing phase. To summarize the instructions.\n\nIf the shape is a circle press Index Finger.\nIf the shape is a square press Middle Finger.\n\nYou should respond as quickly and accurately as possible to each shape.\n \nOn some trials, a star will appear around the shape. If you see a star appear, please try your best to withhold your response on that trial.\n\nPlease do not slow down your responses to wait for the star to appear.  You should respond as quickly and accurately as possible as soon as you see the shapes appear on the screen.\n\nPress enter to start the testing.\n\n',
     font='Arial',
     pos=[0, 0], height=0.025, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
@@ -294,10 +297,9 @@ testText = visual.TextStim(win=win, name='testText',
     depth=-1.0);
 # Run 'Begin Experiment' code from test_setup
 testBlockCount = 0
-
 stopTrialList = createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed)
 
-thisExp.addData(f"Test Block: {testBlockCount}", stopTrialList)
+thisExp.addData(f"Test Block: 1", stopTrialList)
 
 # --- Initialize components for Routine "stopBlockSetup" ---
 
@@ -671,7 +673,7 @@ for thisPracticeBlock in practiceBlocks:
     
     #***************************
     trialCount = 0
-    
+    phase = "practice"
     # keep track of which components have finished
     practiceBlockSetupComponents = []
     for thisComponent in practiceBlockSetupComponents:
@@ -910,13 +912,13 @@ for thisPracticeBlock in practiceBlocks:
                     thisExp.timestampOnFlip(win, 'goResp.stopped')
                     goResp.status = FINISHED
             if goResp.status == STARTED and not waitOnFlip:
-                theseKeys = goResp.getKeys(keyList=['m', 'z'], waitRelease=False)
+                theseKeys = goResp.getKeys(keyList=['left', 'right'], waitRelease=False)
                 _goResp_allKeys.extend(theseKeys)
                 if len(_goResp_allKeys):
                     goResp.keys = _goResp_allKeys[0].name  # just the first key pressed
                     goResp.rt = _goResp_allKeys[0].rt
                     # was this correct?
-                    if (goResp.keys == str(corrGoResp)) or (goResp.keys == corrGoResp):
+                    if (goResp.keys == str(currentCorrectResponse)) or (goResp.keys == currentCorrectResponse):
                         goResp.corr = 1
                     else:
                         goResp.corr = 0
@@ -987,7 +989,7 @@ for thisPracticeBlock in practiceBlocks:
         if goResp.keys in ['', [], None]:  # No response was made
             goResp.keys = None
             # was no response the correct answer?!
-            if str(corrGoResp).lower() == 'none':
+            if str(currentCorrectResponse).lower() == 'none':
                goResp.corr = 1;  # correct non-response
             else:
                goResp.corr = 0;  # failed to respond (incorrectly)
@@ -1146,8 +1148,12 @@ for thisPracticeBlock in practiceBlocks:
         if currentStopPracTrial['condition'] == 'go':
             if goResp.keys is None:
                 omissionCount = omissionCount + 1
-            elif goResp.corr == 0:
+                print(f'{omissionCount}')
+            elif goResp.keys != currentCorrectResponse:
                 commissionCount = commissionCount + 1
+                print(f'{commissionCount}')
+            else:
+                print("practice wasnt omission or comission! yay.")
         
         #Outputting a bunch of variables
         practiceTrials.addData("fixationOnset", fixation.tStart)
@@ -1203,6 +1209,8 @@ for thisPracticeBlock in practiceBlocks:
                 thisComponent.setAutoDraw(False)
         # Run 'End Routine' code from practice_trial_end
         practiceTrials.addData("EndTrialTimeStamp", core.getTime())
+        practiceTrials.addData("Phase", phase)
+        practiceTrials.addData("Block", block)
         # the Routine "endTrial" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         thisExp.nextEntry()
@@ -1225,10 +1233,13 @@ for thisPracticeBlock in practiceBlocks:
         goRTFeedback = 'Null'
     
     if goTrialCount > 0:
-        commissionRate = (commissionCount/goTrialCount)*100
+        commissionRate = (commissionCount/goTrialCount)
+        print(f'comissionCount: {commissionCount}')
+        print(f'goTrialCount: {goTrialCount}')
         commissionRate = round(commissionRate, 2)
-        omissionRate = (omissionCount/goTrialCount)*100
+        omissionRate = (omissionCount/goTrialCount)
         omissionRate = round(omissionRate, 2)
+        print(f'omissionCount: {omissionCount}')
     else: 
         commissionRate = 1
         omissionRate = 1
@@ -1242,13 +1253,16 @@ for thisPracticeBlock in practiceBlocks:
     SSDFeedback = SSD
     SSDFeedback = round(SSDFeedback, 2)
     
-    stopMessage = "\nPlease take this time to read your feedback if there is any, and take a short break. Press enter to continue.\n"
+    print(f'comission_rate: {commissionRate}, omission_rate: {omissionRate}')
+    
+    stopMessage = "\nPlease take this time to read your feedback if there is any, and take a short (1 minute) break. Press enter to continue.\n"
     
     practiceCount += 1
+    block += 1
     if practiceCount == practice_blocks:
         practiceEnd = 1
         stopMessage = "Done with this practice.\nPress enter to continue."
-    elif commissionRate > commision_thresh and probabilityOfStop < maxStopCorrectPractice and probabilityOfStop > minStopCorrectPractice:
+    elif commissionRate <= commision_thresh and probabilityOfStop < maxStopCorrectPractice and probabilityOfStop > minStopCorrectPractice:
         practiceEnd = 1
         stopMessage = "Done with this practice.\nPress enter to continue."
     
@@ -1257,14 +1271,20 @@ for thisPracticeBlock in practiceBlocks:
     
         if commissionRate > commision_thresh:
             stopMessage += "\n Your accuracy is too low. Remember:" \
-                            + "\n\tCircle: Z key" \
-                            + "\n\tSquare: M key"
+                            + "\n\tCircle: Index Finger" \
+                            + "\n\tSquare: Middle Finger"
                             
         if goRTFeedback != 'Null' and goRTFeedback > rt_thresh:
             stopMessage += "\n\nYou have been responding too slowly, please respond to each shape as quickly and as accurately as possible."
     
         if omissionRate > missed_response_thresh:
-            stopMessage += "\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes."
+            if commissionRate > commision_thresh:
+                stopMessage += "\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes."
+            else:
+                stopMessage += "\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes." \
+                            + "\n Your accuracy is too low. Remember:" \
+                            + "\n\tCircle: Index Finger" \
+                            + "\n\tSquare: Middle Finger"
     
         if probabilityOfStop == minStopCorrectPractice:
             stopMessage += "\n\nYou have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star."
@@ -1292,7 +1312,7 @@ for thisPracticeBlock in practiceBlocks:
     frameN = -1
     
     # --- Run Routine "practiceFeedback" ---
-    while continueRoutine and routineTimer.getTime() < 180.0:
+    while continueRoutine and routineTimer.getTime() < 60.0:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1312,7 +1332,7 @@ for thisPracticeBlock in practiceBlocks:
             text_5.setAutoDraw(True)
         if text_5.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text_5.tStartRefresh + 180-frameTolerance:
+            if tThisFlipGlobal > text_5.tStartRefresh + 60-frameTolerance:
                 # keep track of stop time/frame for later
                 text_5.tStop = t  # not accounting for scr refresh
                 text_5.frameNStop = frameN  # exact frame index
@@ -1337,7 +1357,7 @@ for thisPracticeBlock in practiceBlocks:
             win.callOnFlip(key_resp_3.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if key_resp_3.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > key_resp_3.tStartRefresh + 180-frameTolerance:
+            if tThisFlipGlobal > key_resp_3.tStartRefresh + 60-frameTolerance:
                 # keep track of stop time/frame for later
                 key_resp_3.tStop = t  # not accounting for scr refresh
                 key_resp_3.frameNStop = frameN  # exact frame index
@@ -1385,7 +1405,7 @@ for thisPracticeBlock in practiceBlocks:
     if routineForceEnded:
         routineTimer.reset()
     else:
-        routineTimer.addTime(-180.000000)
+        routineTimer.addTime(-60.000000)
     
     # --- Prepare to start Routine "practiceRepeat" ---
     continueRoutine = True
@@ -1395,7 +1415,6 @@ for thisPracticeBlock in practiceBlocks:
     stopPracTrialList = createTrialTypes(numStopPracTrials, color, shapes, conditions, totalShapesUsed)
     
     thisExp.addData("stopPracTrialList", stopPracTrialList)
-    
     if practiceEnd == 1:
         practiceBlocks.finished = True
     # keep track of which components have finished
@@ -1457,6 +1476,9 @@ routineForceEnded = False
 key_resp.keys = []
 key_resp.rt = []
 _key_resp_allKeys = []
+# Run 'Begin Routine' code from test_setup
+phase = "test"
+block = 1
 # keep track of which components have finished
 testInstructionsComponents = [key_resp, testText]
 for thisComponent in testInstructionsComponents:
@@ -1836,13 +1858,13 @@ for thisStopBlock in stopBlocks:
                     thisExp.timestampOnFlip(win, 'goResp_test.stopped')
                     goResp_test.status = FINISHED
             if goResp_test.status == STARTED and not waitOnFlip:
-                theseKeys = goResp_test.getKeys(keyList=['m', 'z'], waitRelease=False)
+                theseKeys = goResp_test.getKeys(keyList=['left', 'right'], waitRelease=False)
                 _goResp_test_allKeys.extend(theseKeys)
                 if len(_goResp_test_allKeys):
                     goResp_test.keys = _goResp_test_allKeys[0].name  # just the first key pressed
                     goResp_test.rt = _goResp_test_allKeys[0].rt
                     # was this correct?
-                    if (goResp_test.keys == str(corrGoResp)) or (goResp_test.keys == corrGoResp):
+                    if (goResp_test.keys == str(currentCorrectResponse)) or (goResp_test.keys == currentCorrectResponse):
                         goResp_test.corr = 1
                     else:
                         goResp_test.corr = 0
@@ -1893,7 +1915,7 @@ for thisStopBlock in stopBlocks:
         if goResp_test.keys in ['', [], None]:  # No response was made
             goResp_test.keys = None
             # was no response the correct answer?!
-            if str(corrGoResp).lower() == 'none':
+            if str(currentCorrectResponse).lower() == 'none':
                goResp_test.corr = 1;  # correct non-response
             else:
                goResp_test.corr = 0;  # failed to respond (incorrectly)
@@ -1939,17 +1961,19 @@ for thisStopBlock in stopBlocks:
         
         if currentStopTestTrial['condition'] == 'stop' and goResp_test.keys is None:
             stopSuccessCount = stopSuccessCount + 1
+            
+        print('goResp_test.corr: goResp_test.corr')
         
         if currentStopTestTrial['condition'] == 'go':
             if goResp_test.keys is None:
                 omissionCount = omissionCount + 1
-            elif goResp_test.corr == 0:
+            elif goResp_test.keys != currentCorrectResponse:
                 commissionCount = commissionCount + 1
         
         #Outputting a bunch of variables
         testTrials.addData("fixationOnset", test_fixation.tStart)
         testTrials.addData("goStimOnset", goStim_test.tStart)
-        if SSD  != -1:
+        if currentStopTestTrial['condition'] == 'stop':
             testTrials.addData("stopSignalOnset", stopSignal_test.tStart)
         
         #***************************
@@ -2004,6 +2028,8 @@ for thisStopBlock in stopBlocks:
         testTrials.addData("EndingSSD", SSD)
         testTrials.addData("EndTrialTimeStamp", core.getTime())
         
+        testTrials.addData("Block", block)
+        testTrials.addData("Phase", phase)
         #***************************
         # the Routine "ssdChange" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
@@ -2026,9 +2052,9 @@ for thisStopBlock in stopBlocks:
         goRTFeedback = 'Null'
     
     if goTrialCount > 0:
-        commissionRate = (commissionCount/goTrialCount)*100
+        commissionRate = (commissionCount/goTrialCount)
         commissionRate = round(commissionRate, 2)
-        omissionRate = (omissionCount/goTrialCount)*100
+        omissionRate = (omissionCount/goTrialCount)
         omissionRate = round(omissionRate, 2)
     else: 
         commissionRate = 'Null'
@@ -2044,31 +2070,42 @@ for thisStopBlock in stopBlocks:
     SSDFeedback = round(SSDFeedback, 2)
     
     testBlockCount += 1
-    
+    block +=1
     stopMessage = f"You have completed {testBlockCount} of {numTestBlocks}."
     
     if testBlockCount == numTestBlocks:
         stopMessage += "\n You have finished the testing phase."
     else:
-        stopMessage += "\nPlease take this time to read your feedback if there is any, and take a short break.\n"
+        stopMessage += "\nPlease take this time to read your feedback if there is any, and take a 1 minute break.\n"
         
         if commissionRate > commision_thresh:
             stopMessage += "\n Your accuracy is too low. Remember:" \
-                            + "\n\tCircle: Z key" \
-                            + "\n\tSquare: M key"
+                            + "\n\tCircle: Index Finger" \
+                            + "\n\tSquare: Middle Finger"
                             
         if goRTFeedback != 'Null' and goRTFeedback > rt_thresh:
             stopMessage += "\nYou have been responding too slowly, please respond to each shape as quickly and as accurately as possible."
     
         if omissionRate > missed_response_thresh:
-            stopMessage += "\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes."
+            if commissionRate > commision_thresh:
+                stopMessage += "\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes."
+            else:
+                stopMessage += "\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes." \
+                            + "\n Your accuracy is too low. Remember:" \
+                            + "\n\tCircle: Index Finger" \
+                            + "\n\tSquare: Middle Finger"
     
-        if probabilityOfStop == minStopCorrect:
+        if probabilityOfStop < minStopCorrect:
             stopMessage += "\nYou have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star."
-        elif probabilityOfStop == maxStopCorrect:
+        elif probabilityOfStop > maxStopCorrect:
             stopMessage += "\nDo not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear."
             
     stopMessage += "\n\nPress enter to continue."
+    
+    
+    print(f'comission_rate: {commissionRate}, omission_rate: {omissionRate}')
+    print(stopMessage)
+    
     #***************************
     
     stopTrialList = createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed)
@@ -2093,7 +2130,7 @@ for thisStopBlock in stopBlocks:
     frameN = -1
     
     # --- Run Routine "endOfStopBlockFeedback" ---
-    while continueRoutine and routineTimer.getTime() < 180.0:
+    while continueRoutine and routineTimer.getTime() < 60.0:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -2113,7 +2150,7 @@ for thisStopBlock in stopBlocks:
             text_6.setAutoDraw(True)
         if text_6.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text_6.tStartRefresh + 180-frameTolerance:
+            if tThisFlipGlobal > text_6.tStartRefresh + 60-frameTolerance:
                 # keep track of stop time/frame for later
                 text_6.tStop = t  # not accounting for scr refresh
                 text_6.frameNStop = frameN  # exact frame index
@@ -2138,7 +2175,7 @@ for thisStopBlock in stopBlocks:
             win.callOnFlip(key_resp_4.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if key_resp_4.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > key_resp_4.tStartRefresh + 180-frameTolerance:
+            if tThisFlipGlobal > key_resp_4.tStartRefresh + 60-frameTolerance:
                 # keep track of stop time/frame for later
                 key_resp_4.tStop = t  # not accounting for scr refresh
                 key_resp_4.frameNStop = frameN  # exact frame index
@@ -2186,7 +2223,7 @@ for thisStopBlock in stopBlocks:
     if routineForceEnded:
         routineTimer.reset()
     else:
-        routineTimer.addTime(-180.000000)
+        routineTimer.addTime(-60.000000)
     thisExp.nextEntry()
     
 # completed numTestBlocks repeats of 'stopBlocks'

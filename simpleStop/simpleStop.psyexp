@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2023.1.2">
+<PsychoPy2experiment encoding="utf-8" version="2022.2.2">
   <Settings>
     <Param val="3" valType="str" updates="None" name="Audio latency priority"/>
     <Param val="ptb" valType="str" updates="None" name="Audio lib"/>
@@ -68,10 +68,10 @@
   </Settings>
   <Routines>
     <Routine name="StimSetup">
-      <CodeComponent name="stim_setup" plugin="None">
+      <CodeComponent name="stim_setup">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="#***************************&amp;#10;&amp;#10;from copy import deepcopy&amp;#10;import random&amp;#10;&amp;#10;color = 'black'&amp;#10;shapes = [&quot;circle&quot;, &quot;circle&quot;, &quot;square&quot;, &quot;square&quot;]&amp;#10;conditions = ['go', 'go', 'stop']&amp;#10;totalShapesUsed = 4&amp;#10;numStim = 4&amp;#10;stopTaskTrials = 144&amp;#10;numStopPracTrials = 24&amp;#10;practice_blocks = 3&amp;#10;numTrialsPerBlock = 48&amp;#10;numTestBlocks = int(stopTaskTrials / numTrialsPerBlock)&amp;#10;stopTrialList = []&amp;#10;stopPracTrialList = []&amp;#10;possible_responses = [&amp;#10;  [&quot;circle&quot;, 'z'],&amp;#10;  [&quot;circle&quot;, 'z'],&amp;#10;  [&quot;square&quot;, 'm'],&amp;#10;  [&quot;square&quot;, 'm'],&amp;#10;]&amp;#10;&amp;#10;InitSSD = .25&amp;#10;SSD = InitSSD&amp;#10;&amp;#10;def createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed):&amp;#10;    unique_combos = len(conditions) * totalShapesUsed&amp;#10;&amp;#10;    stims = []&amp;#10;    for x in range(len(conditions)):&amp;#10;        for j in range(totalShapesUsed):&amp;#10;            stim = {&amp;#10;                'fileName': shapes[j]+color+'.png',&amp;#10;                'correct_response': possible_responses[j][1],&amp;#10;                'condition': conditions[x]&amp;#10;            }&amp;#10;            stims.append(stim)&amp;#10;&amp;#10;&amp;#10;    iterations = int(numTrialsPerBlock / unique_combos)&amp;#10;&amp;#10;    final_stims = []&amp;#10;    for k in range(iterations):&amp;#10;        shuffled_stims = stims.copy()  # Make a copy of stims before shuffling&amp;#10;        random.shuffle(shuffled_stims)&amp;#10;        final_stims.append(shuffled_stims)&amp;#10;&amp;#10;&amp;#10;    res = [dictionary for sublist in final_stims for dictionary in sublist]&amp;#10;        &amp;#10;    &amp;#10;    return res&amp;#10;&amp;#10;#***************************&amp;#10;&amp;#10;stopPracTrialList = createTrialTypes(numStopPracTrials, color, shapes, conditions, totalShapesUsed)&amp;#10;&amp;#10;thisExp.addData(&quot;stopPracTrialList&quot;, stopPracTrialList)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="#***************************&amp;#10;&amp;#10;from copy import deepcopy&amp;#10;import random&amp;#10;&amp;#10;color = 'black'&amp;#10;shapes = [&quot;circle&quot;, &quot;circle&quot;, &quot;square&quot;, &quot;square&quot;]&amp;#10;conditions = ['go', 'go', 'stop']&amp;#10;totalShapesUsed = 4&amp;#10;numStim = 4&amp;#10;stopTaskTrials = 144&amp;#10;numStopPracTrials = 24&amp;#10;practice_blocks = 3&amp;#10;numTrialsPerBlock = 48&amp;#10;numTestBlocks = int(stopTaskTrials / numTrialsPerBlock)&amp;#10;stopTrialList = []&amp;#10;stopPracTrialList = []&amp;#10;possible_responses = [&amp;#10;  [&quot;circle&quot;, 'left'],&amp;#10;  [&quot;circle&quot;, 'left'],&amp;#10;  [&quot;square&quot;, 'right'],&amp;#10;  [&quot;square&quot;, 'right'],&amp;#10;]&amp;#10;&amp;#10;InitSSD = .35&amp;#10;SSD = InitSSD&amp;#10;&amp;#10;def createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed):&amp;#10;    unique_combos = len(conditions) * totalShapesUsed&amp;#10;&amp;#10;    stims = []&amp;#10;    for x in range(len(conditions)):&amp;#10;        for j in range(totalShapesUsed):&amp;#10;            stim = {&amp;#10;                'fileName': shapes[j]+color+'.png',&amp;#10;                'correct_response': possible_responses[j][1],&amp;#10;                'condition': conditions[x]&amp;#10;            }&amp;#10;            stims.append(stim)&amp;#10;&amp;#10;&amp;#10;    iterations = int(numTrialsPerBlock / unique_combos)&amp;#10;&amp;#10;    final_stims = []&amp;#10;    for k in range(iterations):&amp;#10;        shuffled_stims = stims.copy()  # Make a copy of stims before shuffling&amp;#10;        random.shuffle(shuffled_stims)&amp;#10;        final_stims.append(shuffled_stims)&amp;#10;&amp;#10;&amp;#10;    res = [dictionary for sublist in final_stims for dictionary in sublist]&amp;#10;        &amp;#10;    &amp;#10;    return res&amp;#10;&amp;#10;#***************************&amp;#10;&amp;#10;stopPracTrialList = createTrialTypes(numStopPracTrials, color, shapes, conditions, totalShapesUsed)&amp;#10;&amp;#10;thisExp.addData(&quot;stopPracTrialList&quot;, stopPracTrialList)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
@@ -87,7 +87,7 @@
       </CodeComponent>
     </Routine>
     <Routine name="instructions">
-      <TextComponent name="instrStopText" plugin="None">
+      <TextComponent name="instrStopText">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -108,11 +108,11 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="180" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="In this task you will see shapes appear on the screen one at a time.&amp;#10;&amp;#10;Only one response is correct for each shape.&amp;#10;&amp;#10;If the shape is a square press the “M” key.&amp;#10;If the shape is a circle press the “Z” key.&amp;#10;&amp;#10;You should respond as quickly and accurately as possible to each shape.&amp;#10;&amp;#10;On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.&amp;#10;If you see a star appear, please try your best to withhold your response on that trial. If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.&amp;#10;&amp;#10;Please do not slow down your responses to wait for the star.  Continue to respond as quickly and accurately as possible.&amp;#10;&amp;#10;We will start the practice when you finish the instructions. Please make sure you understand the rules before moving on. During practice, you will see a reminder of the rules. This will be removed for test.&amp;#10;&amp;#10;Press enter to continue.&amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
+        <Param val="In this task you will see shapes appear on the screen one at a time.&amp;#10;&amp;#10;Only one response is correct for each shape.&amp;#10;&amp;#10;If the shape is a circle press the index finger.&amp;#10;If the shape is a square press the middle finger.&amp;#10;&amp;#10;You should respond as quickly and accurately as possible to each shape.&amp;#10;&amp;#10;On some trials, a star will appear around the shape.  The star can appear with, or shortly after the shape appears.&amp;#10;&amp;#10;If you see a star appear, please try your best to withhold your response on that trial. If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.&amp;#10;&amp;#10;Please do not slow down your responses to wait for the star to appear.  Continue to respond as quickly and accurately as possible.&amp;#10;&amp;#10;We will start the practice when you finish the instructions. Please make sure you understand the rules before moving on. During practice, you will see a reminder of the rules in the top left of the screen and receive feedback on your performance. This will be removed for test.&amp;#10;&amp;#10;Press enter to continue.&amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="start_prac" plugin="None">
+      <KeyboardComponent name="start_prac">
         <Param val="'return'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -133,7 +133,7 @@
       </KeyboardComponent>
     </Routine>
     <Routine name="newPracticeStim">
-      <CodeComponent name="practice_stims" plugin="None">
+      <CodeComponent name="practice_stims">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
@@ -153,7 +153,7 @@
     </Routine>
     <Routine name="startPractice"/>
     <Routine name="trial">
-      <TextComponent name="fixation" plugin="None">
+      <TextComponent name="fixation">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -178,7 +178,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <ImageComponent name="goStim" plugin="None">
+      <ImageComponent name="goStim">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="$[1,1,1]" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -205,9 +205,9 @@
         <Param val="128" valType="code" updates="constant" name="texture resolution"/>
         <Param val="pix" valType="str" updates="None" name="units"/>
       </ImageComponent>
-      <KeyboardComponent name="goResp" plugin="None">
-        <Param val="'m', 'z'" valType="list" updates="constant" name="allowedKeys"/>
-        <Param val="$corrGoResp" valType="str" updates="constant" name="correctAns"/>
+      <KeyboardComponent name="goResp">
+        <Param val="'left', 'right'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="$currentCorrectResponse" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -224,7 +224,7 @@
         <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
-      <ImageComponent name="stopSignal" plugin="None">
+      <ImageComponent name="stopSignal">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -251,7 +251,7 @@
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
       </ImageComponent>
-      <TextComponent name="rules" plugin="None">
+      <TextComponent name="rules">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -272,14 +272,14 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="2.5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Circle: 'Z' Key&amp;#10;Square: 'M' Key&amp;#10;Do not respond if a star appears!" valType="str" updates="constant" name="text"/>
+        <Param val="Circle: Index Finger&amp;#10;Square: Middle Finger&amp;#10;Do not respond if a star appears!" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
     </Routine>
     <Routine name="trial_2"/>
     <Routine name="feedback">
-      <CodeComponent name="practice_feedback" plugin="None">
+      <CodeComponent name="practice_feedback">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="#***************************&amp;#10;&amp;#10;#message variable just needs some value at start&amp;#10;feedbackMessage=None&amp;#10;&amp;#10;#***************************" valType="extendedCode" updates="constant" name="Begin Experiment"/>
@@ -296,7 +296,7 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="practice_feedback" valType="code" updates="None" name="name"/>
       </CodeComponent>
-      <TextComponent name="text" plugin="None">
+      <TextComponent name="text">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -321,7 +321,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="rules_2" plugin="None">
+      <TextComponent name="rules_2">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -342,13 +342,13 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val=".5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Circle: 'Z' Key&amp;#10;Square: 'M' Key&amp;#10;Do not respond if a star appears!" valType="str" updates="constant" name="text"/>
+        <Param val="Circle: Index Finger&amp;#10;Square: Middle Finger&amp;#10;Do not respond if a star appears!" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
     </Routine>
     <Routine name="blank">
-      <TextComponent name="fixation_2" plugin="None">
+      <TextComponent name="fixation_2">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -373,7 +373,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="rules_3" plugin="None">
+      <TextComponent name="rules_3">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -400,32 +400,32 @@
       </TextComponent>
     </Routine>
     <Routine name="endTrial">
-      <CodeComponent name="practice_trial_end" plugin="None">
+      <CodeComponent name="practice_trial_end">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="#***************************&amp;#10;print(f'practice currentSSD: {SSD}')&amp;#10;#Adjusting SSD within a range of 0-1s&amp;#10;if currentStopPracTrial['condition'] == 'stop':&amp;#10;    if goResp.keys is None:&amp;#10;        if SSD &lt;= 0.95:&amp;#10;            SSD = round(deepcopy(SSD)  + .05, 2)&amp;#10;            print(&quot;Successful stop.&quot;)&amp;#10;            print(f'practice adujsted SSD: {SSD}')&amp;#10;    else:&amp;#10;        if SSD &gt;= .05:&amp;#10;            SSD = round(deepcopy(SSD)  - .05, 2)&amp;#10;            print(&quot;Failed stop.&quot;)&amp;#10;            print(f'practice adujsted SSD: {SSD}')&amp;#10;&amp;#10;if currentStopPracTrial['condition'] == 'go':&amp;#10;    goTrialCount = goTrialCount + 1&amp;#10;&amp;#10;if goResp.keys == currentCorrectResponse and currentStopPracTrial['condition'] == 'go':&amp;#10;    goCumRT = goCumRT + goResp.rt&amp;#10;    goRTCount = goRTCount + 1&amp;#10;&amp;#10;if currentStopPracTrial['condition'] == 'stop':&amp;#10;    stopTrialCount = stopTrialCount + 1&amp;#10;&amp;#10;if currentStopPracTrial['condition'] == 'stop' and goResp.keys is None:&amp;#10;    stopSuccessCount = stopSuccessCount + 1&amp;#10;&amp;#10;if currentStopPracTrial['condition'] == 'go':&amp;#10;    if goResp.keys is None:&amp;#10;        omissionCount = omissionCount + 1&amp;#10;    elif goResp.corr == 0:&amp;#10;        commissionCount = commissionCount + 1&amp;#10;&amp;#10;#Outputting a bunch of variables&amp;#10;practiceTrials.addData(&quot;fixationOnset&quot;, fixation.tStart)&amp;#10;practiceTrials.addData(&quot;goStimOnset&quot;, goStim.tStart)&amp;#10;if SSD  != -1:&amp;#10;    practiceTrials.addData(&quot;stopSignalOnset&quot;, stopSignal.tStart)&amp;#10;&amp;#10;#***************************" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="#***************************&amp;#10;print(f'practice currentSSD: {SSD}')&amp;#10;#Adjusting SSD within a range of 0-1s&amp;#10;if currentStopPracTrial['condition'] == 'stop':&amp;#10;    if goResp.keys is None:&amp;#10;        if SSD &lt;= 0.95:&amp;#10;            SSD = round(deepcopy(SSD)  + .05, 2)&amp;#10;            print(&quot;Successful stop.&quot;)&amp;#10;            print(f'practice adujsted SSD: {SSD}')&amp;#10;    else:&amp;#10;        if SSD &gt;= .05:&amp;#10;            SSD = round(deepcopy(SSD)  - .05, 2)&amp;#10;            print(&quot;Failed stop.&quot;)&amp;#10;            print(f'practice adujsted SSD: {SSD}')&amp;#10;&amp;#10;if currentStopPracTrial['condition'] == 'go':&amp;#10;    goTrialCount = goTrialCount + 1&amp;#10;&amp;#10;if goResp.keys == currentCorrectResponse and currentStopPracTrial['condition'] == 'go':&amp;#10;    goCumRT = goCumRT + goResp.rt&amp;#10;    goRTCount = goRTCount + 1&amp;#10;&amp;#10;if currentStopPracTrial['condition'] == 'stop':&amp;#10;    stopTrialCount = stopTrialCount + 1&amp;#10;&amp;#10;if currentStopPracTrial['condition'] == 'stop' and goResp.keys is None:&amp;#10;    stopSuccessCount = stopSuccessCount + 1&amp;#10;&amp;#10;if currentStopPracTrial['condition'] == 'go':&amp;#10;    if goResp.keys is None:&amp;#10;        omissionCount = omissionCount + 1&amp;#10;        print(f'{omissionCount}')&amp;#10;    elif goResp.keys != currentCorrectResponse:&amp;#10;        commissionCount = commissionCount + 1&amp;#10;        print(f'{commissionCount}')&amp;#10;    else:&amp;#10;        print(&quot;practice wasnt omission or comission! yay.&quot;)&amp;#10;&amp;#10;#Outputting a bunch of variables&amp;#10;practiceTrials.addData(&quot;fixationOnset&quot;, fixation.tStart)&amp;#10;practiceTrials.addData(&quot;goStimOnset&quot;, goStim.tStart)&amp;#10;if SSD  != -1:&amp;#10;    practiceTrials.addData(&quot;stopSignalOnset&quot;, stopSignal.tStart)&amp;#10;&amp;#10;#***************************" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="practiceTrials.addData(&quot;EndTrialTimeStamp&quot;, core.getTime())" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="practiceTrials.addData(&quot;EndTrialTimeStamp&quot;, core.getTime())&amp;#10;practiceTrials.addData(&quot;Phase&quot;, phase)&amp;#10;practiceTrials.addData(&quot;Block&quot;, block)" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="practice_trial_end" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
     <Routine name="practiceFeedback">
-      <CodeComponent name="practice_block_feedback" plugin="None">
+      <CodeComponent name="practice_block_feedback">
         <Param val="accuracy_thresh = 0.8&amp;#10;missed_thresh = 0.1&amp;#10;maxSSD = 1000&amp;#10;minSSD = 0&amp;#10;&amp;#10;rt_thresh = 1000&amp;#10;missed_response_thresh = 0.1&amp;#10;commision_thresh = 0.25&amp;#10;&amp;#10;maxStopCorrect = 0.7&amp;#10;minStopCorrect = 0.3&amp;#10;&amp;#10;maxStopCorrectPractice = 1&amp;#10;minStopCorrectPractice = 0&amp;#10;&amp;#10;practiceCount = 0&amp;#10;practiceEnd = 0" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="#***************************&amp;#10;import numpy as np&amp;#10;&amp;#10;if goRTCount &gt; 0:&amp;#10;    goRTFeedback = goCumRT/goRTCount&amp;#10;    goRTFeedback = round(goRTFeedback, 2)&amp;#10;else:&amp;#10;    goRTFeedback = 'Null'&amp;#10;&amp;#10;if goTrialCount &gt; 0:&amp;#10;    commissionRate = (commissionCount/goTrialCount)*100&amp;#10;    commissionRate = round(commissionRate, 2)&amp;#10;    omissionRate = (omissionCount/goTrialCount)*100&amp;#10;    omissionRate = round(omissionRate, 2)&amp;#10;else: &amp;#10;    commissionRate = 1&amp;#10;    omissionRate = 1&amp;#10;&amp;#10;if stopTrialCount &gt; 0: &amp;#10;    probabilityOfStop = stopSuccessCount/stopTrialCount&amp;#10;    probabilityOfStop = round(probabilityOfStop, 2)&amp;#10;else:&amp;#10;    probabilityOfStop = 1&amp;#10;&amp;#10;SSDFeedback = SSD&amp;#10;SSDFeedback = round(SSDFeedback, 2)&amp;#10;&amp;#10;stopMessage = &quot;\nPlease take this time to read your feedback if there is any, and take a short break. Press enter to continue.\n&quot;&amp;#10;&amp;#10;practiceCount += 1&amp;#10;if practiceCount == practice_blocks:&amp;#10;    practiceEnd = 1&amp;#10;    stopMessage = &quot;Done with this practice.\nPress enter to continue.&quot;&amp;#10;elif commissionRate &gt; commision_thresh and probabilityOfStop &lt; maxStopCorrectPractice and probabilityOfStop &gt; minStopCorrectPractice:&amp;#10;    practiceEnd = 1&amp;#10;    stopMessage = &quot;Done with this practice.\nPress enter to continue.&quot;&amp;#10;&amp;#10;else:&amp;#10;    stopMessage = &quot;Redoing this practice.\n&quot;&amp;#10;&amp;#10;    if commissionRate &gt; commision_thresh:&amp;#10;        stopMessage += &quot;\n Your accuracy is too low. Remember:&quot; \&amp;#10;                        + &quot;\n\tCircle: Z key&quot; \&amp;#10;                        + &quot;\n\tSquare: M key&quot;&amp;#10;                        &amp;#10;    if goRTFeedback != 'Null' and goRTFeedback &gt; rt_thresh:&amp;#10;        stopMessage += &quot;\n\nYou have been responding too slowly, please respond to each shape as quickly and as accurately as possible.&quot;&amp;#10;&amp;#10;    if omissionRate &gt; missed_response_thresh:&amp;#10;        stopMessage += &quot;\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes.&quot;&amp;#10;&amp;#10;    if probabilityOfStop == minStopCorrectPractice:&amp;#10;        stopMessage += &quot;\n\nYou have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.&quot;&amp;#10;    elif probabilityOfStop == maxStopCorrectPractice:&amp;#10;        stopMessage += &quot;\n\nDo not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.&quot;&amp;#10;    &amp;#10;    stopMessage += &quot;\nPress enter to continue&quot;&amp;#10;#***************************" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="#***************************&amp;#10;import numpy as np&amp;#10;&amp;#10;if goRTCount &gt; 0:&amp;#10;    goRTFeedback = goCumRT/goRTCount&amp;#10;    goRTFeedback = round(goRTFeedback, 2)&amp;#10;else:&amp;#10;    goRTFeedback = 'Null'&amp;#10;&amp;#10;if goTrialCount &gt; 0:&amp;#10;    commissionRate = (commissionCount/goTrialCount)&amp;#10;    print(f'comissionCount: {commissionCount}')&amp;#10;    print(f'goTrialCount: {goTrialCount}')&amp;#10;    commissionRate = round(commissionRate, 2)&amp;#10;    omissionRate = (omissionCount/goTrialCount)&amp;#10;    omissionRate = round(omissionRate, 2)&amp;#10;    print(f'omissionCount: {omissionCount}')&amp;#10;else: &amp;#10;    commissionRate = 1&amp;#10;    omissionRate = 1&amp;#10;&amp;#10;if stopTrialCount &gt; 0: &amp;#10;    probabilityOfStop = stopSuccessCount/stopTrialCount&amp;#10;    probabilityOfStop = round(probabilityOfStop, 2)&amp;#10;else:&amp;#10;    probabilityOfStop = 1&amp;#10;&amp;#10;SSDFeedback = SSD&amp;#10;SSDFeedback = round(SSDFeedback, 2)&amp;#10;&amp;#10;print(f'comission_rate: {commissionRate}, omission_rate: {omissionRate}')&amp;#10;&amp;#10;stopMessage = &quot;\nPlease take this time to read your feedback if there is any, and take a short (1 minute) break. Press enter to continue.\n&quot;&amp;#10;&amp;#10;practiceCount += 1&amp;#10;block += 1&amp;#10;if practiceCount == practice_blocks:&amp;#10;    practiceEnd = 1&amp;#10;    stopMessage = &quot;Done with this practice.\nPress enter to continue.&quot;&amp;#10;elif commissionRate &lt;= commision_thresh and probabilityOfStop &lt; maxStopCorrectPractice and probabilityOfStop &gt; minStopCorrectPractice:&amp;#10;    practiceEnd = 1&amp;#10;    stopMessage = &quot;Done with this practice.\nPress enter to continue.&quot;&amp;#10;&amp;#10;else:&amp;#10;    stopMessage = &quot;Redoing this practice.\n&quot;&amp;#10;&amp;#10;    if commissionRate &gt; commision_thresh:&amp;#10;        stopMessage += &quot;\n Your accuracy is too low. Remember:&quot; \&amp;#10;                        + &quot;\n\tCircle: Index Finger&quot; \&amp;#10;                        + &quot;\n\tSquare: Middle Finger&quot;&amp;#10;                        &amp;#10;    if goRTFeedback != 'Null' and goRTFeedback &gt; rt_thresh:&amp;#10;        stopMessage += &quot;\n\nYou have been responding too slowly, please respond to each shape as quickly and as accurately as possible.&quot;&amp;#10;&amp;#10;    if omissionRate &gt; missed_response_thresh:&amp;#10;        if commissionRate &gt; commision_thresh:&amp;#10;            stopMessage += &quot;\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes.&quot;&amp;#10;        else:&amp;#10;            stopMessage += &quot;\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes.&quot; \&amp;#10;                        + &quot;\n Your accuracy is too low. Remember:&quot; \&amp;#10;                        + &quot;\n\tCircle: Index Finger&quot; \&amp;#10;                        + &quot;\n\tSquare: Middle Finger&quot;&amp;#10;&amp;#10;    if probabilityOfStop == minStopCorrectPractice:&amp;#10;        stopMessage += &quot;\n\nYou have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.&quot;&amp;#10;    elif probabilityOfStop == maxStopCorrectPractice:&amp;#10;        stopMessage += &quot;\n\nDo not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.&quot;&amp;#10;    &amp;#10;    stopMessage += &quot;\nPress enter to continue&quot;&amp;#10;#***************************" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -436,7 +436,7 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="practice_block_feedback" valType="code" updates="None" name="name"/>
       </CodeComponent>
-      <TextComponent name="text_5" plugin="None">
+      <TextComponent name="text_5">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -455,13 +455,13 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="180" valType="code" updates="constant" name="stopVal"/>
+        <Param val="60" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="$stopMessage" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="key_resp_3" plugin="None">
+      <KeyboardComponent name="key_resp_3">
         <Param val="'return'" valType="list" updates="set every repeat" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -475,14 +475,14 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="180" valType="code" updates="constant" name="stopVal"/>
+        <Param val="60" valType="code" updates="constant" name="stopVal"/>
         <Param val="last key" valType="str" updates="constant" name="store"/>
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
     </Routine>
     <Routine name="trialConditional">
-      <CodeComponent name="code_2" plugin="None">
+      <CodeComponent name="code_2">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="nRepStopTrial = 0&amp;#10;nRepGoTrial = 0&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
@@ -502,13 +502,13 @@
     </Routine>
     <Routine name="feedback_2"/>
     <Routine name="practiceRepeat">
-      <CodeComponent name="practice_block_loop" plugin="None">
+      <CodeComponent name="practice_block_loop">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="stopPracTrialList = createTrialTypes(numStopPracTrials, color, shapes, conditions, totalShapesUsed)&amp;#10;&amp;#10;thisExp.addData(&quot;stopPracTrialList&quot;, stopPracTrialList)&amp;#10;&amp;#10;if practiceEnd == 1:&amp;#10;    practiceBlocks.finished = True" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="stopPracTrialList = createTrialTypes(numStopPracTrials, color, shapes, conditions, totalShapesUsed)&amp;#10;&amp;#10;thisExp.addData(&quot;stopPracTrialList&quot;, stopPracTrialList)&amp;#10;if practiceEnd == 1:&amp;#10;    practiceBlocks.finished = True" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -521,7 +521,7 @@
       </CodeComponent>
     </Routine>
     <Routine name="stopBlockSetup">
-      <CodeComponent name="test_block_vars" plugin="None">
+      <CodeComponent name="test_block_vars">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
@@ -540,7 +540,7 @@
       </CodeComponent>
     </Routine>
     <Routine name="newStopStim">
-      <CodeComponent name="test_stims" plugin="None">
+      <CodeComponent name="test_stims">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
@@ -559,7 +559,7 @@
       </CodeComponent>
     </Routine>
     <Routine name="ITI">
-      <TextComponent name="fixation_3" plugin="None">
+      <TextComponent name="fixation_3">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -586,32 +586,32 @@
       </TextComponent>
     </Routine>
     <Routine name="ssdChange">
-      <CodeComponent name="ssd_staircase" plugin="None">
+      <CodeComponent name="ssd_staircase">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="#***************************&amp;#10;print(f'test current SSD: {SSD}')&amp;#10;#Adjusting SSD within a range of 0-1s&amp;#10;if currentStopTestTrial['condition'] == 'stop':&amp;#10;    print(currentStopTestTrial['condition'])&amp;#10;    if goResp_test.keys is None:&amp;#10;        if SSD &lt;= 0.95:&amp;#10;            SSD = round(deepcopy(SSD)  + .05, 2)&amp;#10;            print(&quot;Successful stop wtf.&quot;)&amp;#10;            print(f'test adujsted SSD: {SSD}')&amp;#10;    else:&amp;#10;        if SSD &gt;= 0.05:&amp;#10;            SSD = round(deepcopy(SSD)  - .05, 2)&amp;#10;            print(&quot;Failed stop wtf.&quot;)&amp;#10;            print(f'test adujsted SSD: {SSD}')&amp;#10;        &amp;#10;&amp;#10;if currentStopTestTrial['condition'] == 'go':&amp;#10;    goTrialCount = goTrialCount + 1&amp;#10;&amp;#10;if goResp_test.keys == currentCorrectResponse and currentStopTestTrial['condition'] == 'go':&amp;#10;    goCumRT = goCumRT + goResp_test.rt&amp;#10;    goRTCount = goRTCount + 1&amp;#10;&amp;#10;if currentStopTestTrial['condition'] == 'stop':&amp;#10;    stopTrialCount = stopTrialCount + 1&amp;#10;&amp;#10;if currentStopTestTrial['condition'] == 'stop' and goResp_test.keys is None:&amp;#10;    stopSuccessCount = stopSuccessCount + 1&amp;#10;&amp;#10;if currentStopTestTrial['condition'] == 'go':&amp;#10;    if goResp_test.keys is None:&amp;#10;        omissionCount = omissionCount + 1&amp;#10;    elif goResp_test.corr == 0:&amp;#10;        commissionCount = commissionCount + 1&amp;#10;&amp;#10;#Outputting a bunch of variables&amp;#10;testTrials.addData(&quot;fixationOnset&quot;, test_fixation.tStart)&amp;#10;testTrials.addData(&quot;goStimOnset&quot;, goStim_test.tStart)&amp;#10;if SSD  != -1:&amp;#10;    testTrials.addData(&quot;stopSignalOnset&quot;, stopSignal_test.tStart)&amp;#10;&amp;#10;#***************************" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="#***************************&amp;#10;print(f'test current SSD: {SSD}')&amp;#10;#Adjusting SSD within a range of 0-1s&amp;#10;if currentStopTestTrial['condition'] == 'stop':&amp;#10;    print(currentStopTestTrial['condition'])&amp;#10;    if goResp_test.keys is None:&amp;#10;        if SSD &lt;= 0.95:&amp;#10;            SSD = round(deepcopy(SSD)  + .05, 2)&amp;#10;            print(&quot;Successful stop wtf.&quot;)&amp;#10;            print(f'test adujsted SSD: {SSD}')&amp;#10;    else:&amp;#10;        if SSD &gt;= 0.05:&amp;#10;            SSD = round(deepcopy(SSD)  - .05, 2)&amp;#10;            print(&quot;Failed stop wtf.&quot;)&amp;#10;            print(f'test adujsted SSD: {SSD}')&amp;#10;        &amp;#10;&amp;#10;if currentStopTestTrial['condition'] == 'go':&amp;#10;    goTrialCount = goTrialCount + 1&amp;#10;&amp;#10;if goResp_test.keys == currentCorrectResponse and currentStopTestTrial['condition'] == 'go':&amp;#10;    goCumRT = goCumRT + goResp_test.rt&amp;#10;    goRTCount = goRTCount + 1&amp;#10;&amp;#10;if currentStopTestTrial['condition'] == 'stop':&amp;#10;    stopTrialCount = stopTrialCount + 1&amp;#10;&amp;#10;if currentStopTestTrial['condition'] == 'stop' and goResp_test.keys is None:&amp;#10;    stopSuccessCount = stopSuccessCount + 1&amp;#10;    &amp;#10;print('goResp_test.corr: goResp_test.corr')&amp;#10;&amp;#10;if currentStopTestTrial['condition'] == 'go':&amp;#10;    if goResp_test.keys is None:&amp;#10;        omissionCount = omissionCount + 1&amp;#10;    elif goResp_test.keys != currentCorrectResponse:&amp;#10;        commissionCount = commissionCount + 1&amp;#10;&amp;#10;#Outputting a bunch of variables&amp;#10;testTrials.addData(&quot;fixationOnset&quot;, test_fixation.tStart)&amp;#10;testTrials.addData(&quot;goStimOnset&quot;, goStim_test.tStart)&amp;#10;if currentStopTestTrial['condition'] == 'stop':&amp;#10;    testTrials.addData(&quot;stopSignalOnset&quot;, stopSignal_test.tStart)&amp;#10;&amp;#10;#***************************" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="#***************************&amp;#10;&amp;#10;testTrials.addData(&quot;EndingSSD&quot;, SSD)&amp;#10;testTrials.addData(&quot;EndTrialTimeStamp&quot;, core.getTime())&amp;#10;&amp;#10;#***************************" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="#***************************&amp;#10;&amp;#10;testTrials.addData(&quot;EndingSSD&quot;, SSD)&amp;#10;testTrials.addData(&quot;EndTrialTimeStamp&quot;, core.getTime())&amp;#10;&amp;#10;testTrials.addData(&quot;Block&quot;, block)&amp;#10;testTrials.addData(&quot;Phase&quot;, phase)&amp;#10;#***************************" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="ssd_staircase" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
     <Routine name="endOfStopBlockFeedback">
-      <CodeComponent name="test_block_feedback" plugin="None">
+      <CodeComponent name="test_block_feedback">
         <Param val="&amp;#10;maxSSD = 1&amp;#10;minSSD = 0&amp;#10;&amp;#10;rt_thresh = 1000&amp;#10;missed_response_thresh = 0.1&amp;#10;commision_thresh = 0.25&amp;#10;&amp;#10;maxStopCorrect = 0.7&amp;#10;minStopCorrect = 0.3" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="#***************************&amp;#10;&amp;#10;if goRTCount &gt; 0:&amp;#10;    goRTFeedback = goCumRT/goRTCount&amp;#10;    goRTFeedback = round(goRTFeedback, 2)&amp;#10;else:&amp;#10;    goRTFeedback = 'Null'&amp;#10;&amp;#10;if goTrialCount &gt; 0:&amp;#10;    commissionRate = (commissionCount/goTrialCount)*100&amp;#10;    commissionRate = round(commissionRate, 2)&amp;#10;    omissionRate = (omissionCount/goTrialCount)*100&amp;#10;    omissionRate = round(omissionRate, 2)&amp;#10;else: &amp;#10;    commissionRate = 'Null'&amp;#10;    omissionRate = 'Null'&amp;#10;&amp;#10;if stopTrialCount &gt; 0: &amp;#10;    probabilityOfStop = stopSuccessCount/stopTrialCount&amp;#10;    probabilityOfStop = round(probabilityOfStop, 2)&amp;#10;else:&amp;#10;    probabilityOfStop = 'Null'&amp;#10;&amp;#10;SSDFeedback = (SSD)/2&amp;#10;SSDFeedback = round(SSDFeedback, 2)&amp;#10;&amp;#10;testBlockCount += 1&amp;#10;&amp;#10;stopMessage = f&quot;You have completed {testBlockCount} of {numTestBlocks}.&quot;&amp;#10;&amp;#10;if testBlockCount == numTestBlocks:&amp;#10;    stopMessage += &quot;\n You have finished the testing phase.&quot;&amp;#10;else:&amp;#10;    stopMessage += &quot;\nPlease take this time to read your feedback if there is any, and take a short break.\n&quot;&amp;#10;    &amp;#10;    if commissionRate &gt; commision_thresh:&amp;#10;        stopMessage += &quot;\n Your accuracy is too low. Remember:&quot; \&amp;#10;                        + &quot;\n\tCircle: Z key&quot; \&amp;#10;                        + &quot;\n\tSquare: M key&quot;&amp;#10;                        &amp;#10;    if goRTFeedback != 'Null' and goRTFeedback &gt; rt_thresh:&amp;#10;        stopMessage += &quot;\nYou have been responding too slowly, please respond to each shape as quickly and as accurately as possible.&quot;&amp;#10;&amp;#10;    if omissionRate &gt; missed_response_thresh:&amp;#10;        stopMessage += &quot;\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes.&quot;&amp;#10;&amp;#10;    if probabilityOfStop == minStopCorrect:&amp;#10;        stopMessage += &quot;\nYou have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.&quot;&amp;#10;    elif probabilityOfStop == maxStopCorrect:&amp;#10;        stopMessage += &quot;\nDo not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.&quot;&amp;#10;        &amp;#10;stopMessage += &quot;\n\nPress enter to continue.&quot;&amp;#10;#***************************&amp;#10;&amp;#10;stopTrialList = createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed)&amp;#10;&amp;#10;thisExp.addData(f&quot;Test Block: {testBlockCount}&quot;, stopTrialList)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="#***************************&amp;#10;&amp;#10;if goRTCount &gt; 0:&amp;#10;    goRTFeedback = goCumRT/goRTCount&amp;#10;    goRTFeedback = round(goRTFeedback, 2)&amp;#10;else:&amp;#10;    goRTFeedback = 'Null'&amp;#10;&amp;#10;if goTrialCount &gt; 0:&amp;#10;    commissionRate = (commissionCount/goTrialCount)&amp;#10;    commissionRate = round(commissionRate, 2)&amp;#10;    omissionRate = (omissionCount/goTrialCount)&amp;#10;    omissionRate = round(omissionRate, 2)&amp;#10;else: &amp;#10;    commissionRate = 'Null'&amp;#10;    omissionRate = 'Null'&amp;#10;&amp;#10;if stopTrialCount &gt; 0: &amp;#10;    probabilityOfStop = stopSuccessCount/stopTrialCount&amp;#10;    probabilityOfStop = round(probabilityOfStop, 2)&amp;#10;else:&amp;#10;    probabilityOfStop = 'Null'&amp;#10;&amp;#10;SSDFeedback = (SSD)/2&amp;#10;SSDFeedback = round(SSDFeedback, 2)&amp;#10;&amp;#10;testBlockCount += 1&amp;#10;block +=1&amp;#10;stopMessage = f&quot;You have completed {testBlockCount} of {numTestBlocks}.&quot;&amp;#10;&amp;#10;if testBlockCount == numTestBlocks:&amp;#10;    stopMessage += &quot;\n You have finished the testing phase.&quot;&amp;#10;else:&amp;#10;    stopMessage += &quot;\nPlease take this time to read your feedback if there is any, and take a 1 minute break.\n&quot;&amp;#10;    &amp;#10;    if commissionRate &gt; commision_thresh:&amp;#10;        stopMessage += &quot;\n Your accuracy is too low. Remember:&quot; \&amp;#10;                        + &quot;\n\tCircle: Index Finger&quot; \&amp;#10;                        + &quot;\n\tSquare: Middle Finger&quot;&amp;#10;                        &amp;#10;    if goRTFeedback != 'Null' and goRTFeedback &gt; rt_thresh:&amp;#10;        stopMessage += &quot;\nYou have been responding too slowly, please respond to each shape as quickly and as accurately as possible.&quot;&amp;#10;&amp;#10;    if omissionRate &gt; missed_response_thresh:&amp;#10;        if commissionRate &gt; commision_thresh:&amp;#10;            stopMessage += &quot;\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes.&quot;&amp;#10;        else:&amp;#10;            stopMessage += &quot;\n\nWe have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding accurately and quickly to the shapes.&quot; \&amp;#10;                        + &quot;\n Your accuracy is too low. Remember:&quot; \&amp;#10;                        + &quot;\n\tCircle: Index Finger&quot; \&amp;#10;                        + &quot;\n\tSquare: Middle Finger&quot;&amp;#10;&amp;#10;    if probabilityOfStop &lt; minStopCorrect:&amp;#10;        stopMessage += &quot;\nYou have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.&quot;&amp;#10;    elif probabilityOfStop &gt; maxStopCorrect:&amp;#10;        stopMessage += &quot;\nDo not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.&quot;&amp;#10;        &amp;#10;stopMessage += &quot;\n\nPress enter to continue.&quot;&amp;#10;&amp;#10;&amp;#10;print(f'comission_rate: {commissionRate}, omission_rate: {omissionRate}')&amp;#10;print(stopMessage)&amp;#10;&amp;#10;#***************************&amp;#10;&amp;#10;stopTrialList = createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed)&amp;#10;&amp;#10;thisExp.addData(f&quot;Test Block: {testBlockCount}&quot;, stopTrialList)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -622,7 +622,7 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="test_block_feedback" valType="code" updates="None" name="name"/>
       </CodeComponent>
-      <TextComponent name="text_6" plugin="None">
+      <TextComponent name="text_6">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -641,13 +641,13 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="180" valType="code" updates="constant" name="stopVal"/>
+        <Param val="60" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="$stopMessage" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="key_resp_4" plugin="None">
+      <KeyboardComponent name="key_resp_4">
         <Param val="'return'" valType="list" updates="set every repeat" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -661,14 +661,14 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="180" valType="code" updates="constant" name="stopVal"/>
+        <Param val="60" valType="code" updates="constant" name="stopVal"/>
         <Param val="last key" valType="str" updates="constant" name="store"/>
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
     </Routine>
     <Routine name="testInstructions">
-      <KeyboardComponent name="key_resp" plugin="None">
+      <KeyboardComponent name="key_resp">
         <Param val="'return'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -687,7 +687,7 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
-      <TextComponent name="testText" plugin="None">
+      <TextComponent name="testText">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -708,17 +708,17 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="300" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="We will now begin the testing phase. To summarize the instructions.&amp;#10;&amp;#10;Only one response is correct for each shape.&amp;#10;&amp;#10;If the shape is a square press the “M” key.&amp;#10;If the shape is a circle press the “Z” key.&amp;#10;&amp;#10;You should respond as quickly and accurately as possible to each shape. &amp;#10;On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears. If you see a star appear, please try your best to withhold your response on that trial.&amp;#10;&amp;#10;If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.&amp;#10;&amp;#10;Please do not slow down your responses to wait for the star.  Continue to respond as quickly and accurately as possible.&amp;#10;&amp;#10;Press enter to start the testing.&amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
+        <Param val="We will now begin the testing phase. To summarize the instructions.&amp;#10;&amp;#10;If the shape is a circle press Index Finger.&amp;#10;If the shape is a square press Middle Finger.&amp;#10;&amp;#10;You should respond as quickly and accurately as possible to each shape.&amp;#10; &amp;#10;On some trials, a star will appear around the shape. If you see a star appear, please try your best to withhold your response on that trial.&amp;#10;&amp;#10;Please do not slow down your responses to wait for the star to appear.  You should respond as quickly and accurately as possible as soon as you see the shapes appear on the screen.&amp;#10;&amp;#10;Press enter to start the testing.&amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <CodeComponent name="test_setup" plugin="None">
+      <CodeComponent name="test_setup">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="testBlockCount = 0&amp;#10;&amp;#10;stopTrialList = createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed)&amp;#10;&amp;#10;thisExp.addData(f&quot;Test Block: {testBlockCount}&quot;, stopTrialList)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="testBlockCount = 0&amp;#10;stopTrialList = createTrialTypes(numTrialsPerBlock, color, shapes, conditions, totalShapesUsed)&amp;#10;&amp;#10;thisExp.addData(f&quot;Test Block: 1&quot;, stopTrialList)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="testBlockCount = 0" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="phase = &quot;test&quot;&amp;#10;block = 1" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -731,13 +731,13 @@
       </CodeComponent>
     </Routine>
     <Routine name="practiceBlockSetup">
-      <CodeComponent name="practice_block" plugin="None">
+      <CodeComponent name="practice_block">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="block = 1&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="#***************************&amp;#10;goCumRT = 0&amp;#10;goRTCount = 0&amp;#10;omissionCount = 0&amp;#10;commissionCount = 0&amp;#10;stopTrialCount = 0&amp;#10;stopSuccessCount = 0&amp;#10;goTrialCount = 0&amp;#10;&amp;#10;#***************************&amp;#10;trialCount = 0&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="#***************************&amp;#10;goCumRT = 0&amp;#10;goRTCount = 0&amp;#10;omissionCount = 0&amp;#10;commissionCount = 0&amp;#10;stopTrialCount = 0&amp;#10;stopSuccessCount = 0&amp;#10;goTrialCount = 0&amp;#10;&amp;#10;#***************************&amp;#10;trialCount = 0&amp;#10;phase = &quot;practice&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -750,7 +750,7 @@
       </CodeComponent>
     </Routine>
     <Routine name="Welcome">
-      <TextComponent name="welcome_message" plugin="None">
+      <TextComponent name="welcome_message">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -777,7 +777,7 @@
       </TextComponent>
     </Routine>
     <Routine name="start">
-      <TextComponent name="welcome" plugin="None">
+      <TextComponent name="welcome">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -802,7 +802,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="start_exp" plugin="None">
+      <KeyboardComponent name="start_exp">
         <Param val="'return'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -823,7 +823,7 @@
       </KeyboardComponent>
     </Routine>
     <Routine name="end">
-      <TextComponent name="ending_text" plugin="None">
+      <TextComponent name="ending_text">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -848,7 +848,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="end_resp" plugin="None">
+      <KeyboardComponent name="end_resp">
         <Param val="'return'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -869,7 +869,7 @@
       </KeyboardComponent>
     </Routine>
     <Routine name="test_trial">
-      <TextComponent name="test_fixation" plugin="None">
+      <TextComponent name="test_fixation">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -894,7 +894,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <ImageComponent name="goStim_test" plugin="None">
+      <ImageComponent name="goStim_test">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="$[1,1,1]" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -921,9 +921,9 @@
         <Param val="128" valType="code" updates="constant" name="texture resolution"/>
         <Param val="pix" valType="str" updates="None" name="units"/>
       </ImageComponent>
-      <KeyboardComponent name="goResp_test" plugin="None">
-        <Param val="'m', 'z'" valType="list" updates="constant" name="allowedKeys"/>
-        <Param val="$corrGoResp" valType="str" updates="constant" name="correctAns"/>
+      <KeyboardComponent name="goResp_test">
+        <Param val="'left', 'right'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="$currentCorrectResponse" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -940,7 +940,7 @@
         <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
-      <ImageComponent name="stopSignal_test" plugin="None">
+      <ImageComponent name="stopSignal_test">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
