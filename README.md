@@ -29,7 +29,26 @@ The key components of this repo include:
 or follow the instructions for manual installation on the Github Readme linked above.
 
 
-## To run task:
+## To run Shared Control task:
 `cd path/to/SharedControl`
 
-`python experiment.py`
+`python experiment_FINAL.py`
+
+## To run Simple Stop Task:
+Install PsychoPy GUI and click/run simpleStop.psyexp
+
+## Directories
+
+notebooks: contains various notebooks used in testing task functions or analyzing the data
+
+- tweak_SSD_sampler.ipynb: Contains testing of the SSD sample function used within the SharedControl task.
+- stop_signal_test.ipynb: Contains testing of the createTrialTypes function used in the ssimple stop task
+- analysis/shared_control_analysis.ipynb: This is the main analysis notebook for SharedControl data where we operationalize various variables such as the point of inhibition outlined in our preregestration
+- analysis/simple_stop_qc.ipynb: This is our qc notebook for simple stop data. This notebook will output several qc metrics such as rt/acc/ssd/ssrt
+- analysis/survey_analysis.ipynb: This notebook computes the survey scores for the AI survey.
+- analysis/point_of_inhibition_analysis_outdated.ipynb: This notebook is currently outdated, but was our initial attempt to operationalize the point of inhbition within our pilot data prior to our preregestration.
+- analysis/shared_control_trial_analysis.ipynb: Plots single trials of shared control data for qc reasons of pilot data. This was used in writing the preregestration.
+
+
+old script: contains older versions of the simple stop and shared control task
+simpleStop: contains the psychopy version of simple stop
