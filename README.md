@@ -46,11 +46,9 @@ notebooks: contains various notebooks used in testing task functions or analyzin
 - analysis/shared_control_analysis.ipynb: This is the main analysis notebook for SharedControl data where we operationalize various variables such as the point of inhibition outlined in our preregestration
 - analysis/simple_stop_qc.ipynb: This is our qc notebook for simple stop data. This notebook will output several qc metrics such as rt/acc/ssd/ssrt
 - analysis/survey_analysis.ipynb: This notebook computes the survey scores for the AI survey.
-- analysis/archived/point_of_inhibition_analysis_outdated.ipynb: This notebook is currently outdated, but was our initial attempt to operationalize the point of inhbition within our pilot data prior to our preregestration.
-- analysis/archived/shared_control_trial_analysis.ipynb: Plots single trials of shared control data for qc reasons of pilot data. This was used in writing the preregestration.
-- analysis/comparing_ssrt.ipynb: I consolodate all ssrts (simple, shared control) and survey scores into one place to comparisons
-- analysis/expanalysis/: used to download survey data locally from expfactory website. To make the survey_analysis notebook work with this you will need to add an access_token.txt and shared_control_subjects.csv
-- analysis/output: This directory should be on the gitignore, but its contains the output csvs from the analyses
+- analysis/point_of_inhibition_analysis_outdated.ipynb: This notebook is currently outdated, but was our initial attempt to operationalize the point of inhbition within our pilot data prior to our preregestration.
+- analysis/shared_control_trial_analysis.ipynb: Plots single trials of shared control data for qc reasons of pilot data. This was used in writing the preregestration.
+
 
 old script: contains older versions of the simple stop and shared control task
 
