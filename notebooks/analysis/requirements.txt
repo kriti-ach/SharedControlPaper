@@ -97,6 +97,7 @@ Flask-RESTful==0.3.10
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.2.1
 fonttools
+fqdn==1.5.1
 frozendict
 frozenlist
 fsspec
@@ -125,6 +126,7 @@ ipykernel
 ipython
 ipython-genutils
 ipywidgets
+isoduration==20.11.0
 isort
 itemadapter
 itemloaders
@@ -353,10 +355,12 @@ uc-micro-py
 ujson
 unicodedata2
 Unidecode
+uri-template==1.3.0
 urllib3
 w3lib
 watchdog
 wcwidth
+webcolors==24.8.0
 webencodings
 websocket-client
 Werkzeug
