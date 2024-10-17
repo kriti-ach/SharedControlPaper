@@ -191,6 +191,7 @@ nbconvert
 nbformat
 nest-asyncio
 networkx
+nibabel==5.3.1
 nltk
 notebook
 notebook_shim
