@@ -225,6 +225,7 @@ prompt-toolkit
 Protego
 protobuf==3.20.3
 psutil
+ptitprince==0.2.7
 ptyprocess
 pure-eval
 py-cpuinfo
@@ -300,7 +301,7 @@ scikit-image
 scikit-learn
 scipy
 Scrapy
-seaborn
+seaborn==0.11.0
 semver
 Send2Trash
 service-identity
