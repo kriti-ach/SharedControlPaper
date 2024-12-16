@@ -1,7 +1,9 @@
-.DS_store
+.
+DS_store
 __pycache__
 .ipynb_checkpoints/
 .vscode/
+.venv/
 data*
 simpleStop/data/
 notebooks/analysis/access_token.txt
