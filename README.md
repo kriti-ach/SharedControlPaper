@@ -43,10 +43,13 @@ notebooks: contains various notebooks used in testing task functions or analyzin
 
 - tweak_SSD_sampler.ipynb: Contains testing of the SSD sample function used within the SharedControl task.
 - stop_signal_test.ipynb: Contains testing of the createTrialTypes function used in the ssimple stop task
-- analysis/shared_control_analysis.ipynb: This is the main analysis notebook for SharedControl data where we operationalize various variables such as the point of inhibition outlined in our preregestration
+- analysis/shared_control_analysis.ipynb: This is the main analysis notebook for SharedControl data where we operationalize various variables such as the point of inhibition outlined in our preregistration. We also compute all our descriptive results here.
+- analysis/shared_control_results.ipynb: This notebook contains all of our statistical tests and code to create our figures.
 - analysis/simple_stop_qc.ipynb: This is our qc notebook for simple stop data. This notebook will output several qc metrics such as rt/acc/ssd/ssrt
-- analysis/survey_analysis.ipynb: This notebook computes the survey scores for the AI survey.
-- analysis/point_of_inhibition_analysis_outdated.ipynb: This notebook is currently outdated, but was our initial attempt to operationalize the point of inhbition within our pilot data prior to our preregestration.
+- analysis/survey_analysis_KA.ipynb: This notebook computes the survey scores for the AI survey.
+- analysis/point_of_inhibition_analysis.ipynb: This notebook was our initial attempt to operationalize the point of inhbition within our pilot data prior to our preregistration. It also includes code to finalize the post-buffer stamp in our final sample.
+- analysis/demographics_survey.ipynb: Calculates age/sex of our subjects from the demographics survey.
+- analysis/survey_analysis.ipynb: This notebook is currently outdated but was used to compute the survey scores for the AI survey.
 - analysis/shared_control_trial_analysis.ipynb: Plots single trials of shared control data for qc reasons of pilot data. This was used in writing the preregestration.
 
 
