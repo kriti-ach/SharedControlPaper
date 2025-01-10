@@ -15,7 +15,7 @@ practice_clock = core.Clock()
 testing_clock = core.Clock()
 pre_practice_clock = core.Clock()
 
-# constants with units in the visual degrees or degrees/loop
+# constants with units in the visual degrees or degrees/loop where 1 loop is ~16.68ms (0.01668s)
 STARTING_POS = [-15, 0]
 FINISH_LINE = 15
 RING_PACE = (0.095, 0)
@@ -398,7 +398,7 @@ if __name__ == "__main__":
         finishline,
     ) = initStims()
     while waitingForSpace:
-        scan_codes, analog_codes, _ = wp.read_full_buffer()
+        scan_codes, analog_codes, _ = wp.read_full_buffer() # np.max(analog_codes) is between 0 and 1
         if HID_CODE_ENTER in scan_codes:
             waitingForSpace = False
 
