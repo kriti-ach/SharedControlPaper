@@ -865,12 +865,17 @@ if __name__ == "__main__":
         if count < practice_len:
             trials.data.add("block", "practice")
             trials.data.add("phase", "practice")
-        elif practice_len <= count and count < practice_len + block:
+        elif practice_len <= count and count < practice_len + n_trials_block1:
             trials.data.add("block", "block 1")
             trials.data.add("phase", "test")
-        elif practice_len + block <= count:
+        elif practice_len + n_trials_block2 <= count:
             trials.data.add("block", "block 2")
             trials.data.add("phase", "test")
+
+        if trials.data["block"][count] == "block 1": # not sure if this will work
+            block = n_trials_block1
+        else:
+            block = n_trials_block2
 
         if count + 1 == practice_len + block:
             print(feedback_tracker)
