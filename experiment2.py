@@ -199,8 +199,8 @@ def setup_trials():
     ai_block[ai_engaged_stop_trials + ai_engaged_no_stop_trials + ai_disengaged_stop_trials:] = (["No-stop AI-disengaged"] *
                                                                                                          ai_disengaged_no_stop_trials)
     
-    non_ai_block[:non_ai_stop_trials] = ["Stop AI-disengaged"] * non_ai_stop_trials
-    non_ai_block[non_ai_stop_trials:] = ["No-stop AI-disengaged"] * non_ai_no_stop_trials
+    non_ai_block[:non_ai_stop_trials] = ["Stop Non-AI"] * non_ai_stop_trials
+    non_ai_block[non_ai_stop_trials:] = ["No-stop Non-AI"] * non_ai_no_stop_trials
     
     np.random.shuffle(ai_block)
     np.random.shuffle(non_ai_block)
@@ -223,7 +223,9 @@ def setupPractice(num_ai_engaged_stop_trials = 8,
                   num_ai_engaged_no_stop_trials = 16, 
                   num_ai_disengaged_stop_trials = 2, 
                   num_ai_disengaged_no_stop_trials = 4):
-    practice_conditions = ["Stop AI-engaged"] * num_ai_engaged_stop_trials + ["ai-engaged no stop"] * num_ai_engaged_no_stop_trials + ["ai-disengaged stop"] * num_ai_disengaged_stop_trials + ["ai-disengaged no stop"] * num_ai_disengaged_no_stop_trials
+    practice_conditions = (["Stop AI-engaged"] * num_ai_engaged_stop_trials + ["No-stop AI-engaged"] * num_ai_engaged_no_stop_trials + 
+                           ["Stop AI-disengaged"] * num_ai_disengaged_stop_trials + ["No-stop AI-disengaged"] * 
+                           num_ai_disengaged_no_stop_trials)
     np.random.shuffle(practice_conditions)
     return practice_conditions, len(practice_conditions)
 
@@ -612,7 +614,7 @@ if __name__ == "__main__":
             mywin.flip()
 
         # START
-        if trial["condition"] == "non-ai":
+        if trial["condition"] == "Stop Non-AI" or trial["condition"] == "Stop AI-disengaged":
             trial_start = core.getTime()
             # SSD
             SSD_timer = core.CountdownTimer(SSD)
@@ -665,7 +667,6 @@ if __name__ == "__main__":
                 ball.draw()
                 ring.draw()
                 finishline.draw()
-                feedback.draw()
 
             if count < practice_len: # if it's the practice block, show feedback
                 feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
@@ -692,7 +693,7 @@ if __name__ == "__main__":
 
                     mywin.flip()
 
-        elif trial["condition"] == "ai":
+        elif trial["condition"] == "Stop AI-engaged":
             trial_start = core.getTime()
             # SSD
             SSD_timer = core.CountdownTimer(SSD)
@@ -745,7 +746,6 @@ if __name__ == "__main__":
                 ball.draw()
                 ring.draw()
                 finishline.draw()
-                feedback.draw()
 
             if count < practice_len: # if it's the practice block, show feedback
                 feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
@@ -771,6 +771,62 @@ if __name__ == "__main__":
                         outside_circle_alert.draw()
 
                     mywin.flip()
+        
+        elif (trial["condition"] == "No-stop Non-AI" or trial["condition"] == "No-stop AI-disengaged" or 
+              trial["condition"] == "No-stop AI-engaged"):
+                timer = core.CountdownTimer(COUNTDOWN_TIME)
+                while timer.getTime() > 0:  # after 2s will become negative
+                    countdown.text = f"{timer.getTime():.0f}"
+                    ball.draw()
+                    ring.draw()
+                    if timer.getTime() < 0.5 and timer.getTime() > 0:
+                        fixation.draw()
+                    finishline.draw()
+                    mywin.flip()
+
+                timer = core.CountdownTimer(TRIAL_TIME)
+                while timer.getTime() > 0:
+                    while not FinishLine:
+                        scan_codes, analog_codes, _ = wp.read_full_buffer()
+                        ring.pos += RING_PACE
+                        if scan_codes and scan_codes[0] == HID_CODE_SPACE and analog_codes:
+                            ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
+
+                        dist = ball.pos[0] - ring.pos[0]
+                        if dist > 1.05:
+                            Hit = True
+                        if np.abs(ring.pos[0]) >= FINISH_LINE:
+                            FinishLine = True
+                        ball.draw()
+                        ring.draw()
+                        finishline.draw()
+                        mywin.flip()
+                    if FinishLine:
+                        ball.draw()
+                        ring.draw()
+                        finishline.draw()
+                        mywin.flip()
+                if count < practice_len: # if it's the practice block, show feedback
+                    feedback_timer = core.CountdownTimer(FEEDBACK_TIME)
+                    while feedback_timer.getTime() > 0:
+                        mywin.color = "grey"
+                        ball.draw()
+                        ring.draw()
+                        finishline.draw()
+                        feedback.draw()
+
+                        if find_sequence(pressures[25:-70], 0, 4):
+                            no_pressure_alert.draw()
+
+                        if find_sequence(pressures[:25], 0, 8):
+                            late_start_alert.draw()
+
+                        if distances[-1] < HIT_BOX[0]:
+                            outside_circle_alert.draw()
+                        elif distances[-1] > HIT_BOX[1]:
+                            outside_circle_alert.draw()
+
+                        mywin.flip()
 
         # Save Data
         trials.data.add("time_stamps", " ".join([str(elem) for elem in timings]))
