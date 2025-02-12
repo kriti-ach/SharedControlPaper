@@ -128,7 +128,7 @@ def getInput(id_text="s999", sess_text="001"):
         return text1, text2
 
 
-def get_prob_dist_inputs(n_trials_block1=60, n_trials_block2=180, ai_proportion_block1=0, ai_proportion_block2=0.8):
+def get_prob_dist_inputs(n_trials_block1=60, n_trials_block2=180, ai_proportion_block1=0, ai_proportion_block2=0.8, stop_proportion = .33):
     while True:
         prob_dist = gui.Dlg(title="Probability Distribution of Conditions")
         prob_dist.addText(
@@ -141,6 +141,7 @@ def get_prob_dist_inputs(n_trials_block1=60, n_trials_block2=180, ai_proportion_
         prob_dist.addField("Number of Trials (Block 2): ", n_trials_block2)
         prob_dist.addField("Block 1 AI % in proportions: ", ai_proportion_block1)
         prob_dist.addField("Block 2 AI % in proportions: ", ai_proportion_block2)
+        prob_dist.addField("Stop % in proportions: ", stop_proportion) # allow for potential manipulation of stop proportion
         prob_dist.addField("Enter condition order (1,2): ")
 
         prob_dist.show()
@@ -153,7 +154,8 @@ def get_prob_dist_inputs(n_trials_block1=60, n_trials_block2=180, ai_proportion_
         n_trials_block2 = prob_dist.data[1]
         ai_proportion_block1 = prob_dist.data[2]
         ai_proportion_block2 = prob_dist.data[3]
-        cond_order = int(prob_dist.data[4])
+        stop_proportion = prob_dist.data[4]
+        cond_order = int(prob_dist.data[5])
 
         if n_trials_block1 % 3 == 0:
             break
@@ -163,61 +165,66 @@ def get_prob_dist_inputs(n_trials_block1=60, n_trials_block2=180, ai_proportion_
         if n_trials_block2 % 15 == 0:
             break
         else:
-            print("Error - Please enter a number of total trials in Block 1 divisible by 15.")
+            print("Error - Please enter a number of total trials in Block 2 divisible by 15.")
 
         if cond_order == 1 or cond_order == 2:
             break
         else:
             print("Please enter a valid condition order")
 
-    return n_trials_block1, n_trials_block2, ai_proportion_block1, ai_proportion_block2, cond_order
-
-
-def create_conditions_array(ai_disengaged_trials, ai_engaged_trials):
-    conditions = np.array([0] * ai_disengaged_trials + [1] * ai_engaged_trials)
-    np.random.shuffle(conditions)
-    conditions = conditions.astype("object")
-    conditions[conditions == 0] = "ai-disengaged"
-    conditions[conditions == 1] = "ai-engaged"
-    return conditions
+    return n_trials_block1, n_trials_block2, ai_proportion_block1, ai_proportion_block2, stop_proportion, cond_order
 
 
 def setup_trials():
-    n_trials_block1, n_trials_block2, ai_proportion_block1, ai_proportion_block2, cond_order = get_prob_dist_inputs()
+    n_trials_block1, n_trials_block2, block1_ai_proportion, block2_ai_proportion, stop_proportion, cond_order = get_prob_dist_inputs()
 
-    if n_trials_block1 == 0:
-        return [], 0
+    # block1 defaults to non-ai block, block2 defaults to 80% ai block
     
-    if n_trials_block2 == 0:
-        return [], 0
-    ai_engaged_trials_block1 = int(n_trials_block1 * ai_proportion_block1)
-    ai_engaged_trials_block2 = int(n_trials_block2 * ai_proportion_block2)
-    ai_disengaged_trials_block1 = n_trials_block1 - ai_engaged_trials_block1
-    ai_disengaged_trials_block2 = n_trials_block2- ai_engaged_trials_block2
+    ai_block = [""] * n_trials_block2 
+    non_ai_block = [""] *  n_trials_block1
+    
+    ai_engaged_stop_trials = int(n_trials_block2 * stop_proportion * block2_ai_proportion)
+    ai_engaged_no_stop_trials = int(n_trials_block2 * (1 - stop_proportion) * block2_ai_proportion)
+    ai_disengaged_stop_trials = int(n_trials_block2 * stop_proportion * (1 - block2_ai_proportion))
+    ai_disengaged_no_stop_trials = int(n_trials_block2 * (1 - stop_proportion) * (1 - block2_ai_proportion))
 
-    conditions_block1 = create_conditions_array(ai_disengaged_trials_block1, ai_engaged_trials_block1)
-    conditions_block2 = create_conditions_array(ai_disengaged_trials_block2, ai_engaged_trials_block2)
+    non_ai_stop_trials = int(n_trials_block1 * stop_proportion)
+    non_ai_no_stop_trials = n_trials_block1 - non_ai_stop_trials
+    
+
+    ai_block[:ai_engaged_stop_trials] = ["Stop AI-engaged"] * ai_engaged_stop_trials
+    ai_block[ai_engaged_stop_trials:ai_engaged_stop_trials + ai_engaged_no_stop_trials] = (["No-stop AI-engaged"] * 
+                                                                                                   ai_engaged_no_stop_trials)
+    ai_block[ai_engaged_stop_trials + ai_engaged_no_stop_trials:ai_engaged_stop_trials + ai_engaged_no_stop_trials +  ai_disengaged_stop_trials] = ["Stop AI-disengaged"] * ai_disengaged_stop_trials
+    ai_block[ai_engaged_stop_trials + ai_engaged_no_stop_trials + ai_disengaged_stop_trials:] = (["No-stop AI-disengaged"] *
+                                                                                                         ai_disengaged_no_stop_trials)
+    
+    non_ai_block[:non_ai_stop_trials] = ["Stop AI-disengaged"] * non_ai_stop_trials
+    non_ai_block[non_ai_stop_trials:] = ["No-stop AI-disengaged"] * non_ai_no_stop_trials
+    
+    np.random.shuffle(ai_block)
+    np.random.shuffle(non_ai_block)
 
     print(cond_order)
 
     if cond_order == 1:
         print("done")
-        conditions = list(conditions_block1) + list(conditions_block2)
-
+        conditions = list(ai_block) + list(non_ai_block)
+        block_labels = ["ai", "non-ai"]
+    elif cond_order == 2:
+        conditions = list(non_ai_block) + list(ai_block)
         block_labels = ["non-ai", "ai"]
 
-    elif cond_order == 2:
-        conditions = list(conditions_block2) + list(conditions_block1)
-
-        block_labels = ["ai", "non-ai"]
-
-    return conditions, block, block_labels, cond_order
+    return conditions, n_trials_block1, n_trials_block2, block_labels, cond_order
 
 
-def setupPractice(num_ai_disengaged=6, num_ai_engaged=24):
-    practice_conditions = ["ai-disengaged"] * num_ai_disengaged + ["ai-engaged"] * num_ai_engaged
+
+def setupPractice(num_ai_engaged_stop_trials = 8, 
+                  num_ai_engaged_no_stop_trials = 16, 
+                  num_ai_disengaged_stop_trials = 2, 
+                  num_ai_disengaged_no_stop_trials = 4):
+    practice_conditions = ["Stop AI-engaged"] * num_ai_engaged_stop_trials + ["ai-engaged no stop"] * num_ai_engaged_no_stop_trials + ["ai-disengaged stop"] * num_ai_disengaged_stop_trials + ["ai-disengaged no stop"] * num_ai_disengaged_no_stop_trials
     np.random.shuffle(practice_conditions)
-
     return practice_conditions, len(practice_conditions)
 
 
@@ -294,7 +301,7 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     # subject info
-    conditions, block, block_labels, condition_order = setup_trials()
+    conditions, n_trials_block1, n_trials_block2, block_labels, condition_order = setup_trials()
     practice, practice_len = setupPractice()
     subid, sess = getInput()
 
@@ -605,7 +612,7 @@ if __name__ == "__main__":
             mywin.flip()
 
         # START
-        if trial["condition"] == "stop":
+        if trial["condition"] == "non-ai":
             trial_start = core.getTime()
             # SSD
             SSD_timer = core.CountdownTimer(SSD)
