@@ -35,10 +35,10 @@ HIT_BOX = [-1.20, 1.15]
 INSTRUCTIONS_GO = (
     "Welcome to the task!\n\n"
     + "Please read the instructions for the task carefully.\n\n"
-    + "On each trial, your job is to keep a dot inside of a moving ring by controlling its speed with your spacebar press.\n\n"
+    + "On each trial, your goal is to keep a dot inside of a moving ring by controlling its speed with your spacebar press.\n\n"
     + "Press the spacebar to move the dot across the screen.\n\n"
     + "The harder you press the spacebar, the faster the dot will move.\n\n"
-    + "Please try your best to keep the dot within the ring. If you find the ball is going too fast, press the spacebar with less pressure  to reduce the dot’s speed.\n\n"
+    + "Please try your best to keep the dot within the ring. If you find the dot is moving too fast, press the spacebar with less pressure  to reduce the dot’s speed.\n\n"
     + "For a brief period you will see a plus sign on the screen signifying that the trial is about to start and then the ring will begin to move from left to right. \n\n"
     + "As soon as the ring starts to move, you should press the spacebar to move the dot with it.\n\n"
     + "Try to keep the dot within the ring as it moves across the screen.\n\n"
@@ -46,15 +46,15 @@ INSTRUCTIONS_GO = (
 )
 
 INSTRUCTIONS_STOP = (
-    "At some point while you move the dot across the screen, the screen will turn red.\n\n"
+    "On some trials, the screen will turn red while you are moving the dot across the screen.\n\n"
     + "When the screen turns red, this indicates that you should stop the movement of the dot by quickly stopping your spacebar press.\n\n"
     + "As you move the ball try to keep the space bar pressed the entire time and not let go of the space bar unless the screen turns red.\n\n"
-    + "Let's have you practice stopping the dot as you move it across the screen.\n\nWhen you are ready to begin, press enter."
+    + "We will now practice stopping the dot as you move it across the screen.\n\nWhen you are ready to begin, press enter."
 )
 
 INSTRUCTIONS_PRACTICE = (
     "Great, now that you've practiced going and stopping let's put everything together and walk through the rest of the task.\n\n"
-    + "The experiment is broken up into blocks, which are sets of trials. On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an artificial intelligence (AI) algorithm that will attempt to stop the dot when the screen turns red. On most trials it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. Before each block, you will be told whether you are in a block that is AI-assisted or not. \n\n"
+    + "The experiment is broken up into blocks, which are sets of trials. On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an artificial intelligence (AI) algorithm that will attempt to stop the dot when the screen turns red. On most of the trials where the screen turns red, it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. Before each block, you will be told whether you are in a block that is AI-assisted or not. \n\n"
     + "The task is broken up into a practice phase where you will get feedback on your behavior and a testing phase which will not give you feedback.\n\n"
     + "In this practice phase the artificial intelligence algorithm will be engaged. On most trials, the AI algorithm will stop the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail. When it fails,  you must stop the dot’s movement yourself. \n\n"
     + "When you are ready to begin the practice phase, press enter. \n\n"
@@ -63,7 +63,7 @@ INSTRUCTIONS_PRACTICE = (
 INSTRUCTIONS_TESTING = (
     "We will now begin the testing phase. To summarize...\n\n"
     + "On each trial, your job is to keep a dot inside of a moving ring by controlling its speed.\n\n"
-    + "On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an AI algorithm that will attempt to stop the dot when the screen turns red. On most trials it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. You will be told whether you are in a block that is AI-assisted or not.\n\n"
+    + "On certain blocks, you will be entirely responsible for controlling the dot and stopping its movement when the screen turns red. On other blocks there will be an AI algorithm that will attempt to stop the dot when the screen turns red. On most of the trials where the screen turns red, it will succeed at stopping the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail.  When it fails to stop the dot, you are responsible for stopping the dot. You will be told whether you are in a block that is AI-assisted or not.\n\n"
     + "Remember to try to keep the space bar pressed the entire time and not let go of the space bar fully unless the screen turns red. \n\n"
     + "When you are ready to begin the testing phase, press enter."
 )
@@ -72,13 +72,13 @@ END_TEXT = "Thank you for participating in this experiment!\n\nPlease press the 
 
 NON_AI_TEXT = (
     "In this block the artificial intelligence algorithm is not engaged."
-    + "\n\nYou are solely responsible for stopping the dots movement as quickly as possible when the screen turns red."
+    + "\n\nYou are solely responsible for stopping the dots movement as quickly as possible if the screen turns red."
     + "\n\n Press enter to begin..."
 )
 
 AI_TEXT = (
     "In this block the artificial intelligence algorithm will be engaged. \n\n"
-    + "On most trials, the AI algorithm will stop the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail."
+    + "On most of the trials where the screen turns red, the AI algorithm will stop the dot irrespective of whether you stop pressing the spacebar, but sometimes it will fail."
     + "\n\nWhen it fails, you must stop the dot’s movement yourself."
     + "\n\n Press Enter to begin..."
 )
