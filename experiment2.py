@@ -157,6 +157,11 @@ def get_prob_dist_inputs(n_trials_block1=60, n_trials_block2=180, ai_proportion_
         stop_proportion = prob_dist.data[4]
         cond_order = int(prob_dist.data[5])
 
+        if 0 < stop_proportion < 1:
+            break
+        else:
+            print("Error – Please enter a valid stopping proportion between 0-1.")
+
         if n_trials_block1 % 3 == 0:
             break
         else:
@@ -988,6 +993,9 @@ if __name__ == "__main__":
 
             feedback_tracker = []
     # FINISH
+
+    block = n_trials_block2 # temporary fix so code will run, but won't return accurate proportions for block2
+
 
     pressure_proportions = feedback_tracker.count("pressure") / (practice_len + block)
     late_proportions = feedback_tracker.count("late") / (practice_len + block)
