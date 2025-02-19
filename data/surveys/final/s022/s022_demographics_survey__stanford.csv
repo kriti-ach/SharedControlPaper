@@ -1,0 +1,41 @@
+question_key,text,required,response,options
+demographics_survey__stanford_8_options,What is the highest level of education you have completed?,1.0,4,Did Not Complete High School;  High School/GED;  Some College;  Bachelor's Degree;  Master's Degree;  Advanced Graduate work or Ph.D
+demographics_survey__stanford_40_options,How many traffic accidents have you been in over your life?,1.0,1,0; 1; 2; 3; 4; 5-10; >10
+demographics_survey__stanford_31_options,How much credit card debt do you have?,1.0,1,<$500; $500-$2499; $2500-$9999; $10000-$24999; $25000-$49999; $50000-$99999; $100000-$199999; >$200000;  Prefer Not To Say
+demographics_survey__stanford_23,"If you chose 'Yes' for using hormonal birth control, which type are you using? (List brand and type if known):",0.0,,
+demographics_survey__stanford_16,Years:,1.0,0,
+demographics_survey__stanford_17,Months:,1.0,0,
+demographics_survey__stanford_13_options,What is your relationship status?,1.0,1,Single; Married; In Committed Relationship
+demographics_survey__stanford_34,"On average, how many cups of coffee do you have each day?",1.0,0,
+demographics_survey__stanford_35,"On average, how many cups of tea do you have each day?",1.0,0,
+demographics_survey__stanford_10,Feet:,1.0,5,
+demographics_survey__stanford_11,Inches:,1.0,63,
+demographics_survey__stanford_2_options,What is your gender?,1.0,1,Male; female; non-binary/third gender;  prefer not to answer
+demographics_survey__stanford_12,How much do you weigh (in pounds)?,1.0,145,
+demographics_survey__stanford_28_options,How much mortgage debt do you have?,1.0,1,<$500; $500-$2499; $2500-$9999; $10000-$24999; $25000-$49999; $50000-$99999; $100000-$199999; >$200000;  Prefer Not To Say
+demographics_survey__stanford_42_options,,,"['money', 'tasks are fun', 'want to contribute to research']",
+demographics_survey__stanford_25_options,Do you have a retirement account?,1.0,2,Yes; No
+demographics_survey__stanford_5_options,,,Asian,
+demographics_survey__stanford_38_options,Do you feel you have a problem with gambling?,1.0,0,no;  yes in the past but not now;  yes
+demographics_survey__stanford_30_options,How much education debt do you have?,1.0,1,<$500; $500-$2499; $2500-$9999; $10000-$24999; $25000-$49999; $50000-$99999; $100000-$199999; >$200000;  Prefer Not To Say
+demographics_survey__stanford_29_options,How much car-related debt do you have?,1.0,1,<$500; $500-$2499; $2500-$9999; $10000-$24999; $25000-$49999; $50000-$99999; $100000-$199999; >$200000;  Prefer Not To Say
+demographics_survey__stanford_4,How old are you (in years)?,1.0,24,
+demographics_survey__stanford_6,If you chose 'Other' for racial  background how would you describe it?,0.0,,
+demographics_survey__stanford_22_options,Are you taking any form of hormonal birth control?,1.0,1,Yes; No
+demographics_survey__stanford_36,"On average, how many cans of caffeinated soda do you have each day?",1.0,0,
+demographics_survey__stanford_7_options,"Are you of Hispanic, Latino or Spanish origin?",1.0,0,Yes;  No
+demographics_survey__stanford_43,"If you have other motivations, please list them. ",0.0,,
+demographics_survey__stanford_32,Please list any other sources of debt you have:,0.0,na,
+demographics_survey__stanford_19_options,How many children do you have?,1.0,1,0; 1; 2; 3; 4; 5-10; >10
+demographics_survey__stanford_26_options,If you do have a retirement account what percent is in stocks?,0.0,1,<10%; 10-19%; 20-29%; 30-39%; 40-49%; 50-59%; 60-69%; 70-79%; 80-89%; 90% or greater
+demographics_survey__stanford_20,"If you menstruate, when was the date of your last period (please answer in the form [mm/dd/yyyy])? Put 'not menstruating', if you do not menstruate.",1.0,07/20/2024,
+demographics_survey__stanford_24,What is your household's annual income (in US dollars)?,1.0,60000,
+demographics_survey__stanford_14_options,How many times have you been divorced?,1.0,0,0; 1; 2; 3; 4; 5; More
+demographics_survey__stanford_39_options,How many traffic tickets have you gotten in the last year?,1.0,1,0; 1; 2; 3; 4; 5-10; >10
+demographics_survey__stanford_21,"If you menstruate, what is the length in days of your typical cycle? Put 0, if you do not menstruate.",1.0,5,
+demographics_survey__stanford_41_options,How many times in your life have you been arrested and/or charged with illegal activities?,1.0,1,0; 1; 2; 3; 4; 5-10; >10
+demographics_survey__stanford_37,What is your daily caffeine intake from other sources each day (in mg)?,1.0,0,
+demographics_survey__stanford_3_options,What is your biological sex? ,1.0,1,male;  female;  intersex
+demographics_survey__stanford_33_options,"If you listed any other sources of debt, how much debt do you have from these other sources?",0.0,1,<$500; $500-$2499; $2500-$9999; $10000-$24999; $25000-$49999; $50000-$99999; $100000-$199999; >$200000;  Prefer Not To Say
+demographics_survey__stanford_18_options,How many romantic relationships have you had?,1.0,1,0; 1; 2; 3; 4; 5-10; >10
+demographics_survey__stanford_27_options,What is your housing status?,1.0,2,own a home; rent a home/apartment; live with someone (no rent); residential/halfway house; shelter; no current home

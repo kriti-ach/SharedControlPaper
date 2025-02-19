@@ -1,0 +1,2500 @@
+15.9055 	WARNING 	User requested fullscreen with size [2560 1440], but screen is actually [1920, 1080]. Using actual size
+16.4826 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fe1e2888460>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fe1afc99b20>, multiSample=False, name='window1', numSamples=2, pos=[0.0, 0.0], screen=0, size=array([1920, 1080]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+16.4828 	EXP 	window1: mouseVisible = True
+16.4833 	EXP 	window1: mouseVisible = False
+16.4833 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+16.4833 	EXP 	window1: recordFrameIntervals = False
+16.6476 	EXP 	window1: recordFrameIntervals = True
+16.7190 	WARNING 	t of last frame was 21.11ms (=1/47)
+16.7523 	WARNING 	t of last frame was 20.73ms (=1/48)
+16.8694 	WARNING 	t of last frame was 20.76ms (=1/48)
+16.9023 	WARNING 	t of last frame was 20.35ms (=1/49)
+16.9360 	WARNING 	Multiple dropped frames have occurred - I'll stop bothering you about them!
+17.1497 	EXP 	Screen (0) actual frame rate measured at 59.72Hz
+17.1497 	EXP 	window1: recordFrameIntervals = False
+19.7930 	EXP 	Created welcome = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.045, italic=False, languageStyle='LTR', name='welcome', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.8454 	EXP 	Created instrStopText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.025, italic=False, languageStyle='LTR', name='instrStopText', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.8501 	EXP 	Created fixation = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.15, italic=False, languageStyle='LTR', name='fixation', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+19.8553 	EXP 	Created goStim = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, image='sin', interpolate=True, mask=None, maskParams=None, name='goStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([151., 151.]), texRes=128, units='pix', win=Window(...))
+19.9172 	EXP 	Created stopSignal = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-3.0, flipHoriz=False, flipVert=False, image='stopSignal.png', interpolate=True, mask=None, maskParams=None, name='stopSignal', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+19.9373 	EXP 	Created rules = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-4.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.03, italic=False, languageStyle='LTR', name='rules', opacity=1.0, ori=0.0, pos=array([-0.6,  0.4]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.9389 	EXP 	Created text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+19.9505 	EXP 	Created rules_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.03, italic=False, languageStyle='LTR', name='rules_2', opacity=1.0, ori=0.0, pos=array([-0.6,  0.4]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.9517 	EXP 	Created text_5 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.025, italic=False, languageStyle='LTR', name='text_5', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+19.9837 	EXP 	Created testText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.025, italic=False, languageStyle='LTR', name='testText', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.9879 	EXP 	Created test_fixation = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.15, italic=False, languageStyle='LTR', name='test_fixation', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+19.9921 	EXP 	Created goStim_test = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, image='sin', interpolate=True, mask=None, maskParams=None, name='goStim_test', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([151., 151.]), texRes=128, units='pix', win=Window(...))
+20.0295 	EXP 	Created stopSignal_test = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-3.0, flipHoriz=False, flipVert=False, image='stopSignal.png', interpolate=True, mask=None, maskParams=None, name='stopSignal_test', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+20.0308 	EXP 	Created text_6 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.025, italic=False, languageStyle='LTR', name='text_6', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+20.0427 	EXP 	Created ending_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='ending_text', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+20.0542 	EXP 	welcome: autoDraw = True
+25.9061 	DATA 	Keypress: return
+25.9110 	EXP 	welcome: autoDraw = False
+25.9110 	EXP 	instrStopText: autoDraw = True
+86.3607 	EXP 	Created sequence: fullRandom, trialTypes=1, nReps=3, seed=None
+86.3611 	EXP 	New trial (rep=0, index=0): None
+86.3798 	EXP 	Imported condition.xlsx as conditions, 4 conditions, 2 params
+86.3802 	EXP 	Created sequence: fullRandom, trialTypes=4, nReps=6, seed=None
+86.3805 	EXP 	New trial (rep=0, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+86.3981 	DATA 	Keypress: return
+86.4031 	EXP 	instrStopText: autoDraw = False
+86.4031 	EXP 	stopSignal: texRes = 128.0
+86.4031 	EXP 	goStim: image = 'squareblack.png'
+86.4031 	EXP 	fixation: autoDraw = True
+86.4031 	EXP 	rules: autoDraw = True
+86.8932 	EXP 	goStim: autoDraw = True
+86.9097 	EXP 	fixation: autoDraw = False
+87.2438 	EXP 	stopSignal: autoDraw = True
+87.7441 	EXP 	stopSignal: autoDraw = False
+87.8944 	EXP 	goStim: autoDraw = False
+88.9144 	EXP 	rules: autoDraw = False
+88.9144 	EXP 	fixation: autoDraw = False
+88.9144 	EXP 	goStim: autoDraw = False
+88.9144 	EXP 	stopSignal: autoDraw = False
+88.9144 	EXP 	rules: autoDraw = False
+88.9144 	EXP 	text: height = 0.05
+88.9144 	EXP 	text: height = 0.05
+88.9144 	EXP 	text: height = 0.05
+88.9144 	EXP 	text: text = 'Respond Faster'
+88.9144 	EXP 	text: autoDraw = True
+88.9144 	EXP 	rules_2: autoDraw = True
+89.4138 	EXP 	New trial (rep=0, index=1): {'corrGoResp': None, 'shape': None}
+89.4328 	EXP 	text: autoDraw = False
+89.4328 	EXP 	rules_2: autoDraw = False
+89.4328 	EXP 	stopSignal: texRes = 128.0
+89.4328 	EXP 	goStim: image = 'squareblack.png'
+89.4328 	EXP 	fixation: autoDraw = True
+89.4328 	EXP 	rules: autoDraw = True
+89.9300 	EXP 	goStim: autoDraw = True
+89.9463 	EXP 	fixation: autoDraw = False
+90.2804 	EXP 	stopSignal: autoDraw = True
+90.4814 	DATA 	Keypress: left
+90.7958 	EXP 	stopSignal: autoDraw = False
+90.9292 	EXP 	goStim: autoDraw = False
+91.0153 	DATA 	Keypress: left
+91.9480 	EXP 	rules: autoDraw = False
+91.9480 	EXP 	fixation: autoDraw = False
+91.9480 	EXP 	goStim: autoDraw = False
+91.9480 	EXP 	stopSignal: autoDraw = False
+91.9480 	EXP 	rules: autoDraw = False
+91.9480 	EXP 	text: height = 0.05
+91.9480 	EXP 	text: height = 0.05
+91.9480 	EXP 	text: height = 0.05
+91.9480 	EXP 	text: text = 'Incorrect'
+91.9480 	EXP 	text: autoDraw = True
+91.9480 	EXP 	rules_2: autoDraw = True
+92.4336 	EXP 	New trial (rep=0, index=2): {'corrGoResp': None, 'shape': None}
+92.4523 	EXP 	text: autoDraw = False
+92.4523 	EXP 	rules_2: autoDraw = False
+92.4523 	EXP 	stopSignal: texRes = 128.0
+92.4523 	EXP 	goStim: image = 'squareblack.png'
+92.4523 	EXP 	fixation: autoDraw = True
+92.4523 	EXP 	rules: autoDraw = True
+92.9497 	EXP 	goStim: autoDraw = True
+92.9662 	EXP 	fixation: autoDraw = False
+93.2998 	EXP 	stopSignal: autoDraw = True
+93.8005 	EXP 	stopSignal: autoDraw = False
+93.9508 	EXP 	goStim: autoDraw = False
+94.9519 	EXP 	rules: autoDraw = False
+94.9519 	EXP 	fixation: autoDraw = False
+94.9519 	EXP 	goStim: autoDraw = False
+94.9519 	EXP 	stopSignal: autoDraw = False
+94.9519 	EXP 	rules: autoDraw = False
+94.9519 	EXP 	text: height = 0.05
+94.9519 	EXP 	text: height = 0.05
+94.9519 	EXP 	text: height = 0.05
+94.9519 	EXP 	text: text = 'Respond Faster'
+94.9519 	EXP 	text: autoDraw = True
+94.9519 	EXP 	rules_2: autoDraw = True
+95.4369 	EXP 	New trial (rep=0, index=3): {'corrGoResp': None, 'shape': None}
+95.4561 	EXP 	text: autoDraw = False
+95.4561 	EXP 	rules_2: autoDraw = False
+95.4561 	EXP 	text: autoDraw = False
+95.4561 	EXP 	rules_2: autoDraw = False
+95.4561 	EXP 	stopSignal: texRes = 128.0
+95.4561 	EXP 	goStim: image = 'squareblack.png'
+95.4561 	EXP 	fixation: autoDraw = True
+95.4561 	EXP 	rules: autoDraw = True
+95.9228 	DATA 	Keypress: right
+95.9530 	EXP 	goStim: autoDraw = True
+95.9696 	EXP 	fixation: autoDraw = False
+96.3018 	EXP 	stopSignal: autoDraw = True
+96.8026 	EXP 	stopSignal: autoDraw = False
+96.9527 	EXP 	goStim: autoDraw = False
+97.9552 	EXP 	rules: autoDraw = False
+97.9552 	EXP 	fixation: autoDraw = False
+97.9552 	EXP 	goStim: autoDraw = False
+97.9552 	EXP 	stopSignal: autoDraw = False
+97.9552 	EXP 	rules: autoDraw = False
+97.9552 	EXP 	text: height = 0.05
+97.9552 	EXP 	text: height = 0.05
+97.9552 	EXP 	text: height = 0.05
+97.9552 	EXP 	text: text = 'Correct'
+97.9552 	EXP 	text: autoDraw = True
+97.9552 	EXP 	rules_2: autoDraw = True
+98.4402 	EXP 	New trial (rep=1, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+98.4641 	EXP 	text: autoDraw = False
+98.4641 	EXP 	rules_2: autoDraw = False
+98.4641 	EXP 	stopSignal: texRes = 128.0
+98.4641 	EXP 	goStim: image = 'circleblack.png'
+98.4641 	EXP 	fixation: autoDraw = True
+98.4641 	EXP 	rules: autoDraw = True
+98.9563 	EXP 	goStim: autoDraw = True
+98.9731 	EXP 	fixation: autoDraw = False
+99.1765 	DATA 	Keypress: right
+99.3570 	EXP 	stopSignal: autoDraw = True
+99.8725 	EXP 	stopSignal: autoDraw = False
+99.9561 	EXP 	goStim: autoDraw = False
+100.9751 	EXP 	rules: autoDraw = False
+100.9751 	EXP 	fixation: autoDraw = False
+100.9751 	EXP 	goStim: autoDraw = False
+100.9751 	EXP 	stopSignal: autoDraw = False
+100.9751 	EXP 	rules: autoDraw = False
+100.9751 	EXP 	text: height = 0.05
+100.9751 	EXP 	text: height = 0.05
+100.9751 	EXP 	text: height = 0.05
+100.9751 	EXP 	text: text = 'Incorrect'
+100.9751 	EXP 	text: autoDraw = True
+100.9751 	EXP 	rules_2: autoDraw = True
+101.4604 	EXP 	New trial (rep=1, index=1): {'corrGoResp': None, 'shape': None}
+101.4800 	EXP 	text: autoDraw = False
+101.4800 	EXP 	rules_2: autoDraw = False
+101.4800 	EXP 	text: autoDraw = False
+101.4800 	EXP 	rules_2: autoDraw = False
+101.4800 	EXP 	stopSignal: texRes = 128.0
+101.4800 	EXP 	goStim: image = 'squareblack.png'
+101.4800 	EXP 	fixation: autoDraw = True
+101.4800 	EXP 	rules: autoDraw = True
+101.9762 	EXP 	goStim: autoDraw = True
+101.9930 	EXP 	fixation: autoDraw = False
+102.3766 	EXP 	stopSignal: autoDraw = True
+102.4467 	DATA 	Keypress: right
+102.4791 	DATA 	Keypress: left
+102.8759 	EXP 	stopSignal: autoDraw = False
+102.9760 	EXP 	goStim: autoDraw = False
+103.9947 	EXP 	rules: autoDraw = False
+103.9947 	EXP 	fixation: autoDraw = False
+103.9947 	EXP 	goStim: autoDraw = False
+103.9947 	EXP 	stopSignal: autoDraw = False
+103.9947 	EXP 	rules: autoDraw = False
+103.9947 	EXP 	text: height = 0.05
+103.9947 	EXP 	text: height = 0.05
+103.9947 	EXP 	text: height = 0.05
+103.9947 	EXP 	text: text = 'Correct'
+103.9947 	EXP 	text: autoDraw = True
+103.9947 	EXP 	rules_2: autoDraw = True
+104.4801 	EXP 	New trial (rep=1, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+104.4994 	EXP 	text: autoDraw = False
+104.4994 	EXP 	rules_2: autoDraw = False
+104.4994 	EXP 	stopSignal: texRes = 128.0
+104.4994 	EXP 	goStim: image = 'squareblack.png'
+104.4994 	EXP 	fixation: autoDraw = True
+104.4994 	EXP 	rules: autoDraw = True
+104.9962 	EXP 	goStim: autoDraw = True
+105.0128 	EXP 	fixation: autoDraw = False
+105.3967 	EXP 	stopSignal: autoDraw = True
+105.5335 	DATA 	Keypress: right
+105.6170 	DATA 	Keypress: left
+105.8959 	EXP 	stopSignal: autoDraw = False
+105.9961 	EXP 	goStim: autoDraw = False
+107.0141 	EXP 	rules: autoDraw = False
+107.0141 	EXP 	fixation: autoDraw = False
+107.0141 	EXP 	goStim: autoDraw = False
+107.0141 	EXP 	stopSignal: autoDraw = False
+107.0141 	EXP 	rules: autoDraw = False
+107.0141 	EXP 	text: height = 0.05
+107.0141 	EXP 	text: height = 0.05
+107.0141 	EXP 	text: height = 0.05
+107.0141 	EXP 	text: text = 'There was a star'
+107.0141 	EXP 	text: autoDraw = True
+107.0141 	EXP 	rules_2: autoDraw = True
+107.5006 	EXP 	New trial (rep=1, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+107.5202 	EXP 	text: autoDraw = False
+107.5202 	EXP 	rules_2: autoDraw = False
+107.5202 	EXP 	stopSignal: texRes = 128.0
+107.5202 	EXP 	goStim: image = 'circleblack.png'
+107.5202 	EXP 	fixation: autoDraw = True
+107.5202 	EXP 	rules: autoDraw = True
+108.0165 	EXP 	goStim: autoDraw = True
+108.0331 	EXP 	fixation: autoDraw = False
+108.3667 	EXP 	stopSignal: autoDraw = True
+108.4038 	DATA 	Keypress: left
+108.4364 	DATA 	Keypress: right
+108.8659 	EXP 	stopSignal: autoDraw = False
+109.0160 	EXP 	goStim: autoDraw = False
+110.0348 	EXP 	rules: autoDraw = False
+110.0348 	EXP 	fixation: autoDraw = False
+110.0348 	EXP 	goStim: autoDraw = False
+110.0348 	EXP 	stopSignal: autoDraw = False
+110.0348 	EXP 	rules: autoDraw = False
+110.0348 	EXP 	text: text = 'There was a star'
+110.0348 	EXP 	text: autoDraw = True
+110.0348 	EXP 	rules_2: autoDraw = True
+110.5202 	EXP 	New trial (rep=2, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+110.5389 	EXP 	text: autoDraw = False
+110.5389 	EXP 	rules_2: autoDraw = False
+110.5389 	EXP 	stopSignal: texRes = 128.0
+110.5389 	EXP 	goStim: image = 'circleblack.png'
+110.5389 	EXP 	fixation: autoDraw = True
+110.5389 	EXP 	rules: autoDraw = True
+111.0366 	EXP 	goStim: autoDraw = True
+111.0530 	EXP 	fixation: autoDraw = False
+111.3368 	EXP 	stopSignal: autoDraw = True
+111.6236 	DATA 	Keypress: left
+111.8377 	EXP 	stopSignal: autoDraw = False
+112.0359 	EXP 	goStim: autoDraw = False
+113.0394 	EXP 	rules: autoDraw = False
+113.0394 	EXP 	fixation: autoDraw = False
+113.0394 	EXP 	goStim: autoDraw = False
+113.0394 	EXP 	stopSignal: autoDraw = False
+113.0394 	EXP 	rules: autoDraw = False
+113.0394 	EXP 	text: height = 0.05
+113.0394 	EXP 	text: height = 0.05
+113.0394 	EXP 	text: height = 0.05
+113.0394 	EXP 	text: text = 'Correct'
+113.0394 	EXP 	text: autoDraw = True
+113.0394 	EXP 	rules_2: autoDraw = True
+113.5235 	EXP 	New trial (rep=2, index=1): {'corrGoResp': None, 'shape': None}
+113.5428 	EXP 	text: autoDraw = False
+113.5428 	EXP 	rules_2: autoDraw = False
+113.5428 	EXP 	stopSignal: texRes = 128.0
+113.5428 	EXP 	goStim: image = 'circleblack.png'
+113.5428 	EXP 	fixation: autoDraw = True
+113.5428 	EXP 	rules: autoDraw = True
+114.0398 	EXP 	goStim: autoDraw = True
+114.0568 	EXP 	fixation: autoDraw = False
+114.3400 	EXP 	stopSignal: autoDraw = True
+114.5600 	DATA 	Keypress: left
+114.8391 	EXP 	stopSignal: autoDraw = False
+115.0394 	EXP 	goStim: autoDraw = False
+116.0580 	EXP 	rules: autoDraw = False
+116.0580 	EXP 	fixation: autoDraw = False
+116.0580 	EXP 	goStim: autoDraw = False
+116.0580 	EXP 	stopSignal: autoDraw = False
+116.0580 	EXP 	rules: autoDraw = False
+116.0580 	EXP 	text: text = 'Correct'
+116.0580 	EXP 	text: autoDraw = True
+116.0580 	EXP 	rules_2: autoDraw = True
+116.5435 	EXP 	New trial (rep=2, index=2): {'corrGoResp': None, 'shape': None}
+116.5626 	EXP 	text: autoDraw = False
+116.5626 	EXP 	rules_2: autoDraw = False
+116.5626 	EXP 	stopSignal: texRes = 128.0
+116.5626 	EXP 	goStim: image = 'circleblack.png'
+116.5626 	EXP 	fixation: autoDraw = True
+116.5626 	EXP 	rules: autoDraw = True
+117.0596 	EXP 	goStim: autoDraw = True
+117.0763 	EXP 	fixation: autoDraw = False
+117.3597 	EXP 	stopSignal: autoDraw = True
+117.6298 	DATA 	Keypress: left
+117.8609 	EXP 	stopSignal: autoDraw = False
+118.0595 	EXP 	goStim: autoDraw = False
+119.0781 	EXP 	rules: autoDraw = False
+119.0781 	EXP 	fixation: autoDraw = False
+119.0781 	EXP 	goStim: autoDraw = False
+119.0781 	EXP 	stopSignal: autoDraw = False
+119.0781 	EXP 	rules: autoDraw = False
+119.0781 	EXP 	text: text = 'Correct'
+119.0781 	EXP 	text: autoDraw = True
+119.0781 	EXP 	rules_2: autoDraw = True
+119.5635 	EXP 	New trial (rep=2, index=3): {'corrGoResp': None, 'shape': None}
+119.5826 	EXP 	text: autoDraw = False
+119.5826 	EXP 	rules_2: autoDraw = False
+119.5826 	EXP 	stopSignal: texRes = 128.0
+119.5826 	EXP 	goStim: image = 'circleblack.png'
+119.5826 	EXP 	fixation: autoDraw = True
+119.5826 	EXP 	rules: autoDraw = True
+120.0796 	EXP 	goStim: autoDraw = True
+120.0964 	EXP 	fixation: autoDraw = False
+120.3799 	EXP 	stopSignal: autoDraw = True
+120.5499 	DATA 	Keypress: left
+120.8791 	EXP 	stopSignal: autoDraw = False
+121.0793 	EXP 	goStim: autoDraw = False
+122.0980 	EXP 	rules: autoDraw = False
+122.0980 	EXP 	fixation: autoDraw = False
+122.0980 	EXP 	goStim: autoDraw = False
+122.0980 	EXP 	stopSignal: autoDraw = False
+122.0980 	EXP 	rules: autoDraw = False
+122.0980 	EXP 	text: height = 0.05
+122.0980 	EXP 	text: height = 0.05
+122.0980 	EXP 	text: height = 0.05
+122.0980 	EXP 	text: text = 'There was a star'
+122.0980 	EXP 	text: autoDraw = True
+122.0980 	EXP 	rules_2: autoDraw = True
+122.5836 	EXP 	New trial (rep=3, index=0): {'corrGoResp': None, 'shape': None}
+122.6033 	EXP 	text: autoDraw = False
+122.6033 	EXP 	rules_2: autoDraw = False
+122.6033 	EXP 	stopSignal: texRes = 128.0
+122.6033 	EXP 	goStim: image = 'squareblack.png'
+122.6033 	EXP 	fixation: autoDraw = True
+122.6033 	EXP 	rules: autoDraw = True
+123.0997 	EXP 	goStim: autoDraw = True
+123.1162 	EXP 	fixation: autoDraw = False
+123.3498 	EXP 	stopSignal: autoDraw = True
+123.7705 	DATA 	Keypress: right
+123.8508 	EXP 	stopSignal: autoDraw = False
+123.8531 	DATA 	Keypress: left
+124.0992 	EXP 	goStim: autoDraw = False
+125.1172 	EXP 	rules: autoDraw = False
+125.1172 	EXP 	fixation: autoDraw = False
+125.1172 	EXP 	goStim: autoDraw = False
+125.1172 	EXP 	stopSignal: autoDraw = False
+125.1172 	EXP 	rules: autoDraw = False
+125.1172 	EXP 	text: height = 0.05
+125.1172 	EXP 	text: height = 0.05
+125.1172 	EXP 	text: height = 0.05
+125.1172 	EXP 	text: text = 'Correct'
+125.1172 	EXP 	text: autoDraw = True
+125.1172 	EXP 	rules_2: autoDraw = True
+125.6035 	EXP 	New trial (rep=3, index=1): {'corrGoResp': None, 'shape': None}
+125.6233 	EXP 	text: autoDraw = False
+125.6233 	EXP 	rules_2: autoDraw = False
+125.6233 	EXP 	stopSignal: texRes = 128.0
+125.6233 	EXP 	goStim: image = 'circleblack.png'
+125.6233 	EXP 	fixation: autoDraw = True
+125.6233 	EXP 	rules: autoDraw = True
+126.1194 	EXP 	goStim: autoDraw = True
+126.1363 	EXP 	fixation: autoDraw = False
+126.3698 	EXP 	stopSignal: autoDraw = True
+126.8070 	DATA 	Keypress: left
+126.8706 	EXP 	stopSignal: autoDraw = False
+127.1193 	EXP 	goStim: autoDraw = False
+128.1371 	EXP 	rules: autoDraw = False
+128.1371 	EXP 	fixation: autoDraw = False
+128.1371 	EXP 	goStim: autoDraw = False
+128.1371 	EXP 	stopSignal: autoDraw = False
+128.1371 	EXP 	rules: autoDraw = False
+128.1371 	EXP 	text: height = 0.05
+128.1371 	EXP 	text: height = 0.05
+128.1371 	EXP 	text: height = 0.05
+128.1371 	EXP 	text: text = 'There was a star'
+128.1371 	EXP 	text: autoDraw = True
+128.1371 	EXP 	rules_2: autoDraw = True
+128.6234 	EXP 	New trial (rep=3, index=2): {'corrGoResp': None, 'shape': None}
+128.6428 	EXP 	text: autoDraw = False
+128.6428 	EXP 	rules_2: autoDraw = False
+128.6428 	EXP 	stopSignal: texRes = 128.0
+128.6428 	EXP 	goStim: image = 'circleblack.png'
+128.6428 	EXP 	fixation: autoDraw = True
+128.6428 	EXP 	rules: autoDraw = True
+129.1398 	EXP 	goStim: autoDraw = True
+129.1562 	EXP 	fixation: autoDraw = False
+129.3399 	EXP 	stopSignal: autoDraw = True
+129.5098 	DATA 	Keypress: right
+129.5105 	DATA 	Keypress: left
+129.8391 	EXP 	stopSignal: autoDraw = False
+130.1392 	EXP 	goStim: autoDraw = False
+131.1580 	EXP 	rules: autoDraw = False
+131.1580 	EXP 	fixation: autoDraw = False
+131.1580 	EXP 	goStim: autoDraw = False
+131.1580 	EXP 	stopSignal: autoDraw = False
+131.1580 	EXP 	rules: autoDraw = False
+131.1580 	EXP 	text: height = 0.05
+131.1580 	EXP 	text: height = 0.05
+131.1580 	EXP 	text: height = 0.05
+131.1580 	EXP 	text: text = 'Incorrect'
+131.1580 	EXP 	text: autoDraw = True
+131.1580 	EXP 	rules_2: autoDraw = True
+131.6434 	EXP 	New trial (rep=3, index=3): {'corrGoResp': None, 'shape': None}
+131.6632 	EXP 	text: autoDraw = False
+131.6632 	EXP 	rules_2: autoDraw = False
+131.6632 	EXP 	stopSignal: texRes = 128.0
+131.6632 	EXP 	goStim: image = 'squareblack.png'
+131.6632 	EXP 	fixation: autoDraw = True
+131.6632 	EXP 	rules: autoDraw = True
+132.1595 	EXP 	goStim: autoDraw = True
+132.1762 	EXP 	fixation: autoDraw = False
+132.3597 	EXP 	stopSignal: autoDraw = True
+132.6969 	DATA 	Keypress: right
+132.8608 	EXP 	stopSignal: autoDraw = False
+133.1592 	EXP 	goStim: autoDraw = False
+134.1781 	EXP 	rules: autoDraw = False
+134.1781 	EXP 	fixation: autoDraw = False
+134.1781 	EXP 	goStim: autoDraw = False
+134.1781 	EXP 	stopSignal: autoDraw = False
+134.1781 	EXP 	rules: autoDraw = False
+134.1781 	EXP 	text: height = 0.05
+134.1781 	EXP 	text: height = 0.05
+134.1781 	EXP 	text: height = 0.05
+134.1781 	EXP 	text: text = 'Correct'
+134.1781 	EXP 	text: autoDraw = True
+134.1781 	EXP 	rules_2: autoDraw = True
+134.6633 	EXP 	New trial (rep=4, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+134.6823 	EXP 	text: autoDraw = False
+134.6823 	EXP 	rules_2: autoDraw = False
+134.6823 	EXP 	stopSignal: texRes = 128.0
+134.6823 	EXP 	goStim: image = 'squareblack.png'
+134.6823 	EXP 	fixation: autoDraw = True
+134.6823 	EXP 	rules: autoDraw = True
+135.1795 	EXP 	goStim: autoDraw = True
+135.1965 	EXP 	fixation: autoDraw = False
+135.3798 	EXP 	stopSignal: autoDraw = True
+135.7171 	DATA 	Keypress: right
+135.7498 	DATA 	Keypress: left
+135.8808 	EXP 	stopSignal: autoDraw = False
+136.1793 	EXP 	goStim: autoDraw = False
+137.1982 	EXP 	rules: autoDraw = False
+137.1982 	EXP 	fixation: autoDraw = False
+137.1982 	EXP 	goStim: autoDraw = False
+137.1982 	EXP 	stopSignal: autoDraw = False
+137.1982 	EXP 	rules: autoDraw = False
+137.1982 	EXP 	text: text = 'Correct'
+137.1982 	EXP 	text: autoDraw = True
+137.1982 	EXP 	rules_2: autoDraw = True
+137.6836 	EXP 	New trial (rep=4, index=1): {'corrGoResp': None, 'shape': None}
+137.7036 	EXP 	text: autoDraw = False
+137.7036 	EXP 	rules_2: autoDraw = False
+137.7036 	EXP 	text: autoDraw = False
+137.7036 	EXP 	rules_2: autoDraw = False
+137.7036 	EXP 	stopSignal: texRes = 128.0
+137.7036 	EXP 	goStim: image = 'circleblack.png'
+137.7036 	EXP 	fixation: autoDraw = True
+137.7036 	EXP 	rules: autoDraw = True
+138.1998 	EXP 	goStim: autoDraw = True
+138.2164 	EXP 	fixation: autoDraw = False
+138.4000 	EXP 	stopSignal: autoDraw = True
+138.7874 	DATA 	Keypress: left
+138.9007 	EXP 	stopSignal: autoDraw = False
+139.1994 	EXP 	goStim: autoDraw = False
+140.2177 	EXP 	rules: autoDraw = False
+140.2177 	EXP 	fixation: autoDraw = False
+140.2177 	EXP 	goStim: autoDraw = False
+140.2177 	EXP 	stopSignal: autoDraw = False
+140.2177 	EXP 	rules: autoDraw = False
+140.2177 	EXP 	text: height = 0.05
+140.2177 	EXP 	text: height = 0.05
+140.2177 	EXP 	text: height = 0.05
+140.2177 	EXP 	text: text = 'There was a star'
+140.2177 	EXP 	text: autoDraw = True
+140.2177 	EXP 	rules_2: autoDraw = True
+140.7037 	EXP 	New trial (rep=4, index=2): {'corrGoResp': None, 'shape': None}
+140.7231 	EXP 	text: autoDraw = False
+140.7231 	EXP 	rules_2: autoDraw = False
+140.7231 	EXP 	text: autoDraw = False
+140.7231 	EXP 	rules_2: autoDraw = False
+140.7231 	EXP 	stopSignal: texRes = 128.0
+140.7231 	EXP 	goStim: image = 'squareblack.png'
+140.7231 	EXP 	fixation: autoDraw = True
+140.7231 	EXP 	rules: autoDraw = True
+141.2195 	EXP 	goStim: autoDraw = True
+141.2362 	EXP 	fixation: autoDraw = False
+141.3698 	EXP 	stopSignal: autoDraw = True
+141.8703 	EXP 	stopSignal: autoDraw = False
+142.2207 	EXP 	goStim: autoDraw = False
+143.2383 	EXP 	rules: autoDraw = False
+143.2383 	EXP 	fixation: autoDraw = False
+143.2383 	EXP 	goStim: autoDraw = False
+143.2383 	EXP 	stopSignal: autoDraw = False
+143.2383 	EXP 	rules: autoDraw = False
+143.2383 	EXP 	text: height = 0.05
+143.2383 	EXP 	text: height = 0.05
+143.2383 	EXP 	text: height = 0.05
+143.2383 	EXP 	text: text = 'Correct'
+143.2383 	EXP 	text: autoDraw = True
+143.2383 	EXP 	rules_2: autoDraw = True
+143.7237 	EXP 	New trial (rep=4, index=3): {'corrGoResp': None, 'shape': None}
+143.7429 	EXP 	text: autoDraw = False
+143.7429 	EXP 	rules_2: autoDraw = False
+143.7429 	EXP 	stopSignal: texRes = 128.0
+143.7429 	EXP 	goStim: image = 'squareblack.png'
+143.7429 	EXP 	fixation: autoDraw = True
+143.7429 	EXP 	rules: autoDraw = True
+144.2396 	EXP 	goStim: autoDraw = True
+144.2563 	EXP 	fixation: autoDraw = False
+144.4398 	EXP 	stopSignal: autoDraw = True
+144.5431 	DATA 	Keypress: right
+144.9388 	EXP 	stopSignal: autoDraw = False
+145.2392 	EXP 	goStim: autoDraw = False
+146.2578 	EXP 	rules: autoDraw = False
+146.2578 	EXP 	fixation: autoDraw = False
+146.2578 	EXP 	goStim: autoDraw = False
+146.2578 	EXP 	stopSignal: autoDraw = False
+146.2578 	EXP 	rules: autoDraw = False
+146.2578 	EXP 	text: height = 0.05
+146.2578 	EXP 	text: height = 0.05
+146.2578 	EXP 	text: height = 0.05
+146.2578 	EXP 	text: text = 'There was a star'
+146.2578 	EXP 	text: autoDraw = True
+146.2578 	EXP 	rules_2: autoDraw = True
+146.7434 	EXP 	New trial (rep=5, index=0): {'corrGoResp': None, 'shape': None}
+146.7628 	EXP 	text: autoDraw = False
+146.7628 	EXP 	rules_2: autoDraw = False
+146.7628 	EXP 	stopSignal: texRes = 128.0
+146.7628 	EXP 	goStim: image = 'squareblack.png'
+146.7628 	EXP 	fixation: autoDraw = True
+146.7628 	EXP 	rules: autoDraw = True
+147.2595 	EXP 	goStim: autoDraw = True
+147.2762 	EXP 	fixation: autoDraw = False
+147.4097 	EXP 	stopSignal: autoDraw = True
+147.7970 	DATA 	Keypress: right
+147.9107 	EXP 	stopSignal: autoDraw = False
+148.2592 	EXP 	goStim: autoDraw = False
+149.2775 	EXP 	rules: autoDraw = False
+149.2775 	EXP 	fixation: autoDraw = False
+149.2775 	EXP 	goStim: autoDraw = False
+149.2775 	EXP 	stopSignal: autoDraw = False
+149.2775 	EXP 	rules: autoDraw = False
+149.2775 	EXP 	text: height = 0.05
+149.2775 	EXP 	text: height = 0.05
+149.2775 	EXP 	text: height = 0.05
+149.2775 	EXP 	text: text = 'Correct'
+149.2775 	EXP 	text: autoDraw = True
+149.2775 	EXP 	rules_2: autoDraw = True
+149.7634 	EXP 	New trial (rep=5, index=1): {'corrGoResp': None, 'shape': None}
+149.7894 	EXP 	text: autoDraw = False
+149.7894 	EXP 	rules_2: autoDraw = False
+149.7894 	EXP 	stopSignal: texRes = 128.0
+149.7894 	EXP 	goStim: image = 'circleblack.png'
+149.7894 	EXP 	fixation: autoDraw = True
+149.7894 	EXP 	rules: autoDraw = True
+150.2794 	EXP 	goStim: autoDraw = True
+150.2961 	EXP 	fixation: autoDraw = False
+150.4296 	EXP 	stopSignal: autoDraw = True
+150.8833 	DATA 	Keypress: left
+150.9305 	EXP 	stopSignal: autoDraw = False
+151.2794 	EXP 	goStim: autoDraw = False
+152.2994 	EXP 	rules: autoDraw = False
+152.2994 	EXP 	fixation: autoDraw = False
+152.2994 	EXP 	goStim: autoDraw = False
+152.2994 	EXP 	stopSignal: autoDraw = False
+152.2994 	EXP 	rules: autoDraw = False
+152.2994 	EXP 	text: text = 'Correct'
+152.2994 	EXP 	text: autoDraw = True
+152.2994 	EXP 	rules_2: autoDraw = True
+152.7837 	EXP 	New trial (rep=5, index=2): {'corrGoResp': None, 'shape': None}
+152.8031 	EXP 	text: autoDraw = False
+152.8031 	EXP 	rules_2: autoDraw = False
+152.8031 	EXP 	text: autoDraw = False
+152.8031 	EXP 	rules_2: autoDraw = False
+152.8031 	EXP 	stopSignal: texRes = 128.0
+152.8031 	EXP 	goStim: image = 'circleblack.png'
+152.8031 	EXP 	fixation: autoDraw = True
+152.8031 	EXP 	rules: autoDraw = True
+153.2995 	EXP 	goStim: autoDraw = True
+153.3167 	EXP 	fixation: autoDraw = False
+153.4499 	EXP 	stopSignal: autoDraw = True
+153.8379 	DATA 	Keypress: left
+153.9506 	EXP 	stopSignal: autoDraw = False
+154.2992 	EXP 	goStim: autoDraw = False
+155.3016 	EXP 	rules: autoDraw = False
+155.3016 	EXP 	fixation: autoDraw = False
+155.3016 	EXP 	goStim: autoDraw = False
+155.3016 	EXP 	stopSignal: autoDraw = False
+155.3016 	EXP 	rules: autoDraw = False
+155.3016 	EXP 	text: text = 'Correct'
+155.3016 	EXP 	text: autoDraw = True
+155.3016 	EXP 	rules_2: autoDraw = True
+155.7869 	EXP 	New trial (rep=5, index=3): {'corrGoResp': None, 'shape': None}
+155.8063 	EXP 	text: autoDraw = False
+155.8063 	EXP 	rules_2: autoDraw = False
+155.8063 	EXP 	text: autoDraw = False
+155.8063 	EXP 	rules_2: autoDraw = False
+155.8063 	EXP 	stopSignal: texRes = 128.0
+155.8063 	EXP 	goStim: image = 'circleblack.png'
+155.8063 	EXP 	fixation: autoDraw = True
+155.8063 	EXP 	rules: autoDraw = True
+156.3033 	EXP 	goStim: autoDraw = True
+156.3198 	EXP 	fixation: autoDraw = False
+156.4531 	EXP 	stopSignal: autoDraw = True
+156.6732 	DATA 	Keypress: left
+156.9530 	EXP 	stopSignal: autoDraw = False
+157.3026 	EXP 	goStim: autoDraw = False
+158.3204 	EXP 	rules: autoDraw = False
+158.3204 	EXP 	fixation: autoDraw = False
+158.3204 	EXP 	goStim: autoDraw = False
+158.3204 	EXP 	stopSignal: autoDraw = False
+158.3204 	EXP 	rules: autoDraw = False
+158.3204 	EXP 	text: text = 'Correct'
+158.3204 	EXP 	text: autoDraw = True
+158.3204 	EXP 	rules_2: autoDraw = True
+158.8272 	EXP 	text: autoDraw = False
+158.8272 	EXP 	rules_2: autoDraw = False
+158.8272 	EXP 	text_5: height = 0.025
+158.8272 	EXP 	text_5: height = 0.025
+158.8272 	EXP 	text_5: height = 0.025
+158.8272 	EXP 	text_5: text = 'Done with this practice.\nPress enter to continue.'
+158.8272 	EXP 	text_5: autoDraw = True
+160.5778 	DATA 	Keypress: return
+160.5913 	EXP 	text_5: autoDraw = False
+160.5913 	EXP 	testText: autoDraw = True
+164.5130 	EXP 	Created sequence: sequential, trialTypes=1, nReps=3, seed=None
+164.5132 	EXP 	New trial (rep=0, index=0): None
+164.5282 	EXP 	Imported condition.xlsx as conditions, 4 conditions, 2 params
+164.5286 	EXP 	Created sequence: fullRandom, trialTypes=4, nReps=12, seed=None
+164.5288 	EXP 	New trial (rep=0, index=0): {'corrGoResp': None, 'shape': None}
+164.5428 	DATA 	Keypress: return
+164.5480 	EXP 	testText: autoDraw = False
+164.5480 	EXP 	stopSignal_test: texRes = 128.0
+164.5480 	EXP 	goStim_test: image = 'circleblack.png'
+164.5480 	EXP 	test_fixation: autoDraw = True
+165.0459 	EXP 	goStim_test: autoDraw = True
+165.0625 	EXP 	test_fixation: autoDraw = False
+165.1959 	EXP 	stopSignal_test: autoDraw = True
+165.6482 	DATA 	Keypress: left
+165.6966 	EXP 	stopSignal_test: autoDraw = False
+166.0324 	DATA 	Keypress: left
+166.0468 	EXP 	goStim_test: autoDraw = False
+167.0335 	EXP 	New trial (rep=0, index=1): {'corrGoResp': None, 'shape': None}
+167.0531 	EXP 	test_fixation: autoDraw = False
+167.0531 	EXP 	goStim_test: autoDraw = False
+167.0531 	EXP 	stopSignal_test: autoDraw = False
+167.0531 	EXP 	stopSignal_test: texRes = 128.0
+167.0531 	EXP 	goStim_test: image = 'squareblack.png'
+167.0531 	EXP 	test_fixation: autoDraw = True
+167.5486 	EXP 	goStim_test: autoDraw = True
+167.5653 	EXP 	test_fixation: autoDraw = False
+167.6989 	EXP 	stopSignal_test: autoDraw = True
+167.9851 	DATA 	Keypress: right
+168.1997 	EXP 	stopSignal_test: autoDraw = False
+168.5482 	EXP 	goStim_test: autoDraw = False
+169.5351 	EXP 	New trial (rep=0, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+169.5524 	EXP 	test_fixation: autoDraw = False
+169.5524 	EXP 	goStim_test: autoDraw = False
+169.5524 	EXP 	stopSignal_test: autoDraw = False
+169.5524 	EXP 	stopSignal_test: texRes = 128.0
+169.5524 	EXP 	goStim_test: image = 'squareblack.png'
+169.5524 	EXP 	test_fixation: autoDraw = True
+170.0514 	EXP 	test_fixation: autoDraw = False
+170.0514 	EXP 	goStim_test: autoDraw = True
+170.2015 	EXP 	stopSignal_test: autoDraw = True
+170.4714 	DATA 	Keypress: right
+170.7025 	EXP 	stopSignal_test: autoDraw = False
+171.0509 	EXP 	goStim_test: autoDraw = False
+172.0382 	EXP 	New trial (rep=0, index=3): {'corrGoResp': None, 'shape': None}
+172.0553 	EXP 	test_fixation: autoDraw = False
+172.0553 	EXP 	goStim_test: autoDraw = False
+172.0553 	EXP 	stopSignal_test: autoDraw = False
+172.0553 	EXP 	stopSignal_test: texRes = 128.0
+172.0553 	EXP 	goStim_test: image = 'circleblack.png'
+172.0553 	EXP 	test_fixation: autoDraw = True
+172.5542 	EXP 	goStim_test: autoDraw = True
+172.5707 	EXP 	test_fixation: autoDraw = False
+172.7042 	EXP 	stopSignal_test: autoDraw = True
+173.0238 	DATA 	Keypress: left
+173.2052 	EXP 	stopSignal_test: autoDraw = False
+173.5537 	EXP 	goStim_test: autoDraw = False
+174.5405 	EXP 	New trial (rep=1, index=0): {'corrGoResp': None, 'shape': None}
+174.5574 	EXP 	test_fixation: autoDraw = False
+174.5574 	EXP 	goStim_test: autoDraw = False
+174.5574 	EXP 	stopSignal_test: autoDraw = False
+174.5574 	EXP 	stopSignal_test: texRes = 128.0
+174.5574 	EXP 	goStim_test: image = 'circleblack.png'
+174.5574 	EXP 	test_fixation: autoDraw = True
+175.0568 	EXP 	test_fixation: autoDraw = False
+175.0568 	EXP 	goStim_test: autoDraw = True
+175.2068 	EXP 	stopSignal_test: autoDraw = True
+175.4764 	DATA 	Keypress: left
+175.7079 	EXP 	stopSignal_test: autoDraw = False
+176.0565 	EXP 	goStim_test: autoDraw = False
+177.0432 	EXP 	New trial (rep=1, index=1): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+177.0608 	EXP 	test_fixation: autoDraw = False
+177.0608 	EXP 	goStim_test: autoDraw = False
+177.0608 	EXP 	stopSignal_test: autoDraw = False
+177.0608 	EXP 	stopSignal_test: texRes = 128.0
+177.0608 	EXP 	goStim_test: image = 'squareblack.png'
+177.0608 	EXP 	test_fixation: autoDraw = True
+177.5596 	EXP 	goStim_test: autoDraw = True
+177.5763 	EXP 	test_fixation: autoDraw = False
+177.7097 	EXP 	stopSignal_test: autoDraw = True
+178.0959 	DATA 	Keypress: right
+178.2105 	EXP 	stopSignal_test: autoDraw = False
+178.5593 	EXP 	goStim_test: autoDraw = False
+179.5479 	EXP 	New trial (rep=1, index=2): {'corrGoResp': None, 'shape': None}
+179.5641 	EXP 	test_fixation: autoDraw = False
+179.5641 	EXP 	goStim_test: autoDraw = False
+179.5641 	EXP 	stopSignal_test: autoDraw = False
+179.5641 	EXP 	stopSignal_test: texRes = 128.0
+179.5641 	EXP 	goStim_test: image = 'squareblack.png'
+179.5641 	EXP 	test_fixation: autoDraw = True
+180.0626 	EXP 	goStim_test: autoDraw = True
+180.0793 	EXP 	test_fixation: autoDraw = False
+180.2125 	EXP 	stopSignal_test: autoDraw = True
+180.4483 	DATA 	Keypress: right
+180.7135 	EXP 	stopSignal_test: autoDraw = False
+181.0619 	EXP 	goStim_test: autoDraw = False
+182.0492 	EXP 	New trial (rep=1, index=3): {'corrGoResp': None, 'shape': None}
+182.0665 	EXP 	test_fixation: autoDraw = False
+182.0665 	EXP 	goStim_test: autoDraw = False
+182.0665 	EXP 	stopSignal_test: autoDraw = False
+182.0665 	EXP 	stopSignal_test: texRes = 128.0
+182.0665 	EXP 	goStim_test: image = 'circleblack.png'
+182.0665 	EXP 	test_fixation: autoDraw = True
+182.5651 	EXP 	goStim_test: autoDraw = True
+182.5818 	EXP 	test_fixation: autoDraw = False
+182.6651 	EXP 	stopSignal_test: autoDraw = True
+183.1658 	EXP 	stopSignal_test: autoDraw = False
+183.5664 	EXP 	goStim_test: autoDraw = False
+184.5520 	EXP 	New trial (rep=2, index=0): {'corrGoResp': None, 'shape': None}
+184.5708 	EXP 	test_fixation: autoDraw = False
+184.5708 	EXP 	goStim_test: autoDraw = False
+184.5708 	EXP 	stopSignal_test: autoDraw = False
+184.5708 	EXP 	stopSignal_test: texRes = 128.0
+184.5708 	EXP 	goStim_test: image = 'squareblack.png'
+184.5708 	EXP 	test_fixation: autoDraw = True
+185.0679 	EXP 	goStim_test: autoDraw = True
+185.0845 	EXP 	test_fixation: autoDraw = False
+185.2181 	EXP 	stopSignal_test: autoDraw = True
+185.6209 	DATA 	Keypress: right
+185.7190 	EXP 	stopSignal_test: autoDraw = False
+186.0676 	EXP 	goStim_test: autoDraw = False
+187.0542 	EXP 	New trial (rep=2, index=1): {'corrGoResp': None, 'shape': None}
+187.0725 	EXP 	test_fixation: autoDraw = False
+187.0725 	EXP 	goStim_test: autoDraw = False
+187.0725 	EXP 	stopSignal_test: autoDraw = False
+187.0725 	EXP 	stopSignal_test: texRes = 128.0
+187.0725 	EXP 	goStim_test: image = 'circleblack.png'
+187.0725 	EXP 	test_fixation: autoDraw = True
+187.5694 	EXP 	goStim_test: autoDraw = True
+187.5860 	EXP 	test_fixation: autoDraw = False
+187.7196 	EXP 	stopSignal_test: autoDraw = True
+188.2200 	EXP 	stopSignal_test: autoDraw = False
+188.5712 	EXP 	goStim_test: autoDraw = False
+189.5578 	EXP 	New trial (rep=2, index=2): {'corrGoResp': None, 'shape': None}
+189.5763 	EXP 	test_fixation: autoDraw = False
+189.5763 	EXP 	goStim_test: autoDraw = False
+189.5763 	EXP 	stopSignal_test: autoDraw = False
+189.5763 	EXP 	stopSignal_test: texRes = 128.0
+189.5763 	EXP 	goStim_test: image = 'circleblack.png'
+189.5763 	EXP 	test_fixation: autoDraw = True
+190.0735 	EXP 	goStim_test: autoDraw = True
+190.0901 	EXP 	test_fixation: autoDraw = False
+190.2739 	EXP 	stopSignal_test: autoDraw = True
+190.5771 	DATA 	Keypress: left
+190.7728 	EXP 	stopSignal_test: autoDraw = False
+191.0731 	EXP 	goStim_test: autoDraw = False
+192.0604 	EXP 	New trial (rep=2, index=3): {'corrGoResp': None, 'shape': None}
+192.0776 	EXP 	test_fixation: autoDraw = False
+192.0776 	EXP 	goStim_test: autoDraw = False
+192.0776 	EXP 	stopSignal_test: autoDraw = False
+192.0776 	EXP 	stopSignal_test: texRes = 128.0
+192.0776 	EXP 	goStim_test: image = 'squareblack.png'
+192.0776 	EXP 	test_fixation: autoDraw = True
+192.5762 	EXP 	goStim_test: autoDraw = True
+192.5929 	EXP 	test_fixation: autoDraw = False
+192.7764 	EXP 	stopSignal_test: autoDraw = True
+193.2768 	EXP 	stopSignal_test: autoDraw = False
+193.5771 	EXP 	goStim_test: autoDraw = False
+194.5631 	EXP 	New trial (rep=3, index=0): {'corrGoResp': None, 'shape': None}
+194.5823 	EXP 	test_fixation: autoDraw = False
+194.5823 	EXP 	goStim_test: autoDraw = False
+194.5823 	EXP 	stopSignal_test: autoDraw = False
+194.5823 	EXP 	stopSignal_test: texRes = 128.0
+194.5823 	EXP 	goStim_test: image = 'circleblack.png'
+194.5823 	EXP 	test_fixation: autoDraw = True
+195.0790 	EXP 	goStim_test: autoDraw = True
+195.0957 	EXP 	test_fixation: autoDraw = False
+195.3293 	EXP 	stopSignal_test: autoDraw = True
+195.4819 	DATA 	Keypress: left
+195.8450 	EXP 	stopSignal_test: autoDraw = False
+196.0787 	EXP 	goStim_test: autoDraw = False
+197.0651 	EXP 	New trial (rep=3, index=1): {'corrGoResp': None, 'shape': None}
+197.0843 	EXP 	test_fixation: autoDraw = False
+197.0843 	EXP 	goStim_test: autoDraw = False
+197.0843 	EXP 	stopSignal_test: autoDraw = False
+197.0843 	EXP 	stopSignal_test: texRes = 128.0
+197.0843 	EXP 	goStim_test: image = 'circleblack.png'
+197.0843 	EXP 	test_fixation: autoDraw = True
+197.5817 	EXP 	goStim_test: autoDraw = True
+197.5984 	EXP 	test_fixation: autoDraw = False
+197.8321 	EXP 	stopSignal_test: autoDraw = True
+198.2019 	DATA 	Keypress: left
+198.3332 	EXP 	stopSignal_test: autoDraw = False
+198.5813 	EXP 	goStim_test: autoDraw = False
+199.5673 	EXP 	New trial (rep=3, index=2): {'corrGoResp': None, 'shape': None}
+199.5982 	EXP 	test_fixation: autoDraw = False
+199.5982 	EXP 	goStim_test: autoDraw = False
+199.5982 	EXP 	stopSignal_test: autoDraw = False
+199.5982 	EXP 	stopSignal_test: texRes = 128.0
+199.5982 	EXP 	goStim_test: image = 'squareblack.png'
+199.5982 	EXP 	test_fixation: autoDraw = True
+200.0830 	EXP 	goStim_test: autoDraw = True
+200.0998 	EXP 	test_fixation: autoDraw = False
+200.3334 	EXP 	stopSignal_test: autoDraw = True
+200.7358 	DATA 	Keypress: right
+200.8338 	EXP 	stopSignal_test: autoDraw = False
+201.0843 	EXP 	goStim_test: autoDraw = False
+202.0718 	EXP 	New trial (rep=3, index=3): {'corrGoResp': None, 'shape': None}
+202.0903 	EXP 	test_fixation: autoDraw = False
+202.0903 	EXP 	goStim_test: autoDraw = False
+202.0903 	EXP 	stopSignal_test: autoDraw = False
+202.0903 	EXP 	stopSignal_test: texRes = 128.0
+202.0903 	EXP 	goStim_test: image = 'squareblack.png'
+202.0903 	EXP 	test_fixation: autoDraw = True
+202.5870 	EXP 	goStim_test: autoDraw = True
+202.6038 	EXP 	test_fixation: autoDraw = False
+202.8374 	EXP 	stopSignal_test: autoDraw = True
+203.1570 	DATA 	Keypress: right
+203.3385 	EXP 	stopSignal_test: autoDraw = False
+203.5869 	EXP 	goStim_test: autoDraw = False
+204.5729 	EXP 	New trial (rep=4, index=0): {'corrGoResp': None, 'shape': None}
+204.5898 	EXP 	test_fixation: autoDraw = False
+204.5898 	EXP 	goStim_test: autoDraw = False
+204.5898 	EXP 	stopSignal_test: autoDraw = False
+204.5898 	EXP 	stopSignal_test: texRes = 128.0
+204.5898 	EXP 	goStim_test: image = 'circleblack.png'
+204.5898 	EXP 	test_fixation: autoDraw = True
+205.0886 	EXP 	test_fixation: autoDraw = False
+205.0886 	EXP 	goStim_test: autoDraw = True
+205.3390 	EXP 	stopSignal_test: autoDraw = True
+205.8394 	EXP 	stopSignal_test: autoDraw = False
+206.0908 	EXP 	goStim_test: autoDraw = False
+207.0772 	EXP 	New trial (rep=4, index=1): {'corrGoResp': None, 'shape': None}
+207.0971 	EXP 	test_fixation: autoDraw = False
+207.0971 	EXP 	goStim_test: autoDraw = False
+207.0971 	EXP 	stopSignal_test: autoDraw = False
+207.0971 	EXP 	stopSignal_test: texRes = 128.0
+207.0971 	EXP 	goStim_test: image = 'squareblack.png'
+207.0971 	EXP 	test_fixation: autoDraw = True
+207.5927 	EXP 	goStim_test: autoDraw = True
+207.6093 	EXP 	test_fixation: autoDraw = False
+207.8931 	EXP 	stopSignal_test: autoDraw = True
+208.1296 	DATA 	Keypress: right
+208.3940 	EXP 	stopSignal_test: autoDraw = False
+208.5924 	EXP 	goStim_test: autoDraw = False
+209.5786 	EXP 	New trial (rep=4, index=2): {'corrGoResp': None, 'shape': None}
+209.5956 	EXP 	test_fixation: autoDraw = False
+209.5956 	EXP 	goStim_test: autoDraw = False
+209.5956 	EXP 	stopSignal_test: autoDraw = False
+209.5956 	EXP 	stopSignal_test: texRes = 128.0
+209.5956 	EXP 	goStim_test: image = 'circleblack.png'
+209.5956 	EXP 	test_fixation: autoDraw = True
+210.0940 	EXP 	goStim_test: autoDraw = True
+210.1107 	EXP 	test_fixation: autoDraw = False
+210.3447 	EXP 	stopSignal_test: autoDraw = True
+210.6799 	DATA 	Keypress: left
+210.8449 	EXP 	stopSignal_test: autoDraw = False
+211.0961 	EXP 	goStim_test: autoDraw = False
+212.0826 	EXP 	New trial (rep=4, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+212.1008 	EXP 	test_fixation: autoDraw = False
+212.1008 	EXP 	goStim_test: autoDraw = False
+212.1008 	EXP 	stopSignal_test: autoDraw = False
+212.1008 	EXP 	stopSignal_test: texRes = 128.0
+212.1008 	EXP 	goStim_test: image = 'circleblack.png'
+212.1008 	EXP 	test_fixation: autoDraw = True
+212.5983 	EXP 	goStim_test: autoDraw = True
+212.6151 	EXP 	test_fixation: autoDraw = False
+212.8485 	EXP 	stopSignal_test: autoDraw = True
+213.3492 	EXP 	stopSignal_test: autoDraw = False
+213.5994 	EXP 	goStim_test: autoDraw = False
+214.5852 	EXP 	New trial (rep=5, index=0): {'corrGoResp': None, 'shape': None}
+214.6038 	EXP 	test_fixation: autoDraw = False
+214.6038 	EXP 	goStim_test: autoDraw = False
+214.6038 	EXP 	stopSignal_test: autoDraw = False
+214.6038 	EXP 	stopSignal_test: texRes = 128.0
+214.6038 	EXP 	goStim_test: image = 'circleblack.png'
+214.6038 	EXP 	test_fixation: autoDraw = True
+215.1011 	EXP 	goStim_test: autoDraw = True
+215.1175 	EXP 	test_fixation: autoDraw = False
+215.4016 	EXP 	stopSignal_test: autoDraw = True
+215.6047 	DATA 	Keypress: left
+215.9006 	EXP 	stopSignal_test: autoDraw = False
+216.1007 	EXP 	goStim_test: autoDraw = False
+217.0869 	EXP 	New trial (rep=5, index=1): {'corrGoResp': None, 'shape': None}
+217.1049 	EXP 	test_fixation: autoDraw = False
+217.1049 	EXP 	goStim_test: autoDraw = False
+217.1049 	EXP 	stopSignal_test: autoDraw = False
+217.1049 	EXP 	stopSignal_test: texRes = 128.0
+217.1049 	EXP 	goStim_test: image = 'squareblack.png'
+217.1049 	EXP 	test_fixation: autoDraw = True
+217.6024 	EXP 	goStim_test: autoDraw = True
+217.6192 	EXP 	test_fixation: autoDraw = False
+217.9029 	EXP 	stopSignal_test: autoDraw = True
+218.4033 	EXP 	stopSignal_test: autoDraw = False
+218.6049 	EXP 	goStim_test: autoDraw = False
+219.5910 	EXP 	New trial (rep=5, index=2): {'corrGoResp': None, 'shape': None}
+219.6097 	EXP 	test_fixation: autoDraw = False
+219.6097 	EXP 	goStim_test: autoDraw = False
+219.6097 	EXP 	stopSignal_test: autoDraw = False
+219.6097 	EXP 	stopSignal_test: texRes = 128.0
+219.6097 	EXP 	goStim_test: image = 'squareblack.png'
+219.6097 	EXP 	test_fixation: autoDraw = True
+220.1066 	EXP 	goStim_test: autoDraw = True
+220.1234 	EXP 	test_fixation: autoDraw = False
+220.4573 	EXP 	stopSignal_test: autoDraw = True
+220.7743 	DATA 	Keypress: right
+220.9727 	EXP 	stopSignal_test: autoDraw = False
+221.1063 	EXP 	goStim_test: autoDraw = False
+222.0935 	EXP 	New trial (rep=5, index=3): {'corrGoResp': None, 'shape': None}
+222.1103 	EXP 	test_fixation: autoDraw = False
+222.1103 	EXP 	goStim_test: autoDraw = False
+222.1103 	EXP 	stopSignal_test: autoDraw = False
+222.1103 	EXP 	stopSignal_test: texRes = 128.0
+222.1103 	EXP 	goStim_test: image = 'squareblack.png'
+222.1103 	EXP 	test_fixation: autoDraw = True
+222.6092 	EXP 	goStim_test: autoDraw = True
+222.6259 	EXP 	test_fixation: autoDraw = False
+222.9598 	EXP 	stopSignal_test: autoDraw = True
+223.0121 	DATA 	Keypress: right
+223.4588 	EXP 	stopSignal_test: autoDraw = False
+223.6089 	EXP 	goStim_test: autoDraw = False
+224.5966 	EXP 	New trial (rep=6, index=0): {'corrGoResp': None, 'shape': None}
+224.6173 	EXP 	test_fixation: autoDraw = False
+224.6173 	EXP 	goStim_test: autoDraw = False
+224.6173 	EXP 	stopSignal_test: autoDraw = False
+224.6173 	EXP 	stopSignal_test: texRes = 128.0
+224.6173 	EXP 	goStim_test: image = 'circleblack.png'
+224.6173 	EXP 	test_fixation: autoDraw = True
+225.1107 	EXP 	goStim_test: autoDraw = True
+225.1273 	EXP 	test_fixation: autoDraw = False
+225.4614 	EXP 	stopSignal_test: autoDraw = True
+225.5801 	DATA 	Keypress: left
+225.9621 	EXP 	stopSignal_test: autoDraw = False
+226.1138 	EXP 	goStim_test: autoDraw = False
+227.0991 	EXP 	New trial (rep=6, index=1): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+227.1178 	EXP 	test_fixation: autoDraw = False
+227.1178 	EXP 	goStim_test: autoDraw = False
+227.1178 	EXP 	stopSignal_test: autoDraw = False
+227.1178 	EXP 	stopSignal_test: texRes = 128.0
+227.1178 	EXP 	goStim_test: image = 'squareblack.png'
+227.1178 	EXP 	test_fixation: autoDraw = True
+227.6148 	EXP 	goStim_test: autoDraw = True
+227.6315 	EXP 	test_fixation: autoDraw = False
+227.9653 	EXP 	stopSignal_test: autoDraw = True
+228.1015 	DATA 	Keypress: right
+228.4643 	EXP 	stopSignal_test: autoDraw = False
+228.6145 	EXP 	goStim_test: autoDraw = False
+229.6015 	EXP 	New trial (rep=6, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+229.6195 	EXP 	test_fixation: autoDraw = False
+229.6195 	EXP 	goStim_test: autoDraw = False
+229.6195 	EXP 	stopSignal_test: autoDraw = False
+229.6195 	EXP 	stopSignal_test: texRes = 128.0
+229.6195 	EXP 	goStim_test: image = 'squareblack.png'
+229.6195 	EXP 	test_fixation: autoDraw = True
+230.1177 	EXP 	goStim_test: autoDraw = True
+230.1343 	EXP 	test_fixation: autoDraw = False
+230.4679 	EXP 	stopSignal_test: autoDraw = True
+230.6540 	DATA 	Keypress: right
+230.9672 	EXP 	stopSignal_test: autoDraw = False
+231.1172 	EXP 	goStim_test: autoDraw = False
+232.1033 	EXP 	New trial (rep=6, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+232.1253 	EXP 	test_fixation: autoDraw = False
+232.1253 	EXP 	goStim_test: autoDraw = False
+232.1253 	EXP 	stopSignal_test: autoDraw = False
+232.1253 	EXP 	stopSignal_test: texRes = 128.0
+232.1253 	EXP 	goStim_test: image = 'circleblack.png'
+232.1253 	EXP 	test_fixation: autoDraw = True
+232.6204 	EXP 	goStim_test: autoDraw = True
+232.6371 	EXP 	test_fixation: autoDraw = False
+232.9693 	EXP 	stopSignal_test: autoDraw = True
+233.0559 	DATA 	Keypress: left
+233.4699 	EXP 	stopSignal_test: autoDraw = False
+233.6200 	EXP 	goStim_test: autoDraw = False
+234.6079 	EXP 	New trial (rep=7, index=0): {'corrGoResp': None, 'shape': None}
+234.6269 	EXP 	test_fixation: autoDraw = False
+234.6269 	EXP 	goStim_test: autoDraw = False
+234.6269 	EXP 	stopSignal_test: autoDraw = False
+234.6269 	EXP 	stopSignal_test: texRes = 128.0
+234.6269 	EXP 	goStim_test: image = 'circleblack.png'
+234.6269 	EXP 	test_fixation: autoDraw = True
+235.1231 	EXP 	goStim_test: autoDraw = True
+235.1399 	EXP 	test_fixation: autoDraw = False
+235.4734 	EXP 	stopSignal_test: autoDraw = True
+235.7762 	DATA 	Keypress: left
+235.9748 	EXP 	stopSignal_test: autoDraw = False
+236.1229 	EXP 	goStim_test: autoDraw = False
+237.1090 	EXP 	New trial (rep=7, index=1): {'corrGoResp': None, 'shape': None}
+237.1258 	EXP 	test_fixation: autoDraw = False
+237.1258 	EXP 	goStim_test: autoDraw = False
+237.1258 	EXP 	stopSignal_test: autoDraw = False
+237.1258 	EXP 	stopSignal_test: texRes = 128.0
+237.1258 	EXP 	goStim_test: image = 'squareblack.png'
+237.1258 	EXP 	test_fixation: autoDraw = True
+237.6246 	EXP 	goStim_test: autoDraw = True
+237.6412 	EXP 	test_fixation: autoDraw = False
+237.9754 	EXP 	stopSignal_test: autoDraw = True
+238.1943 	DATA 	Keypress: right
+238.4755 	EXP 	stopSignal_test: autoDraw = False
+238.6257 	EXP 	goStim_test: autoDraw = False
+239.6129 	EXP 	New trial (rep=7, index=2): {'corrGoResp': None, 'shape': None}
+239.6322 	EXP 	test_fixation: autoDraw = False
+239.6322 	EXP 	goStim_test: autoDraw = False
+239.6322 	EXP 	stopSignal_test: autoDraw = False
+239.6322 	EXP 	stopSignal_test: texRes = 128.0
+239.6322 	EXP 	goStim_test: image = 'circleblack.png'
+239.6322 	EXP 	test_fixation: autoDraw = True
+240.1289 	EXP 	goStim_test: autoDraw = True
+240.1455 	EXP 	test_fixation: autoDraw = False
+240.4795 	EXP 	stopSignal_test: autoDraw = True
+240.6482 	DATA 	Keypress: left
+240.9948 	EXP 	stopSignal_test: autoDraw = False
+241.1283 	EXP 	goStim_test: autoDraw = False
+242.1144 	EXP 	New trial (rep=7, index=3): {'corrGoResp': None, 'shape': None}
+242.1313 	EXP 	test_fixation: autoDraw = False
+242.1313 	EXP 	goStim_test: autoDraw = False
+242.1313 	EXP 	stopSignal_test: autoDraw = False
+242.1313 	EXP 	stopSignal_test: texRes = 128.0
+242.1313 	EXP 	goStim_test: image = 'squareblack.png'
+242.1313 	EXP 	test_fixation: autoDraw = True
+242.6299 	EXP 	goStim_test: autoDraw = True
+242.6466 	EXP 	test_fixation: autoDraw = False
+242.9805 	EXP 	stopSignal_test: autoDraw = True
+243.0660 	DATA 	Keypress: right
+243.4809 	EXP 	stopSignal_test: autoDraw = False
+243.6333 	EXP 	goStim_test: autoDraw = False
+244.6192 	EXP 	New trial (rep=8, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+244.6382 	EXP 	test_fixation: autoDraw = False
+244.6382 	EXP 	goStim_test: autoDraw = False
+244.6382 	EXP 	stopSignal_test: autoDraw = False
+244.6382 	EXP 	stopSignal_test: texRes = 128.0
+244.6382 	EXP 	goStim_test: image = 'circleblack.png'
+244.6382 	EXP 	test_fixation: autoDraw = True
+245.1342 	EXP 	goStim_test: autoDraw = True
+245.1507 	EXP 	test_fixation: autoDraw = False
+245.4849 	EXP 	stopSignal_test: autoDraw = True
+245.6372 	DATA 	Keypress: left
+246.0004 	EXP 	stopSignal_test: autoDraw = False
+246.1338 	EXP 	goStim_test: autoDraw = False
+247.1203 	EXP 	New trial (rep=8, index=1): {'corrGoResp': None, 'shape': None}
+247.1382 	EXP 	test_fixation: autoDraw = False
+247.1382 	EXP 	goStim_test: autoDraw = False
+247.1382 	EXP 	stopSignal_test: autoDraw = False
+247.1382 	EXP 	stopSignal_test: texRes = 128.0
+247.1382 	EXP 	goStim_test: image = 'squareblack.png'
+247.1382 	EXP 	test_fixation: autoDraw = True
+247.6357 	EXP 	goStim_test: autoDraw = True
+247.6522 	EXP 	test_fixation: autoDraw = False
+247.9362 	EXP 	stopSignal_test: autoDraw = True
+248.4366 	EXP 	stopSignal_test: autoDraw = False
+248.6376 	EXP 	goStim_test: autoDraw = False
+249.6241 	EXP 	New trial (rep=8, index=2): {'corrGoResp': None, 'shape': None}
+249.6431 	EXP 	test_fixation: autoDraw = False
+249.6431 	EXP 	goStim_test: autoDraw = False
+249.6431 	EXP 	stopSignal_test: autoDraw = False
+249.6431 	EXP 	stopSignal_test: texRes = 128.0
+249.6431 	EXP 	goStim_test: image = 'circleblack.png'
+249.6431 	EXP 	test_fixation: autoDraw = True
+250.1399 	EXP 	goStim_test: autoDraw = True
+250.1566 	EXP 	test_fixation: autoDraw = False
+250.4906 	EXP 	stopSignal_test: autoDraw = True
+250.5771 	DATA 	Keypress: left
+251.0059 	EXP 	stopSignal_test: autoDraw = False
+251.1394 	EXP 	goStim_test: autoDraw = False
+252.1265 	EXP 	New trial (rep=8, index=3): {'corrGoResp': None, 'shape': None}
+252.1433 	EXP 	test_fixation: autoDraw = False
+252.1433 	EXP 	goStim_test: autoDraw = False
+252.1433 	EXP 	stopSignal_test: autoDraw = False
+252.1433 	EXP 	stopSignal_test: texRes = 128.0
+252.1433 	EXP 	goStim_test: image = 'squareblack.png'
+252.1433 	EXP 	test_fixation: autoDraw = True
+252.6424 	EXP 	test_fixation: autoDraw = False
+252.6424 	EXP 	goStim_test: autoDraw = True
+252.9427 	EXP 	stopSignal_test: autoDraw = True
+253.4433 	EXP 	stopSignal_test: autoDraw = False
+253.6435 	EXP 	goStim_test: autoDraw = False
+254.6296 	EXP 	New trial (rep=9, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+254.6485 	EXP 	test_fixation: autoDraw = False
+254.6485 	EXP 	goStim_test: autoDraw = False
+254.6485 	EXP 	stopSignal_test: autoDraw = False
+254.6485 	EXP 	stopSignal_test: texRes = 128.0
+254.6485 	EXP 	goStim_test: image = 'circleblack.png'
+254.6485 	EXP 	test_fixation: autoDraw = True
+255.1453 	EXP 	goStim_test: autoDraw = True
+255.1619 	EXP 	test_fixation: autoDraw = False
+255.4956 	EXP 	stopSignal_test: autoDraw = True
+255.6816 	DATA 	Keypress: left
+255.9967 	EXP 	stopSignal_test: autoDraw = False
+256.1449 	EXP 	goStim_test: autoDraw = False
+257.1327 	EXP 	New trial (rep=9, index=1): {'corrGoResp': None, 'shape': None}
+257.1521 	EXP 	test_fixation: autoDraw = False
+257.1521 	EXP 	goStim_test: autoDraw = False
+257.1521 	EXP 	stopSignal_test: autoDraw = False
+257.1521 	EXP 	stopSignal_test: texRes = 128.0
+257.1521 	EXP 	goStim_test: image = 'squareblack.png'
+257.1521 	EXP 	test_fixation: autoDraw = True
+257.6466 	EXP 	goStim_test: autoDraw = True
+257.6634 	EXP 	test_fixation: autoDraw = False
+257.9970 	EXP 	stopSignal_test: autoDraw = True
+258.4662 	DATA 	Keypress: right
+258.4975 	EXP 	stopSignal_test: autoDraw = False
+258.6478 	EXP 	goStim_test: autoDraw = False
+259.6350 	EXP 	New trial (rep=9, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+259.6537 	EXP 	test_fixation: autoDraw = False
+259.6537 	EXP 	goStim_test: autoDraw = False
+259.6537 	EXP 	stopSignal_test: autoDraw = False
+259.6537 	EXP 	stopSignal_test: texRes = 128.0
+259.6537 	EXP 	goStim_test: image = 'squareblack.png'
+259.6537 	EXP 	test_fixation: autoDraw = True
+260.1508 	EXP 	goStim_test: autoDraw = True
+260.1674 	EXP 	test_fixation: autoDraw = False
+260.5013 	EXP 	stopSignal_test: autoDraw = True
+261.0016 	EXP 	stopSignal_test: autoDraw = False
+261.1519 	EXP 	goStim_test: autoDraw = False
+262.1380 	EXP 	New trial (rep=9, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+262.1570 	EXP 	test_fixation: autoDraw = False
+262.1570 	EXP 	goStim_test: autoDraw = False
+262.1570 	EXP 	stopSignal_test: autoDraw = False
+262.1570 	EXP 	stopSignal_test: texRes = 128.0
+262.1570 	EXP 	goStim_test: image = 'circleblack.png'
+262.1570 	EXP 	test_fixation: autoDraw = True
+262.6536 	EXP 	goStim_test: autoDraw = True
+262.6704 	EXP 	test_fixation: autoDraw = False
+263.0540 	EXP 	stopSignal_test: autoDraw = True
+263.1903 	DATA 	Keypress: left
+263.5530 	EXP 	stopSignal_test: autoDraw = False
+263.6532 	EXP 	goStim_test: autoDraw = False
+264.6391 	EXP 	New trial (rep=10, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+264.6562 	EXP 	test_fixation: autoDraw = False
+264.6562 	EXP 	goStim_test: autoDraw = False
+264.6562 	EXP 	stopSignal_test: autoDraw = False
+264.6562 	EXP 	stopSignal_test: texRes = 128.0
+264.6562 	EXP 	goStim_test: image = 'squareblack.png'
+264.6562 	EXP 	test_fixation: autoDraw = True
+265.1549 	EXP 	goStim_test: autoDraw = True
+265.1716 	EXP 	test_fixation: autoDraw = False
+265.5558 	EXP 	stopSignal_test: autoDraw = True
+265.9580 	DATA 	Keypress: right
+266.0558 	EXP 	stopSignal_test: autoDraw = False
+266.1559 	EXP 	goStim_test: autoDraw = False
+267.1437 	EXP 	New trial (rep=10, index=1): {'corrGoResp': None, 'shape': None}
+267.1626 	EXP 	test_fixation: autoDraw = False
+267.1626 	EXP 	goStim_test: autoDraw = False
+267.1626 	EXP 	stopSignal_test: autoDraw = False
+267.1626 	EXP 	stopSignal_test: texRes = 128.0
+267.1626 	EXP 	goStim_test: image = 'circleblack.png'
+267.1626 	EXP 	test_fixation: autoDraw = True
+267.6590 	EXP 	goStim_test: autoDraw = True
+267.6756 	EXP 	test_fixation: autoDraw = False
+268.0595 	EXP 	stopSignal_test: autoDraw = True
+268.1285 	DATA 	Keypress: left
+268.5586 	EXP 	stopSignal_test: autoDraw = False
+268.6587 	EXP 	goStim_test: autoDraw = False
+269.6468 	EXP 	New trial (rep=10, index=2): {'corrGoResp': None, 'shape': None}
+269.6647 	EXP 	test_fixation: autoDraw = False
+269.6647 	EXP 	goStim_test: autoDraw = False
+269.6647 	EXP 	stopSignal_test: autoDraw = False
+269.6647 	EXP 	stopSignal_test: texRes = 128.0
+269.6647 	EXP 	goStim_test: image = 'circleblack.png'
+269.6647 	EXP 	test_fixation: autoDraw = True
+270.1603 	EXP 	goStim_test: autoDraw = True
+270.1769 	EXP 	test_fixation: autoDraw = False
+270.5109 	EXP 	stopSignal_test: autoDraw = True
+270.8969 	DATA 	Keypress: left
+271.0113 	EXP 	stopSignal_test: autoDraw = False
+271.1643 	EXP 	goStim_test: autoDraw = False
+272.1488 	EXP 	New trial (rep=10, index=3): {'corrGoResp': None, 'shape': None}
+272.1676 	EXP 	test_fixation: autoDraw = False
+272.1676 	EXP 	goStim_test: autoDraw = False
+272.1676 	EXP 	stopSignal_test: autoDraw = False
+272.1676 	EXP 	stopSignal_test: texRes = 128.0
+272.1676 	EXP 	goStim_test: image = 'squareblack.png'
+272.1676 	EXP 	test_fixation: autoDraw = True
+272.6644 	EXP 	goStim_test: autoDraw = True
+272.6812 	EXP 	test_fixation: autoDraw = False
+273.0148 	EXP 	stopSignal_test: autoDraw = True
+273.5154 	EXP 	stopSignal_test: autoDraw = False
+273.6655 	EXP 	goStim_test: autoDraw = False
+274.6515 	EXP 	New trial (rep=11, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+274.6704 	EXP 	test_fixation: autoDraw = False
+274.6704 	EXP 	goStim_test: autoDraw = False
+274.6704 	EXP 	stopSignal_test: autoDraw = False
+274.6704 	EXP 	stopSignal_test: texRes = 128.0
+274.6704 	EXP 	goStim_test: image = 'squareblack.png'
+274.6704 	EXP 	test_fixation: autoDraw = True
+275.1673 	EXP 	goStim_test: autoDraw = True
+275.1840 	EXP 	test_fixation: autoDraw = False
+275.5680 	EXP 	stopSignal_test: autoDraw = True
+275.8872 	DATA 	Keypress: right
+276.0687 	EXP 	stopSignal_test: autoDraw = False
+276.1672 	EXP 	goStim_test: autoDraw = False
+277.1531 	EXP 	New trial (rep=11, index=1): {'corrGoResp': None, 'shape': None}
+277.1695 	EXP 	test_fixation: autoDraw = False
+277.1695 	EXP 	goStim_test: autoDraw = False
+277.1695 	EXP 	stopSignal_test: autoDraw = False
+277.1695 	EXP 	stopSignal_test: texRes = 128.0
+277.1695 	EXP 	goStim_test: image = 'squareblack.png'
+277.1695 	EXP 	test_fixation: autoDraw = True
+277.6689 	EXP 	test_fixation: autoDraw = False
+277.6689 	EXP 	goStim_test: autoDraw = True
+278.0693 	EXP 	stopSignal_test: autoDraw = True
+278.4063 	DATA 	Keypress: right
+278.5697 	EXP 	stopSignal_test: autoDraw = False
+278.6701 	EXP 	goStim_test: autoDraw = False
+279.6573 	EXP 	New trial (rep=11, index=2): {'corrGoResp': None, 'shape': None}
+279.6762 	EXP 	test_fixation: autoDraw = False
+279.6762 	EXP 	goStim_test: autoDraw = False
+279.6762 	EXP 	stopSignal_test: autoDraw = False
+279.6762 	EXP 	stopSignal_test: texRes = 128.0
+279.6762 	EXP 	goStim_test: image = 'circleblack.png'
+279.6762 	EXP 	test_fixation: autoDraw = True
+280.1718 	EXP 	goStim_test: autoDraw = True
+280.1883 	EXP 	test_fixation: autoDraw = False
+280.5733 	EXP 	stopSignal_test: autoDraw = True
+280.8596 	DATA 	Keypress: left
+281.0724 	EXP 	stopSignal_test: autoDraw = False
+281.1725 	EXP 	goStim_test: autoDraw = False
+282.1592 	EXP 	New trial (rep=11, index=3): {'corrGoResp': None, 'shape': None}
+282.1764 	EXP 	test_fixation: autoDraw = False
+282.1764 	EXP 	goStim_test: autoDraw = False
+282.1764 	EXP 	stopSignal_test: autoDraw = False
+282.1764 	EXP 	stopSignal_test: texRes = 128.0
+282.1764 	EXP 	goStim_test: image = 'circleblack.png'
+282.1764 	EXP 	test_fixation: autoDraw = True
+282.6756 	EXP 	test_fixation: autoDraw = False
+282.6756 	EXP 	goStim_test: autoDraw = True
+283.0759 	EXP 	stopSignal_test: autoDraw = True
+283.5765 	EXP 	stopSignal_test: autoDraw = False
+283.6767 	EXP 	goStim_test: autoDraw = False
+284.6877 	EXP 	test_fixation: autoDraw = False
+284.6877 	EXP 	goStim_test: autoDraw = False
+284.6877 	EXP 	stopSignal_test: autoDraw = False
+284.6877 	EXP 	text_6: height = 0.025
+284.6877 	EXP 	text_6: height = 0.025
+284.6877 	EXP 	text_6: height = 0.025
+284.6877 	EXP 	text_6: text = 'You have completed 1 of 3.\nPlease take this time to read your feedback if there is any, and take a 1 minute break.\n\n\nPress enter to continue.'
+284.6877 	EXP 	text_6: autoDraw = True
+299.0116 	EXP 	New trial (rep=1, index=0): None
+299.0346 	EXP 	Imported condition.xlsx as conditions, 4 conditions, 2 params
+299.0357 	EXP 	Created sequence: fullRandom, trialTypes=4, nReps=12, seed=None
+299.0360 	EXP 	New trial (rep=0, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+299.0495 	DATA 	Keypress: return
+299.0545 	EXP 	text_6: autoDraw = False
+299.0545 	EXP 	stopSignal_test: texRes = 128.0
+299.0545 	EXP 	goStim_test: image = 'squareblack.png'
+299.0545 	EXP 	test_fixation: autoDraw = True
+299.5609 	EXP 	test_fixation: autoDraw = False
+299.5609 	EXP 	goStim_test: autoDraw = True
+300.0115 	EXP 	stopSignal_test: autoDraw = True
+300.5121 	EXP 	stopSignal_test: autoDraw = False
+300.5620 	EXP 	goStim_test: autoDraw = False
+301.5488 	EXP 	New trial (rep=0, index=1): {'corrGoResp': None, 'shape': None}
+301.5672 	EXP 	test_fixation: autoDraw = False
+301.5672 	EXP 	goStim_test: autoDraw = False
+301.5672 	EXP 	stopSignal_test: autoDraw = False
+301.5672 	EXP 	stopSignal_test: texRes = 128.0
+301.5672 	EXP 	goStim_test: image = 'squareblack.png'
+301.5672 	EXP 	test_fixation: autoDraw = True
+302.0640 	EXP 	goStim_test: autoDraw = True
+302.0803 	EXP 	test_fixation: autoDraw = False
+302.4831 	DATA 	Keypress: right
+302.5642 	EXP 	stopSignal_test: autoDraw = True
+303.0634 	EXP 	goStim_test: autoDraw = False
+303.0634 	EXP 	stopSignal_test: autoDraw = False
+304.0496 	EXP 	New trial (rep=0, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+304.0667 	EXP 	test_fixation: autoDraw = False
+304.0667 	EXP 	goStim_test: autoDraw = False
+304.0667 	EXP 	stopSignal_test: autoDraw = False
+304.0667 	EXP 	stopSignal_test: texRes = 128.0
+304.0667 	EXP 	goStim_test: image = 'circleblack.png'
+304.0667 	EXP 	test_fixation: autoDraw = True
+304.5651 	EXP 	goStim_test: autoDraw = True
+304.5817 	EXP 	test_fixation: autoDraw = False
+305.0007 	DATA 	Keypress: left
+305.0661 	EXP 	stopSignal_test: autoDraw = True
+305.5661 	EXP 	goStim_test: autoDraw = False
+305.5661 	EXP 	stopSignal_test: autoDraw = False
+306.5536 	EXP 	New trial (rep=0, index=3): {'corrGoResp': None, 'shape': None}
+306.5721 	EXP 	test_fixation: autoDraw = False
+306.5721 	EXP 	goStim_test: autoDraw = False
+306.5721 	EXP 	stopSignal_test: autoDraw = False
+306.5721 	EXP 	stopSignal_test: texRes = 128.0
+306.5721 	EXP 	goStim_test: image = 'circleblack.png'
+306.5721 	EXP 	test_fixation: autoDraw = True
+307.0694 	EXP 	goStim_test: autoDraw = True
+307.0860 	EXP 	test_fixation: autoDraw = False
+307.5698 	EXP 	stopSignal_test: autoDraw = True
+307.6390 	DATA 	Keypress: left
+308.0689 	EXP 	goStim_test: autoDraw = False
+308.0689 	EXP 	stopSignal_test: autoDraw = False
+309.0550 	EXP 	New trial (rep=1, index=0): {'corrGoResp': None, 'shape': None}
+309.0717 	EXP 	test_fixation: autoDraw = False
+309.0717 	EXP 	goStim_test: autoDraw = False
+309.0717 	EXP 	stopSignal_test: autoDraw = False
+309.0717 	EXP 	stopSignal_test: texRes = 128.0
+309.0717 	EXP 	goStim_test: image = 'circleblack.png'
+309.0717 	EXP 	test_fixation: autoDraw = True
+309.5705 	EXP 	goStim_test: autoDraw = True
+309.5873 	EXP 	test_fixation: autoDraw = False
+310.0212 	EXP 	stopSignal_test: autoDraw = True
+310.4238 	DATA 	Keypress: left
+310.5216 	EXP 	stopSignal_test: autoDraw = False
+310.5716 	EXP 	goStim_test: autoDraw = False
+311.5588 	EXP 	New trial (rep=1, index=1): {'corrGoResp': None, 'shape': None}
+311.5778 	EXP 	test_fixation: autoDraw = False
+311.5778 	EXP 	goStim_test: autoDraw = False
+311.5778 	EXP 	stopSignal_test: autoDraw = False
+311.5778 	EXP 	stopSignal_test: texRes = 128.0
+311.5778 	EXP 	goStim_test: image = 'circleblack.png'
+311.5778 	EXP 	test_fixation: autoDraw = True
+312.0748 	EXP 	goStim_test: autoDraw = True
+312.0913 	EXP 	test_fixation: autoDraw = False
+312.5251 	EXP 	stopSignal_test: autoDraw = True
+313.0257 	EXP 	stopSignal_test: autoDraw = False
+313.0760 	EXP 	goStim_test: autoDraw = False
+314.0616 	EXP 	New trial (rep=1, index=2): {'corrGoResp': None, 'shape': None}
+314.0809 	EXP 	test_fixation: autoDraw = False
+314.0809 	EXP 	goStim_test: autoDraw = False
+314.0809 	EXP 	stopSignal_test: autoDraw = False
+314.0809 	EXP 	stopSignal_test: texRes = 128.0
+314.0809 	EXP 	goStim_test: image = 'squareblack.png'
+314.0809 	EXP 	test_fixation: autoDraw = True
+314.5774 	EXP 	goStim_test: autoDraw = True
+314.5940 	EXP 	test_fixation: autoDraw = False
+315.0783 	EXP 	stopSignal_test: autoDraw = True
+315.1305 	DATA 	Keypress: right
+315.5770 	EXP 	goStim_test: autoDraw = False
+315.5938 	EXP 	stopSignal_test: autoDraw = False
+316.5632 	EXP 	New trial (rep=1, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+316.5796 	EXP 	test_fixation: autoDraw = False
+316.5796 	EXP 	goStim_test: autoDraw = False
+316.5796 	EXP 	stopSignal_test: autoDraw = False
+316.5796 	EXP 	stopSignal_test: texRes = 128.0
+316.5796 	EXP 	goStim_test: image = 'squareblack.png'
+316.5796 	EXP 	test_fixation: autoDraw = True
+317.0789 	EXP 	test_fixation: autoDraw = False
+317.0789 	EXP 	goStim_test: autoDraw = True
+317.5294 	EXP 	stopSignal_test: autoDraw = True
+318.0299 	EXP 	stopSignal_test: autoDraw = False
+318.0316 	DATA 	Keypress: right
+318.0800 	EXP 	goStim_test: autoDraw = False
+319.0672 	EXP 	New trial (rep=2, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+319.0863 	EXP 	test_fixation: autoDraw = False
+319.0863 	EXP 	goStim_test: autoDraw = False
+319.0863 	EXP 	stopSignal_test: autoDraw = False
+319.0863 	EXP 	stopSignal_test: texRes = 128.0
+319.0863 	EXP 	goStim_test: image = 'circleblack.png'
+319.0863 	EXP 	test_fixation: autoDraw = True
+319.5830 	EXP 	goStim_test: autoDraw = True
+319.5998 	EXP 	test_fixation: autoDraw = False
+320.0335 	EXP 	stopSignal_test: autoDraw = True
+320.4529 	DATA 	Keypress: left
+320.5340 	EXP 	stopSignal_test: autoDraw = False
+320.5842 	EXP 	goStim_test: autoDraw = False
+321.5688 	EXP 	New trial (rep=2, index=1): {'corrGoResp': None, 'shape': None}
+321.5855 	EXP 	test_fixation: autoDraw = False
+321.5855 	EXP 	goStim_test: autoDraw = False
+321.5855 	EXP 	stopSignal_test: autoDraw = False
+321.5855 	EXP 	stopSignal_test: texRes = 128.0
+321.5855 	EXP 	goStim_test: image = 'squareblack.png'
+321.5855 	EXP 	test_fixation: autoDraw = True
+322.0871 	EXP 	test_fixation: autoDraw = False
+322.0871 	EXP 	goStim_test: autoDraw = True
+322.5349 	EXP 	stopSignal_test: autoDraw = True
+322.8704 	DATA 	Keypress: right
+323.0354 	EXP 	stopSignal_test: autoDraw = False
+323.1021 	EXP 	goStim_test: autoDraw = False
+324.0728 	EXP 	New trial (rep=2, index=2): {'corrGoResp': None, 'shape': None}
+324.0915 	EXP 	test_fixation: autoDraw = False
+324.0915 	EXP 	goStim_test: autoDraw = False
+324.0915 	EXP 	stopSignal_test: autoDraw = False
+324.0915 	EXP 	stopSignal_test: texRes = 128.0
+324.0915 	EXP 	goStim_test: image = 'squareblack.png'
+324.0915 	EXP 	test_fixation: autoDraw = True
+324.5884 	EXP 	goStim_test: autoDraw = True
+324.6052 	EXP 	test_fixation: autoDraw = False
+325.0389 	EXP 	stopSignal_test: autoDraw = True
+325.1924 	DATA 	Keypress: right
+325.5382 	EXP 	stopSignal_test: autoDraw = False
+325.5881 	EXP 	goStim_test: autoDraw = False
+326.5741 	EXP 	New trial (rep=2, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+326.5912 	EXP 	test_fixation: autoDraw = False
+326.5912 	EXP 	goStim_test: autoDraw = False
+326.5912 	EXP 	stopSignal_test: autoDraw = False
+326.5912 	EXP 	stopSignal_test: texRes = 128.0
+326.5912 	EXP 	goStim_test: image = 'circleblack.png'
+326.5912 	EXP 	test_fixation: autoDraw = True
+327.0898 	EXP 	goStim_test: autoDraw = True
+327.1065 	EXP 	test_fixation: autoDraw = False
+327.5403 	EXP 	stopSignal_test: autoDraw = True
+327.7925 	DATA 	Keypress: left
+328.0411 	EXP 	stopSignal_test: autoDraw = False
+328.0911 	EXP 	goStim_test: autoDraw = False
+329.0783 	EXP 	New trial (rep=3, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+329.0970 	EXP 	test_fixation: autoDraw = False
+329.0970 	EXP 	goStim_test: autoDraw = False
+329.0970 	EXP 	stopSignal_test: autoDraw = False
+329.0970 	EXP 	stopSignal_test: texRes = 128.0
+329.0970 	EXP 	goStim_test: image = 'circleblack.png'
+329.0970 	EXP 	test_fixation: autoDraw = True
+329.5939 	EXP 	goStim_test: autoDraw = True
+329.6108 	EXP 	test_fixation: autoDraw = False
+330.0448 	EXP 	stopSignal_test: autoDraw = True
+330.4639 	DATA 	Keypress: left
+330.5455 	EXP 	stopSignal_test: autoDraw = False
+330.5954 	EXP 	goStim_test: autoDraw = False
+331.5796 	EXP 	New trial (rep=3, index=1): {'corrGoResp': None, 'shape': None}
+331.5967 	EXP 	test_fixation: autoDraw = False
+331.5967 	EXP 	goStim_test: autoDraw = False
+331.5967 	EXP 	stopSignal_test: autoDraw = False
+331.5967 	EXP 	stopSignal_test: texRes = 128.0
+331.5967 	EXP 	goStim_test: image = 'squareblack.png'
+331.5967 	EXP 	test_fixation: autoDraw = True
+332.0961 	EXP 	goStim_test: autoDraw = True
+332.1124 	EXP 	test_fixation: autoDraw = False
+332.5458 	EXP 	stopSignal_test: autoDraw = True
+332.9984 	DATA 	Keypress: right
+333.0464 	EXP 	stopSignal_test: autoDraw = False
+333.0964 	EXP 	goStim_test: autoDraw = False
+334.0838 	EXP 	New trial (rep=3, index=2): {'corrGoResp': None, 'shape': None}
+334.1028 	EXP 	test_fixation: autoDraw = False
+334.1028 	EXP 	goStim_test: autoDraw = False
+334.1028 	EXP 	stopSignal_test: autoDraw = False
+334.1028 	EXP 	stopSignal_test: texRes = 128.0
+334.1028 	EXP 	goStim_test: image = 'circleblack.png'
+334.1028 	EXP 	test_fixation: autoDraw = True
+334.5995 	EXP 	goStim_test: autoDraw = True
+334.6163 	EXP 	test_fixation: autoDraw = False
+335.0499 	EXP 	stopSignal_test: autoDraw = True
+335.3528 	DATA 	Keypress: left
+335.5508 	EXP 	stopSignal_test: autoDraw = False
+335.5994 	EXP 	goStim_test: autoDraw = False
+336.5851 	EXP 	New trial (rep=3, index=3): {'corrGoResp': None, 'shape': None}
+336.6023 	EXP 	test_fixation: autoDraw = False
+336.6023 	EXP 	goStim_test: autoDraw = False
+336.6023 	EXP 	stopSignal_test: autoDraw = False
+336.6023 	EXP 	stopSignal_test: texRes = 128.0
+336.6023 	EXP 	goStim_test: image = 'squareblack.png'
+336.6023 	EXP 	test_fixation: autoDraw = True
+337.1010 	EXP 	goStim_test: autoDraw = True
+337.1177 	EXP 	test_fixation: autoDraw = False
+337.5514 	EXP 	stopSignal_test: autoDraw = True
+337.7201 	DATA 	Keypress: right
+338.0518 	EXP 	stopSignal_test: autoDraw = False
+338.1020 	EXP 	goStim_test: autoDraw = False
+339.0892 	EXP 	New trial (rep=4, index=0): {'corrGoResp': None, 'shape': None}
+339.1075 	EXP 	test_fixation: autoDraw = False
+339.1075 	EXP 	goStim_test: autoDraw = False
+339.1075 	EXP 	stopSignal_test: autoDraw = False
+339.1075 	EXP 	stopSignal_test: texRes = 128.0
+339.1075 	EXP 	goStim_test: image = 'squareblack.png'
+339.1075 	EXP 	test_fixation: autoDraw = True
+339.6050 	EXP 	goStim_test: autoDraw = True
+339.6216 	EXP 	test_fixation: autoDraw = False
+340.0554 	EXP 	stopSignal_test: autoDraw = True
+340.5567 	EXP 	stopSignal_test: autoDraw = False
+340.6064 	EXP 	goStim_test: autoDraw = False
+341.5911 	EXP 	New trial (rep=4, index=1): {'corrGoResp': None, 'shape': None}
+341.6087 	EXP 	test_fixation: autoDraw = False
+341.6087 	EXP 	goStim_test: autoDraw = False
+341.6087 	EXP 	stopSignal_test: autoDraw = False
+341.6087 	EXP 	stopSignal_test: texRes = 128.0
+341.6087 	EXP 	goStim_test: image = 'circleblack.png'
+341.6087 	EXP 	test_fixation: autoDraw = True
+342.1068 	EXP 	goStim_test: autoDraw = True
+342.1239 	EXP 	test_fixation: autoDraw = False
+342.6070 	EXP 	stopSignal_test: autoDraw = True
+342.6759 	DATA 	Keypress: left
+343.1076 	EXP 	goStim_test: autoDraw = False
+343.1076 	EXP 	stopSignal_test: autoDraw = False
+344.0948 	EXP 	New trial (rep=4, index=2): {'corrGoResp': None, 'shape': None}
+344.1134 	EXP 	test_fixation: autoDraw = False
+344.1134 	EXP 	goStim_test: autoDraw = False
+344.1134 	EXP 	stopSignal_test: autoDraw = False
+344.1134 	EXP 	stopSignal_test: texRes = 128.0
+344.1134 	EXP 	goStim_test: image = 'circleblack.png'
+344.1134 	EXP 	test_fixation: autoDraw = True
+344.6105 	EXP 	goStim_test: autoDraw = True
+344.6273 	EXP 	test_fixation: autoDraw = False
+345.1110 	EXP 	stopSignal_test: autoDraw = True
+345.6117 	EXP 	goStim_test: autoDraw = False
+345.6117 	EXP 	stopSignal_test: autoDraw = False
+346.5976 	EXP 	New trial (rep=4, index=3): {'corrGoResp': None, 'shape': None}
+346.6166 	EXP 	test_fixation: autoDraw = False
+346.6166 	EXP 	goStim_test: autoDraw = False
+346.6166 	EXP 	stopSignal_test: autoDraw = False
+346.6166 	EXP 	stopSignal_test: texRes = 128.0
+346.6166 	EXP 	goStim_test: image = 'squareblack.png'
+346.6166 	EXP 	test_fixation: autoDraw = True
+347.1133 	EXP 	goStim_test: autoDraw = True
+347.1299 	EXP 	test_fixation: autoDraw = False
+347.6645 	EXP 	stopSignal_test: autoDraw = True
+347.6667 	DATA 	Keypress: right
+348.1130 	EXP 	goStim_test: autoDraw = False
+348.1797 	EXP 	stopSignal_test: autoDraw = False
+349.0992 	EXP 	New trial (rep=5, index=0): {'corrGoResp': None, 'shape': None}
+349.1155 	EXP 	test_fixation: autoDraw = False
+349.1155 	EXP 	goStim_test: autoDraw = False
+349.1155 	EXP 	stopSignal_test: autoDraw = False
+349.1155 	EXP 	stopSignal_test: texRes = 128.0
+349.1155 	EXP 	goStim_test: image = 'squareblack.png'
+349.1155 	EXP 	test_fixation: autoDraw = True
+349.6146 	EXP 	test_fixation: autoDraw = False
+349.6146 	EXP 	goStim_test: autoDraw = True
+350.1654 	EXP 	stopSignal_test: autoDraw = True
+350.4174 	DATA 	Keypress: right
+350.6158 	EXP 	goStim_test: autoDraw = False
+350.6659 	EXP 	stopSignal_test: autoDraw = False
+351.6033 	EXP 	New trial (rep=5, index=1): {'corrGoResp': None, 'shape': None}
+351.6225 	EXP 	test_fixation: autoDraw = False
+351.6225 	EXP 	goStim_test: autoDraw = False
+351.6225 	EXP 	stopSignal_test: autoDraw = False
+351.6225 	EXP 	stopSignal_test: texRes = 128.0
+351.6225 	EXP 	goStim_test: image = 'circleblack.png'
+351.6225 	EXP 	test_fixation: autoDraw = True
+352.1188 	EXP 	goStim_test: autoDraw = True
+352.1354 	EXP 	test_fixation: autoDraw = False
+352.6694 	EXP 	stopSignal_test: autoDraw = True
+352.8557 	DATA 	Keypress: left
+353.1203 	EXP 	goStim_test: autoDraw = False
+353.1689 	EXP 	stopSignal_test: autoDraw = False
+354.1046 	EXP 	New trial (rep=5, index=2): {'corrGoResp': None, 'shape': None}
+354.1354 	EXP 	test_fixation: autoDraw = False
+354.1354 	EXP 	goStim_test: autoDraw = False
+354.1354 	EXP 	stopSignal_test: autoDraw = False
+354.1354 	EXP 	stopSignal_test: texRes = 128.0
+354.1354 	EXP 	goStim_test: image = 'circleblack.png'
+354.1354 	EXP 	test_fixation: autoDraw = True
+354.6204 	EXP 	goStim_test: autoDraw = True
+354.6370 	EXP 	test_fixation: autoDraw = False
+355.1208 	EXP 	stopSignal_test: autoDraw = True
+355.4405 	DATA 	Keypress: left
+355.6214 	EXP 	goStim_test: autoDraw = False
+355.6214 	EXP 	stopSignal_test: autoDraw = False
+356.6086 	EXP 	New trial (rep=5, index=3): {'corrGoResp': None, 'shape': None}
+356.6277 	EXP 	test_fixation: autoDraw = False
+356.6277 	EXP 	goStim_test: autoDraw = False
+356.6277 	EXP 	stopSignal_test: autoDraw = False
+356.6277 	EXP 	stopSignal_test: texRes = 128.0
+356.6277 	EXP 	goStim_test: image = 'squareblack.png'
+356.6277 	EXP 	test_fixation: autoDraw = True
+357.1247 	EXP 	goStim_test: autoDraw = True
+357.1410 	EXP 	test_fixation: autoDraw = False
+357.6252 	EXP 	stopSignal_test: autoDraw = True
+358.1254 	EXP 	goStim_test: autoDraw = False
+358.1254 	EXP 	stopSignal_test: autoDraw = False
+359.1114 	EXP 	New trial (rep=6, index=0): {'corrGoResp': None, 'shape': None}
+359.1302 	EXP 	test_fixation: autoDraw = False
+359.1302 	EXP 	goStim_test: autoDraw = False
+359.1302 	EXP 	stopSignal_test: autoDraw = False
+359.1302 	EXP 	stopSignal_test: texRes = 128.0
+359.1302 	EXP 	goStim_test: image = 'squareblack.png'
+359.1302 	EXP 	test_fixation: autoDraw = True
+359.6273 	EXP 	goStim_test: autoDraw = True
+359.6438 	EXP 	test_fixation: autoDraw = False
+360.1779 	EXP 	stopSignal_test: autoDraw = True
+360.6286 	EXP 	goStim_test: autoDraw = False
+360.6304 	DATA 	Keypress: right
+360.6783 	EXP 	stopSignal_test: autoDraw = False
+361.6129 	EXP 	New trial (rep=6, index=1): {'corrGoResp': None, 'shape': None}
+361.6305 	EXP 	test_fixation: autoDraw = False
+361.6305 	EXP 	goStim_test: autoDraw = False
+361.6305 	EXP 	stopSignal_test: autoDraw = False
+361.6305 	EXP 	stopSignal_test: texRes = 128.0
+361.6305 	EXP 	goStim_test: image = 'circleblack.png'
+361.6305 	EXP 	test_fixation: autoDraw = True
+362.1285 	EXP 	goStim_test: autoDraw = True
+362.1454 	EXP 	test_fixation: autoDraw = False
+362.6791 	EXP 	stopSignal_test: autoDraw = True
+362.9646 	DATA 	Keypress: left
+363.1299 	EXP 	goStim_test: autoDraw = False
+363.1797 	EXP 	stopSignal_test: autoDraw = False
+364.1164 	EXP 	New trial (rep=6, index=2): {'corrGoResp': None, 'shape': None}
+364.1353 	EXP 	test_fixation: autoDraw = False
+364.1353 	EXP 	goStim_test: autoDraw = False
+364.1353 	EXP 	stopSignal_test: autoDraw = False
+364.1353 	EXP 	stopSignal_test: texRes = 128.0
+364.1353 	EXP 	goStim_test: image = 'squareblack.png'
+364.1353 	EXP 	test_fixation: autoDraw = True
+364.6326 	EXP 	goStim_test: autoDraw = True
+364.6495 	EXP 	test_fixation: autoDraw = False
+365.1833 	EXP 	stopSignal_test: autoDraw = True
+365.4368 	DATA 	Keypress: right
+365.6342 	EXP 	goStim_test: autoDraw = False
+365.6842 	EXP 	stopSignal_test: autoDraw = False
+366.6184 	EXP 	New trial (rep=6, index=3): {'corrGoResp': None, 'shape': None}
+366.6352 	EXP 	test_fixation: autoDraw = False
+366.6352 	EXP 	goStim_test: autoDraw = False
+366.6352 	EXP 	stopSignal_test: autoDraw = False
+366.6352 	EXP 	stopSignal_test: texRes = 128.0
+366.6352 	EXP 	goStim_test: image = 'circleblack.png'
+366.6352 	EXP 	test_fixation: autoDraw = True
+367.1345 	EXP 	test_fixation: autoDraw = False
+367.1345 	EXP 	goStim_test: autoDraw = True
+367.6846 	EXP 	stopSignal_test: autoDraw = True
+368.1352 	EXP 	goStim_test: autoDraw = False
+368.1852 	EXP 	stopSignal_test: autoDraw = False
+369.1226 	EXP 	New trial (rep=7, index=0): {'corrGoResp': None, 'shape': None}
+369.1413 	EXP 	test_fixation: autoDraw = False
+369.1413 	EXP 	goStim_test: autoDraw = False
+369.1413 	EXP 	stopSignal_test: autoDraw = False
+369.1413 	EXP 	stopSignal_test: texRes = 128.0
+369.1413 	EXP 	goStim_test: image = 'circleblack.png'
+369.1413 	EXP 	test_fixation: autoDraw = True
+369.6383 	EXP 	goStim_test: autoDraw = True
+369.6548 	EXP 	test_fixation: autoDraw = False
+370.2387 	EXP 	stopSignal_test: autoDraw = True
+370.6396 	EXP 	goStim_test: autoDraw = False
+370.7398 	EXP 	stopSignal_test: autoDraw = False
+371.6238 	EXP 	New trial (rep=7, index=1): {'corrGoResp': None, 'shape': None}
+371.6407 	EXP 	test_fixation: autoDraw = False
+371.6407 	EXP 	goStim_test: autoDraw = False
+371.6407 	EXP 	stopSignal_test: autoDraw = False
+371.6407 	EXP 	stopSignal_test: texRes = 128.0
+371.6407 	EXP 	goStim_test: image = 'squareblack.png'
+371.6407 	EXP 	test_fixation: autoDraw = True
+372.1395 	EXP 	test_fixation: autoDraw = False
+372.1395 	EXP 	goStim_test: autoDraw = True
+372.7903 	EXP 	stopSignal_test: autoDraw = True
+373.1408 	EXP 	goStim_test: autoDraw = False
+373.2907 	EXP 	stopSignal_test: autoDraw = False
+374.1278 	EXP 	New trial (rep=7, index=2): {'corrGoResp': None, 'shape': None}
+374.1466 	EXP 	test_fixation: autoDraw = False
+374.1466 	EXP 	goStim_test: autoDraw = False
+374.1466 	EXP 	stopSignal_test: autoDraw = False
+374.1466 	EXP 	stopSignal_test: texRes = 128.0
+374.1466 	EXP 	goStim_test: image = 'circleblack.png'
+374.1466 	EXP 	test_fixation: autoDraw = True
+374.6436 	EXP 	goStim_test: autoDraw = True
+374.6604 	EXP 	test_fixation: autoDraw = False
+375.3446 	EXP 	stopSignal_test: autoDraw = True
+375.6447 	EXP 	goStim_test: autoDraw = False
+375.6635 	DATA 	Keypress: left
+375.8454 	EXP 	stopSignal_test: autoDraw = False
+376.6298 	EXP 	New trial (rep=7, index=3): {'corrGoResp': None, 'shape': None}
+376.6474 	EXP 	test_fixation: autoDraw = False
+376.6474 	EXP 	goStim_test: autoDraw = False
+376.6474 	EXP 	stopSignal_test: autoDraw = False
+376.6474 	EXP 	stopSignal_test: texRes = 128.0
+376.6474 	EXP 	goStim_test: image = 'circleblack.png'
+376.6474 	EXP 	test_fixation: autoDraw = True
+377.1451 	EXP 	goStim_test: autoDraw = True
+377.1617 	EXP 	test_fixation: autoDraw = False
+377.8457 	EXP 	stopSignal_test: autoDraw = True
+378.1151 	DATA 	Keypress: left
+378.1463 	EXP 	goStim_test: autoDraw = False
+378.3466 	EXP 	stopSignal_test: autoDraw = False
+379.1330 	EXP 	New trial (rep=8, index=0): {'corrGoResp': None, 'shape': None}
+379.1495 	EXP 	test_fixation: autoDraw = False
+379.1495 	EXP 	goStim_test: autoDraw = False
+379.1495 	EXP 	stopSignal_test: autoDraw = False
+379.1495 	EXP 	stopSignal_test: texRes = 128.0
+379.1495 	EXP 	goStim_test: image = 'circleblack.png'
+379.1495 	EXP 	test_fixation: autoDraw = True
+379.6493 	EXP 	test_fixation: autoDraw = False
+379.6493 	EXP 	goStim_test: autoDraw = True
+380.3499 	EXP 	stopSignal_test: autoDraw = True
+380.6028 	DATA 	Keypress: left
+380.6503 	EXP 	goStim_test: autoDraw = False
+380.8510 	EXP 	stopSignal_test: autoDraw = False
+381.6349 	EXP 	New trial (rep=8, index=1): {'corrGoResp': None, 'shape': None}
+381.6574 	EXP 	test_fixation: autoDraw = False
+381.6574 	EXP 	goStim_test: autoDraw = False
+381.6574 	EXP 	stopSignal_test: autoDraw = False
+381.6574 	EXP 	stopSignal_test: texRes = 128.0
+381.6574 	EXP 	goStim_test: image = 'squareblack.png'
+381.6574 	EXP 	test_fixation: autoDraw = True
+382.1505 	EXP 	goStim_test: autoDraw = True
+382.1672 	EXP 	test_fixation: autoDraw = False
+382.8514 	EXP 	stopSignal_test: autoDraw = True
+383.1518 	EXP 	goStim_test: autoDraw = False
+383.2205 	DATA 	Keypress: right
+383.3518 	EXP 	stopSignal_test: autoDraw = False
+384.1391 	EXP 	New trial (rep=8, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+384.1587 	EXP 	test_fixation: autoDraw = False
+384.1587 	EXP 	goStim_test: autoDraw = False
+384.1587 	EXP 	stopSignal_test: autoDraw = False
+384.1587 	EXP 	stopSignal_test: texRes = 128.0
+384.1587 	EXP 	goStim_test: image = 'squareblack.png'
+384.1587 	EXP 	test_fixation: autoDraw = True
+384.6550 	EXP 	goStim_test: autoDraw = True
+384.6715 	EXP 	test_fixation: autoDraw = False
+385.3056 	EXP 	stopSignal_test: autoDraw = True
+385.6563 	EXP 	goStim_test: autoDraw = False
+385.6629 	DATA 	Keypress: right
+385.8063 	EXP 	stopSignal_test: autoDraw = False
+386.6407 	EXP 	New trial (rep=8, index=3): {'corrGoResp': None, 'shape': None}
+386.6586 	EXP 	test_fixation: autoDraw = False
+386.6586 	EXP 	goStim_test: autoDraw = False
+386.6586 	EXP 	stopSignal_test: autoDraw = False
+386.6586 	EXP 	stopSignal_test: texRes = 128.0
+386.6586 	EXP 	goStim_test: image = 'squareblack.png'
+386.6586 	EXP 	test_fixation: autoDraw = True
+387.1561 	EXP 	goStim_test: autoDraw = True
+387.1727 	EXP 	test_fixation: autoDraw = False
+387.8067 	EXP 	stopSignal_test: autoDraw = True
+388.1258 	DATA 	Keypress: right
+388.1572 	EXP 	goStim_test: autoDraw = False
+388.3074 	EXP 	stopSignal_test: autoDraw = False
+389.1443 	EXP 	New trial (rep=9, index=0): {'corrGoResp': None, 'shape': None}
+389.1615 	EXP 	test_fixation: autoDraw = False
+389.1615 	EXP 	goStim_test: autoDraw = False
+389.1615 	EXP 	stopSignal_test: autoDraw = False
+389.1615 	EXP 	stopSignal_test: texRes = 128.0
+389.1615 	EXP 	goStim_test: image = 'circleblack.png'
+389.1615 	EXP 	test_fixation: autoDraw = True
+389.6603 	EXP 	goStim_test: autoDraw = True
+389.6769 	EXP 	test_fixation: autoDraw = False
+390.3108 	EXP 	stopSignal_test: autoDraw = True
+390.5969 	DATA 	Keypress: left
+390.6614 	EXP 	goStim_test: autoDraw = False
+390.8119 	EXP 	stopSignal_test: autoDraw = False
+391.6461 	EXP 	New trial (rep=9, index=1): {'corrGoResp': None, 'shape': None}
+391.6633 	EXP 	test_fixation: autoDraw = False
+391.6633 	EXP 	goStim_test: autoDraw = False
+391.6633 	EXP 	stopSignal_test: autoDraw = False
+391.6633 	EXP 	stopSignal_test: texRes = 128.0
+391.6633 	EXP 	goStim_test: image = 'circleblack.png'
+391.6633 	EXP 	test_fixation: autoDraw = True
+392.1617 	EXP 	goStim_test: autoDraw = True
+392.1782 	EXP 	test_fixation: autoDraw = False
+392.8122 	EXP 	stopSignal_test: autoDraw = True
+393.1627 	EXP 	goStim_test: autoDraw = False
+393.3128 	EXP 	stopSignal_test: autoDraw = False
+394.1499 	EXP 	New trial (rep=9, index=2): {'corrGoResp': None, 'shape': None}
+394.1672 	EXP 	test_fixation: autoDraw = False
+394.1672 	EXP 	goStim_test: autoDraw = False
+394.1672 	EXP 	stopSignal_test: autoDraw = False
+394.1672 	EXP 	stopSignal_test: texRes = 128.0
+394.1672 	EXP 	goStim_test: image = 'circleblack.png'
+394.1672 	EXP 	test_fixation: autoDraw = True
+394.6658 	EXP 	goStim_test: autoDraw = True
+394.6825 	EXP 	test_fixation: autoDraw = False
+395.3665 	EXP 	stopSignal_test: autoDraw = True
+395.6668 	EXP 	goStim_test: autoDraw = False
+395.8678 	EXP 	stopSignal_test: autoDraw = False
+395.8698 	DATA 	Keypress: left
+396.6516 	EXP 	New trial (rep=9, index=3): {'corrGoResp': None, 'shape': None}
+396.6732 	EXP 	test_fixation: autoDraw = False
+396.6732 	EXP 	goStim_test: autoDraw = False
+396.6732 	EXP 	stopSignal_test: autoDraw = False
+396.6732 	EXP 	stopSignal_test: texRes = 128.0
+396.6732 	EXP 	goStim_test: image = 'squareblack.png'
+396.6732 	EXP 	test_fixation: autoDraw = True
+397.1671 	EXP 	goStim_test: autoDraw = True
+397.1838 	EXP 	test_fixation: autoDraw = False
+397.8679 	EXP 	stopSignal_test: autoDraw = True
+398.1682 	EXP 	goStim_test: autoDraw = False
+398.2200 	DATA 	Keypress: right
+398.3684 	EXP 	stopSignal_test: autoDraw = False
+399.1578 	EXP 	New trial (rep=10, index=0): {'corrGoResp': None, 'shape': None}
+399.1748 	EXP 	test_fixation: autoDraw = False
+399.1748 	EXP 	goStim_test: autoDraw = False
+399.1748 	EXP 	stopSignal_test: autoDraw = False
+399.1748 	EXP 	stopSignal_test: texRes = 128.0
+399.1748 	EXP 	goStim_test: image = 'squareblack.png'
+399.1748 	EXP 	test_fixation: autoDraw = True
+399.6713 	EXP 	goStim_test: autoDraw = True
+399.6880 	EXP 	test_fixation: autoDraw = False
+400.3726 	EXP 	stopSignal_test: autoDraw = True
+400.3745 	DATA 	Keypress: right
+400.6728 	EXP 	goStim_test: autoDraw = False
+400.8880 	EXP 	stopSignal_test: autoDraw = False
+401.6570 	EXP 	New trial (rep=10, index=1): {'corrGoResp': None, 'shape': None}
+401.6744 	EXP 	test_fixation: autoDraw = False
+401.6744 	EXP 	goStim_test: autoDraw = False
+401.6744 	EXP 	stopSignal_test: autoDraw = False
+401.6744 	EXP 	stopSignal_test: texRes = 128.0
+401.6744 	EXP 	goStim_test: image = 'circleblack.png'
+401.6744 	EXP 	test_fixation: autoDraw = True
+402.1728 	EXP 	goStim_test: autoDraw = True
+402.1895 	EXP 	test_fixation: autoDraw = False
+402.7920 	DATA 	Keypress: left
+402.8236 	EXP 	stopSignal_test: autoDraw = True
+403.1738 	EXP 	goStim_test: autoDraw = False
+403.3239 	EXP 	stopSignal_test: autoDraw = False
+404.1611 	EXP 	New trial (rep=10, index=2): {'corrGoResp': None, 'shape': None}
+404.1807 	EXP 	test_fixation: autoDraw = False
+404.1807 	EXP 	goStim_test: autoDraw = False
+404.1807 	EXP 	stopSignal_test: autoDraw = False
+404.1807 	EXP 	stopSignal_test: texRes = 128.0
+404.1807 	EXP 	goStim_test: image = 'squareblack.png'
+404.1807 	EXP 	test_fixation: autoDraw = True
+404.6770 	EXP 	goStim_test: autoDraw = True
+404.6936 	EXP 	test_fixation: autoDraw = False
+405.2776 	EXP 	stopSignal_test: autoDraw = True
+405.4134 	DATA 	Keypress: right
+405.6783 	EXP 	goStim_test: autoDraw = False
+405.7785 	EXP 	stopSignal_test: autoDraw = False
+406.6627 	EXP 	New trial (rep=10, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+406.6790 	EXP 	test_fixation: autoDraw = False
+406.6790 	EXP 	goStim_test: autoDraw = False
+406.6790 	EXP 	stopSignal_test: autoDraw = False
+406.6790 	EXP 	stopSignal_test: texRes = 128.0
+406.6790 	EXP 	goStim_test: image = 'squareblack.png'
+406.6790 	EXP 	test_fixation: autoDraw = True
+407.1782 	EXP 	test_fixation: autoDraw = False
+407.1782 	EXP 	goStim_test: autoDraw = True
+407.7288 	EXP 	stopSignal_test: autoDraw = True
+408.1793 	EXP 	goStim_test: autoDraw = False
+408.2294 	EXP 	stopSignal_test: autoDraw = False
+408.2980 	DATA 	Keypress: right
+409.1666 	EXP 	New trial (rep=11, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+409.1857 	EXP 	test_fixation: autoDraw = False
+409.1857 	EXP 	goStim_test: autoDraw = False
+409.1857 	EXP 	stopSignal_test: autoDraw = False
+409.1857 	EXP 	stopSignal_test: texRes = 128.0
+409.1857 	EXP 	goStim_test: image = 'circleblack.png'
+409.1857 	EXP 	test_fixation: autoDraw = True
+409.6822 	EXP 	goStim_test: autoDraw = True
+409.6990 	EXP 	test_fixation: autoDraw = False
+410.2331 	EXP 	stopSignal_test: autoDraw = True
+410.4522 	DATA 	Keypress: left
+410.6838 	EXP 	goStim_test: autoDraw = False
+410.7338 	EXP 	stopSignal_test: autoDraw = False
+411.6682 	EXP 	New trial (rep=11, index=1): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+411.6846 	EXP 	test_fixation: autoDraw = False
+411.6846 	EXP 	goStim_test: autoDraw = False
+411.6846 	EXP 	stopSignal_test: autoDraw = False
+411.6846 	EXP 	stopSignal_test: texRes = 128.0
+411.6846 	EXP 	goStim_test: image = 'circleblack.png'
+411.6846 	EXP 	test_fixation: autoDraw = True
+412.1837 	EXP 	test_fixation: autoDraw = False
+412.1837 	EXP 	goStim_test: autoDraw = True
+412.7343 	EXP 	stopSignal_test: autoDraw = True
+412.8697 	DATA 	Keypress: left
+413.1849 	EXP 	goStim_test: autoDraw = False
+413.2348 	EXP 	stopSignal_test: autoDraw = False
+414.1722 	EXP 	New trial (rep=11, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+414.1910 	EXP 	test_fixation: autoDraw = False
+414.1910 	EXP 	goStim_test: autoDraw = False
+414.1910 	EXP 	stopSignal_test: autoDraw = False
+414.1910 	EXP 	stopSignal_test: texRes = 128.0
+414.1910 	EXP 	goStim_test: image = 'squareblack.png'
+414.1910 	EXP 	test_fixation: autoDraw = True
+414.6878 	EXP 	goStim_test: autoDraw = True
+414.7046 	EXP 	test_fixation: autoDraw = False
+415.2383 	EXP 	stopSignal_test: autoDraw = True
+415.3909 	DATA 	Keypress: right
+415.6877 	EXP 	goStim_test: autoDraw = False
+415.7378 	EXP 	stopSignal_test: autoDraw = False
+416.6735 	EXP 	New trial (rep=11, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+416.6900 	EXP 	test_fixation: autoDraw = False
+416.6900 	EXP 	goStim_test: autoDraw = False
+416.6900 	EXP 	stopSignal_test: autoDraw = False
+416.6900 	EXP 	stopSignal_test: texRes = 128.0
+416.6900 	EXP 	goStim_test: image = 'squareblack.png'
+416.6900 	EXP 	test_fixation: autoDraw = True
+417.1892 	EXP 	test_fixation: autoDraw = False
+417.1892 	EXP 	goStim_test: autoDraw = True
+417.7398 	EXP 	stopSignal_test: autoDraw = True
+417.9922 	DATA 	Keypress: right
+418.1903 	EXP 	goStim_test: autoDraw = False
+418.2404 	EXP 	stopSignal_test: autoDraw = False
+419.1932 	EXP 	test_fixation: autoDraw = False
+419.1932 	EXP 	goStim_test: autoDraw = False
+419.1932 	EXP 	stopSignal_test: autoDraw = False
+419.1932 	EXP 	text_6: height = 0.025
+419.1932 	EXP 	text_6: height = 0.025
+419.1932 	EXP 	text_6: height = 0.025
+419.1932 	EXP 	text_6: text = 'You have completed 2 of 3.\nPlease take this time to read your feedback if there is any, and take a 1 minute break.\n\n\nPress enter to continue.'
+419.1932 	EXP 	text_6: autoDraw = True
+431.7579 	EXP 	New trial (rep=2, index=0): None
+431.7740 	EXP 	Imported condition.xlsx as conditions, 4 conditions, 2 params
+431.7744 	EXP 	Created sequence: fullRandom, trialTypes=4, nReps=12, seed=None
+431.7747 	EXP 	New trial (rep=0, index=0): {'corrGoResp': None, 'shape': None}
+431.7876 	DATA 	Keypress: return
+431.7928 	EXP 	text_6: autoDraw = False
+431.7928 	EXP 	stopSignal_test: texRes = 128.0
+431.7928 	EXP 	goStim_test: image = 'squareblack.png'
+431.7928 	EXP 	test_fixation: autoDraw = True
+432.2906 	EXP 	goStim_test: autoDraw = True
+432.3073 	EXP 	test_fixation: autoDraw = False
+432.8415 	EXP 	stopSignal_test: autoDraw = True
+432.8933 	DATA 	Keypress: right
+433.2919 	EXP 	goStim_test: autoDraw = False
+433.3419 	EXP 	stopSignal_test: autoDraw = False
+434.2782 	EXP 	New trial (rep=0, index=1): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+434.2966 	EXP 	test_fixation: autoDraw = False
+434.2966 	EXP 	goStim_test: autoDraw = False
+434.2966 	EXP 	stopSignal_test: autoDraw = False
+434.2966 	EXP 	stopSignal_test: texRes = 128.0
+434.2966 	EXP 	goStim_test: image = 'squareblack.png'
+434.2966 	EXP 	test_fixation: autoDraw = True
+434.7935 	EXP 	goStim_test: autoDraw = True
+434.8101 	EXP 	test_fixation: autoDraw = False
+435.2940 	EXP 	stopSignal_test: autoDraw = True
+435.5799 	DATA 	Keypress: right
+435.7948 	EXP 	goStim_test: autoDraw = False
+435.7948 	EXP 	stopSignal_test: autoDraw = False
+436.7790 	EXP 	New trial (rep=0, index=2): {'corrGoResp': None, 'shape': None}
+436.8009 	EXP 	test_fixation: autoDraw = False
+436.8009 	EXP 	goStim_test: autoDraw = False
+436.8009 	EXP 	stopSignal_test: autoDraw = False
+436.8009 	EXP 	stopSignal_test: texRes = 128.0
+436.8009 	EXP 	goStim_test: image = 'circleblack.png'
+436.8009 	EXP 	test_fixation: autoDraw = True
+437.2957 	EXP 	goStim_test: autoDraw = True
+437.3207 	EXP 	test_fixation: autoDraw = False
+437.7952 	EXP 	stopSignal_test: autoDraw = True
+438.0307 	DATA 	Keypress: left
+438.2960 	EXP 	goStim_test: autoDraw = False
+438.2960 	EXP 	stopSignal_test: autoDraw = False
+439.2831 	EXP 	New trial (rep=0, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+439.3022 	EXP 	test_fixation: autoDraw = False
+439.3022 	EXP 	goStim_test: autoDraw = False
+439.3022 	EXP 	stopSignal_test: autoDraw = False
+439.3022 	EXP 	stopSignal_test: texRes = 128.0
+439.3022 	EXP 	goStim_test: image = 'squareblack.png'
+439.3022 	EXP 	test_fixation: autoDraw = True
+439.7990 	EXP 	goStim_test: autoDraw = True
+439.8155 	EXP 	test_fixation: autoDraw = False
+440.2994 	EXP 	stopSignal_test: autoDraw = True
+440.5858 	DATA 	Keypress: right
+440.8004 	EXP 	goStim_test: autoDraw = False
+440.8004 	EXP 	stopSignal_test: autoDraw = False
+441.7845 	EXP 	New trial (rep=1, index=0): {'corrGoResp': None, 'shape': None}
+441.8016 	EXP 	test_fixation: autoDraw = False
+441.8016 	EXP 	goStim_test: autoDraw = False
+441.8016 	EXP 	stopSignal_test: autoDraw = False
+441.8016 	EXP 	stopSignal_test: texRes = 128.0
+441.8016 	EXP 	goStim_test: image = 'circleblack.png'
+441.8016 	EXP 	test_fixation: autoDraw = True
+442.3002 	EXP 	goStim_test: autoDraw = True
+442.3175 	EXP 	test_fixation: autoDraw = False
+442.8008 	EXP 	stopSignal_test: autoDraw = True
+443.3014 	EXP 	goStim_test: autoDraw = False
+443.3014 	EXP 	stopSignal_test: autoDraw = False
+444.2887 	EXP 	New trial (rep=1, index=1): {'corrGoResp': None, 'shape': None}
+444.3075 	EXP 	test_fixation: autoDraw = False
+444.3075 	EXP 	goStim_test: autoDraw = False
+444.3075 	EXP 	stopSignal_test: autoDraw = False
+444.3075 	EXP 	stopSignal_test: texRes = 128.0
+444.3075 	EXP 	goStim_test: image = 'squareblack.png'
+444.3075 	EXP 	test_fixation: autoDraw = True
+444.8045 	EXP 	goStim_test: autoDraw = True
+444.8211 	EXP 	test_fixation: autoDraw = False
+445.3550 	EXP 	stopSignal_test: autoDraw = True
+445.7414 	DATA 	Keypress: right
+445.8056 	EXP 	goStim_test: autoDraw = False
+445.8563 	EXP 	stopSignal_test: autoDraw = False
+446.7904 	EXP 	New trial (rep=1, index=2): {'corrGoResp': None, 'shape': None}
+446.8084 	EXP 	test_fixation: autoDraw = False
+446.8084 	EXP 	goStim_test: autoDraw = False
+446.8084 	EXP 	stopSignal_test: autoDraw = False
+446.8084 	EXP 	stopSignal_test: texRes = 128.0
+446.8084 	EXP 	goStim_test: image = 'circleblack.png'
+446.8084 	EXP 	test_fixation: autoDraw = True
+447.3058 	EXP 	goStim_test: autoDraw = True
+447.3223 	EXP 	test_fixation: autoDraw = False
+447.8564 	EXP 	stopSignal_test: autoDraw = True
+448.2255 	DATA 	Keypress: left
+448.3068 	EXP 	goStim_test: autoDraw = False
+448.3575 	EXP 	stopSignal_test: autoDraw = False
+449.2939 	EXP 	New trial (rep=1, index=3): {'corrGoResp': None, 'shape': None}
+449.3100 	EXP 	test_fixation: autoDraw = False
+449.3100 	EXP 	goStim_test: autoDraw = False
+449.3100 	EXP 	stopSignal_test: autoDraw = False
+449.3100 	EXP 	stopSignal_test: texRes = 128.0
+449.3100 	EXP 	goStim_test: image = 'circleblack.png'
+449.3100 	EXP 	test_fixation: autoDraw = True
+449.8100 	EXP 	test_fixation: autoDraw = False
+449.8100 	EXP 	goStim_test: autoDraw = True
+450.3605 	EXP 	stopSignal_test: autoDraw = True
+450.7803 	DATA 	Keypress: left
+450.8110 	EXP 	goStim_test: autoDraw = False
+450.8618 	EXP 	stopSignal_test: autoDraw = False
+451.7958 	EXP 	New trial (rep=2, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+451.8131 	EXP 	test_fixation: autoDraw = False
+451.8131 	EXP 	goStim_test: autoDraw = False
+451.8131 	EXP 	stopSignal_test: autoDraw = False
+451.8131 	EXP 	stopSignal_test: texRes = 128.0
+451.8131 	EXP 	goStim_test: image = 'circleblack.png'
+451.8131 	EXP 	test_fixation: autoDraw = True
+452.3112 	EXP 	goStim_test: autoDraw = True
+452.3281 	EXP 	test_fixation: autoDraw = False
+452.8619 	EXP 	stopSignal_test: autoDraw = True
+453.3125 	EXP 	goStim_test: autoDraw = False
+453.3629 	EXP 	stopSignal_test: autoDraw = False
+454.2989 	EXP 	New trial (rep=2, index=1): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+454.3162 	EXP 	test_fixation: autoDraw = False
+454.3162 	EXP 	goStim_test: autoDraw = False
+454.3162 	EXP 	stopSignal_test: autoDraw = False
+454.3162 	EXP 	stopSignal_test: texRes = 128.0
+454.3162 	EXP 	goStim_test: image = 'circleblack.png'
+454.3162 	EXP 	test_fixation: autoDraw = True
+454.8153 	EXP 	test_fixation: autoDraw = False
+454.8153 	EXP 	goStim_test: autoDraw = True
+455.4161 	EXP 	stopSignal_test: autoDraw = True
+455.6353 	DATA 	Keypress: left
+455.8169 	EXP 	goStim_test: autoDraw = False
+455.9170 	EXP 	stopSignal_test: autoDraw = False
+456.8012 	EXP 	New trial (rep=2, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+456.8227 	EXP 	test_fixation: autoDraw = False
+456.8227 	EXP 	goStim_test: autoDraw = False
+456.8227 	EXP 	stopSignal_test: autoDraw = False
+456.8227 	EXP 	stopSignal_test: texRes = 128.0
+456.8227 	EXP 	goStim_test: image = 'squareblack.png'
+456.8227 	EXP 	test_fixation: autoDraw = True
+457.3171 	EXP 	goStim_test: autoDraw = True
+457.3344 	EXP 	test_fixation: autoDraw = False
+457.9174 	EXP 	stopSignal_test: autoDraw = True
+458.2702 	DATA 	Keypress: right
+458.3181 	EXP 	goStim_test: autoDraw = False
+458.4181 	EXP 	stopSignal_test: autoDraw = False
+459.3054 	EXP 	New trial (rep=2, index=3): {'corrGoResp': None, 'shape': None}
+459.3239 	EXP 	test_fixation: autoDraw = False
+459.3239 	EXP 	goStim_test: autoDraw = False
+459.3239 	EXP 	stopSignal_test: autoDraw = False
+459.3239 	EXP 	stopSignal_test: texRes = 128.0
+459.3239 	EXP 	goStim_test: image = 'squareblack.png'
+459.3239 	EXP 	test_fixation: autoDraw = True
+459.8210 	EXP 	goStim_test: autoDraw = True
+459.8376 	EXP 	test_fixation: autoDraw = False
+460.4217 	EXP 	stopSignal_test: autoDraw = True
+460.8207 	EXP 	goStim_test: autoDraw = False
+460.9207 	EXP 	stopSignal_test: autoDraw = False
+461.8068 	EXP 	New trial (rep=3, index=0): {'corrGoResp': None, 'shape': None}
+461.8238 	EXP 	test_fixation: autoDraw = False
+461.8238 	EXP 	goStim_test: autoDraw = False
+461.8238 	EXP 	stopSignal_test: autoDraw = False
+461.8238 	EXP 	stopSignal_test: texRes = 128.0
+461.8238 	EXP 	goStim_test: image = 'circleblack.png'
+461.8238 	EXP 	test_fixation: autoDraw = True
+462.3224 	EXP 	goStim_test: autoDraw = True
+462.3391 	EXP 	test_fixation: autoDraw = False
+462.9733 	EXP 	stopSignal_test: autoDraw = True
+463.3234 	EXP 	goStim_test: autoDraw = False
+463.4735 	EXP 	stopSignal_test: autoDraw = False
+464.3108 	EXP 	New trial (rep=3, index=1): {'corrGoResp': None, 'shape': None}
+464.3296 	EXP 	test_fixation: autoDraw = False
+464.3296 	EXP 	goStim_test: autoDraw = False
+464.3296 	EXP 	stopSignal_test: autoDraw = False
+464.3296 	EXP 	stopSignal_test: texRes = 128.0
+464.3296 	EXP 	goStim_test: image = 'squareblack.png'
+464.3296 	EXP 	test_fixation: autoDraw = True
+464.8266 	EXP 	goStim_test: autoDraw = True
+464.8433 	EXP 	test_fixation: autoDraw = False
+465.5274 	EXP 	stopSignal_test: autoDraw = True
+465.7800 	DATA 	Keypress: right
+465.8276 	EXP 	goStim_test: autoDraw = False
+466.0282 	EXP 	stopSignal_test: autoDraw = False
+466.8122 	EXP 	New trial (rep=3, index=2): {'corrGoResp': None, 'shape': None}
+466.8293 	EXP 	test_fixation: autoDraw = False
+466.8293 	EXP 	goStim_test: autoDraw = False
+466.8293 	EXP 	stopSignal_test: autoDraw = False
+466.8293 	EXP 	stopSignal_test: texRes = 128.0
+466.8293 	EXP 	goStim_test: image = 'squareblack.png'
+466.8293 	EXP 	test_fixation: autoDraw = True
+467.3279 	EXP 	goStim_test: autoDraw = True
+467.3446 	EXP 	test_fixation: autoDraw = False
+468.0286 	EXP 	stopSignal_test: autoDraw = True
+468.2974 	DATA 	Keypress: right
+468.3290 	EXP 	goStim_test: autoDraw = False
+468.5293 	EXP 	stopSignal_test: autoDraw = False
+469.3155 	EXP 	New trial (rep=3, index=3): {'corrGoResp': None, 'shape': None}
+469.3334 	EXP 	test_fixation: autoDraw = False
+469.3334 	EXP 	goStim_test: autoDraw = False
+469.3334 	EXP 	stopSignal_test: autoDraw = False
+469.3334 	EXP 	stopSignal_test: texRes = 128.0
+469.3334 	EXP 	goStim_test: image = 'circleblack.png'
+469.3334 	EXP 	test_fixation: autoDraw = True
+469.8321 	EXP 	goStim_test: autoDraw = True
+469.8486 	EXP 	test_fixation: autoDraw = False
+470.5327 	EXP 	stopSignal_test: autoDraw = True
+470.7854 	DATA 	Keypress: left
+470.8331 	EXP 	goStim_test: autoDraw = False
+471.0339 	EXP 	stopSignal_test: autoDraw = False
+471.8179 	EXP 	New trial (rep=4, index=0): {'corrGoResp': None, 'shape': None}
+471.8354 	EXP 	test_fixation: autoDraw = False
+471.8354 	EXP 	goStim_test: autoDraw = False
+471.8354 	EXP 	stopSignal_test: autoDraw = False
+471.8354 	EXP 	stopSignal_test: texRes = 128.0
+471.8354 	EXP 	goStim_test: image = 'squareblack.png'
+471.8354 	EXP 	test_fixation: autoDraw = True
+472.3333 	EXP 	goStim_test: autoDraw = True
+472.3501 	EXP 	test_fixation: autoDraw = False
+473.0341 	EXP 	stopSignal_test: autoDraw = True
+473.2029 	DATA 	Keypress: right
+473.3345 	EXP 	goStim_test: autoDraw = False
+473.5348 	EXP 	stopSignal_test: autoDraw = False
+474.3213 	EXP 	New trial (rep=4, index=1): {'corrGoResp': None, 'shape': None}
+474.3382 	EXP 	test_fixation: autoDraw = False
+474.3382 	EXP 	goStim_test: autoDraw = False
+474.3382 	EXP 	stopSignal_test: autoDraw = False
+474.3382 	EXP 	stopSignal_test: texRes = 128.0
+474.3382 	EXP 	goStim_test: image = 'squareblack.png'
+474.3382 	EXP 	test_fixation: autoDraw = True
+474.8376 	EXP 	test_fixation: autoDraw = False
+474.8376 	EXP 	goStim_test: autoDraw = True
+475.5384 	EXP 	stopSignal_test: autoDraw = True
+475.7410 	DATA 	Keypress: right
+475.8390 	EXP 	goStim_test: autoDraw = False
+476.0395 	EXP 	stopSignal_test: autoDraw = False
+476.8235 	EXP 	New trial (rep=4, index=2): {'corrGoResp': None, 'shape': None}
+476.8407 	EXP 	test_fixation: autoDraw = False
+476.8407 	EXP 	goStim_test: autoDraw = False
+476.8407 	EXP 	stopSignal_test: autoDraw = False
+476.8407 	EXP 	stopSignal_test: texRes = 128.0
+476.8407 	EXP 	goStim_test: image = 'squareblack.png'
+476.8407 	EXP 	test_fixation: autoDraw = True
+477.3389 	EXP 	goStim_test: autoDraw = True
+477.3556 	EXP 	test_fixation: autoDraw = False
+478.0396 	EXP 	stopSignal_test: autoDraw = True
+478.3402 	EXP 	goStim_test: autoDraw = False
+478.5403 	EXP 	stopSignal_test: autoDraw = False
+479.3269 	EXP 	New trial (rep=4, index=3): {'corrGoResp': None, 'shape': None}
+479.3441 	EXP 	test_fixation: autoDraw = False
+479.3441 	EXP 	goStim_test: autoDraw = False
+479.3441 	EXP 	stopSignal_test: autoDraw = False
+479.3441 	EXP 	stopSignal_test: texRes = 128.0
+479.3441 	EXP 	goStim_test: image = 'circleblack.png'
+479.3441 	EXP 	test_fixation: autoDraw = True
+479.8431 	EXP 	goStim_test: autoDraw = True
+479.8598 	EXP 	test_fixation: autoDraw = False
+480.5941 	EXP 	stopSignal_test: autoDraw = True
+480.8440 	EXP 	goStim_test: autoDraw = False
+481.0298 	DATA 	Keypress: left
+481.0945 	EXP 	stopSignal_test: autoDraw = False
+481.8289 	EXP 	New trial (rep=5, index=0): {'corrGoResp': None, 'shape': None}
+481.8459 	EXP 	test_fixation: autoDraw = False
+481.8459 	EXP 	goStim_test: autoDraw = False
+481.8459 	EXP 	stopSignal_test: autoDraw = False
+481.8459 	EXP 	stopSignal_test: texRes = 128.0
+481.8459 	EXP 	goStim_test: image = 'squareblack.png'
+481.8459 	EXP 	test_fixation: autoDraw = True
+482.3445 	EXP 	goStim_test: autoDraw = True
+482.3611 	EXP 	test_fixation: autoDraw = False
+483.0308 	DATA 	Keypress: right
+483.0953 	EXP 	stopSignal_test: autoDraw = True
+483.3456 	EXP 	goStim_test: autoDraw = False
+483.5960 	EXP 	stopSignal_test: autoDraw = False
+484.3317 	EXP 	New trial (rep=5, index=1): {'corrGoResp': None, 'shape': None}
+484.3487 	EXP 	test_fixation: autoDraw = False
+484.3487 	EXP 	goStim_test: autoDraw = False
+484.3487 	EXP 	stopSignal_test: autoDraw = False
+484.3487 	EXP 	stopSignal_test: texRes = 128.0
+484.3487 	EXP 	goStim_test: image = 'circleblack.png'
+484.3487 	EXP 	test_fixation: autoDraw = True
+484.8472 	EXP 	goStim_test: autoDraw = True
+484.8640 	EXP 	test_fixation: autoDraw = False
+485.5480 	EXP 	stopSignal_test: autoDraw = True
+485.6002 	DATA 	Keypress: left
+485.8483 	EXP 	goStim_test: autoDraw = False
+486.0490 	EXP 	stopSignal_test: autoDraw = False
+486.8357 	EXP 	New trial (rep=5, index=2): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+486.8545 	EXP 	test_fixation: autoDraw = False
+486.8545 	EXP 	goStim_test: autoDraw = False
+486.8545 	EXP 	stopSignal_test: autoDraw = False
+486.8545 	EXP 	stopSignal_test: texRes = 128.0
+486.8545 	EXP 	goStim_test: image = 'circleblack.png'
+486.8545 	EXP 	test_fixation: autoDraw = True
+487.3515 	EXP 	goStim_test: autoDraw = True
+487.3682 	EXP 	test_fixation: autoDraw = False
+488.0022 	EXP 	stopSignal_test: autoDraw = True
+488.1884 	DATA 	Keypress: left
+488.3528 	EXP 	goStim_test: autoDraw = False
+488.5012 	EXP 	stopSignal_test: autoDraw = False
+489.3372 	EXP 	New trial (rep=5, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+489.3541 	EXP 	test_fixation: autoDraw = False
+489.3541 	EXP 	goStim_test: autoDraw = False
+489.3541 	EXP 	stopSignal_test: autoDraw = False
+489.3541 	EXP 	stopSignal_test: texRes = 128.0
+489.3541 	EXP 	goStim_test: image = 'circleblack.png'
+489.3541 	EXP 	test_fixation: autoDraw = True
+489.8527 	EXP 	goStim_test: autoDraw = True
+489.8694 	EXP 	test_fixation: autoDraw = False
+490.5033 	EXP 	stopSignal_test: autoDraw = True
+490.7556 	DATA 	Keypress: left
+490.8538 	EXP 	goStim_test: autoDraw = False
+491.0041 	EXP 	stopSignal_test: autoDraw = False
+491.0727 	DATA 	Keypress: left
+491.8407 	EXP 	New trial (rep=6, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+491.8581 	EXP 	test_fixation: autoDraw = False
+491.8581 	EXP 	goStim_test: autoDraw = False
+491.8581 	EXP 	stopSignal_test: autoDraw = False
+491.8581 	EXP 	stopSignal_test: texRes = 128.0
+491.8581 	EXP 	goStim_test: image = 'squareblack.png'
+491.8581 	EXP 	test_fixation: autoDraw = True
+492.3568 	EXP 	goStim_test: autoDraw = True
+492.3735 	EXP 	test_fixation: autoDraw = False
+493.0079 	EXP 	stopSignal_test: autoDraw = True
+493.0099 	DATA 	Keypress: right
+493.3568 	EXP 	goStim_test: autoDraw = False
+493.5234 	EXP 	stopSignal_test: autoDraw = False
+494.3425 	EXP 	New trial (rep=6, index=1): {'corrGoResp': None, 'shape': None}
+494.3596 	EXP 	test_fixation: autoDraw = False
+494.3596 	EXP 	goStim_test: autoDraw = False
+494.3596 	EXP 	stopSignal_test: autoDraw = False
+494.3596 	EXP 	stopSignal_test: texRes = 128.0
+494.3596 	EXP 	goStim_test: image = 'circleblack.png'
+494.3596 	EXP 	test_fixation: autoDraw = True
+494.8585 	EXP 	test_fixation: autoDraw = False
+494.8585 	EXP 	goStim_test: autoDraw = True
+495.5090 	EXP 	stopSignal_test: autoDraw = True
+495.5444 	DATA 	Keypress: left
+495.8594 	EXP 	goStim_test: autoDraw = False
+496.0094 	EXP 	stopSignal_test: autoDraw = False
+496.8470 	EXP 	New trial (rep=6, index=2): {'corrGoResp': None, 'shape': None}
+496.8657 	EXP 	test_fixation: autoDraw = False
+496.8657 	EXP 	goStim_test: autoDraw = False
+496.8657 	EXP 	stopSignal_test: autoDraw = False
+496.8657 	EXP 	stopSignal_test: texRes = 128.0
+496.8657 	EXP 	goStim_test: image = 'circleblack.png'
+496.8657 	EXP 	test_fixation: autoDraw = True
+497.3625 	EXP 	goStim_test: autoDraw = True
+497.3790 	EXP 	test_fixation: autoDraw = False
+498.0130 	EXP 	stopSignal_test: autoDraw = True
+498.2323 	DATA 	Keypress: left
+498.3636 	EXP 	goStim_test: autoDraw = False
+498.5139 	EXP 	stopSignal_test: autoDraw = False
+499.3484 	EXP 	New trial (rep=6, index=3): {'corrGoResp': None, 'shape': None}
+499.3652 	EXP 	test_fixation: autoDraw = False
+499.3652 	EXP 	goStim_test: autoDraw = False
+499.3652 	EXP 	stopSignal_test: autoDraw = False
+499.3652 	EXP 	stopSignal_test: texRes = 128.0
+499.3652 	EXP 	goStim_test: image = 'circleblack.png'
+499.3652 	EXP 	test_fixation: autoDraw = True
+499.8637 	EXP 	goStim_test: autoDraw = True
+499.8804 	EXP 	test_fixation: autoDraw = False
+500.5143 	EXP 	stopSignal_test: autoDraw = True
+500.8001 	DATA 	Keypress: left
+500.8647 	EXP 	goStim_test: autoDraw = False
+501.0152 	EXP 	stopSignal_test: autoDraw = False
+501.8517 	EXP 	New trial (rep=7, index=0): {'corrGoResp': None, 'shape': None}
+501.8681 	EXP 	test_fixation: autoDraw = False
+501.8681 	EXP 	goStim_test: autoDraw = False
+501.8681 	EXP 	stopSignal_test: autoDraw = False
+501.8681 	EXP 	stopSignal_test: texRes = 128.0
+501.8681 	EXP 	goStim_test: image = 'circleblack.png'
+501.8681 	EXP 	test_fixation: autoDraw = True
+502.3680 	EXP 	test_fixation: autoDraw = False
+502.3680 	EXP 	goStim_test: autoDraw = True
+503.0185 	EXP 	stopSignal_test: autoDraw = True
+503.3214 	DATA 	Keypress: left
+503.3690 	EXP 	goStim_test: autoDraw = False
+503.5195 	EXP 	stopSignal_test: autoDraw = False
+504.3536 	EXP 	New trial (rep=7, index=1): {'corrGoResp': None, 'shape': None}
+504.3761 	EXP 	test_fixation: autoDraw = False
+504.3761 	EXP 	goStim_test: autoDraw = False
+504.3761 	EXP 	stopSignal_test: autoDraw = False
+504.3761 	EXP 	stopSignal_test: texRes = 128.0
+504.3761 	EXP 	goStim_test: image = 'squareblack.png'
+504.3761 	EXP 	test_fixation: autoDraw = True
+504.8692 	EXP 	goStim_test: autoDraw = True
+504.8859 	EXP 	test_fixation: autoDraw = False
+505.5199 	EXP 	stopSignal_test: autoDraw = True
+505.6888 	DATA 	Keypress: right
+505.8703 	EXP 	goStim_test: autoDraw = False
+506.0208 	EXP 	stopSignal_test: autoDraw = False
+506.8572 	EXP 	New trial (rep=7, index=2): {'corrGoResp': None, 'shape': None}
+506.8737 	EXP 	test_fixation: autoDraw = False
+506.8737 	EXP 	goStim_test: autoDraw = False
+506.8737 	EXP 	stopSignal_test: autoDraw = False
+506.8737 	EXP 	stopSignal_test: texRes = 128.0
+506.8737 	EXP 	goStim_test: image = 'squareblack.png'
+506.8737 	EXP 	test_fixation: autoDraw = True
+507.3733 	EXP 	test_fixation: autoDraw = False
+507.3733 	EXP 	goStim_test: autoDraw = True
+507.9742 	EXP 	stopSignal_test: autoDraw = True
+508.2602 	DATA 	Keypress: right
+508.3751 	EXP 	goStim_test: autoDraw = False
+508.4751 	EXP 	stopSignal_test: autoDraw = False
+509.3594 	EXP 	New trial (rep=7, index=3): {'corrGoResp': None, 'shape': None}
+509.3763 	EXP 	test_fixation: autoDraw = False
+509.3763 	EXP 	goStim_test: autoDraw = False
+509.3763 	EXP 	stopSignal_test: autoDraw = False
+509.3763 	EXP 	stopSignal_test: texRes = 128.0
+509.3763 	EXP 	goStim_test: image = 'squareblack.png'
+509.3763 	EXP 	test_fixation: autoDraw = True
+509.8748 	EXP 	goStim_test: autoDraw = True
+509.8915 	EXP 	test_fixation: autoDraw = False
+510.4754 	EXP 	stopSignal_test: autoDraw = True
+510.8110 	DATA 	Keypress: right
+510.8759 	EXP 	goStim_test: autoDraw = False
+510.9760 	EXP 	stopSignal_test: autoDraw = False
+511.8626 	EXP 	New trial (rep=8, index=0): {'corrGoResp': None, 'shape': None}
+511.8795 	EXP 	test_fixation: autoDraw = False
+511.8795 	EXP 	goStim_test: autoDraw = False
+511.8795 	EXP 	stopSignal_test: autoDraw = False
+511.8795 	EXP 	stopSignal_test: texRes = 128.0
+511.8795 	EXP 	goStim_test: image = 'squareblack.png'
+511.8795 	EXP 	test_fixation: autoDraw = True
+512.3789 	EXP 	test_fixation: autoDraw = False
+512.3789 	EXP 	goStim_test: autoDraw = True
+512.9795 	EXP 	stopSignal_test: autoDraw = True
+513.2666 	DATA 	Keypress: right
+513.3801 	EXP 	goStim_test: autoDraw = False
+513.4807 	EXP 	stopSignal_test: autoDraw = False
+514.3649 	EXP 	New trial (rep=8, index=1): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+514.3879 	EXP 	test_fixation: autoDraw = False
+514.3879 	EXP 	goStim_test: autoDraw = False
+514.3879 	EXP 	stopSignal_test: autoDraw = False
+514.3879 	EXP 	stopSignal_test: texRes = 128.0
+514.3879 	EXP 	goStim_test: image = 'circleblack.png'
+514.3879 	EXP 	test_fixation: autoDraw = True
+514.8803 	EXP 	goStim_test: autoDraw = True
+514.8969 	EXP 	test_fixation: autoDraw = False
+515.4811 	EXP 	stopSignal_test: autoDraw = True
+515.5332 	DATA 	Keypress: left
+515.8815 	EXP 	goStim_test: autoDraw = False
+515.9817 	EXP 	stopSignal_test: autoDraw = False
+516.8683 	EXP 	New trial (rep=8, index=2): {'corrGoResp': None, 'shape': None}
+516.8856 	EXP 	test_fixation: autoDraw = False
+516.8856 	EXP 	goStim_test: autoDraw = False
+516.8856 	EXP 	stopSignal_test: autoDraw = False
+516.8856 	EXP 	stopSignal_test: texRes = 128.0
+516.8856 	EXP 	goStim_test: image = 'squareblack.png'
+516.8856 	EXP 	test_fixation: autoDraw = True
+517.3847 	EXP 	goStim_test: autoDraw = True
+517.4012 	EXP 	test_fixation: autoDraw = False
+517.9353 	EXP 	stopSignal_test: autoDraw = True
+518.3855 	EXP 	goStim_test: autoDraw = False
+518.4355 	EXP 	stopSignal_test: autoDraw = False
+519.3716 	EXP 	New trial (rep=8, index=3): {'corrGoResp': None, 'shape': None}
+519.3909 	EXP 	test_fixation: autoDraw = False
+519.3909 	EXP 	goStim_test: autoDraw = False
+519.3909 	EXP 	stopSignal_test: autoDraw = False
+519.3909 	EXP 	stopSignal_test: texRes = 128.0
+519.3909 	EXP 	goStim_test: image = 'circleblack.png'
+519.3909 	EXP 	test_fixation: autoDraw = True
+519.8872 	EXP 	goStim_test: autoDraw = True
+519.9039 	EXP 	test_fixation: autoDraw = False
+520.4879 	EXP 	stopSignal_test: autoDraw = True
+520.8869 	EXP 	goStim_test: autoDraw = False
+520.9870 	EXP 	stopSignal_test: autoDraw = False
+521.8730 	EXP 	New trial (rep=9, index=0): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+521.8898 	EXP 	test_fixation: autoDraw = False
+521.8898 	EXP 	goStim_test: autoDraw = False
+521.8898 	EXP 	stopSignal_test: autoDraw = False
+521.8898 	EXP 	stopSignal_test: texRes = 128.0
+521.8898 	EXP 	goStim_test: image = 'circleblack.png'
+521.8898 	EXP 	test_fixation: autoDraw = True
+522.3887 	EXP 	test_fixation: autoDraw = False
+522.3887 	EXP 	goStim_test: autoDraw = True
+523.0392 	EXP 	stopSignal_test: autoDraw = True
+523.3083 	DATA 	Keypress: left
+523.3898 	EXP 	goStim_test: autoDraw = False
+523.5398 	EXP 	stopSignal_test: autoDraw = False
+524.3768 	EXP 	New trial (rep=9, index=1): {'corrGoResp': None, 'shape': None}
+524.3959 	EXP 	test_fixation: autoDraw = False
+524.3959 	EXP 	goStim_test: autoDraw = False
+524.3959 	EXP 	stopSignal_test: autoDraw = False
+524.3959 	EXP 	stopSignal_test: texRes = 128.0
+524.3959 	EXP 	goStim_test: image = 'squareblack.png'
+524.3959 	EXP 	test_fixation: autoDraw = True
+524.8926 	EXP 	goStim_test: autoDraw = True
+524.9095 	EXP 	test_fixation: autoDraw = False
+525.5434 	EXP 	stopSignal_test: autoDraw = True
+525.8944 	EXP 	goStim_test: autoDraw = False
+525.8966 	DATA 	Keypress: right
+526.0448 	EXP 	stopSignal_test: autoDraw = False
+526.8785 	EXP 	New trial (rep=9, index=2): {'corrGoResp': None, 'shape': None}
+526.8949 	EXP 	test_fixation: autoDraw = False
+526.8949 	EXP 	goStim_test: autoDraw = False
+526.8949 	EXP 	stopSignal_test: autoDraw = False
+526.8949 	EXP 	stopSignal_test: texRes = 128.0
+526.8949 	EXP 	goStim_test: image = 'squareblack.png'
+526.8949 	EXP 	test_fixation: autoDraw = True
+527.3941 	EXP 	test_fixation: autoDraw = False
+527.3941 	EXP 	goStim_test: autoDraw = True
+528.0447 	EXP 	stopSignal_test: autoDraw = True
+528.2805 	DATA 	Keypress: right
+528.3951 	EXP 	goStim_test: autoDraw = False
+528.5456 	EXP 	stopSignal_test: autoDraw = False
+529.3815 	EXP 	New trial (rep=9, index=3): {'corrGoResp': None, 'shape': None}
+529.4006 	EXP 	test_fixation: autoDraw = False
+529.4006 	EXP 	goStim_test: autoDraw = False
+529.4006 	EXP 	stopSignal_test: autoDraw = False
+529.4006 	EXP 	stopSignal_test: texRes = 128.0
+529.4006 	EXP 	goStim_test: image = 'circleblack.png'
+529.4006 	EXP 	test_fixation: autoDraw = True
+529.8969 	EXP 	goStim_test: autoDraw = True
+529.9135 	EXP 	test_fixation: autoDraw = False
+530.5495 	EXP 	stopSignal_test: autoDraw = True
+530.7181 	DATA 	Keypress: left
+530.8979 	EXP 	goStim_test: autoDraw = False
+531.0648 	EXP 	stopSignal_test: autoDraw = False
+531.8856 	EXP 	New trial (rep=10, index=0): {'corrGoResp': None, 'shape': None}
+531.9045 	EXP 	test_fixation: autoDraw = False
+531.9045 	EXP 	goStim_test: autoDraw = False
+531.9045 	EXP 	stopSignal_test: autoDraw = False
+531.9045 	EXP 	stopSignal_test: texRes = 128.0
+531.9045 	EXP 	goStim_test: image = 'squareblack.png'
+531.9045 	EXP 	test_fixation: autoDraw = True
+532.4011 	EXP 	goStim_test: autoDraw = True
+532.4176 	EXP 	test_fixation: autoDraw = False
+533.0017 	EXP 	stopSignal_test: autoDraw = True
+533.4021 	EXP 	goStim_test: autoDraw = False
+533.5024 	EXP 	stopSignal_test: autoDraw = False
+534.3883 	EXP 	New trial (rep=10, index=1): {'corrGoResp': None, 'shape': None}
+534.4068 	EXP 	test_fixation: autoDraw = False
+534.4068 	EXP 	goStim_test: autoDraw = False
+534.4068 	EXP 	stopSignal_test: autoDraw = False
+534.4068 	EXP 	stopSignal_test: texRes = 128.0
+534.4068 	EXP 	goStim_test: image = 'squareblack.png'
+534.4068 	EXP 	test_fixation: autoDraw = True
+534.9041 	EXP 	goStim_test: autoDraw = True
+534.9204 	EXP 	test_fixation: autoDraw = False
+535.5544 	EXP 	stopSignal_test: autoDraw = True
+535.8408 	DATA 	Keypress: right
+535.9052 	EXP 	goStim_test: autoDraw = False
+536.0554 	EXP 	stopSignal_test: autoDraw = False
+536.8896 	EXP 	New trial (rep=10, index=2): {'corrGoResp': None, 'shape': None}
+536.9077 	EXP 	test_fixation: autoDraw = False
+536.9077 	EXP 	goStim_test: autoDraw = False
+536.9077 	EXP 	stopSignal_test: autoDraw = False
+536.9077 	EXP 	stopSignal_test: texRes = 128.0
+536.9077 	EXP 	goStim_test: image = 'circleblack.png'
+536.9077 	EXP 	test_fixation: autoDraw = True
+537.4052 	EXP 	goStim_test: autoDraw = True
+537.4219 	EXP 	test_fixation: autoDraw = False
+538.0558 	EXP 	stopSignal_test: autoDraw = True
+538.3417 	DATA 	Keypress: left
+538.4062 	EXP 	goStim_test: autoDraw = False
+538.5567 	EXP 	stopSignal_test: autoDraw = False
+539.3922 	EXP 	New trial (rep=10, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+539.4100 	EXP 	test_fixation: autoDraw = False
+539.4100 	EXP 	goStim_test: autoDraw = False
+539.4100 	EXP 	stopSignal_test: autoDraw = False
+539.4100 	EXP 	stopSignal_test: texRes = 128.0
+539.4100 	EXP 	goStim_test: image = 'squareblack.png'
+539.4100 	EXP 	test_fixation: autoDraw = True
+539.9078 	EXP 	goStim_test: autoDraw = True
+539.9247 	EXP 	test_fixation: autoDraw = False
+540.5588 	EXP 	stopSignal_test: autoDraw = True
+540.8945 	DATA 	Keypress: right
+540.9091 	EXP 	goStim_test: autoDraw = False
+541.0591 	EXP 	stopSignal_test: autoDraw = False
+541.8965 	EXP 	New trial (rep=11, index=0): {'corrGoResp': None, 'shape': None}
+541.9178 	EXP 	test_fixation: autoDraw = False
+541.9178 	EXP 	goStim_test: autoDraw = False
+541.9178 	EXP 	stopSignal_test: autoDraw = False
+541.9178 	EXP 	stopSignal_test: texRes = 128.0
+541.9178 	EXP 	goStim_test: image = 'circleblack.png'
+541.9178 	EXP 	test_fixation: autoDraw = True
+542.4122 	EXP 	goStim_test: autoDraw = True
+542.4288 	EXP 	test_fixation: autoDraw = False
+543.0628 	EXP 	stopSignal_test: autoDraw = True
+543.4131 	EXP 	goStim_test: autoDraw = False
+543.4661 	DATA 	Keypress: left
+543.5637 	EXP 	stopSignal_test: autoDraw = False
+544.3980 	EXP 	New trial (rep=11, index=1): {'corrGoResp': None, 'shape': None}
+544.4142 	EXP 	test_fixation: autoDraw = False
+544.4142 	EXP 	goStim_test: autoDraw = False
+544.4142 	EXP 	stopSignal_test: autoDraw = False
+544.4142 	EXP 	stopSignal_test: texRes = 128.0
+544.4142 	EXP 	goStim_test: image = 'circleblack.png'
+544.4142 	EXP 	test_fixation: autoDraw = True
+544.9134 	EXP 	test_fixation: autoDraw = False
+544.9134 	EXP 	goStim_test: autoDraw = True
+545.5642 	EXP 	stopSignal_test: autoDraw = True
+545.9145 	EXP 	goStim_test: autoDraw = False
+546.0179 	DATA 	Keypress: left
+546.0647 	EXP 	stopSignal_test: autoDraw = False
+546.9005 	EXP 	New trial (rep=11, index=2): {'corrGoResp': None, 'shape': None}
+546.9177 	EXP 	test_fixation: autoDraw = False
+546.9177 	EXP 	goStim_test: autoDraw = False
+546.9177 	EXP 	stopSignal_test: autoDraw = False
+546.9177 	EXP 	stopSignal_test: texRes = 128.0
+546.9177 	EXP 	goStim_test: image = 'squareblack.png'
+546.9177 	EXP 	test_fixation: autoDraw = True
+547.4162 	EXP 	goStim_test: autoDraw = True
+547.4328 	EXP 	test_fixation: autoDraw = False
+548.0670 	EXP 	stopSignal_test: autoDraw = True
+548.4173 	EXP 	goStim_test: autoDraw = False
+548.5673 	EXP 	stopSignal_test: autoDraw = False
+549.4051 	EXP 	New trial (rep=11, index=3): {'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim'}
+549.4244 	EXP 	test_fixation: autoDraw = False
+549.4244 	EXP 	goStim_test: autoDraw = False
+549.4244 	EXP 	stopSignal_test: autoDraw = False
+549.4244 	EXP 	stopSignal_test: texRes = 128.0
+549.4244 	EXP 	goStim_test: image = 'circleblack.png'
+549.4244 	EXP 	test_fixation: autoDraw = True
+549.9203 	EXP 	goStim_test: autoDraw = True
+549.9374 	EXP 	test_fixation: autoDraw = False
+550.6214 	EXP 	stopSignal_test: autoDraw = True
+550.7585 	DATA 	Keypress: left
+550.9201 	EXP 	goStim_test: autoDraw = False
+551.1370 	EXP 	stopSignal_test: autoDraw = False
+551.9259 	EXP 	test_fixation: autoDraw = False
+551.9259 	EXP 	goStim_test: autoDraw = False
+551.9259 	EXP 	stopSignal_test: autoDraw = False
+551.9259 	EXP 	text_6: height = 0.025
+551.9259 	EXP 	text_6: height = 0.025
+551.9259 	EXP 	text_6: height = 0.025
+551.9259 	EXP 	text_6: text = 'You have completed 3 of 3.\n You have finished the testing phase.\n\nPress enter to continue.'
+551.9259 	EXP 	text_6: autoDraw = True
+555.3965 	DATA 	Keypress: return
+555.4097 	EXP 	text_6: autoDraw = False
+555.4097 	EXP 	ending_text: autoDraw = True
+559.2322 	DATA 	Keypress: return
+559.2474 	EXP 	ending_text: autoDraw = False
+560.0558 	EXP 	window1: mouseVisible = True
