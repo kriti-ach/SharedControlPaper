@@ -4,16 +4,46 @@
 This project is looking to see the effects of shared control on stop inhibition by creating an experiment 
 which has the user control the height of a {} by using a pressure sensitive keyboard.
 
-## Contents of repo:
-The key components of this repo include:
-<ul>
-    <li>experiment.py - the main experiment script to run the task</li>
-    <li>wooting_utils.py - contains the keyboard specific utility functions</li>
-    <li>schematics.py - not relevent, i believe this is a test verison or unfinished verison of exp</li>
-    <li>tweak_SSD_sampler.ipynb - notebook running simulations to test sample_SSD funciton in exp file</li>
-</ul>
+## Installation
+Clone the repository using:
 
-## To setup keyboard:
+```
+git clone git@github.com:kriti-a567/SharedControlPaper.git
+```
+
+If you don't already have `uv` installed, use `pip install uv` then you can clone the repository and generate the `.venv` using:
+```
+sh setup_env.sh
+```
+If running the notebooks in VSCode, just select the .venv from the root dirctory as the kernel.
+
+## Repository Structure
+
+- /data:
+    - /experiments
+          - Contains CSV files for the 'final' and 'pilot' subjects for both the force-sensitive stopping task ('shared_control') and the simple stop task ('simple_stop').
+    - /surveys
+          - Contains CSV files for the 'final' and 'pilot' subjects for both the AI trust survey and the demographics survey.
+- /experiments:
+      - forceSensitiveStoppingTask.py
+          - The script to run the force-sensitive stopping task.
+      - /simpleStop
+          -  The scripts to run the simple stop task.
+          -  Install PsychoPy GUI and click/run simpleStop.psyexp.
+- /figures:
+    - Contains the figures in the paper. Note: Figures 1a and 1b were not generated with code and are not in this repository.
+- /libs/dylibs:
+    - Contains dylibs you will need to install to run the force-sensitive stopping task.
+- /notebooks:
+    - The notebooks which run through the processing and analysis.
+    - The notebooks are numbered in the order in which they should be run.
+- /src/sharedcontrolpaper:
+      - utils.py: Helper functions to condense analysis in notebooks
+      - wooting_utils.py: Contains the keyboard specific utility functions
+- /tables:
+ - Contains the tables in the paper.
+
+## To setup keyboard (note: you will need the Wooting keyboard to run `forceSensitiveStoppingTask.py`):
 1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
 2. Install appropriate dynamic libraries (dylibs). 
 
@@ -28,31 +58,3 @@ The key components of this repo include:
 
 or follow the instructions for manual installation on the Github Readme linked above.
 
-
-## To run Shared Control task:
-`cd path/to/SharedControl`
-
-`python experiment_FINAL.py`
-
-## To run Simple Stop Task:
-Install PsychoPy GUI and click/run simpleStop.psyexp
-
-## Directories
-
-notebooks: contains various notebooks used in testing task functions or analyzing the data
-
-- tweak_SSD_sampler.ipynb: Contains testing of the SSD sample function used within the SharedControl task.
-- stop_signal_test.ipynb: Contains testing of the createTrialTypes function used in the ssimple stop task
-- analysis/shared_control_analysis.ipynb: This is the main analysis notebook for SharedControl data where we operationalize various variables such as the point of inhibition outlined in our preregistration. We also compute all our descriptive results here.
-- analysis/shared_control_results.ipynb: This notebook contains all of our statistical tests and code to create our figures.
-- analysis/simple_stop_qc.ipynb: This is our qc notebook for simple stop data. This notebook will output several qc metrics such as rt/acc/ssd/ssrt
-- analysis/survey_analysis_KA.ipynb: This notebook computes the survey scores for the AI survey.
-- analysis/point_of_inhibition_analysis.ipynb: This notebook was our initial attempt to operationalize the point of inhbition within our pilot data prior to our preregistration. It also includes code to finalize the post-buffer stamp in our final sample.
-- analysis/demographics_survey.ipynb: Calculates age/sex of our subjects from the demographics survey.
-- analysis/survey_analysis.ipynb: This notebook is currently outdated but was used to compute the survey scores for the AI survey.
-- analysis/shared_control_trial_analysis.ipynb: Plots single trials of shared control data for qc reasons of pilot data. This was used in writing the preregestration.
-
-
-old script: contains older versions of the simple stop and shared control task
-
-simpleStop: contains the psychopy version of simple stop
