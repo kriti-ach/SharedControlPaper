@@ -24,7 +24,7 @@ If running the notebooks in VSCode, just select the .venv from the root dirctory
 ## Running Notebooks
 
 ```
-cd Path/to/noteboooks
+cd noteboooks
 ```
 ```
 jupyter execute notebook_name.ipynb
