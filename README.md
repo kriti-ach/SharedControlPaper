@@ -17,6 +17,15 @@ sh setup_env.sh
 ```
 If running the notebooks in VSCode, just select the .venv from the root dirctory as the kernel.
 
+## Running Notebooks
+
+```
+cd Path/to/noteboooks
+```
+```
+jupyter execute notebook_name.ipynb
+```
+
 ## Repository Structure
 
 - /data:  
