@@ -8,7 +8,7 @@ which has the user control the height of a {} by using a pressure sensitive keyb
 Clone the repository using:
 
 ```
-git clone git@github.com:kriti-a567/SharedControlPaper.git
+git clone https://github.com/kriti-a567/SharedControlPaper.git
 ```
 Go into the repo using:
 
