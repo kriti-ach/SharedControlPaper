@@ -6,4 +6,6 @@ source .venv/bin/activate
 
 uv sync
 
-uv pip install --editable .
+uv pip install --editable .       
+cd notebooks  
+jupyter execute *.ipynb
