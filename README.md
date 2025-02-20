@@ -10,8 +10,12 @@ Clone the repository using:
 ```
 git clone git@github.com:kriti-a567/SharedControlPaper.git
 ```
+Go into the repo using:
 
-If you don't already have `uv` installed, use `pip install uv` then you can clone the repository and generate the `.venv` using:
+```
+cd Path/to/repo
+```
+Generate the `.venv` using:
 ```
 sh setup_env.sh
 ```
