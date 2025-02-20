@@ -37,7 +37,6 @@ pytz==2025.1
 pyzmq==26.2.1
 scipy==1.15.2
 seaborn==0.13.2
--e git+ssh://git@github.com/kriti-a567/SharedControlPaper.git@e563485993350d23f372f5c59a9b3b16d079646f#egg=sharedcontrolpaper
 six==1.17.0
 stack-data==0.6.3
 tornado==6.4.2
