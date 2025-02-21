@@ -4,7 +4,7 @@
 This project is looking to see the effects of shared control on stop inhibition by creating an experiment 
 which has the user control the height of a {} by using a pressure sensitive keyboard.
 
-## Installation
+## Installation and Running Notebooks
 Clone the repository using:
 
 ```
@@ -15,20 +15,20 @@ Go into the repo using:
 ```
 cd Path/to/repo
 ```
-Generate the `.venv` using:
+Generate the `.venv` and open Jupyter Lab:
 ```
 sh setup_env.sh
 ```
-If running the notebooks in VSCode, just select the .venv from the root dirctory as the kernel.
 
 ## Running Notebooks
 
-```
-cd noteboooks
-```
-```
-jupyter execute notebook_name.ipynb
-```
+Select `sharedcontrolpaper` as the Kernel in the top right corner of the screen.
+
+Run all cells.
+
+Repeat this process for every Jupyter Notebook. 
+
+If running the notebooks in VSCode, just select `sharedcontrolpaper` from the root directory as the kernel.
 
 ## Repository Structure
 
