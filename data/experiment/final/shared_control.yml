@@ -1,0 +1,7 @@
+columns: 
+  - column_one:
+      Description: Description of column one
+      Type: str
+      Required: true
+      Default: None
+      Example: "1234567890"
