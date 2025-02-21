@@ -7,22 +7,25 @@ which has the user control the movement of a dot inside a ring by using a pressu
 ## Installation and Running Notebooks
 Clone the repository using:
 
-```
+```bash
 git clone https://github.com/kriti-a567/SharedControlPaper.git
 ```
+
 Go into the repo using:
 
+```bash
+cd /path/to/SharedControlPaper
 ```
-cd SharedControlPaper
-```
-Generate the `.venv` and open Jupyter Lab:
-```
+
+Generate the virtual environment and open the project in Jupyter Lab:
+
+```bash
 sh setup_env.sh
 ```
 
 ## Running Notebooks
 
-Select `notebooks`.
+Select the `notebooks` directory.
 
 Select `sharedcontrolpaper` as the Kernel in the top right corner of the screen.
 
@@ -40,7 +43,7 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
     - /surveys:  
       * Contains CSV files for the 'final' and 'pilot' subjects for both the AI trust survey and the demographics survey.  
 - /experiments:  
-    - forceSensitiveStoppingTask.py  
+    - [forceSensitiveStoppingTask.py](experiments/forceSensitiveStoppingTask.py)  
         * The script to run the force-sensitive stopping task.   
     - /simpleStop  
         * The scripts to run the simple stop task.  
@@ -53,12 +56,15 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
     - The notebooks which run through the processing and analysis.  
     - The notebooks are numbered in the order in which they should be run.  
 - /src/sharedcontrolpaper:    
-    - utils.py: Helper functions to condense analysis in notebooks  
-    - wooting_utils.py: Contains the keyboard specific utility functions  
+    - [utils.py](src/sharedcontrolpaper/utils.py): Helper functions to condense analysis in notebooks  
+    - [wooting_utils.py](src/sharedcontrolpaper/wooting_utils.py): Contains the keyboard specific utility functions  
 - /tables:  
     - Contains the tables in the paper.
 
-## To setup keyboard (note: you will need the Wooting keyboard to run `forceSensitiveStoppingTask.py`):
+## Keyboard Setup:
+
+Note: You will need the Wooting keyboard to run [forceSensitiveStoppingTask.py](experiments/forceSensitiveStoppingTask.py).
+
 1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
 2. Install appropriate dynamic libraries (dylibs). 
 
