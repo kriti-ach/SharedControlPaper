@@ -40,77 +40,6 @@ def string_to_numbers(string_data):
     numbers = [float(num) for num in string_data.split()]
     return numbers
 
-def calculate_intervals(time_stamps, distances_raw, pressures_raw, endpoint, stop_onset, critical_distance=1.2, interval_duration=0.1):
-    """
-    Calculate accuracies, pressures, and stops at specified intervals until a given endpoint.
-
-    Parameters:
-    - time_stamps: Array of timestamps
-    - distances_raw: Array of raw distance values
-    - pressures_raw: Array of raw pressure values
-    - endpoint: The point in time to stop calculations (e.g., stop signal or end of trial)
-    - stop_onset: The point in time when the stop signal appears
-    - critical_distance: The distance within which the ball is considered 'inside the ring' (default 1.2)
-    - interval_duration: The duration of each interval in seconds (default 0.1)
-
-    Returns:
-    - accuracies: List of accuracies at each interval
-    - pressures: List of average pressures at each interval
-    - stops: List indicating whether the stop was present in each interval
-    """
-
-    accuracies = []
-    pressures = []
-    stops = []
-
-    interval_start_idx = 0
-    interval_end_time = time_stamps[0] + interval_duration  # Start of the first interval
-
-    while interval_start_idx < len(time_stamps) and time_stamps[interval_start_idx] <= endpoint:
-        temp_pressures = []
-        inside_ring_count = 0
-        count = interval_start_idx  # Tracks the timestamps within the current interval
-
-        # Determine if the stop signal occurs in this interval
-        stop = 1 if stop_onset <= interval_end_time else 0
-
-        # Loop through timestamps within the current interval
-        while (count < len(time_stamps) and 
-               time_stamps[count] <= interval_end_time and 
-               time_stamps[count] < endpoint):
-            distance = distances_raw[count]
-            pressure = pressures_raw[count]
-
-            if abs(distance) <= critical_distance:
-                inside_ring_count += 1
-
-            temp_pressures.append(pressure)
-            count += 1
-
-        # Calculate accuracy for this interval
-        if count > interval_start_idx:  # Avoid division by zero
-            go_task_accuracy = inside_ring_count / (count - interval_start_idx)
-        else:
-            go_task_accuracy = np.nan
-
-        accuracies.append(go_task_accuracy)
-
-        # Calculate average pressure for this interval
-        avg_pressure = np.mean(temp_pressures) if temp_pressures else np.nan
-        pressures.append(avg_pressure)
-
-        # Record if stop occurred in this interval
-        stops.append(stop)
-
-        # Move to the next interval if the interval start index is not already count (to ensure it doesn't get stuck in an infinite loop)
-        if interval_start_idx != count:
-            interval_start_idx = count
-        else:
-            break
-        interval_end_time += interval_duration  # Move the interval end time by specified duration
-
-    return accuracies, pressures, stops
-
 def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
     """
     Process trial data for a specific block, calculating metrics including SSRT,
@@ -273,18 +202,6 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
             ball_before_ring_proportion_after_stop_onset = np.nan
             ball_after_ring_proportion_after_stop_onset = np.nan
 
-        trial_end_time = time_stamps[-1]
-        # Calculate until stop onset
-        accuracies_at_intervals_until_stop_onset, pressures_at_intervals_until_stop_onset, stops_at_intervals_until_stop_onset = calculate_intervals(
-            time_stamps, distances_raw, pressures_raw, stop_onset, stop_onset
-        )
-
-        # Calculate until end of trial
-        accuracies_at_intervals_until_end, pressures_at_intervals_until_end, stops_at_intervals_until_end = calculate_intervals(
-            time_stamps, distances_raw, pressures_raw, trial_end_time, stop_onset
-        )
-        avg_pressure_until_stop_onset = np.mean(pressures_at_intervals_until_stop_onset)
-
         trial_results[trial_number] = {
             'stop_onset': stop_onset,
             'stop_moment': stop_moment,
@@ -306,13 +223,6 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
             'ball_after_ring_proportion_before_stop_onset': ball_after_ring_proportion_before_stop_onset,
             'ball_before_ring_proportion_after_stop_onset': ball_before_ring_proportion_after_stop_onset,
             'ball_after_ring_proportion_after_stop_onset': ball_after_ring_proportion_after_stop_onset,
-            'accuracies_at_intervals_until_end': accuracies_at_intervals_until_end,
-            'accuracies_at_intervals_until_stop_onset': accuracies_at_intervals_until_stop_onset,
-            'pressures_at_intervals_until_end': pressures_at_intervals_until_end,
-            'pressures_at_intervals_until_stop_onset': pressures_at_intervals_until_stop_onset,
-            'stops_at_intervals_until_stop_onset': stops_at_intervals_until_stop_onset,
-            'stops_at_intervals_until_end': stops_at_intervals_until_end,
-            'avg_pressure_until_stop_onset': avg_pressure_until_stop_onset,
             'ssrt': ssrt
         }
     return trial_results, ssrt_list
