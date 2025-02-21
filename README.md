@@ -1,8 +1,8 @@
 # Shared Control Paper Repo
 
 ## Description
-This project is looking to see the effects of shared control on stop inhibition by creating an experiment 
-which has the user control the height of a {} by using a pressure sensitive keyboard.
+This project is looking to see the effects of sharing control with an aritificial intelligence (AI) agent on response inhibition by creating an experiment 
+which has the user control the movement of a dot inside a ring by using a pressure sensitive keyboard. You will need a Wooting 60HE keyboard to run this experiment.
 
 ## Installation and Running Notebooks
 Clone the repository using:
@@ -21,6 +21,8 @@ sh setup_env.sh
 ```
 
 ## Running Notebooks
+
+Select `notebooks`.
 
 Select `sharedcontrolpaper` as the Kernel in the top right corner of the screen.
 
