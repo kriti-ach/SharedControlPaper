@@ -171,7 +171,7 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
                     has_thirty_percent_drop = False
                     for j in range(i+1, i+5):
                         if pressures_raw[j-1] == 1.0:
-                            if pressures_raw[j] == 1.0:
+                            if pressures_raw[j] == 1.0: # Break if any of the next 5 timepoints have a pressure = 1
                                 is_monotonic = False
                                 break
                         else:
@@ -187,15 +187,8 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
                     pressure_at_moment_of_inhibition = pressures_raw[i]
                     break
         
-        #Find the old moment of inhibition as was calculated in pilot subjects
-        if index_of_start_check is not None:
-            for i in range(index_of_start_check, len(pressures_raw)):
-                if pressures_raw[i] < pressures_raw[index_of_start_check]:
-                    old_moment_of_inhibition = time_stamps[i]
-                    index_of_old_inhibition = i
-                    break
-        
         # Ring position at moment of inhibition is the same as ring position at stop onset
+        # distances_raw is calculated for the ball position relative to the ring position
         distance_at_stop_onset = distances_raw[stop_onset_idx] + ring_positions_raw[stop_onset_idx]
 
         # Find the end of inhibition (first zero pressure after the start of inhibition) and distance at the end of inhibition
@@ -297,8 +290,6 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
             'stop_moment': stop_moment,
             'stop_moment_idx': stop_moment_idx,
             'moment_of_inhibition': moment_of_inhibition,
-            'old_moment_of_inhibition': old_moment_of_inhibition,
-            'index_of_old_inhibition': index_of_old_inhibition,
             'index_of_inhibition': index_of_inhibition,
             'duration_of_inhibition': duration_of_inhibition,
             'distance_of_inhibition': distance_of_inhibition,
