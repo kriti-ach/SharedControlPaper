@@ -1,7 +1,20 @@
-.
-**/.DS_store
-__pycache__
-.ipynb_checkpoints/
-.vscode/
+# Virtual environment
 .venv/
+
+# Python package
 *.egg-info
+
+# jupyter
+.ipynb_checkpoints/
+
+# pycache
+__pycache__/
+
+# OS generated files 
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.d
