@@ -13,7 +13,7 @@ git clone https://github.com/kriti-a567/SharedControlPaper.git
 Go into the repo using:
 
 ```
-cd Path/to/repo
+cd SharedControlPaper
 ```
 Generate the `.venv` and open Jupyter Lab:
 ```
