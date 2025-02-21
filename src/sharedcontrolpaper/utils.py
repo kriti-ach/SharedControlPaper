@@ -75,6 +75,7 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
         # Calculate the minimum time to start checking for inhibition
         start_check_time = stop_onset + min_delay
 
+
         # Find the index to start checking for inhibition (first index after the start_check_time, aka minimum SSRT)
         index_of_start_check = next((i for i, t in enumerate(time_stamps) if t >= start_check_time), None)
 
