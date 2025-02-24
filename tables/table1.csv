@@ -4,4 +4,4 @@ Go Task Accuracy,0.97,0.03
 Stop-Failure RT (ms),481.66,101.76
 Stop-Failure Rate,0.49,0.04
 SSD (ms),327.71,121.41
-SSRT (ms),215.55,31.15
+SSRT (ms),213.16,30.9

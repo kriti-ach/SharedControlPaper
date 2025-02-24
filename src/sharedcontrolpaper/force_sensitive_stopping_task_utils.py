@@ -57,7 +57,6 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
     """
     trial_results = {}
     ssrt_list = []
-    ring_positions_raw = np.arange(-15, 15.0, 0.095).tolist()
 
     for idx, row in data.iterrows():
         trial_number = idx
@@ -84,10 +83,7 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
         stop_moment_idx = None
         moment_of_inhibition = None
         duration_of_inhibition = np.nan
-        distance_at_stop_onset = np.nan
         pressure_at_moment_of_inhibition = np.nan
-        distance_at_stop_moment = np.nan
-        distance_of_inhibition = np.nan
 
         # Find the moment of inhibition and the pressure at the moment of inhibition.
         if index_of_start_check is not None:
@@ -116,25 +112,18 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
                     index_of_inhibition = i
                     pressure_at_moment_of_inhibition = pressures_raw[i]
                     break
-        
-        # Ring position at moment of inhibition is the same as ring position at stop onset
-        # distances_raw is calculated for the ball position relative to the ring position
-        distance_at_stop_onset = distances_raw[stop_onset_idx] + ring_positions_raw[stop_onset_idx]
 
-        # Find the end of inhibition (first zero pressure after the start of inhibition) and distance at the end of inhibition
+        # Find the end of inhibition (first zero pressure after the start of inhibition)
         if index_of_inhibition is not None:
             stop_moment_indices = [i for i in range(index_of_inhibition, len(pressures_raw)) if pressures_raw[i] == 0]
             if stop_moment_indices:
                 stop_moment = time_stamps[stop_moment_indices[0]]
                 stop_moment_idx = stop_moment_indices[0]
-                # Ring position at stop moment is the same as ring position at stop onset
-                distance_at_stop_moment = distances_raw[stop_moment_idx] + ring_positions_raw[stop_onset_idx]
+                
 
         # Find the duration of inhibition (time between moment of inhibition and end of inhibition) 
-        # and distance of inhibition (distance between stop moment and stop onset)
         if moment_of_inhibition is not None and stop_moment is not None:
             duration_of_inhibition = stop_moment - moment_of_inhibition
-            distance_of_inhibition = distance_at_stop_moment - distance_at_stop_onset
                 
         # Calculate SSRT 
         if stop_onset is not None and moment_of_inhibition is not None:
@@ -210,7 +199,6 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
             'moment_of_inhibition': moment_of_inhibition,
             'index_of_inhibition': index_of_inhibition,
             'duration_of_inhibition': duration_of_inhibition,
-            'distance_of_inhibition': distance_of_inhibition,
             'pressure_at_moment_of_inhibition': pressure_at_moment_of_inhibition,
             'distances_raw': distances_raw,
             'pressures_raw': pressures_raw,
@@ -228,7 +216,7 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
         }
     return trial_results, ssrt_list
 
-def process_trial_data_without_minimum_ssrt(data, exp_stage="final"):
+def process_trial_data_without_minimum_ssrt(data):
     """
     Process trial data for a specific block, calculating metrics including SSRT,
     moment of inhibition, and pressure measures. This function calculates the moment of inhibition
@@ -236,7 +224,6 @@ def process_trial_data_without_minimum_ssrt(data, exp_stage="final"):
 
     Parameters:
     - data (DataFrame): A DataFrame containing trial data, including pressure, timestamps, and stop signal data.
-    - exp_stage (String): A string which processes trial data for either the "pilot" subjects or the "final" subjects.
 
     Returns:
     - trial_results (dict): A dictionary containing various calculated metrics for each trial.
@@ -279,42 +266,32 @@ def process_trial_data_without_minimum_ssrt(data, exp_stage="final"):
 
         moment_of_inhibition = None
         index_of_inhibition = None
-        
-        # This is how the moment of inhibition was originally calculated for the pilot subjects in the pre-reg.
-        if exp_stage == "pilot":
-            if found_stop_pressure is not None:
-                for i in range(index_of_closest + 1, len(pressures_raw)):
-                    if pressures_raw[i] < pressures_raw[index_of_closest]:
-                        moment_of_inhibition = time_stamps_raw[i]
-                        index_of_inhibition = i
-                        break
-        # This is the correct/updated calculation for moment of inhibition
-        else:
-            if found_stop_pressure is not None:
-                for i in range(index_of_closest + 1, len(pressures_raw)):
-                    current_pressure = pressures_raw[i]
-                    target_pressure = current_pressure * (1 - 0.3)
-                    # Check if we have at least 5 more points to examine
-                    if i + 5 <= len(pressures_raw):
-                        # Check monotonic decrease with special case for pressure of 1
-                        is_monotonic = True
-                        has_thirty_percent_drop = False
-                        for j in range(i+1, i+5):
-                            if pressures_raw[j-1] == 1.0:
-                                if pressures_raw[j] == 1.0:
-                                    is_monotonic = False
-                                    break
-                            else:
-                                if pressures_raw[j] > pressures_raw[j-1]:
-                                    is_monotonic = False
-                                    break
-                            # Check if pressure dropped by at least 30%
-                            if pressures_raw[j] <= target_pressure:
-                                has_thirty_percent_drop = True
-                    if is_monotonic and has_thirty_percent_drop:
-                        moment_of_inhibition = time_stamps_raw[i]
-                        index_of_inhibition = i
-                        break
+
+        if found_stop_pressure is not None:
+            for i in range(index_of_closest + 1, len(pressures_raw)):
+                current_pressure = pressures_raw[i]
+                target_pressure = current_pressure * (1 - 0.3)
+                # Check if we have at least 5 more points to examine
+                if i + 5 <= len(pressures_raw):
+                    # Check monotonic decrease with special case for pressure of 1
+                    is_monotonic = True
+                    has_thirty_percent_drop = False
+                    for j in range(i+1, i+5):
+                        if pressures_raw[j-1] == 1.0:
+                            if pressures_raw[j] == 1.0:
+                                is_monotonic = False
+                                break
+                        else:
+                            if pressures_raw[j] > pressures_raw[j-1]:
+                                is_monotonic = False
+                                break
+                        # Check if pressure dropped by at least 30%
+                        if pressures_raw[j] <= target_pressure:
+                            has_thirty_percent_drop = True
+                if is_monotonic and has_thirty_percent_drop:
+                    moment_of_inhibition = time_stamps_raw[i]
+                    index_of_inhibition = i
+                    break
 
         trial_data['stop_pressure'] = found_stop_pressure
         trial_data['stop_moment'] = stop_moment
