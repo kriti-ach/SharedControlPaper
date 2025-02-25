@@ -3,25 +3,21 @@ import numpy as np
 
 # Add columns for stop acc, go acc, and stop failure acc
 def preprocess_stop_data(df):
-    df = df.query(f'Phase == "test"')
-    df = df[['Block', 'Phase', 'trialType', 'goStim', 'correctResponse', 'ssd', 'goResp_test.keys', 'goResp_test.corr','goResp_test.rt']]
     df['ssd'] = df['ssd'] * 1000
     df['goResp_test.rt'] = df['goResp_test.rt'] * 1000
 
     df.loc[:, 'stop_acc'] = np.where(df['trialType'] == 'stop', 
-                                 np.where(df['goResp_test.keys'].isnull(), 1, 0),  
+                                 np.where(df['response'].isnull(), 1, 0),  
                                  np.nan)
 
     df.loc[:, 'go_acc'] = np.where(df['trialType'] == 'go', 
-                                   np.where(df['goResp_test.keys'] == df['correctResponse'], 1, 0), 
+                                   np.where(df['response'] == df['correctResponse'], 1, 0), 
                                    np.nan)
 
     df.loc[:, 'stop_failure_acc'] = np.where(
-        (df['trialType'] == 'stop') & (df['goResp_test.rt'].notna()),
-        np.where(df['goResp_test.keys'] == df['correctResponse'], 1, 0),
+        (df['trialType'] == 'stop') & (df['rt'].notna()),
+        np.where(df['response'] == df['correctResponse'], 1, 0),
         np.nan)
-    
-    df.rename(columns={'goResp_test.keys': 'response', 'goResp_test.corr': 'correct', 'goResp_test.rt': 'rt'}, inplace=True)
     
     return df
 
@@ -54,19 +50,19 @@ def compute_SSRT(df, without_short_ssd_trials = False, max_go_rt = 2):
     if len(stop_df) > 0 and len(stop_failure) > 0:
         p_respond = len(stop_failure)/len(stop_df) # proportion of stop trials where there was a response
         avg_SSD = stop_df.ssd.mean()
-        nth_index = int(np.rint(p_respond*len(sorted_go))) - 1 
+    else:
+        SSRT = None
+    nth_index = int(np.rint(p_respond*len(sorted_go))) - 1 
 
-        if nth_index < 0:
-            nth_RT = sorted_go[0]
-        elif nth_index >= len(sorted_go):
-            nth_RT = sorted_go[-1]
-        else:
-            nth_RT = sorted_go[nth_index]
-        
-        if avg_SSD:
-            SSRT = nth_RT - avg_SSD
-        else:
-            SSRT = None
+    if nth_index < 0:
+        nth_RT = sorted_go[0]
+    elif nth_index >= len(sorted_go):
+        nth_RT = sorted_go[-1]
+    else:
+        nth_RT = sorted_go[nth_index]
+    
+    if avg_SSD:
+        SSRT = nth_RT - avg_SSD
     else:
         SSRT = None
     return SSRT

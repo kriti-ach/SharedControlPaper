@@ -39,9 +39,9 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
 
 - /data:  
     - /experiment:  
-      * Contains CSV files for the 'final' and 'pilot' subjects for both the force-sensitive stopping task ('shared_control') and the simple stop task ('simple_stop').  
+      * Contains CSV files for the 'final' subjects for both the force-sensitive stopping task ('shared_control') and the simple stop task ('simple_stop').  
     - /surveys:  
-      * Contains CSV files for the 'final' and 'pilot' subjects for both the AI trust survey and the demographics survey.  
+      * Contains CSV files for the 'final'subjects for both the AI trust survey and the demographics survey.  
 - /experiments:  
     - [forceSensitiveStoppingTask.py](experiments/forceSensitiveStoppingTask.py)  
         * The script to run the force-sensitive stopping task.   

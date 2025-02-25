@@ -1,1 +1,0 @@
-# Data for shared control experiment
