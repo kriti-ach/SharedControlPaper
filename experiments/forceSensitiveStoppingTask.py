@@ -1,9 +1,8 @@
-from psychopy import visual, core, gui, data, core
+from psychopy import visual, gui, data, core
 from wooting_utils import WootingPython, HID_CODE_SPACE, HID_CODE_ENTER
 import numpy as np
 import sys
 import wx
-import random
 import time
 
 

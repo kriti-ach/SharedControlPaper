@@ -44,14 +44,14 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
       * Contains CSV files for the 'final'subjects for both the AI trust survey and the demographics survey.  
 - /experiments:  
     - [forceSensitiveStoppingTask.py](experiments/forceSensitiveStoppingTask.py)  
-        * The script to run the force-sensitive stopping task.   
+        * The script to run the force-sensitive stopping task.
+    - /libs/dylibs:
+        * Contains dylibs you will need to install to run the force-sensitive stopping task.
     - /simpleStop  
         * The scripts to run the simple stop task.  
         * Install PsychoPy GUI and click/run simpleStop.psyexp.  
 - /figures:  
     - Contains the figures in the paper. Note: Figures 1a and 1b were not generated with code and are not in this repository.  
-- /libs/dylibs:  
-    - Contains dylibs you will need to install to run the force-sensitive stopping task.  
 - /notebooks:  
     - The notebooks which run through the processing and analysis.  
     - The notebooks are numbered in the order in which they should be run.  

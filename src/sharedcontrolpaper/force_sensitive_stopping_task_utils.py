@@ -81,7 +81,6 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
         ssrt = np.nan 
         index_of_ssrt = None # Index of SSRT
         ssrt_without_minimum_ssrt = np.nan # SSRT calculated without the minimum SSRT period of 175ms
-        index_of_ssrt_without_minimum_ssrt = np.nan # Index of SSRT without minimum period
         stop_moment = None # Moment where prssure becomes 0 after the SSRT
         stop_moment_idx = None # Index of the stop moment
         duration_of_inhibition = np.nan # Time between SSRT and the stop moment
@@ -137,7 +136,6 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
                             has_thirty_percent_drop = True
                 if is_monotonic and has_thirty_percent_drop:
                     ssrt_without_minimum_ssrt = time_stamps[i]
-                    index_of_ssrt_without_minimum_ssrt = i
                     break
 
         if not np.isnan(ssrt_without_minimum_ssrt) and stop_onset is not None:
