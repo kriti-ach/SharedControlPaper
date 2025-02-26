@@ -281,7 +281,6 @@ def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
 
     ax.set_xlabel('Time (seconds)')
     ax.set_ylabel('Raw Pressure')
-    ax.set_title(f'Trial {trial_number}')
     ax.legend()
     ax.grid(True)
 
