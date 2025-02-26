@@ -1,0 +1,34 @@
+columns: 
+  - Block:
+      Description: Block number
+      Type: float
+      Example: "1.0"
+  - Phase:
+      Description: The practice or test phase of the experiment
+      Type: String
+      Example: "practice"
+  - correctResponse:
+      Description: The correct response for a trial
+      Type: String
+      Example: "right"
+  - goStim:
+      Description: Whether the go stimulus for that trial is a circle or square
+      Type: String
+      Example: "circleblack.png"
+  - response:
+      Description: The subject's response for that trial. It's blank if the subject does not respond on that trial
+      Type: String
+      Example: "right"
+  - rt:
+      Description: The subject's reaction time on that trial in seconds (s)
+      Type: float
+      Example: "0.59"
+  - ssd:
+      Description: The stop signal delay on that trial
+      Type: float
+      Example: "0.3"
+  - trialType:
+      Description: Whether the trial is a go trial or stop trial
+      Type: String
+      Example: "go"
+  

@@ -40,15 +40,15 @@ def string_to_numbers(string_data):
     numbers = [float(num) for num in string_data.split()]
     return numbers
 
-def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
+def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
     """
     Process trial data for a specific block, calculating metrics including SSRT,
     moment of inhibition, and pressure measures.
 
     Parameters:
     - data (DataFrame): A DataFrame containing trial data, including pressure, timestamps, and stop signal data.
-    - block (str): The block type (e.g., 'ai', 'non_ai') of the trials to process.
-    - min_delay (float): Minimum delay after the stop signal before checking for inhibition (default is 0.15 seconds).
+    - block (str): The block type (e.g., 'AI', 'Non-AI') of the trials to process.
+    - min_delay (float): Minimum delay after the stop signal before checking for inhibition (default is 0.175 seconds).
     - threshold_reduction (float): The percentage reduction below which pressure is considered as decreased (default is 30%).
 
     Returns:
@@ -60,11 +60,11 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
 
     for idx, row in data.iterrows():
         trial_number = idx
-        stop_onset = row['SSD_mean']
-        time_stamps = row['time_stamps_raw']
-        pressures_raw = row['pressures_raw']
+        stop_onset = row['SSD']
+        time_stamps = row['time_stamps']
+        pressures = row['pressures']
         condition = row['condition']
-        distances_raw = row['distances_raw']
+        distances = row['distances']
 
         if stop_onset is not None:
             stop_onset_idx = next((i for i, t in enumerate(time_stamps) if t >= stop_onset), None)
@@ -72,71 +72,101 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
             stop_onset_idx = None
 
         # Calculate the minimum time to start checking for inhibition
-        start_check_time = stop_onset + min_delay
+        minimum_ssrt = stop_onset + min_delay
 
 
         # Find the index to start checking for inhibition (first index after the start_check_time, aka minimum SSRT)
-        index_of_start_check = next((i for i, t in enumerate(time_stamps) if t >= start_check_time), None)
+        index_of_minimum_ssrt = next((i for i, t in enumerate(time_stamps) if t >= minimum_ssrt), None)
 
-        index_of_inhibition = None
-        stop_moment = None
-        stop_moment_idx = None
-        moment_of_inhibition = None
-        duration_of_inhibition = np.nan
-        pressure_at_moment_of_inhibition = np.nan
+        ssrt = np.nan 
+        index_of_ssrt = None # Index of SSRT
+        ssrt_without_minimum_ssrt = np.nan # SSRT calculated without the minimum SSRT period of 175ms
+        index_of_ssrt_without_minimum_ssrt = np.nan # Index of SSRT without minimum period
+        stop_moment = None # Moment where prssure becomes 0 after the SSRT
+        stop_moment_idx = None # Index of the stop moment
+        duration_of_inhibition = np.nan # Time between SSRT and the stop moment
 
-        # Find the moment of inhibition and the pressure at the moment of inhibition.
-        if index_of_start_check is not None:
-            for i in range(index_of_start_check, len(pressures_raw)):
-                current_pressure = pressures_raw[i]
+        # Find the SSRT and the pressure at the SSRT.
+        if index_of_minimum_ssrt is not None:
+            for i in range(index_of_minimum_ssrt, len(pressures)):
+                current_pressure = pressures[i]
                 target_pressure = current_pressure * (1 - threshold_reduction)
                 # Check if we have at least 5 more points to examine
-                if i + 5 <= len(pressures_raw):
+                if i + 5 <= len(pressures):
                     # Check monotonic decrease with special case for pressure of 1
                     is_monotonic = True
                     has_thirty_percent_drop = False
                     for j in range(i+1, i+5):
-                        if pressures_raw[j-1] == 1.0:
-                            if pressures_raw[j] == 1.0: # Break if any of the next 5 timepoints have a pressure = 1
+                        if pressures[j-1] == 1.0:
+                            if pressures[j] == 1.0: # Break if any of the next 5 timepoints have a pressure = 1
                                 is_monotonic = False
                                 break
                         else:
-                            if pressures_raw[j] > pressures_raw[j-1]:
+                            if pressures[j] > pressures[j-1]:
                                 is_monotonic = False
                                 break
                         # Check if pressure dropped by at least 30%
-                        if pressures_raw[j] <= target_pressure:
+                        if pressures[j] <= target_pressure:
                             has_thirty_percent_drop = True
                 if is_monotonic and has_thirty_percent_drop:
-                    moment_of_inhibition = time_stamps[i]
-                    index_of_inhibition = i
-                    pressure_at_moment_of_inhibition = pressures_raw[i]
+                    ssrt = time_stamps[i]
+                    index_of_ssrt = i
+                    break
+        
+        # Find the SSRT without the 175ms Minimum SSRT
+        if stop_onset_idx is not None:
+            for i in range(stop_onset_idx, len(pressures)):
+                current_pressure = pressures[i]
+                target_pressure = current_pressure * (1 - threshold_reduction)
+                # Check if we have at least 5 more points to examine
+                if i + 5 <= len(pressures):
+                    # Check monotonic decrease with special case for pressure of 1
+                    is_monotonic = True
+                    has_thirty_percent_drop = False
+                    for j in range(i+1, i+5):
+                        if pressures[j-1] == 1.0:
+                            if pressures[j] == 1.0: # Break if any of the next 5 timepoints have a pressure = 1
+                                is_monotonic = False
+                                break
+                        else:
+                            if pressures[j] > pressures[j-1]:
+                                is_monotonic = False
+                                break
+                        # Check if pressure dropped by at least 30%
+                        if pressures[j] <= target_pressure:
+                            has_thirty_percent_drop = True
+                if is_monotonic and has_thirty_percent_drop:
+                    ssrt_without_minimum_ssrt = time_stamps[i]
+                    index_of_ssrt_without_minimum_ssrt = i
                     break
 
+        if not np.isnan(ssrt_without_minimum_ssrt) and stop_onset is not None:
+            ssrt_without_minimum_ssrt = ssrt_without_minimum_ssrt - stop_onset
+
         # Find the end of inhibition (first zero pressure after the start of inhibition)
-        if index_of_inhibition is not None:
-            stop_moment_indices = [i for i in range(index_of_inhibition, len(pressures_raw)) if pressures_raw[i] == 0]
+        if index_of_ssrt is not None:
+            stop_moment_indices = [i for i in range(index_of_ssrt, len(pressures)) if pressures[i] == 0]
             if stop_moment_indices:
                 stop_moment = time_stamps[stop_moment_indices[0]]
                 stop_moment_idx = stop_moment_indices[0]
                 
 
         # Find the duration of inhibition (time between moment of inhibition and end of inhibition) 
-        if moment_of_inhibition is not None and stop_moment is not None:
-            duration_of_inhibition = stop_moment - moment_of_inhibition
+        if not np.isnan(ssrt) and stop_moment is not None:
+            duration_of_inhibition = stop_moment - ssrt
                 
-        # Calculate SSRT 
-        if stop_onset is not None and moment_of_inhibition is not None:
-            ssrt = moment_of_inhibition - stop_onset
+        # Calculate SSRT relative to the stop onset
+        if stop_onset is not None and not np.isnan(ssrt):
+            ssrt = ssrt - stop_onset
             ssrt_list.append(ssrt)
         else:
             ssrt = np.nan
             ssrt_list.append(ssrt)
-        
-        # Calculate Go Task Measure at the Onset of the Stop Signal 1 - fully within the ring, 0 - outside the ring
+
+        # Calculate Go Task Accuracy at the Onset of the Stop Signal 1 - fully within the ring, 0 - outside the ring
         critical_distance = 2 - 0.8 # This is the distance that needs to be cleared to be outside the circle
         if stop_onset is not None:
-            stop_distance = distances_raw[stop_onset_idx]
+            stop_distance = distances[stop_onset_idx]
             if abs(stop_distance) > critical_distance:
                 go_task_accuracy_at_stop_onset = 0
             else:
@@ -153,7 +183,7 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
         count = 0
         if stop_onset is not None:
             while count < stop_onset_idx:
-                distance = distances_raw[count]
+                distance = distances[count]
                 if abs(distance) <= critical_distance:
                     inside_ring_count += 1
                 elif distance < -critical_distance:
@@ -175,8 +205,8 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
         inside_ring_count = 0
         if stop_onset is not None:
             count = stop_onset_idx + 1
-            while count < len(distances_raw):
-                distance = distances_raw[count]
+            while count < len(distances):
+                distance = distances[count]
                 if abs(distance) <= critical_distance:
                     inside_ring_count += 1
                 elif distance < -critical_distance:
@@ -184,27 +214,26 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
                 elif distance > critical_distance:
                     after_ring_count += 1
                 count += 1
-            go_task_accuracy_after_stop_onset = inside_ring_count / (len(distances_raw) - stop_onset_idx)
-            ball_before_ring_proportion_after_stop_onset = before_ring_count / (len(distances_raw) - stop_onset_idx)
-            ball_after_ring_proportion_after_stop_onset = after_ring_count / (len(distances_raw) - stop_onset_idx)
+            go_task_accuracy_after_stop_onset = inside_ring_count / (len(distances) - stop_onset_idx)
+            ball_before_ring_proportion_after_stop_onset = before_ring_count / (len(distances) - stop_onset_idx)
+            ball_after_ring_proportion_after_stop_onset = after_ring_count / (len(distances) - stop_onset_idx)
         else:
             go_task_accuracy_after_stop_onset = np.nan
             ball_before_ring_proportion_after_stop_onset = np.nan
             ball_after_ring_proportion_after_stop_onset = np.nan
 
+
         trial_results[trial_number] = {
             'stop_onset': stop_onset,
             'stop_moment': stop_moment,
             'stop_moment_idx': stop_moment_idx,
-            'moment_of_inhibition': moment_of_inhibition,
-            'index_of_inhibition': index_of_inhibition,
+            'index_of_ssrt': index_of_ssrt,
             'duration_of_inhibition': duration_of_inhibition,
-            'pressure_at_moment_of_inhibition': pressure_at_moment_of_inhibition,
-            'distances_raw': distances_raw,
-            'pressures_raw': pressures_raw,
-            'time_stamps_raw': time_stamps,
+            'distances': distances,
+            'pressures': pressures,
+            'time_stamps': time_stamps,
             'condition': condition,
-            'post_buffer_stamp': start_check_time,
+            'minimum_ssrt': minimum_ssrt,
             'go_task_accuracy_at_stop_onset': go_task_accuracy_at_stop_onset,
             'go_task_accuracy_before_stop_onset': go_task_accuracy_before_stop_onset,
             'go_task_accuracy_after_stop_onset': go_task_accuracy_after_stop_onset,
@@ -212,100 +241,9 @@ def process_trial_data(data, block, min_delay=0.15, threshold_reduction=0.30):
             'ball_after_ring_proportion_before_stop_onset': ball_after_ring_proportion_before_stop_onset,
             'ball_before_ring_proportion_after_stop_onset': ball_before_ring_proportion_after_stop_onset,
             'ball_after_ring_proportion_after_stop_onset': ball_after_ring_proportion_after_stop_onset,
-            'ssrt': ssrt
+            'ssrt': ssrt,
+            'ssrt_without_minimum_ssrt': ssrt_without_minimum_ssrt
         }
-    return trial_results, ssrt_list
-
-def process_trial_data_without_minimum_ssrt(data):
-    """
-    Process trial data for a specific block, calculating metrics including SSRT,
-    moment of inhibition, and pressure measures. This function calculates the moment of inhibition
-    without any minimum SSRT (index_of_start_check).
-
-    Parameters:
-    - data (DataFrame): A DataFrame containing trial data, including pressure, timestamps, and stop signal data.
-
-    Returns:
-    - trial_results (dict): A dictionary containing various calculated metrics for each trial.
-    - ssrt_list (list): A list of SSRT values calculated for each trial.
-    """
-    trial_results = {}
-    ssrt_list = []
-
-    for idx, row in data.iterrows():
-        trial_number = idx
-        stop_onset = row['SSD_mean']    
-        time_stamps = row['time_stamps_raw']
-        closest_time = min(time_stamps, key=lambda x: abs(x - stop_onset))
-        index_of_closest = time_stamps.index(closest_time) # Index of closest time stamp to stop onset
-        raw_pressure = row['pressures_raw'][index_of_closest]
-
-        trial_results[trial_number] = {
-            'stop_onset': stop_onset,
-            'closest_time': closest_time,
-            'index_of_closest': index_of_closest,
-            'raw_pressure': raw_pressure,
-            'distances_raw': row['distances_raw'],
-            'pressures_raw': row['pressures_raw'],
-            'time_stamps_raw': row['time_stamps_raw'],
-            'condition': row['condition']
-        }
-
-    for trial_number, trial_data in trial_results.items():
-        index_of_closest = trial_data['index_of_closest']
-        pressures_raw = trial_data['pressures_raw']
-        time_stamps_raw = trial_data['time_stamps_raw']
-
-        found_stop_pressure = None
-        stop_moment = None
-        for i in range(index_of_closest + 1, len(pressures_raw)):
-            if pressures_raw[i] == 0:
-                found_stop_pressure = pressures_raw[i]
-                stop_moment = time_stamps_raw[i]
-                break
-
-        moment_of_inhibition = None
-        index_of_inhibition = None
-
-        if found_stop_pressure is not None:
-            for i in range(index_of_closest + 1, len(pressures_raw)):
-                current_pressure = pressures_raw[i]
-                target_pressure = current_pressure * (1 - 0.3)
-                # Check if we have at least 5 more points to examine
-                if i + 5 <= len(pressures_raw):
-                    # Check monotonic decrease with special case for pressure of 1
-                    is_monotonic = True
-                    has_thirty_percent_drop = False
-                    for j in range(i+1, i+5):
-                        if pressures_raw[j-1] == 1.0:
-                            if pressures_raw[j] == 1.0:
-                                is_monotonic = False
-                                break
-                        else:
-                            if pressures_raw[j] > pressures_raw[j-1]:
-                                is_monotonic = False
-                                break
-                        # Check if pressure dropped by at least 30%
-                        if pressures_raw[j] <= target_pressure:
-                            has_thirty_percent_drop = True
-                if is_monotonic and has_thirty_percent_drop:
-                    moment_of_inhibition = time_stamps_raw[i]
-                    index_of_inhibition = i
-                    break
-
-        trial_data['stop_pressure'] = found_stop_pressure
-        trial_data['stop_moment'] = stop_moment
-        trial_data['moment_of_inhibition'] = moment_of_inhibition
-        trial_data['index_of_inhibition'] = index_of_inhibition
-
-        if stop_onset is not None and moment_of_inhibition is not None:
-            trial_data['ssrt'] = moment_of_inhibition - trial_data['stop_onset'] 
-            ssrt = moment_of_inhibition - trial_data['stop_onset'] 
-            ssrt_list.append(ssrt)
-        else:
-            ssrt_list.append(np.nan)
-            trial_data['ssrt'] = np.nan
-
     return trial_results, ssrt_list
 
 def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
@@ -320,26 +258,26 @@ def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
     - ax (matplotlib.axes.Axes): The axes on which to plot the data.
     - color (str): The color to use for the trial plot.
     """
-    pressures_raw = trial_data['pressures_raw']
-    time_stamps_raw = trial_data['time_stamps_raw']
+    pressures = trial_data['pressures']
+    time_stamps = trial_data['time_stamps']
     stop_onset_time = trial_data.get('stop_onset', None)
-    moment_of_inhibition = trial_data.get('moment_of_inhibition', None)
+    ssrt = trial_data.get('ssrt', None)
     
     stop_moment = trial_data.get('stop_moment', None)
-    post_buffer_stamp = trial_data.get('post_buffer_stamp', None)
+    minimum_ssrt = trial_data.get('minimum_ssrt', None)
 
-    ax.plot(time_stamps_raw, pressures_raw, label=f'Trial {trial_number}', color=color)
+    ax.plot(time_stamps, pressures, label=f'Trial {trial_number}', color=color)
 
     # Note: We changed the terminology of moment of inhibition to SSRT, stop moment to the moment when the pressure on the keyboard reached 0
     # , and the post buffer stamp to minimum SSRT for the paper.
     if stop_onset_time is not None:
         ax.axvline(x=stop_onset_time, color='black', linestyle='dotted', linewidth=2, label='Stop Onset')
-    if moment_of_inhibition is not None:
-        ax.axvline(x=moment_of_inhibition, color='green', linestyle='dotted', linewidth=2, label='SSRT')
+    if ssrt is not None:
+        ax.axvline(x=ssrt+stop_onset_time, color='green', linestyle='dotted', linewidth=2, label='SSRT')
     if stop_moment is not None:
         ax.axvline(x=stop_moment, color='red', linestyle='dotted', linewidth=2, label='Pressure on the Keyboard Reached 0')
-    if post_buffer_stamp is not None:
-        ax.axvline(x=post_buffer_stamp, color='purple', linestyle='dotted', linewidth=2, label='Minimum SSRT')
+    if minimum_ssrt is not None:
+        ax.axvline(x=minimum_ssrt, color='purple', linestyle='dotted', linewidth=2, label='Minimum SSRT')
 
     ax.set_xlabel('Time (seconds)')
     ax.set_ylabel('Raw Pressure')

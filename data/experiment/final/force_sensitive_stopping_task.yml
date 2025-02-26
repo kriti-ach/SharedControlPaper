@@ -1,0 +1,15 @@
+columns: 
+  - condition:
+      Description: Whether the trial is an AI-disengaged or AI-engaged trial within the AI block or a Non-AI trial in the Non-AI block
+      Type: String
+      Example: "Non-AI"
+  - SSD:
+      Description: The stop signal delay on that trial
+      Type: float
+      Example: "3.42"
+  - block:
+      Description: The practice or test phase of the experiment. Within the test phase, there are 'block 1' and 'block 2' which can be
+      the AI block or the Non-AI block. If it's the AI block, the condition is either AI-disengaged or AI-engaged. And if it's the Non-AI
+      block, the condition is always Non-AI
+      Type: String
+      Example: "block 1"
