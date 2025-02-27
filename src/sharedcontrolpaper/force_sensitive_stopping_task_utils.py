@@ -101,11 +101,11 @@ def find_ssrt(time_stamps, pressures, start_index, threshold_reduction):
         current_pressure = pressures[i]
         target_pressure = current_pressure * (1 - threshold_reduction)
         # Check if we have at least 5 more points to examine
-        if i + 5 <= len(pressures):
+        if i + 6 <= len(pressures):
             # Check monotonic decrease with special case for pressure of 1
             is_monotonic = True
             has_thirty_percent_drop = False
-            for j in range(i + 1, i + 5):
+            for j in range(i + 1, i + 6):
                 if pressures[j - 1] == 1.0:  # Break if any of the next 5 timepoints have a pressure = 1
                     if pressures[j] == 1.0:
                         is_monotonic = False
@@ -190,6 +190,22 @@ def calculate_go_task_metrics(distances, stop_onset_idx, ring_radius_threshold):
         results['go_task_accuracy_after_stop_onset'] = np.nan
 
     return results
+
+def find_first_non_zero_pressure_timestamp(pressures, time_stamps):
+    first_non_zero_pressure_timestamp = np.nan
+    for i, pressure in enumerate(pressures):
+        if pressure > 0:
+            first_non_zero_pressure_timestamp = time_stamps[i]
+            break
+    return first_non_zero_pressure_timestamp
+
+def find_first_full_pressure_timestamp(pressures, time_stamps):
+    first_full_pressure_timestamp = np.nan
+    for i, pressure in enumerate(pressures):
+        if pressure == 1:
+            first_full_pressure_timestamp = time_stamps[i] 
+            break
+    return first_full_pressure_timestamp
 
 def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
     """
@@ -277,6 +293,10 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
         # Find the pressures at time intervals until stop onset
         pressures_at_intervals_until_stop_onset = calculate_intervals(time_stamps, pressures, stop_onset=stop_onset)
 
+        #Find the first timestamp with non-zero pressure
+        first_non_zero_pressure_timestamp = find_first_non_zero_pressure_timestamp(pressures, time_stamps)
+        first_full_pressure_timestamp = find_first_full_pressure_timestamp(pressures, time_stamps)
+
         trial_results[trial_number] = {
             'stop_onset': stop_onset,
             'stop_moment': stop_moment,
@@ -294,6 +314,8 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
             'ball_before_ring_proportion_before_stop_onset': ball_before_ring_proportion_before_stop_onset,
             'ball_after_ring_proportion_before_stop_onset': ball_after_ring_proportion_before_stop_onset,
             'pressures_at_intervals_until_stop_onset': pressures_at_intervals_until_stop_onset,
+            'first_non_zero_pressure_timestamp': first_non_zero_pressure_timestamp,
+            'first_full_pressure_timestamp': first_full_pressure_timestamp,
             'ssrt': ssrt,
             'ssrt_without_minimum_ssrt': ssrt_no_min
         }

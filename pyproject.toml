@@ -22,3 +22,7 @@ dev = [
 
 [tool.ruff.lint]
 ignore = ["F821"]  # Ignore the error
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

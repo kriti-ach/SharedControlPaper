@@ -1,6 +1,4 @@
 from psychopy import visual, gui, data, core
-import sys
-sys.path.append('/src')
 from experiments.wooting_utils import WootingPython, HID_CODE_SPACE, HID_CODE_ENTER
 import numpy as np
 import sys
@@ -700,7 +698,7 @@ if __name__ == "__main__":
                 timings.append(core.getTime() - trial_start)
                 if scan_codes and scan_codes[0] == HID_CODE_SPACE and analog_codes:
                     not_moving_timer = core.CountdownTimer(1)
-                    ball.pos == (np.max(analog_codes) * PRESS_SCALER, 0)
+                    ball.pos += (np.max(analog_codes) * PRESS_SCALER, 0)
                     pressures.append(np.max(analog_codes))
                 else:
                     pressures.append(0)

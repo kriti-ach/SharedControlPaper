@@ -18,6 +18,7 @@ from psychopy.constants import (NOT_STARTED, STARTED, FINISHED)
 
 from numpy.random import random, randint
 import os  # handy system and path functions
+import random
 
 import psychopy.iohub as io
 from psychopy.hardware import keyboard

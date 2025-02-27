@@ -17,14 +17,14 @@ columns:
       Description: The distance of the center of the ball relative to the center of the ring at every timepoint in the trial. Each distance
       is operationalized as the ball's position at a timepoint minus the ring's position at that timepoint. Distances are in visual degrees
       where 1 cm =~ 1.154 visual degrees. 
-      Type: list of floats
+      Type: String of floats
       Example: "[0.196, -0.196, ...]"
   - pressures:
       Description: The pressure applied on the spacebar at every timepoint in the trial. A pressure of 1 indicates that the subject is
       pressing the spacebar fully, and a pressure of 0 indicates that they aren't pressing the spacebar at all.
-      Type: list of floats
+      Type: String of floats
       Example: "[1.0, 0.95, ...]"
   - time_stamps:
       Description: The time in seconds (s) at every timepoint in the trial. 
-      Type: list of floats
+      Type: String of floats
       Example: "[0.58, 0.75, ...]"
