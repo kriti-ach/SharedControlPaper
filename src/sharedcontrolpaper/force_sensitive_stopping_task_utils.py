@@ -83,6 +83,114 @@ def calculate_intervals(time_stamps, pressures, stop_onset, interval_duration=0.
 
     return pressures_at_intervals
 
+def find_ssrt(time_stamps, pressures, start_index, threshold_reduction):
+    """
+    Finds the stop-signal reaction time (SSRT) based on pressure changes.
+
+    Args:
+        time_stamps: Array of timestamps.
+        pressures: Array of pressure measurements.
+        start_index: Index to start searching for SSRT.
+        threshold_reduction:  The percentage reduction in pressure to define the SSRT.
+
+    Returns:
+        A tuple containing the SSRT (in time units) and its index, or (np.nan, None) if not found.
+    """
+
+    for i in range(start_index, len(pressures)):
+        current_pressure = pressures[i]
+        target_pressure = current_pressure * (1 - threshold_reduction)
+        # Check if we have at least 5 more points to examine
+        if i + 5 <= len(pressures):
+            # Check monotonic decrease with special case for pressure of 1
+            is_monotonic = True
+            has_thirty_percent_drop = False
+            for j in range(i + 1, i + 5):
+                if pressures[j - 1] == 1.0:  # Break if any of the next 5 timepoints have a pressure = 1
+                    if pressures[j] == 1.0:
+                        is_monotonic = False
+                        break
+                elif pressures[j] > pressures[j - 1]:
+                    is_monotonic = False
+                    break
+                # Check if pressure dropped by at least 30%
+                if pressures[j] <= target_pressure:
+                    has_thirty_percent_drop = True
+
+            if is_monotonic and has_thirty_percent_drop:
+                return time_stamps[i], i
+
+    return np.nan, None
+
+
+def calculate_go_task_metrics(distances, stop_onset_idx, ring_radius_threshold):
+    """
+    Calculates go task accuracy metrics.
+
+    Args:
+        distances: Array of distances from the center.
+        stop_onset_idx: Index of the stop signal onset.
+        ring_radius_threshold: Radius of the ring.
+
+    Returns:
+        A dictionary containing all go task accuracy metrics.  Returns NaN for metrics 
+        that cannot be calculated.
+    """
+
+    results = {}
+
+    # Before stop signal
+    inside_ring_count_before = 0
+    before_ring_count_before = 0
+    after_ring_count_before = 0
+    count_before = 0
+
+    if stop_onset_idx is not None:
+        for i in range(stop_onset_idx):
+            distance = distances[i]
+            count_before += 1
+            if abs(distance) <= ring_radius_threshold:
+                inside_ring_count_before += 1
+            elif distance < -ring_radius_threshold:
+                before_ring_count_before += 1
+            else:  # distance > ring_radius_threshold
+                after_ring_count_before += 1
+
+        if count_before > 0:
+            results['go_task_accuracy_before_stop_onset'] = inside_ring_count_before / count_before
+            results['ball_before_ring_proportion_before_stop_onset'] = before_ring_count_before / count_before
+            results['ball_after_ring_proportion_before_stop_onset'] = after_ring_count_before / count_before
+        else:
+            results['go_task_accuracy_before_stop_onset'] = np.nan
+            results['ball_before_ring_proportion_before_stop_onset'] = np.nan
+            results['ball_after_ring_proportion_before_stop_onset'] = np.nan
+
+        # At stop signal
+        stop_distance = distances[stop_onset_idx]
+        results['go_task_accuracy_at_stop_onset'] = 1 if abs(stop_distance) <= ring_radius_threshold else 0
+
+        # After stop signal
+        inside_ring_count_after = 0
+        count_after = 0
+        for i in range(stop_onset_idx + 1, len(distances)):
+            distance = distances[i]
+            count_after += 1
+            if abs(distance) <= ring_radius_threshold:
+                inside_ring_count_after += 1
+
+        if count_after > 0:
+            results['go_task_accuracy_after_stop_onset'] = inside_ring_count_after / count_after
+        else:
+            results['go_task_accuracy_after_stop_onset'] = np.nan
+    else:
+        results['go_task_accuracy_before_stop_onset'] = np.nan
+        results['ball_before_ring_proportion_before_stop_onset'] = np.nan
+        results['ball_after_ring_proportion_before_stop_onset'] = np.nan
+        results['go_task_accuracy_at_stop_onset'] = np.nan
+        results['go_task_accuracy_after_stop_onset'] = np.nan
+
+    return results
+
 def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
     """
     Process trial data for a specific block, calculating metrics including SSRT,
@@ -101,6 +209,8 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
     trial_results = {}
     ssrt_list = []
 
+    ring_radius_threshold = 1.2 # This is the distance that needs to be cleared for the dot to be outside the ring
+
     for idx, row in data.iterrows():
         trial_number = idx
         stop_onset = row['SSD']
@@ -109,6 +219,15 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
         condition = row['condition']
         distances = row['distances']
 
+        ssrt = np.nan 
+        ssrt_index = None # Index of SSRT
+        ssrt_no_min = np.nan # SSRT calculated without the minimum SSRT period of 175ms
+        ssrt_no_min_index = None
+        stop_moment = None # Moment where prssure becomes 0 after the SSRT
+        stop_moment_idx = None # Index of the stop moment
+        duration_of_inhibition = np.nan # Time between SSRT and the stop moment
+
+        # Find the stop onset and the index of stop onset
         if stop_onset is not None:
             stop_onset_idx = next((i for i, t in enumerate(time_stamps) if t >= stop_onset), None)
         else:
@@ -117,74 +236,14 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
         # Calculate the minimum time to start checking for inhibition
         minimum_ssrt = stop_onset + min_delay
         # Find the index to start checking for inhibition (first index after the start_check_time, aka minimum SSRT)
-        index_of_minimum_ssrt = next((i for i, t in enumerate(time_stamps) if t >= minimum_ssrt), None)
-
-        ssrt = np.nan 
-        index_of_ssrt = None # Index of SSRT
-        ssrt_without_minimum_ssrt = np.nan # SSRT calculated without the minimum SSRT period of 175ms
-        stop_moment = None # Moment where prssure becomes 0 after the SSRT
-        stop_moment_idx = None # Index of the stop moment
-        duration_of_inhibition = np.nan # Time between SSRT and the stop moment
-
-        # Find the SSRT and the pressure at the SSRT.
-        if index_of_minimum_ssrt is not None:
-            for i in range(index_of_minimum_ssrt, len(pressures)):
-                current_pressure = pressures[i]
-                target_pressure = current_pressure * (1 - threshold_reduction)
-                # Check if we have at least 5 more points to examine
-                if i + 5 <= len(pressures):
-                    # Check monotonic decrease with special case for pressure of 1
-                    is_monotonic = True
-                    has_thirty_percent_drop = False
-                    for j in range(i+1, i+5):
-                        if pressures[j-1] == 1.0:
-                            if pressures[j] == 1.0: # Break if any of the next 5 timepoints have a pressure = 1
-                                is_monotonic = False
-                                break
-                        else:
-                            if pressures[j] > pressures[j-1]:
-                                is_monotonic = False
-                                break
-                        # Check if pressure dropped by at least 30%
-                        if pressures[j] <= target_pressure:
-                            has_thirty_percent_drop = True
-                if is_monotonic and has_thirty_percent_drop:
-                    ssrt = time_stamps[i]
-                    index_of_ssrt = i
-                    break
+        min_ssrt_index = next((i for i, t in enumerate(time_stamps) if t >= minimum_ssrt), None)
         
-        # Find the SSRT without the 175ms Minimum SSRT
-        if stop_onset_idx is not None:
-            for i in range(stop_onset_idx, len(pressures)):
-                current_pressure = pressures[i]
-                target_pressure = current_pressure * (1 - threshold_reduction)
-                # Check if we have at least 5 more points to examine
-                if i + 5 <= len(pressures):
-                    # Check monotonic decrease with special case for pressure of 1
-                    is_monotonic = True
-                    has_thirty_percent_drop = False
-                    for j in range(i+1, i+5):
-                        if pressures[j-1] == 1.0:
-                            if pressures[j] == 1.0: # Break if any of the next 5 timepoints have a pressure = 1
-                                is_monotonic = False
-                                break
-                        else:
-                            if pressures[j] > pressures[j-1]:
-                                is_monotonic = False
-                                break
-                        # Check if pressure dropped by at least 30%
-                        if pressures[j] <= target_pressure:
-                            has_thirty_percent_drop = True
-                if is_monotonic and has_thirty_percent_drop:
-                    ssrt_without_minimum_ssrt = time_stamps[i]
-                    break
-
-        if not np.isnan(ssrt_without_minimum_ssrt) and stop_onset is not None:
-            ssrt_without_minimum_ssrt = ssrt_without_minimum_ssrt - stop_onset
+        ssrt, ssrt_index = find_ssrt(time_stamps, pressures, min_ssrt_index, threshold_reduction)
+        ssrt_no_min, ssrt_no_min_index = find_ssrt(time_stamps, pressures, stop_onset_idx, threshold_reduction)
 
         # Find the end of inhibition (first zero pressure after the start of inhibition)
-        if index_of_ssrt is not None:
-            stop_moment_indices = [i for i in range(index_of_ssrt, len(pressures)) if pressures[i] == 0]
+        if ssrt_index is not None:
+            stop_moment_indices = [i for i in range(ssrt_index, len(pressures)) if pressures[i] == 0]
             if stop_moment_indices:
                 stop_moment = time_stamps[stop_moment_indices[0]]
                 stop_moment_idx = stop_moment_indices[0]
@@ -202,74 +261,27 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
             ssrt = np.nan
             ssrt_list.append(ssrt)
 
-        # Calculate Go Task Accuracy at the Onset of the Stop Signal 1 - fully within the ring, 0 - outside the ring
-        critical_distance = 2 - 0.8 # This is the distance that needs to be cleared to be outside the circle
-        if stop_onset is not None:
-            stop_distance = distances[stop_onset_idx]
-            if abs(stop_distance) > critical_distance:
-                go_task_accuracy_at_stop_onset = 0
-            else:
-                go_task_accuracy_at_stop_onset = 1
+        if not np.isnan(ssrt_no_min) and stop_onset is not None:
+            ssrt_no_min = ssrt_no_min - stop_onset
         else:
-            stop_distance = np.nan
+            ssrt_no_min = np.nan
         
-        # Calculate Go Task Accuracy throughout the task until the Stop Signal Appears 1 - within the ring the whole time,
-        # 0 - never in the ring
-        # Also find the proportion of times the ball was ahead of or behind the ring before the stop onset
-        inside_ring_count = 0
-        before_ring_count = 0
-        after_ring_count = 0
-        count = 0
-        if stop_onset is not None:
-            while count < stop_onset_idx:
-                distance = distances[count]
-                if abs(distance) <= critical_distance:
-                    inside_ring_count += 1
-                elif distance < -critical_distance:
-                    before_ring_count += 1
-                elif distance > critical_distance:
-                    after_ring_count += 1
-                count += 1
-            go_task_accuracy_before_stop_onset = inside_ring_count / count 
-            ball_before_ring_proportion_before_stop_onset = before_ring_count / count
-            ball_after_ring_proportion_before_stop_onset = after_ring_count / count
-        else:
-            go_task_accuracy_before_stop_onset = np.nan
-            ball_before_ring_proportion_before_stop_onset = np.nan
-            ball_after_ring_proportion_before_stop_onset = np.nan
-
-        # Calculate Go Task Accuracy after the Stop Onset until the end of the task 1 - within the ring the whole time, 
-        # 0 - never in the ring
-        # Also find the proportion of times the ball was ahead of or behind the ring after the stop onset
-        inside_ring_count = 0
-        if stop_onset is not None:
-            count = stop_onset_idx + 1
-            while count < len(distances):
-                distance = distances[count]
-                if abs(distance) <= critical_distance:
-                    inside_ring_count += 1
-                elif distance < -critical_distance:
-                    before_ring_count += 1
-                elif distance > critical_distance:
-                    after_ring_count += 1
-                count += 1
-            go_task_accuracy_after_stop_onset = inside_ring_count / (len(distances) - stop_onset_idx)
-            ball_before_ring_proportion_after_stop_onset = before_ring_count / (len(distances) - stop_onset_idx)
-            ball_after_ring_proportion_after_stop_onset = after_ring_count / (len(distances) - stop_onset_idx)
-        else:
-            go_task_accuracy_after_stop_onset = np.nan
-            ball_before_ring_proportion_after_stop_onset = np.nan
-            ball_after_ring_proportion_after_stop_onset = np.nan
+        # Calculate Go Task Accuracy metrics
+        results = calculate_go_task_metrics(distances, stop_onset_idx, ring_radius_threshold)
+        go_task_accuracy_before_stop_onset = results['go_task_accuracy_before_stop_onset']
+        ball_before_ring_proportion_before_stop_onset = results['ball_before_ring_proportion_before_stop_onset']
+        ball_after_ring_proportion_before_stop_onset = results['ball_after_ring_proportion_before_stop_onset']
+        go_task_accuracy_at_stop_onset = results['go_task_accuracy_at_stop_onset']
+        go_task_accuracy_after_stop_onset = results['go_task_accuracy_after_stop_onset']
 
         # Find the pressures at time intervals until stop onset
         pressures_at_intervals_until_stop_onset = calculate_intervals(time_stamps, pressures, stop_onset=stop_onset)
-
 
         trial_results[trial_number] = {
             'stop_onset': stop_onset,
             'stop_moment': stop_moment,
             'stop_moment_idx': stop_moment_idx,
-            'index_of_ssrt': index_of_ssrt,
+            'index_of_ssrt': ssrt_index,
             'duration_of_inhibition': duration_of_inhibition,
             'distances': distances,
             'pressures': pressures,
@@ -281,11 +293,9 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
             'go_task_accuracy_after_stop_onset': go_task_accuracy_after_stop_onset,
             'ball_before_ring_proportion_before_stop_onset': ball_before_ring_proportion_before_stop_onset,
             'ball_after_ring_proportion_before_stop_onset': ball_after_ring_proportion_before_stop_onset,
-            'ball_before_ring_proportion_after_stop_onset': ball_before_ring_proportion_after_stop_onset,
-            'ball_after_ring_proportion_after_stop_onset': ball_after_ring_proportion_after_stop_onset,
             'pressures_at_intervals_until_stop_onset': pressures_at_intervals_until_stop_onset,
             'ssrt': ssrt,
-            'ssrt_without_minimum_ssrt': ssrt_without_minimum_ssrt
+            'ssrt_without_minimum_ssrt': ssrt_no_min
         }
     return trial_results, ssrt_list
 
