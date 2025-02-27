@@ -1,6 +1,7 @@
 import numpy as np
 import re
 from matplotlib.ticker import MultipleLocator
+import pandas as pd
 
 def get_subject_label(file):
     """
@@ -40,6 +41,48 @@ def string_to_numbers(string_data):
     numbers = [float(num) for num in string_data.split()]
     return numbers
 
+def calculate_intervals(time_stamps, pressures, stop_onset, interval_duration=0.1):
+    """
+    Calculate accuracies, pressures, and stops at specified intervals until a given endpoint.
+
+    Parameters:
+    - time_stamps: Array of timestamps
+    - pressures: Array of raw pressure values
+    - stop_onset: The point in time when the stop signal appears
+    - interval_duration: The duration of each interval in seconds (default 0.1)
+
+    Returns:
+    - pressures_at_intervals: List of average pressures at each interval
+    """
+    pressures_at_intervals = []
+
+    interval_start_idx = 0
+    interval_end_time = time_stamps[0] + interval_duration  # Start of the first interval
+
+    while interval_start_idx < len(time_stamps) and time_stamps[interval_start_idx] <= stop_onset:
+        temp_pressures = []
+        count = interval_start_idx  # Tracks the timestamps within the current interval
+
+        # Loop through timestamps within the current interval
+        while (count < len(time_stamps) and 
+               time_stamps[count] <= interval_end_time and 
+               time_stamps[count] < stop_onset):
+            pressure = pressures[count]
+            temp_pressures.append(pressure)
+            count += 1
+        # Calculate average pressure for this interval
+        avg_pressure = np.mean(temp_pressures) if temp_pressures else np.nan
+        pressures_at_intervals.append(avg_pressure)
+
+        # Move to the next interval if the interval start index is not already count (to ensure it doesn't get stuck in an infinite loop)
+        if interval_start_idx != count:
+            interval_start_idx = count
+        else:
+            break
+        interval_end_time += interval_duration  # Move the interval end time by specified duration
+
+    return pressures_at_intervals
+
 def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
     """
     Process trial data for a specific block, calculating metrics including SSRT,
@@ -73,8 +116,6 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
 
         # Calculate the minimum time to start checking for inhibition
         minimum_ssrt = stop_onset + min_delay
-
-
         # Find the index to start checking for inhibition (first index after the start_check_time, aka minimum SSRT)
         index_of_minimum_ssrt = next((i for i, t in enumerate(time_stamps) if t >= minimum_ssrt), None)
 
@@ -220,6 +261,9 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
             ball_before_ring_proportion_after_stop_onset = np.nan
             ball_after_ring_proportion_after_stop_onset = np.nan
 
+        # Find the pressures at time intervals until stop onset
+        pressures_at_intervals_until_stop_onset = calculate_intervals(time_stamps, pressures, stop_onset=stop_onset)
+
 
         trial_results[trial_number] = {
             'stop_onset': stop_onset,
@@ -239,10 +283,52 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
             'ball_after_ring_proportion_before_stop_onset': ball_after_ring_proportion_before_stop_onset,
             'ball_before_ring_proportion_after_stop_onset': ball_before_ring_proportion_after_stop_onset,
             'ball_after_ring_proportion_after_stop_onset': ball_after_ring_proportion_after_stop_onset,
+            'pressures_at_intervals_until_stop_onset': pressures_at_intervals_until_stop_onset,
             'ssrt': ssrt,
             'ssrt_without_minimum_ssrt': ssrt_without_minimum_ssrt
         }
     return trial_results, ssrt_list
+
+def find_sum_of_intervals(trials_list, measures_dict, max_length, subject):
+        """
+        Calculate the sum of pressures at specified intervals for trials.
+
+        Parameters:
+        - trials_list (list): A list of arrays containing trial data for a particular condition.
+        - measures_dict (dict): A dictionary to store the calculated means/sums for each subject.
+        - counts_dict (dict, optional): A dictionary to store counts of valid trial entries for each subject.
+        - max_length (int): The max length of a trial between all three conditions.
+        - subject (String): The subject ID
+
+        Returns:
+        - measures_dict: Updated measures_dict with the calculated values for each subject.
+        """
+        # Pad the trials with NaN to make sure they are the same length
+        trials = [np.pad(np.array(lst, dtype=float), (0, max_length - len(lst)), constant_values=np.nan) for 
+                                        lst in trials_list]
+        # Calculate the proportion of 1s at each interval
+        counts = np.count_nonzero(~np.isnan(np.vstack(trials)), axis=0)  # Count valid entries
+        measures_dict[subject] = np.nansum(np.vstack(trials) == 1, axis=0) / counts # Count number of pressures=1
+        return measures_dict
+
+def convert_dict_to_df(dict, time_intervals):
+        """
+        Convert a dictionary into a DataFrame, dropping NaN-only columns and adding mean or sum row.
+        
+        Parameters:
+        - data_dict (dict): The data to convert into a DataFrame.
+        - time_intervals (list): List of time interval labels for the columns.
+        
+        Returns:
+        - df: The processed DataFrame.
+        """
+        df = pd.DataFrame.from_dict(dict, orient='index')
+        df = df.dropna(axis=1, how='all')  # Remove columns that are all NaN
+        df.columns = time_intervals
+        df.index.name = 'subject'
+        df = df.sort_values(by='subject')
+        df.loc['mean across all subjects'] = df.mean()
+        return df
 
 def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
     """
@@ -266,8 +352,6 @@ def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
 
     ax.plot(time_stamps, pressures, label=f'Trial {trial_number}', color=color)
 
-    # Note: We changed the terminology of moment of inhibition to SSRT, stop moment to the moment when the pressure on the keyboard reached 0
-    # , and the post buffer stamp to minimum SSRT for the paper.
     if stop_onset_time is not None:
         ax.axvline(x=stop_onset_time, color='black', linestyle='dotted', linewidth=2, label='Stop Onset')
     if ssrt is not None:

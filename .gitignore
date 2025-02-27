@@ -18,3 +18,5 @@ __pycache__/
 .Trashes
 ehthumbs.db
 Thumbs.d
+
+.ruff_cache/

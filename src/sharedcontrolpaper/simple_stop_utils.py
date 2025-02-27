@@ -52,11 +52,11 @@ def compute_SSRT(df, without_short_ssd_trials = False, max_go_rt = 2):
         avg_SSD = stop_df.ssd.mean()
         nth_index = int(np.rint(p_respond*len(sorted_go))) - 1 
         if nth_index < 0:
-            nth_RT = sorted_go[0]
+            nth_RT = sorted_go[0] # Find the fastest go RT
         elif nth_index >= len(sorted_go):
-            nth_RT = sorted_go[-1]
+            nth_RT = sorted_go[-1] # Find the slowest go RT
         else:
-            nth_RT = sorted_go[nth_index]
+            nth_RT = sorted_go[nth_index] # Find the go RT at the nth index
         
         if avg_SSD:
             SSRT = nth_RT - avg_SSD
