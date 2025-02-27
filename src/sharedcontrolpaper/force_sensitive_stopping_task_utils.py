@@ -290,45 +290,45 @@ def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
     return trial_results, ssrt_list
 
 def find_sum_of_intervals(trials_list, measures_dict, max_length, subject):
-        """
-        Calculate the sum of pressures at specified intervals for trials.
+    """
+    Calculate the sum of pressures at specified intervals for trials.
 
-        Parameters:
-        - trials_list (list): A list of arrays containing trial data for a particular condition.
-        - measures_dict (dict): A dictionary to store the calculated means/sums for each subject.
-        - counts_dict (dict, optional): A dictionary to store counts of valid trial entries for each subject.
-        - max_length (int): The max length of a trial between all three conditions.
-        - subject (String): The subject ID
+    Parameters:
+    - trials_list (list): A list of arrays containing trial data for a particular condition.
+    - measures_dict (dict): A dictionary to store the calculated means/sums for each subject.
+    - counts_dict (dict, optional): A dictionary to store counts of valid trial entries for each subject.
+    - max_length (int): The max length of a trial between all three conditions.
+    - subject (String): The subject ID
 
-        Returns:
-        - measures_dict: Updated measures_dict with the calculated values for each subject.
-        """
-        # Pad the trials with NaN to make sure they are the same length
-        trials = [np.pad(np.array(lst, dtype=float), (0, max_length - len(lst)), constant_values=np.nan) for 
-                                        lst in trials_list]
-        # Calculate the proportion of 1s at each interval
-        counts = np.count_nonzero(~np.isnan(np.vstack(trials)), axis=0)  # Count valid entries
-        measures_dict[subject] = np.nansum(np.vstack(trials) == 1, axis=0) / counts # Count number of pressures=1
-        return measures_dict
+    Returns:
+    - measures_dict: Updated measures_dict with the calculated values for each subject.
+    """
+    # Pad the trials with NaN to make sure they are the same length
+    trials = [np.pad(np.array(lst, dtype=float), (0, max_length - len(lst)), constant_values=np.nan) for 
+                                    lst in trials_list]
+    # Calculate the proportion of 1s at each interval
+    counts = np.count_nonzero(~np.isnan(np.vstack(trials)), axis=0)  # Count valid entries
+    measures_dict[subject] = np.nansum(np.vstack(trials) == 1, axis=0) / counts # Count number of pressures=1
+    return measures_dict
 
 def convert_dict_to_df(dict, time_intervals):
-        """
-        Convert a dictionary into a DataFrame, dropping NaN-only columns and adding mean or sum row.
-        
-        Parameters:
-        - data_dict (dict): The data to convert into a DataFrame.
-        - time_intervals (list): List of time interval labels for the columns.
-        
-        Returns:
-        - df: The processed DataFrame.
-        """
-        df = pd.DataFrame.from_dict(dict, orient='index')
-        df = df.dropna(axis=1, how='all')  # Remove columns that are all NaN
-        df.columns = time_intervals
-        df.index.name = 'subject'
-        df = df.sort_values(by='subject')
-        df.loc['mean across all subjects'] = df.mean()
-        return df
+    """
+    Convert a dictionary into a DataFrame, dropping NaN-only columns and adding mean or sum row.
+    
+    Parameters:
+    - data_dict (dict): The data to convert into a DataFrame.
+    - time_intervals (list): List of time interval labels for the columns.
+    
+    Returns:
+    - df: The processed DataFrame.
+    """
+    df = pd.DataFrame.from_dict(dict, orient='index')
+    df = df.dropna(axis=1, how='all')  # Remove columns that are all NaN
+    df.columns = time_intervals
+    df.index.name = 'subject'
+    df = df.sort_values(by='subject')
+    df.loc['mean across all subjects'] = df.mean()
+    return df
 
 def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
     """

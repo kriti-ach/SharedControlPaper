@@ -3,6 +3,16 @@ import numpy as np
 
 # Add columns for stop acc, go acc, and stop failure acc
 def preprocess_stop_data(df):
+    """
+    Preprocesses the stop signal task data contained in the provided DataFrame. 
+    Calculates stop accuracy, go accuracy, stop fail accuracy.
+
+    Parameters:
+        df (pd.DataFrame): The DataFrame containing stop signal task data.
+
+    Returns:
+        pd.DataFrame: The modified DataFrame with additional columns.
+    """
     df['ssd'] = df['ssd'] * 1000
     df['rt'] = df['rt'] * 1000
 
@@ -67,6 +77,16 @@ def compute_SSRT(df, without_short_ssd_trials = False, max_go_rt = 2):
     return SSRT
 
 def analyze_violations(df):
+    """
+    This function checks for Go trials followed by Stop trials and calculates the difference in reaction times (RT) 
+    between the two trials.
+
+    Parameters:
+        df (pd.DataFrame): The DataFrame containing trial data.
+
+    Returns:
+        pd.DataFrame: A DataFrame with two columns.
+    """
     violations_data = []
 
     for i in range(len(df) - 1):  # Go until the second to last trial

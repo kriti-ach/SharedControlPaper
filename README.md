@@ -49,15 +49,17 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
         * Contains dylibs you will need to install to run the force-sensitive stopping task.
     - /simpleStop  
         * The scripts to run the simple stop task.  
-        * Install PsychoPy GUI and click/run simpleStop.psyexp.  
+        * Install PsychoPy GUI and click/run simpleStop.psyexp.
+    - /src/experiments:
+        * [wooting_utils.py](src/experiments/wooting_utils.py): Contains the keyboard specific utility functions 
 - /figures:  
     - Contains the figures in the paper. Note: Figures 1a and 1b were not generated with code and are not in this repository.  
 - /notebooks:  
     - The notebooks which run through the processing and analysis.  
     - The notebooks are numbered in the order in which they should be run.  
 - /src/sharedcontrolpaper:    
-    - [utils.py](src/sharedcontrolpaper/utils.py): Helper functions to condense analysis in notebooks  
-    - [wooting_utils.py](src/sharedcontrolpaper/wooting_utils.py): Contains the keyboard specific utility functions  
+    - [force_sensitive_stopping_task_utils.py](src/sharedcontrolpaper/force_sensitive_stopping_task_utils.py): Helper functions to condense force sensitive stopping task analysis in notebooks.  
+    - [simple_stop_utils.py](src/sharedcontrolpaper/simple_stop_utils.py): Helper functions to condense simple stop analysis in notebooks.  
 - /tables:  
     - Contains the tables in the paper.
 
