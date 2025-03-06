@@ -1,30 +1,41 @@
 columns: 
-  - condition:
-      Description: Whether the trial is an AI-disengaged or AI-engaged trial within the AI block or a Non-AI trial in the Non-AI block
-      Type: String
-      Example: "Non-AI"
-  - SSD:
-      Description: The stop signal delay on that trial
-      Type: float
-      Example: "3.42"
-  - block:
-      Description: The practice or test phase of the experiment. Within the test phase, there are 'block 1' and 'block 2' which can be
-      the AI block or the Non-AI block. If it's the AI block, the condition is either AI-disengaged or AI-engaged. And if it's the Non-AI
-      block, the condition is always Non-AI
-      Type: String
-      Example: "block 1"
-  - distances:
-      Description: The distance of the center of the ball relative to the center of the ring at every timepoint in the trial. Each distance
-      is operationalized as the ball's position at a timepoint minus the ring's position at that timepoint. Distances are in visual degrees
-      where 1 cm =~ 1.154 visual degrees. 
-      Type: String of floats
-      Example: "[0.196, -0.196, ...]"
-  - pressures:
-      Description: The pressure applied on the spacebar at every timepoint in the trial. A pressure of 1 indicates that the subject is
-      pressing the spacebar fully, and a pressure of 0 indicates that they aren't pressing the spacebar at all.
-      Type: String of floats
-      Example: "[1.0, 0.95, ...]"
-  - time_stamps:
-      Description: The time in seconds (s) at every timepoint in the trial. 
-      Type: String of floats
-      Example: "[0.58, 0.75, ...]"
+    - condition:
+        Description: Whether the trial is an AI-failed or AI-assisted trial within the AI block or a Non-AI trial in the Non-AI block
+        Type: String
+        Example: " 'Non-AI' "
+    - SSD:
+        Description: The stop signal delay on that trial
+        Type: float
+        Example: "3.42"
+    - block:
+        Description: The practice or test phase of the experiment. Within the test phase, there are 'block 1' and 'block 2' which can be
+        the AI block or the Non-AI block.
+        Type: String
+        Example: " 'block 1' "
+    - relative_distance:
+        Description: The distance of the center of the ball relative to the center of the ring at a given timepoint in the trial. Each distance
+        is operationalized as the ball's position at a timepoint minus the ring's position at that timepoint. Distances are in visual degrees
+        where 1 cm =~ 1.154 visual degrees. 
+        Type: float
+        Example: "-0.095"
+    - distances:
+        Description: The distance of the center of the ball on the screen at a given timepoint in the trial. 
+        A distance of -15 signifies that the ball is at the starting position at the fixation cross. A distance of 15
+        signifies that the edge of the ball is at the finish line. Distances are in visual degrees
+        where 1 cm =~ 1.154 visual degrees. 
+        Type: float
+        Example: "-0.095"
+    - pressures:
+        Description: The pressure applied on the spacebar at every timepoint in the trial. A pressure of 1 indicates that the subject is
+        pressing the spacebar fully, and a pressure of 0 indicates that they aren't pressing the spacebar at all.
+        Type: flot
+        Example: "1.0"
+    - time_stamps:
+        Description: The time in seconds (s) at every timepoint in the trial. 
+        Type: float
+        Example: "0.58"
+    - sub_trial:
+        Description: The subject number_trial number. Each trial spans multiple rows since the relative_distance, distances, pressures, 
+        and time_stamps have many values across a trial .
+        Type: String
+        Example: " 's006_1' "

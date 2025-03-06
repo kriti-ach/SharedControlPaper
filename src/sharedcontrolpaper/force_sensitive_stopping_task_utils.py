@@ -2,18 +2,19 @@ import numpy as np
 import re
 from matplotlib.ticker import MultipleLocator
 import pandas as pd
+from scipy import stats
+from sharedcontrolpaper.simple_stop_utils import SECONDS_TO_MILLISECONDS
+
+RING_RADIUS_THRESHOLD = 1.2 # Distance that needs to be cleared for the dot to be outside the ring
+MINIMUM_SSRT = 0.175 # The minimum delay after the stop signal before checking for inhibition, in seconds
+NEXT_N_POINTS = 4 # Check if the next N of these points follow the criteria to categorize SSRT
+MAX_PRESSURE = 1 # Pressure when the subject is fully pressing the spacebar
+MIN_PRESSURE = 0 # Pressure when the subject is not pressing the spacebar
+THRESHOLD_REDUCTION = 0.30 # Check for this much reduction in pressure to start checking for SSRT
+INTERVAL_DURATION = 0.1 # Duration of a time interval, in seconds
 
 def get_subject_label(file):
-    """
-    Extract the subject label from a given file path.
-
-    Parameters:
-    - file (str): The file path from which to extract the subject label.
-
-    Returns:
-    - str or None: The extracted subject label (e.g., 's001') if found, 
-                   otherwise returns None and prints a message.
-    """
+    """Extract the subject label from a given file path."""
     
     match = re.search(r'/sub-(s\d{3})/', file)
     
@@ -23,168 +24,147 @@ def get_subject_label(file):
     else:
         return None
     
+def aggregate_trial_data(df):
+    """Aggregates trial data, handling AI-assisted and Non-AI conditions."""
 
-def string_to_numbers(string_data):
+    agg_cols = {
+        'distances': list,
+        'relative_distances': list,
+        'pressures': list,
+        'time_stamps': list,
+        'condition': 'first',
+        'SSD': 'first',
+        'block': 'first',
+    }
+    return df.groupby('sub_trial').agg(agg_cols).reset_index()
+
+def calculate_interval_average(group):
+    """Calculates the average pressure for a given time interval."""
+    return np.mean(group['pressures'])
+
+
+def calculate_intervals(time_stamps, pressures, stop_onset, interval_duration=INTERVAL_DURATION):
+    """Calculates average pressures at specified intervals until stop onset using Pandas."""
+
+    df = pd.DataFrame({'time_stamps': time_stamps, 'pressures': pressures})
+
+    #Efficiently filter the dataframe to include only data points before stop_onset
+    df_before_stop = df[df['time_stamps'] < stop_onset]
+
+    #Create interval labels
+    df_before_stop = df_before_stop.copy()
+    df_before_stop.loc[:, 'interval'] = (df_before_stop['time_stamps'] // interval_duration).astype(int)
+
+    # Group data by interval and calculate average pressure for each
+    pressures_at_intervals = df_before_stop.groupby('interval').apply(calculate_interval_average)
+
+    return pressures_at_intervals.tolist()
+
+def is_monotonic_decrease(series):
+    """Checks if a Pandas Series exhibits a monotonic decrease."""
+    return series.is_monotonic_decreasing
+
+def check_pressure_drop(series, threshold):
+    """Checks if a pressure drop below a threshold occurs within a series."""
+    return (series <= threshold).any()
+
+
+def find_ssrt(time_stamps, pressures, start_index):
     """
-    Convert a string of numbers into a list of floats.
-    
-    Parameters:
-    - string_data (str or float): A string containing space-separated numbers or a single float.
-    
-    Returns:
-    - List: A list of floats converted from the input string or a list containing 
-      the float if the input is already a float.
-    """
-    if isinstance(string_data, float):
-        return [string_data]
-    string_data = string_data.strip("'")
-    numbers = [float(num) for num in string_data.split()]
-    return numbers
-
-def calculate_intervals(time_stamps, pressures, stop_onset, interval_duration=0.1):
-    """
-    Calculate accuracies, pressures, and stops at specified intervals until a given endpoint.
-
-    Parameters:
-    - time_stamps: Array of timestamps
-    - pressures: Array of raw pressure values
-    - stop_onset: The point in time when the stop signal appears
-    - interval_duration: The duration of each interval in seconds (default 0.1)
-
-    Returns:
-    - pressures_at_intervals: List of average pressures at each interval
-    """
-    pressures_at_intervals = []
-
-    interval_start_idx = 0
-    interval_end_time = time_stamps[0] + interval_duration  # Start of the first interval
-
-    while interval_start_idx < len(time_stamps) and time_stamps[interval_start_idx] <= stop_onset:
-        temp_pressures = []
-        count = interval_start_idx  # Tracks the timestamps within the current interval
-
-        # Loop through timestamps within the current interval
-        while (count < len(time_stamps) and 
-               time_stamps[count] <= interval_end_time and 
-               time_stamps[count] < stop_onset):
-            pressure = pressures[count]
-            temp_pressures.append(pressure)
-            count += 1
-        # Calculate average pressure for this interval
-        avg_pressure = np.mean(temp_pressures) if temp_pressures else np.nan
-        pressures_at_intervals.append(avg_pressure)
-
-        # Move to the next interval if the interval start index is not already count (to ensure it doesn't get stuck in an infinite loop)
-        if interval_start_idx != count:
-            interval_start_idx = count
-        else:
-            break
-        interval_end_time += interval_duration  # Move the interval end time by specified duration
-
-    return pressures_at_intervals
-
-def find_ssrt(time_stamps, pressures, start_index, threshold_reduction):
-    """
-    Finds the stop-signal reaction time (SSRT) based on pressure changes.
+    Finds the stop-signal reaction time (SSRT) using Pandas.
 
     Args:
-        time_stamps: Array of timestamps.
-        pressures: Array of pressure measurements.
+        time_stamps: Array-like of timestamps.
+        pressures: Array-like of pressure measurements.
         start_index: Index to start searching for SSRT.
-        threshold_reduction:  The percentage reduction in pressure to define the SSRT.
 
     Returns:
         A tuple containing the SSRT (in time units) and its index, or (np.nan, None) if not found.
     """
+    df = pd.DataFrame({'time_stamps': time_stamps, 'pressures': pressures})
 
     for i in range(start_index, len(pressures)):
         current_pressure = pressures[i]
-        target_pressure = current_pressure * (1 - threshold_reduction)
-        # Check if we have at least 5 more points to examine
-        if i + 6 <= len(pressures):
-            # Check monotonic decrease with special case for pressure of 1
-            is_monotonic = True
-            has_thirty_percent_drop = False
-            for j in range(i + 1, i + 6):
-                if pressures[j - 1] == 1.0:  # Break if any of the next 5 timepoints have a pressure = 1
-                    if pressures[j] == 1.0:
-                        is_monotonic = False
-                        break
-                elif pressures[j] > pressures[j - 1]:
-                    is_monotonic = False
-                    break
-                # Check if pressure dropped by at least 30%
-                if pressures[j] <= target_pressure:
-                    has_thirty_percent_drop = True
+        target_pressure = current_pressure * (1 - THRESHOLD_REDUCTION)
 
-            if is_monotonic and has_thirty_percent_drop:
-                return time_stamps[i], i
+        # Check if we have enough points for the next N
+        if i + NEXT_N_POINTS <= len(pressures):
+            next_pressures = df['pressures'][i + 1:i + 1 + NEXT_N_POINTS]
+            #Handle case where pressure is max:
+            if next_pressures.eq(MAX_PRESSURE).any():
+                continue
+            
+            if is_monotonic_decrease(next_pressures) and check_pressure_drop(next_pressures, target_pressure):
+                return df['time_stamps'][i], i
 
     return np.nan, None
 
+def find_stop_onset_idx(time_stamps, stop_onset):
+    """Finds the index of the first timestamp greater than or equal to stop_onset."""
+    return next((i for i, t in enumerate(time_stamps) if t >= stop_onset), None)
 
-def calculate_go_task_metrics(distances, stop_onset_idx, ring_radius_threshold):
-    """
-    Calculates go task accuracy metrics.
+def find_min_ssrt(time_stamps, stop_onset):
+    """Finds the index of the first timestamp greater than or equal to stop_onset + MINIMUM_SSRT."""
+    minimum_ssrt_for_trial = stop_onset + MINIMUM_SSRT
+    min_ssrt_for_trial_index = next((i for i, t in enumerate(time_stamps) if t >= minimum_ssrt_for_trial), None)
+    return minimum_ssrt_for_trial, min_ssrt_for_trial_index
 
-    Args:
-        distances: Array of distances from the center.
-        stop_onset_idx: Index of the stop signal onset.
-        ring_radius_threshold: Radius of the ring.
+def find_moment_pressure_reached_zero(ssrt_index, time_stamps, pressures):
+    """Finds the timestamp and index when pressure first reaches zero after ssrt_index."""
+    pressure_reached_zero = np.nan
+    pressure_reached_zero_idx = None
+    if ssrt_index is not None:
+        stop_moment_indices = [i for i in range(ssrt_index, len(pressures)) if pressures[i] == 0]
+        if stop_moment_indices:
+            pressure_reached_zero = time_stamps[stop_moment_indices[0]]
+            pressure_reached_zero_idx = stop_moment_indices[0]
+    return pressure_reached_zero, pressure_reached_zero_idx
 
-    Returns:
-        A dictionary containing all go task accuracy metrics.  Returns NaN for metrics 
-        that cannot be calculated.
-    """
+def find_duration_of_inhibition(ssrt, pressure_reached_zero):
+    """Calculates the duration between ssrt and the moment pressure reaches zero."""
+    duration_of_inhibition = np.nan
+    if not np.isnan(ssrt) and pressure_reached_zero is not None:
+        duration_of_inhibition = pressure_reached_zero - ssrt
+    return duration_of_inhibition
+
+def find_ssrt_relative_to_stop_onset(ssrt, stop_onset):
+    """Calculates ssrt relative to stop_onset."""
+    if stop_onset is not None and not np.isnan(ssrt):
+        ssrt = ssrt - stop_onset
+    return ssrt
+
+def calculate_proportions(series, threshold):
+    """Calculates proportions of relative_distances before, inside, and after a threshold."""
+    inside = (series.abs() <= threshold).sum()
+    after = (series > threshold).sum()
+    total = len(series)
+    return inside / total if total else np.nan, after / total if total else np.nan
+
+
+def calculate_go_task_metrics(relative_distances, stop_onset_idx, ring_radius_threshold=RING_RADIUS_THRESHOLD):
+    """Calculates go task accuracy metrics using Pandas."""
+
+    df = pd.Series(relative_distances) #Pandas Series for efficient operations
 
     results = {}
 
-    # Before stop signal
-    inside_ring_count_before = 0
-    before_ring_count_before = 0
-    after_ring_count_before = 0
-    count_before = 0
-
     if stop_onset_idx is not None:
-        for i in range(stop_onset_idx):
-            distance = distances[i]
-            count_before += 1
-            if abs(distance) <= ring_radius_threshold:
-                inside_ring_count_before += 1
-            elif distance < -ring_radius_threshold:
-                before_ring_count_before += 1
-            else:  # distance > ring_radius_threshold
-                after_ring_count_before += 1
-
-        if count_before > 0:
-            results['go_task_accuracy_before_stop_onset'] = inside_ring_count_before / count_before
-            results['ball_before_ring_proportion_before_stop_onset'] = before_ring_count_before / count_before
-            results['ball_after_ring_proportion_before_stop_onset'] = after_ring_count_before / count_before
-        else:
-            results['go_task_accuracy_before_stop_onset'] = np.nan
-            results['ball_before_ring_proportion_before_stop_onset'] = np.nan
-            results['ball_after_ring_proportion_before_stop_onset'] = np.nan
+        # Before stop signal
+        before_stop = df[:stop_onset_idx]
+        before_accuracy, before_prop_after = calculate_proportions(before_stop, ring_radius_threshold)
+        results['go_task_accuracy_before_stop_onset'] = before_accuracy
+        results['ball_after_ring_proportion_before_stop_onset'] = before_prop_after
 
         # At stop signal
-        stop_distance = distances[stop_onset_idx]
-        results['go_task_accuracy_at_stop_onset'] = 1 if abs(stop_distance) <= ring_radius_threshold else 0
+        results['go_task_accuracy_at_stop_onset'] = 1 if abs(df[stop_onset_idx]) <= ring_radius_threshold else 0
 
         # After stop signal
-        inside_ring_count_after = 0
-        count_after = 0
-        for i in range(stop_onset_idx + 1, len(distances)):
-            distance = distances[i]
-            count_after += 1
-            if abs(distance) <= ring_radius_threshold:
-                inside_ring_count_after += 1
-
-        if count_after > 0:
-            results['go_task_accuracy_after_stop_onset'] = inside_ring_count_after / count_after
-        else:
-            results['go_task_accuracy_after_stop_onset'] = np.nan
+        after_stop = df[stop_onset_idx + 1:]
+        after_accuracy, after_prop_after = calculate_proportions(after_stop, ring_radius_threshold)
+        results['go_task_accuracy_after_stop_onset'] = after_accuracy
+        
     else:
         results['go_task_accuracy_before_stop_onset'] = np.nan
-        results['ball_before_ring_proportion_before_stop_onset'] = np.nan
         results['ball_after_ring_proportion_before_stop_onset'] = np.nan
         results['go_task_accuracy_at_stop_onset'] = np.nan
         results['go_task_accuracy_after_stop_onset'] = np.nan
@@ -192,149 +172,137 @@ def calculate_go_task_metrics(distances, stop_onset_idx, ring_radius_threshold):
     return results
 
 def find_first_non_zero_pressure_timestamp(pressures, time_stamps):
+    """Finds the timestamp of the first occurrence of a pressure exceeding the minimum pressure."""
     first_non_zero_pressure_timestamp = np.nan
     for i, pressure in enumerate(pressures):
-        if pressure > 0:
+        if pressure > MIN_PRESSURE:
             first_non_zero_pressure_timestamp = time_stamps[i]
             break
     return first_non_zero_pressure_timestamp
 
 def find_first_full_pressure_timestamp(pressures, time_stamps):
+    """Finds the timestamp of the first occurrence of a pressure at the maximum pressure."""
     first_full_pressure_timestamp = np.nan
     for i, pressure in enumerate(pressures):
-        if pressure == 1:
+        if pressure == MAX_PRESSURE:
             first_full_pressure_timestamp = time_stamps[i] 
             break
     return first_full_pressure_timestamp
 
-def process_trial_data(data, block, min_delay=0.175, threshold_reduction=0.30):
-    """
-    Process trial data for a specific block, calculating metrics including SSRT,
-    moment of inhibition, and pressure measures.
+def find_stops_before_stop_onset(pressures, stop_onset_idx):
+    """Calculates the proportion of times pressure drops to zero before the stop signal."""
+    if stop_onset_idx is None or stop_onset_idx <= 0:
+        return np.nan
 
-    Parameters:
-    - data (DataFrame): A DataFrame containing trial data, including pressure, timestamps, and stop signal data.
-    - block (str): The block type (e.g., 'AI', 'Non-AI') of the trials to process.
-    - min_delay (float): Minimum delay after the stop signal before checking for inhibition (default is 0.175 seconds).
-    - threshold_reduction (float): The percentage reduction below which pressure is considered as decreased (default is 30%).
+    relevant_pressures = pressures[:stop_onset_idx]
+    num_zero_pressures = np.size(relevant_pressures) - np.count_nonzero(relevant_pressures)
+    proportion_zero = num_zero_pressures / len(relevant_pressures) if len(relevant_pressures)>0 else np.nan
 
-    Returns:
-    - trial_results (dict): A dictionary containing various calculated metrics for each trial.
-    - ssrt_list (list): A list of SSRT values calculated for each trial.
-    """
+
+    return proportion_zero
+
+def process_trial_data(data, block):
+    """Process trial data for a specific block, calculating metrics including SSRT,
+    moment of inhibition, and pressure measures."""
     trial_results = {}
     ssrt_list = []
-
-    ring_radius_threshold = 1.2 # This is the distance that needs to be cleared for the dot to be outside the ring
 
     for idx, row in data.iterrows():
         trial_number = idx
         stop_onset = row['SSD']
+
+        if stop_onset is None:
+            raise ValueError(f"Stop onset (SSD) is missing for trial {trial_number}.")
+        
         time_stamps = row['time_stamps']
         pressures = row['pressures']
         condition = row['condition']
         distances = row['distances']
+        relative_distances = row['relative_distances']
 
-        ssrt = np.nan 
-        ssrt_index = None # Index of SSRT
-        ssrt_no_min = np.nan # SSRT calculated without the minimum SSRT period of 175ms
-        ssrt_no_min_index = None
-        stop_moment = None # Moment where prssure becomes 0 after the SSRT
-        stop_moment_idx = None # Index of the stop moment
-        duration_of_inhibition = np.nan # Time between SSRT and the stop moment
+        # Find the index of stop onset
+        stop_onset_idx = find_stop_onset_idx(time_stamps, stop_onset)
 
-        # Find the stop onset and the index of stop onset
-        if stop_onset is not None:
-            stop_onset_idx = next((i for i, t in enumerate(time_stamps) if t >= stop_onset), None)
-        else:
-            stop_onset_idx = None
-
-        # Calculate the minimum time to start checking for inhibition
-        minimum_ssrt = stop_onset + min_delay
-        # Find the index to start checking for inhibition (first index after the start_check_time, aka minimum SSRT)
-        min_ssrt_index = next((i for i, t in enumerate(time_stamps) if t >= minimum_ssrt), None)
+        # Calculate the minimum time to start checking for inhibition and its index for the given trial
+        min_ssrt_for_trial, min_ssrt_for_trial_index = find_min_ssrt(time_stamps, stop_onset)
         
-        ssrt, ssrt_index = find_ssrt(time_stamps, pressures, min_ssrt_index, threshold_reduction)
-        ssrt_no_min, ssrt_no_min_index = find_ssrt(time_stamps, pressures, stop_onset_idx, threshold_reduction)
+        # Calculate the SSRT and the index of SSRT
+        ssrt, ssrt_index = find_ssrt(time_stamps, pressures, min_ssrt_for_trial_index)
 
-        # Find the end of inhibition (first zero pressure after the start of inhibition)
-        if ssrt_index is not None:
-            stop_moment_indices = [i for i in range(ssrt_index, len(pressures)) if pressures[i] == 0]
-            if stop_moment_indices:
-                stop_moment = time_stamps[stop_moment_indices[0]]
-                stop_moment_idx = stop_moment_indices[0]
+        # Calculate the SSRT without a minimum SSRT and its index
+        ssrt_no_min, ssrt_no_min_index = find_ssrt(time_stamps, pressures, stop_onset_idx)
+
+        # Find the moment the pressure on the keyboard reached 0 and its index
+        pressure_reached_zero, pressure_reached_zero_idx = find_moment_pressure_reached_zero(ssrt_index, time_stamps, pressures)
                 
-
         # Find the duration of inhibition (time between moment of inhibition and end of inhibition) 
-        if not np.isnan(ssrt) and stop_moment is not None:
-            duration_of_inhibition = stop_moment - ssrt
+        duration_of_inhibition = find_duration_of_inhibition(ssrt, pressure_reached_zero)
                 
-        # Calculate SSRT relative to the stop onset
-        if stop_onset is not None and not np.isnan(ssrt):
-            ssrt = ssrt - stop_onset
-            ssrt_list.append(ssrt)
-        else:
-            ssrt = np.nan
-            ssrt_list.append(ssrt)
+        # Calculate SSRT and SSRT no min relative to the stop onset
+        ssrt = find_ssrt_relative_to_stop_onset(ssrt, stop_onset)
+        ssrt_no_min = find_ssrt_relative_to_stop_onset(ssrt_no_min, stop_onset)
+        ssrt_list.append(ssrt)
 
-        if not np.isnan(ssrt_no_min) and stop_onset is not None:
-            ssrt_no_min = ssrt_no_min - stop_onset
-        else:
-            ssrt_no_min = np.nan
-        
         # Calculate Go Task Accuracy metrics
-        results = calculate_go_task_metrics(distances, stop_onset_idx, ring_radius_threshold)
-        go_task_accuracy_before_stop_onset = results['go_task_accuracy_before_stop_onset']
-        ball_before_ring_proportion_before_stop_onset = results['ball_before_ring_proportion_before_stop_onset']
-        ball_after_ring_proportion_before_stop_onset = results['ball_after_ring_proportion_before_stop_onset']
-        go_task_accuracy_at_stop_onset = results['go_task_accuracy_at_stop_onset']
-        go_task_accuracy_after_stop_onset = results['go_task_accuracy_after_stop_onset']
+        results = calculate_go_task_metrics(relative_distances, stop_onset_idx)
 
         # Find the pressures at time intervals until stop onset
-        pressures_at_intervals_until_stop_onset = calculate_intervals(time_stamps, pressures, stop_onset=stop_onset)
+        pressures_at_intervals_until_stop_onset = calculate_intervals(time_stamps, pressures, stop_onset)
 
         #Find the first timestamp with non-zero pressure
         first_non_zero_pressure_timestamp = find_first_non_zero_pressure_timestamp(pressures, time_stamps)
         first_full_pressure_timestamp = find_first_full_pressure_timestamp(pressures, time_stamps)
 
+        proportion_stops_before_stop_onset = find_stops_before_stop_onset(pressures, stop_onset_idx)
+
         trial_results[trial_number] = {
             'stop_onset': stop_onset,
-            'stop_moment': stop_moment,
-            'stop_moment_idx': stop_moment_idx,
+            'stop_moment': pressure_reached_zero,
+            'stop_moment_idx': pressure_reached_zero_idx,
             'index_of_ssrt': ssrt_index,
             'duration_of_inhibition': duration_of_inhibition,
             'distances': distances,
             'pressures': pressures,
+            'relative_distances': relative_distances,
             'time_stamps': time_stamps,
             'condition': condition,
-            'minimum_ssrt': minimum_ssrt,
-            'go_task_accuracy_at_stop_onset': go_task_accuracy_at_stop_onset,
-            'go_task_accuracy_before_stop_onset': go_task_accuracy_before_stop_onset,
-            'go_task_accuracy_after_stop_onset': go_task_accuracy_after_stop_onset,
-            'ball_before_ring_proportion_before_stop_onset': ball_before_ring_proportion_before_stop_onset,
-            'ball_after_ring_proportion_before_stop_onset': ball_after_ring_proportion_before_stop_onset,
+            'minimum_ssrt': min_ssrt_for_trial,
+            'go_task_accuracy_at_stop_onset': results['go_task_accuracy_at_stop_onset'],
+            'go_task_accuracy_before_stop_onset': results['go_task_accuracy_before_stop_onset'],
+            'go_task_accuracy_after_stop_onset': results['go_task_accuracy_after_stop_onset'],
+            'ball_after_ring_proportion_before_stop_onset': results['ball_after_ring_proportion_before_stop_onset'],
             'pressures_at_intervals_until_stop_onset': pressures_at_intervals_until_stop_onset,
             'first_non_zero_pressure_timestamp': first_non_zero_pressure_timestamp,
             'first_full_pressure_timestamp': first_full_pressure_timestamp,
+            'proportion_stops_before_stop_onset': proportion_stops_before_stop_onset,
             'ssrt': ssrt,
             'ssrt_without_minimum_ssrt': ssrt_no_min
         }
     return trial_results, ssrt_list
 
+def collect_trial_metric(subject_data, measure, aggregate_ai=False):
+    """Collects metric for a single subject, handling AI Block aggregation."""
+    results = {'non_ai': [], 'ai_failed': [], 'ai_assisted': []}
+    for block, block_data in subject_data.items():
+        for trial, trial_data in block_data['trial_results'].items():
+            metric_value = trial_data.get(measure, np.nan)
+            if block == 'Non-AI':
+                results['non_ai'].append(metric_value)
+            elif block == 'AI':
+                if aggregate_ai:
+                    results['ai_failed'].append(metric_value)
+                    results['ai_assisted'].append(metric_value)
+                else:
+                    condition = trial_data.get('condition', '')
+                    if condition == 'AI-failed':
+                        results['ai_failed'].append(metric_value)
+                    elif condition == 'AI-assisted':
+                        results['ai_assisted'].append(metric_value)
+    return results
+
+
 def find_sum_of_intervals(trials_list, measures_dict, max_length, subject):
-    """
-    Calculate the sum of pressures at specified intervals for trials.
-
-    Parameters:
-    - trials_list (list): A list of arrays containing trial data for a particular condition.
-    - measures_dict (dict): A dictionary to store the calculated means/sums for each subject.
-    - counts_dict (dict, optional): A dictionary to store counts of valid trial entries for each subject.
-    - max_length (int): The max length of a trial between all three conditions.
-    - subject (String): The subject ID
-
-    Returns:
-    - measures_dict: Updated measures_dict with the calculated values for each subject.
-    """
+    """Calculate the sum of pressures at specified intervals for trials."""
     # Pad the trials with NaN to make sure they are the same length
     trials = [np.pad(np.array(lst, dtype=float), (0, max_length - len(lst)), constant_values=np.nan) for 
                                     lst in trials_list]
@@ -343,18 +311,9 @@ def find_sum_of_intervals(trials_list, measures_dict, max_length, subject):
     measures_dict[subject] = np.nansum(np.vstack(trials) == 1, axis=0) / counts # Count number of pressures=1
     return measures_dict
 
-def convert_dict_to_df(dict, time_intervals):
-    """
-    Convert a dictionary into a DataFrame, dropping NaN-only columns and adding mean or sum row.
-    
-    Parameters:
-    - data_dict (dict): The data to convert into a DataFrame.
-    - time_intervals (list): List of time interval labels for the columns.
-    
-    Returns:
-    - df: The processed DataFrame.
-    """
-    df = pd.DataFrame.from_dict(dict, orient='index')
+def convert_dict_to_df(data_dict, time_intervals):
+    """Convert a dictionary into a DataFrame, dropping NaN-only columns and adding mean or sum row."""
+    df = pd.DataFrame.from_dict(data_dict, orient='index')
     df = df.dropna(axis=1, how='all')  # Remove columns that are all NaN
     df.columns = time_intervals
     df.index.name = 'subject'
@@ -362,18 +321,33 @@ def convert_dict_to_df(dict, time_intervals):
     df.loc['mean across all subjects'] = df.mean()
     return df
 
-def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
-    """
-    Function to plot the pressure data for an individual trial. It includes vertical 
-    lines marking key events such as stop onset, moment of inhibition, stop moment, 
-    and post-buffer stamp.
+def calculate_proportions_non_nan(results):
+  """Calculates proportions of non-NaN values for each condition."""
+  counts = {}
+  total_counts = {}
+  for condition, data_list in results.items():
+    count = 0
+    total_count = 0
+    for val in data_list:
+      if not np.isnan(val):
+        count += 1
+      total_count += 1
 
-    Parameters:
-    - trial_data (dict): A dictionary containing trial data with keys:
-    - trial_number (int): The number of the trial being plotted.
-    - ax (matplotlib.axes.Axes): The axes on which to plot the data.
-    - color (str): The color to use for the trial plot.
-    """
+    counts[condition] = count
+    total_counts[condition] = total_count
+
+  return counts, total_counts
+
+def convert_to_milliseconds(df):
+    """Converts specified columns of a DataFrame to milliseconds."""
+    for col in ['non_ai', 'ai_failed', 'ai_assisted']:
+        if col in df.columns:
+            df[col] *= SECONDS_TO_MILLISECONDS
+
+def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
+    """Function to plot the pressure data for an individual trial. It includes vertical 
+    lines marking key events such as stop onset, moment of inhibition, stop moment, 
+    and post-buffer stamp."""
     pressures = trial_data['pressures']
     time_stamps = trial_data['time_stamps']
     stop_onset_time = trial_data.get('stop_onset', None)
@@ -382,7 +356,7 @@ def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
     stop_moment = trial_data.get('stop_moment', None)
     minimum_ssrt = trial_data.get('minimum_ssrt', None)
 
-    ax.plot(time_stamps, pressures, label=f'Trial {trial_number}', color=color)
+    ax.plot(time_stamps, pressures, color=color)
 
     if stop_onset_time is not None:
         ax.axvline(x=stop_onset_time, color='black', linestyle='dotted', linewidth=2, label='Stop Onset')
@@ -395,10 +369,23 @@ def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
 
     ax.set_xlabel('Time (seconds)')
     ax.set_ylabel('Raw Pressure')
-    ax.legend()
+    ax.legend(loc="lower left")
     ax.grid(True)
 
     ax.set_ylim(-0.05, 1.1)
-    ax.set_xlim(0, 6.3)
+    ax.set_xlim(0, 3.5)
     ax.xaxis.set_major_locator(MultipleLocator(1))  # Major ticks at every second
     ax.xaxis.set_minor_locator(MultipleLocator(0.1))  # Minor ticks at every 100 ms
+
+def calculate_confidence_interval(data, confidence=0.95):
+    """Calculates the confidence interval, ignoring NaN values."""
+    a = np.array(data)
+    valid_data = a[~np.isnan(a)]  #Filter out NaNs
+    n = len(valid_data)
+
+    if n < 2:  #Need at least 2 data points for CI calculation
+        return (np.nan, np.nan)
+
+    m, se = np.mean(valid_data), stats.sem(valid_data)
+    h = se * stats.t.ppf((1 + confidence) / 2., n - 1)
+    return m - h, m + h

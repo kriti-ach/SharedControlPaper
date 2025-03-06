@@ -1,106 +1,69 @@
 import pandas as pd
 import numpy as np
 
-# Add columns for stop acc, go acc, and stop failure acc
-def preprocess_stop_data(df):
-    """
-    Preprocesses the stop signal task data contained in the provided DataFrame. 
-    Calculates stop accuracy, go accuracy, stop fail accuracy.
+SECONDS_TO_MILLISECONDS = 1000
+SHORT_SSD_LIMIT = 200
+MAX_GO_RT = 2
 
-    Parameters:
-        df (pd.DataFrame): The DataFrame containing stop signal task data.
+def preprocess_stop_data(df): 
+    """Preprocesses stop signal task data to give go accuracy, stop accuracy, and stop failure accuracy."""
+    df['ssd'] = df['ssd'] * SECONDS_TO_MILLISECONDS
+    df['rt'] = df['rt'] * SECONDS_TO_MILLISECONDS
 
-    Returns:
-        pd.DataFrame: The modified DataFrame with additional columns.
-    """
-    df['ssd'] = df['ssd'] * 1000
-    df['rt'] = df['rt'] * 1000
+    # Efficiently calculate accuracy columns using boolean indexing and assignment
+    df['stop_acc'] = 0
+    df.loc[(df['trialType'] == 'stop') & (df['response'].isnull()), 'stop_acc'] = 1
 
-    df.loc[:, 'stop_acc'] = np.where(df['trialType'] == 'stop', 
-                                 np.where(df['response'].isnull(), 1, 0),  
-                                 np.nan)
+    df['go_acc'] = 0
+    df.loc[(df['trialType'] == 'go') & (df['response'] == df['correctResponse']), 'go_acc'] = 1
 
-    df.loc[:, 'go_acc'] = np.where(df['trialType'] == 'go', 
-                                   np.where(df['response'] == df['correctResponse'], 1, 0), 
-                                   np.nan)
+    df['stop_failure_acc'] = 0
+    df.loc[(df['trialType'] == 'stop') & (df['rt'].notna()) & (df['response'] == df['correctResponse']), 'stop_failure_acc'] = 1
 
-    df.loc[:, 'stop_failure_acc'] = np.where(
-        (df['trialType'] == 'stop') & (df['rt'].notna()),
-        np.where(df['response'] == df['correctResponse'], 1, 0),
-        np.nan)
-    
     return df
 
-def compute_SSRT(df, without_short_ssd_trials = False, max_go_rt = 2):
-    """
-    Compute Stop Signal Reaction Time (SSRT) for the simple stop task.
-
-    Parameters:
-    - df: DataFrame containing trial data.
-    - without_short_ssd_trials: boolean to compute SSRT without short SSD trials when set to True.
-    - max_go_rt: Maximum allowed reaction time for go trials to replace missing values.
-
-    Returns:
-    - SSRT: The computed Stop Signal Reaction Time.
-    """
+def compute_SSRT(df, without_short_ssd_trials=False): #Added SHORT_SSD_LIMIT
+    """Computes Stop Signal Reaction Time (SSRT)."""
     if without_short_ssd_trials:
-        df = df[df['ssd'] >= 200] 
+        df = df[df['ssd'] >= SHORT_SSD_LIMIT]
 
-    avg_SSD = None
-    
-    df = df.query('Phase == "test"')
-    
-    go_trials = df.loc[df.trialType == 'go']
-    stop_df = df.loc[df.trialType == 'stop']
+    df = df[df['Phase'] == 'test']  # Filter for test phase
 
-    go_replacement_df = go_trials.where(~go_trials['rt'].isna(), max_go_rt)
-    sorted_go = go_replacement_df.rt.sort_values(ascending = True, ignore_index=True)
-    stop_failure = stop_df.loc[stop_df['rt'].notna()]
+    go_trials = df[df['trialType'] == 'go']
+    stop_trials = df[df['trialType'] == 'stop']
 
-    if len(stop_df) > 0 and len(stop_failure) > 0:
-        p_respond = len(stop_failure)/len(stop_df) # proportion of stop trials where there was a response
-        avg_SSD = stop_df.ssd.mean()
-        nth_index = int(np.rint(p_respond*len(sorted_go))) - 1 
-        if nth_index < 0:
-            nth_RT = sorted_go[0] # Find the fastest go RT
-        elif nth_index >= len(sorted_go):
-            nth_RT = sorted_go[-1] # Find the slowest go RT
-        else:
-            nth_RT = sorted_go[nth_index] # Find the go RT at the nth index
-        
-        if avg_SSD:
-            SSRT = nth_RT - avg_SSD
-        else:
-            SSRT = None
+    # Handle missing RTs in go trials using fillna
+    go_rts = go_trials['rt'].fillna(MAX_GO_RT)  
+
+    # Efficiently calculate p_respond
+    p_respond = stop_trials['rt'].notna().mean()  
+
+    if len(stop_trials) > 0 and len(go_rts) > 0 :
+      avg_ssd = stop_trials['ssd'].mean()
+      nth_index = int(np.rint(p_respond * len(go_rts))) -1
+      sorted_go_rts = go_rts.sort_values(ascending=True, ignore_index=True)
+
+      nth_rt = sorted_go_rts.iloc[max(0, min(nth_index, len(sorted_go_rts)-1))] # Handle edge cases
+
+      ssrt = nth_rt - avg_ssd
     else:
-        SSRT = None
-    return SSRT
+      ssrt = np.nan
+
+    return ssrt
+
 
 def analyze_violations(df):
-    """
-    This function checks for Go trials followed by Stop trials and calculates the difference in reaction times (RT) 
-    between the two trials.
+    """Analyzes violations (trials where Go RT > Stop Fail RT)."""
+    # Create shifted DataFrames for comparison
+    df_shifted = df.shift(-1)
 
-    Parameters:
-        df (pd.DataFrame): The DataFrame containing trial data.
+    # Efficiently identify violations using boolean indexing
+    violations = (df['trialType'] == 'go') & (df_shifted['trialType'] == 'stop') & (df_shifted['rt'].notna())
 
-    Returns:
-        pd.DataFrame: A DataFrame with two columns.
-    """
-    violations_data = []
+    # Extract relevant data for violations
+    result_df = pd.DataFrame({
+        'difference': df_shifted.loc[violations, 'rt'].values - df.loc[violations, 'rt'].values,
+        'ssd': df_shifted.loc[violations, 'ssd'].values
+    })
 
-    for i in range(len(df) - 1):  # Go until the second to last trial
-        # Check for a Go trial followed by a Stop trial with a violation
-        if (df.iloc[i]['trialType'] == 'go' and
-            df.iloc[i + 1]['trialType'] == 'stop' and
-            pd.notna(df.iloc[i + 1]['rt'])):
-            
-            go_rt = df.iloc[i]['rt']         # RT of Go trial
-            stop_rt = df.iloc[i + 1]['rt']  # RT of Stop trial
-            
-            if pd.notna(go_rt) and pd.notna(stop_rt):  # Ensure RTs are valid
-                difference = stop_rt - go_rt  # Calculate the difference
-                ssd = df.iloc[i + 1]['ssd']    # SSD for the Stop trial
-                violations_data.append({'difference': difference, 'ssd': ssd})
-
-    return pd.DataFrame(violations_data)
+    return result_df
