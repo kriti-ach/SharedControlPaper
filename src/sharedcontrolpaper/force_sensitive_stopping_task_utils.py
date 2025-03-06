@@ -3,6 +3,8 @@ import re
 from matplotlib.ticker import MultipleLocator
 import pandas as pd
 from scipy import stats
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sharedcontrolpaper.simple_stop_utils import SECONDS_TO_MILLISECONDS
 
 RING_RADIUS_THRESHOLD = 1.2 # Distance that needs to be cleared for the dot to be outside the ring
@@ -12,6 +14,7 @@ MAX_PRESSURE = 1 # Pressure when the subject is fully pressing the spacebar
 MIN_PRESSURE = 0 # Pressure when the subject is not pressing the spacebar
 THRESHOLD_REDUCTION = 0.30 # Check for this much reduction in pressure to start checking for SSRT
 INTERVAL_DURATION = 0.1 # Duration of a time interval, in seconds
+EXCLUSIONS = {"s027": ["AI", 80, 96]} # Force-sensitive stopping task exclusions
 
 def get_subject_label(file):
     """Extract the subject label from a given file path."""
@@ -280,11 +283,13 @@ def process_trial_data(data, block):
         }
     return trial_results, ssrt_list
 
-def collect_trial_metric(subject_data, measure, aggregate_ai=False):
+def collect_trial_metric(subject, subject_data, measure, aggregate_ai=False):
     """Collects metric for a single subject, handling AI Block aggregation."""
     results = {'non_ai': [], 'ai_failed': [], 'ai_assisted': []}
     for block, block_data in subject_data.items():
         for trial, trial_data in block_data['trial_results'].items():
+            if subject in EXCLUSIONS.keys() and trial in EXCLUSIONS[subject] and block in EXCLUSIONS[subject]:
+                continue
             metric_value = trial_data.get(measure, np.nan)
             if block == 'Non-AI':
                 results['non_ai'].append(metric_value)
@@ -344,6 +349,101 @@ def convert_to_milliseconds(df):
         if col in df.columns:
             df[col] *= SECONDS_TO_MILLISECONDS
 
+def rename_index_column(df):
+    df.rename_axis('subject_id', inplace=True)
+
+def cohens_d_paired(x1, x2):
+    """Calculate Cohen's d for paired samples (arrays)"""
+    d = (x1 - x2).mean() / np.sqrt(((x1 - x2).std(ddof=1) ** 2) / 2)
+    return d
+
+def calculate_ci_for_difference(x1, x2, confidence=0.95):
+    """Calculate confidence interval for the mean difference between two paired samples (arrays)"""
+    diff = x1 - x2
+    n = len(diff)
+    mean_diff = np.mean(diff)
+    sem = stats.sem(diff)  # Standard error of the mean
+    ci = stats.t.interval(confidence, n-1, loc=mean_diff, scale=sem)
+    return mean_diff, ci
+
+def calc_stats_ind(data1, data2):
+    """Calculate t-stat, p-value, Cohen's d, DF, 95% CI for two independent samples (arrays)"""
+    t_statistic, p_value = stats.ttest_ind(data1, data2)
+    cohens_d = (np.mean(data1) - np.mean(data2)) / np.sqrt(((len(data1)-1)*np.std(data1)**2 + 
+                                                            (len(data2)-1)*np.std(data2)**2)/(len(data1)+len(data2)-2))
+    print(f"Independent samples t-test:")
+    print(f"  t-statistic = {t_statistic:.2f}")
+    print(f"  p-value = {p_value:.3f}")
+    print(f"  Cohen's d = {cohens_d:.2f}")
+
+
+def print_means_t_test(df, condition1, condition2, alpha=0.05):
+    """Prints means, t-statistic, and p-value for a paired t-test."""
+    mean1 = np.mean(df[condition1])
+    mean2 = np.mean(df[condition2])
+    t_test = stats.ttest_rel(df[condition1], df[condition2])
+
+    print(f'Mean {condition1}: {mean1:.2f}')
+    print(f'Mean {condition2}: {mean2:.2f}')
+    print(f"T-statistic: {t_test.statistic:.2f}, p-value: {t_test.pvalue:.2f}")
+    print(f"Significant difference ({condition1} vs {condition2})? {'Yes' if t_test.pvalue < alpha else 'No'}")
+
+def print_effect_size_and_ci(df, condition1, condition2, confidence=0.95):
+    """Prints Cohen's d, mean difference, and confidence interval."""
+    cohens_d_val = cohens_d_paired(df[condition1], df[condition2])
+    mean_diff, ci = calculate_ci_for_difference(df[condition1], df[condition2], confidence)
+
+    print(f"Cohen's d: {cohens_d_val:.2f}")
+    print(f"Mean difference ({condition1} - {condition2}): {mean_diff:.2f} ms")
+    print(f"{confidence*100:.0f}% CI: [{ci[0]:.2f}, {ci[1]:.2f}] ms")
+
+def create_summary_df_for_plotting(df, value_col, custom_names, desired_order):
+    """Creates a summary DataFrame for plotting."""
+    melted_df = df.melt(id_vars='subject_id', value_vars=list(custom_names.keys()), var_name='Condition', value_name=value_col)
+    melted_df['Condition'] = melted_df['Condition'].map(custom_names)
+
+    summary_df = melted_df.groupby('Condition').agg(
+        Mean=(value_col, 'mean'),
+        SEM=(value_col, stats.sem)
+    ).reset_index()
+
+    n = melted_df.groupby('Condition').size()
+    df = n - 1
+    ci_bounds = stats.t.interval(0.95, df, loc=summary_df['Mean'], scale=summary_df['SEM'])
+    summary_df['CI_lower'] = ci_bounds[0]
+    summary_df['CI_upper'] = ci_bounds[1]
+
+    summary_df['Condition'] = pd.Categorical(summary_df['Condition'], categories=desired_order, ordered=True)
+    summary_df = summary_df.sort_values('Condition').reset_index(drop=True)
+    return melted_df, summary_df
+
+def plot_bar_plots(melted_df, summary_df, value_col, ylabel, filename, ylim=None):
+    """Generates the plot."""
+    plt.figure(figsize=(6, 7))
+    sns.barplot(data=summary_df, x='Condition', y='Mean', palette=["teal", "chocolate"], alpha=0.5)
+
+    for subject in melted_df['subject_id'].unique():
+        subject_data = melted_df[melted_df['subject_id'] == subject]
+        plt.plot(range(len(subject_data)), subject_data[value_col], color='black', alpha=0.2, linewidth=1)
+
+    sns.stripplot(x='Condition', y=value_col, data=melted_df, color='black', alpha=0.3, size=3, jitter=0, zorder=2)
+
+    for index, row in summary_df.iterrows():
+        plt.errorbar(x=index, y=row['Mean'],
+                     yerr=[[row['Mean'] - row['CI_lower']], [row['CI_upper'] - row['Mean']]],
+                     fmt='none', color='black', capsize=5)
+
+    # Significance annotation (adjust values as needed)
+    plt.plot([0, 0, 1, 1], [ylim[1] * 0.95, ylim[1] * 0.96, ylim[1] * 0.96, ylim[1] * 0.95], color='black')  # Adjust y-coordinates as needed for annotation
+    plt.text(0.5, ylim[1] * 0.965, "***", ha='center', fontsize=16)
+
+    plt.ylim(ylim)
+    plt.xlabel('Condition')
+    plt.ylabel(ylabel)
+    plt.tight_layout()
+    plt.savefig(filename, dpi=300)
+    plt.show()
+
 def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
     """Function to plot the pressure data for an individual trial. It includes vertical 
     lines marking key events such as stop onset, moment of inhibition, stop moment, 
@@ -377,7 +477,7 @@ def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
     ax.xaxis.set_major_locator(MultipleLocator(1))  # Major ticks at every second
     ax.xaxis.set_minor_locator(MultipleLocator(0.1))  # Minor ticks at every 100 ms
 
-def calculate_confidence_interval(data, confidence=0.95):
+def calculate_confidence_interval_for_intervals(data, confidence=0.95):
     """Calculates the confidence interval, ignoring NaN values."""
     a = np.array(data)
     valid_data = a[~np.isnan(a)]  #Filter out NaNs
