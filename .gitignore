@@ -20,3 +20,6 @@ ehthumbs.db
 Thumbs.d
 
 .ruff_cache/
+
+# Json files
+notebooks/*.json

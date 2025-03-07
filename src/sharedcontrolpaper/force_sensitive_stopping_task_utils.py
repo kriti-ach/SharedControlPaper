@@ -16,6 +16,16 @@ THRESHOLD_REDUCTION = 0.30 # Check for this much reduction in pressure to start 
 INTERVAL_DURATION = 0.1 # Duration of a time interval, in seconds
 EXCLUSIONS = {"s027": ["AI", 80, 96]} # Force-sensitive stopping task exclusions
 
+QUESTION_LIST = [
+    "AI is making our daily lives easier.",
+    "I believe that increased use of artificial intelligence will make the world a safer place.",
+    'I trust a self driving car to drive safer than I would normally.',
+    "I trust artificial intelligence.",
+    "I trust companies that do not use AI over companies that do.",
+    "I would prefer to drive a self-driving car over a regular car.",
+    "More vehicles, software, and appliances should make use of AI."
+]
+
 def get_subject_label(file):
     """Extract the subject label from a given file path."""
     
@@ -305,6 +315,18 @@ def collect_trial_metric(subject, subject_data, measure, aggregate_ai=False):
                         results['ai_assisted'].append(metric_value)
     return results
 
+def grab_mean_metric(shared_control_metrics, measure, aggregate_ai=False):
+    """Calculates subject-level means for a specified metric."""
+
+    condition_measure = {}
+    for subject, subject_data in shared_control_metrics.items():
+        results = collect_trial_metric(subject, subject_data, measure, aggregate_ai)
+        condition_measure[subject] = {
+            'non_ai': np.nanmean(results['non_ai']),
+            'ai_failed': np.nanmean(results['ai_failed']),
+            'ai_assisted': np.nanmean(results['ai_assisted']),
+        }
+    return pd.DataFrame(condition_measure).T.sort_index()
 
 def find_sum_of_intervals(trials_list, measures_dict, max_length, subject):
     """Calculate the sum of pressures at specified intervals for trials."""
@@ -342,6 +364,52 @@ def calculate_proportions_non_nan(results):
     total_counts[condition] = total_count
 
   return counts, total_counts
+
+def grab_mean_metric_by_halves(shared_control_metrics, measure):
+    """Calculates mean metrics split by trial halves."""
+    condition_measure_first_half = {}
+    condition_measure_second_half = {}
+
+    for subject, subject_data in shared_control_metrics.items():
+        non_ai_first, non_ai_second = [], []
+        ai_failed_first, ai_failed_second = [], []
+        ai_assisted_first, ai_assisted_second = [], []
+
+        for block, block_data in subject_data.items():
+            trial_results = block_data['trial_results']
+            num_trials = len(trial_results)
+
+            for i, trial in enumerate(trial_results): # use enumerate directly on trial_results
+                if subject in EXCLUSIONS.keys() and trial in EXCLUSIONS[subject] and block in EXCLUSIONS[subject]: # improved exclusion check
+                    continue
+
+                ssrt_value = shared_control_metrics[subject][block]['trial_results'][trial][measure]
+                if pd.isna(ssrt_value):
+                    continue
+
+                if block == 'Non-AI':
+                    (non_ai_first if i < num_trials / 2 else non_ai_second).append(ssrt_value)
+                elif block == 'AI':
+                    condition = shared_control_metrics[subject][block]['trial_results'][trial]['condition']
+                    if condition == 'AI-failed':
+                        (ai_failed_first if i < num_trials / 2 else ai_failed_second).append(ssrt_value)
+                    elif condition == 'AI-assisted':
+                        (ai_assisted_first if i < num_trials / 2 else ai_assisted_second).append(ssrt_value)
+
+        condition_measure_first_half[subject] = {
+            'non_ai': np.nanmean(non_ai_first),
+            'ai_failed': np.nanmean(ai_failed_first),
+            'ai_assisted': np.nanmean(ai_assisted_first)
+        }
+        condition_measure_second_half[subject] = {
+            'non_ai': np.nanmean(non_ai_second),
+            'ai_failed': np.nanmean(ai_failed_second),
+            'ai_assisted': np.nanmean(ai_assisted_second)
+        }
+
+    df_first_half = pd.DataFrame(condition_measure_first_half).T.sort_index()
+    df_second_half = pd.DataFrame(condition_measure_second_half).T.sort_index()
+    return df_first_half, df_second_half
 
 def convert_to_milliseconds(df):
     """Converts specified columns of a DataFrame to milliseconds."""
@@ -397,54 +465,7 @@ def print_effect_size_and_ci(df, condition1, condition2, confidence=0.95):
     print(f"Mean difference ({condition1} - {condition2}): {mean_diff:.2f} ms")
     print(f"{confidence*100:.0f}% CI: [{ci[0]:.2f}, {ci[1]:.2f}] ms")
 
-def create_summary_df_for_plotting(df, value_col, custom_names, desired_order):
-    """Creates a summary DataFrame for plotting."""
-    melted_df = df.melt(id_vars='subject_id', value_vars=list(custom_names.keys()), var_name='Condition', value_name=value_col)
-    melted_df['Condition'] = melted_df['Condition'].map(custom_names)
-
-    summary_df = melted_df.groupby('Condition').agg(
-        Mean=(value_col, 'mean'),
-        SEM=(value_col, stats.sem)
-    ).reset_index()
-
-    n = melted_df.groupby('Condition').size()
-    df = n - 1
-    ci_bounds = stats.t.interval(0.95, df, loc=summary_df['Mean'], scale=summary_df['SEM'])
-    summary_df['CI_lower'] = ci_bounds[0]
-    summary_df['CI_upper'] = ci_bounds[1]
-
-    summary_df['Condition'] = pd.Categorical(summary_df['Condition'], categories=desired_order, ordered=True)
-    summary_df = summary_df.sort_values('Condition').reset_index(drop=True)
-    return melted_df, summary_df
-
-def plot_bar_plots(melted_df, summary_df, value_col, ylabel, filename, ylim=None):
-    """Generates the plot."""
-    plt.figure(figsize=(6, 7))
-    sns.barplot(data=summary_df, x='Condition', y='Mean', palette=["teal", "chocolate"], alpha=0.5)
-
-    for subject in melted_df['subject_id'].unique():
-        subject_data = melted_df[melted_df['subject_id'] == subject]
-        plt.plot(range(len(subject_data)), subject_data[value_col], color='black', alpha=0.2, linewidth=1)
-
-    sns.stripplot(x='Condition', y=value_col, data=melted_df, color='black', alpha=0.3, size=3, jitter=0, zorder=2)
-
-    for index, row in summary_df.iterrows():
-        plt.errorbar(x=index, y=row['Mean'],
-                     yerr=[[row['Mean'] - row['CI_lower']], [row['CI_upper'] - row['Mean']]],
-                     fmt='none', color='black', capsize=5)
-
-    # Significance annotation (adjust values as needed)
-    plt.plot([0, 0, 1, 1], [ylim[1] * 0.95, ylim[1] * 0.96, ylim[1] * 0.96, ylim[1] * 0.95], color='black')  # Adjust y-coordinates as needed for annotation
-    plt.text(0.5, ylim[1] * 0.965, "***", ha='center', fontsize=16)
-
-    plt.ylim(ylim)
-    plt.xlabel('Condition')
-    plt.ylabel(ylabel)
-    plt.tight_layout()
-    plt.savefig(filename, dpi=300)
-    plt.show()
-
-def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
+def plot_trial_pressure_individual_for_figure_2(trial_data, trial_number, ax, color):
     """Function to plot the pressure data for an individual trial. It includes vertical 
     lines marking key events such as stop onset, moment of inhibition, stop moment, 
     and post-buffer stamp."""
@@ -477,7 +498,116 @@ def plot_trial_pressure_individual(trial_data, trial_number, ax, color):
     ax.xaxis.set_major_locator(MultipleLocator(1))  # Major ticks at every second
     ax.xaxis.set_minor_locator(MultipleLocator(0.1))  # Minor ticks at every 100 ms
 
-def calculate_confidence_interval_for_intervals(data, confidence=0.95):
+def create_summary_df_for_figure_3_and_4(df, value_col, custom_names, desired_order):
+    """Creates a summary DataFrame for plotting."""
+    melted_df = df.melt(id_vars='subject_id', value_vars=list(custom_names.keys()), var_name='Condition', value_name=value_col)
+    melted_df['Condition'] = melted_df['Condition'].map(custom_names)
+
+    summary_df = melted_df.groupby('Condition').agg(
+        Mean=(value_col, 'mean'),
+        SEM=(value_col, stats.sem)
+    ).reset_index()
+
+    n = melted_df.groupby('Condition').size()
+    df = n - 1
+    ci_bounds = stats.t.interval(0.95, df, loc=summary_df['Mean'], scale=summary_df['SEM'])
+    summary_df['CI_lower'] = ci_bounds[0]
+    summary_df['CI_upper'] = ci_bounds[1]
+
+    summary_df['Condition'] = pd.Categorical(summary_df['Condition'], categories=desired_order, ordered=True)
+    summary_df = summary_df.sort_values('Condition').reset_index(drop=True)
+    return melted_df, summary_df
+
+def plot_figure_3_and_4(melted_df, summary_df, value_col, ylabel, filename, ylim=None):
+    """Generates the plot."""
+    plt.figure(figsize=(6, 7))
+    sns.barplot(data=summary_df, x='Condition', y='Mean', palette=["teal", "chocolate"], alpha=0.5)
+
+    for subject in melted_df['subject_id'].unique():
+        subject_data = melted_df[melted_df['subject_id'] == subject]
+        plt.plot(range(len(subject_data)), subject_data[value_col], color='black', alpha=0.2, linewidth=1)
+
+    sns.stripplot(x='Condition', y=value_col, data=melted_df, color='black', alpha=0.3, size=3, jitter=0, zorder=2)
+
+    for index, row in summary_df.iterrows():
+        plt.errorbar(x=index, y=row['Mean'],
+                     yerr=[[row['Mean'] - row['CI_lower']], [row['CI_upper'] - row['Mean']]],
+                     fmt='none', color='black', capsize=5)
+
+    # Significance annotation (adjust values as needed)
+    plt.plot([0, 0, 1, 1], [ylim[1] * 0.95, ylim[1] * 0.96, ylim[1] * 0.96, ylim[1] * 0.95], color='black')  # Adjust y-coordinates as needed for annotation
+    plt.text(0.5, ylim[1] * 0.965, "***", ha='center', fontsize=16)
+
+    plt.ylim(ylim)
+    plt.xlabel('Condition')
+    plt.ylabel(ylabel)
+    plt.tight_layout()
+    plt.savefig(filename, dpi=300)
+    plt.show()
+
+def plot_figure_s1(survey_results, output_filename):
+    """Plots the survey correlation matrix efficiently using pandas."""
+
+    all_survey_data = []
+    for subject_id, details in survey_results.items():
+        df = pd.DataFrame(details['data'])
+        all_survey_data.append(df)
+
+    combined_df = pd.concat(all_survey_data, keys=survey_results.keys(), names=['subject_id', 'index'])
+    combined_df = combined_df.reset_index().pivot(index='subject_id', columns='text', values='corrected_value')
+
+    #Handle potential errors if some questions are missing for some subjects
+    combined_df = combined_df.dropna()
+
+    #Rename columns (optional - if you want to keep original question names, remove this section)
+    new_columns = [f'Q{i+1}' for i in range(len(combined_df.columns))]
+    combined_df.columns = new_columns
+
+    #Calculate and plot the correlation matrix efficiently
+    correlation_matrix = combined_df.corr()
+    cmap = sns.diverging_palette(240, 10, as_cmap=True)
+    plt.figure(figsize=(12, 10))
+    sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap=cmap, center=0, square=True,
+                cbar_kws={"shrink": .8}, vmin=-1, vmax=1, annot_kws={"size": 10})
+    plt.xlabel("Survey Questions")
+    plt.ylabel("Survey Questions")
+    tick_positions = np.arange(len(new_columns)) + 0.5
+    plt.xticks(ticks=tick_positions, labels=new_columns, ha='right')
+    plt.yticks(ticks=tick_positions, labels=new_columns)
+    plt.tight_layout()
+    plt.savefig(output_filename, dpi=300)
+    plt.show()
+
+def plot_figure_s2(shared_control_metrics, output_filename):
+    all_ssrt_data = []
+    for subject, subject_data in shared_control_metrics.items():
+        results = collect_trial_metric(subject, subject_data, 'ssrt_without_minimum_ssrt', aggregate_ai=False)
+        df = pd.DataFrame({
+            'subject': subject,
+            'ssrt': results['non_ai'] + results['ai_failed'] + results['ai_assisted']
+        })
+        all_ssrt_data.append(df)
+
+    ssrt_series = pd.concat(all_ssrt_data, ignore_index=True)['ssrt']
+    ssrt_series_ms = ssrt_series * SECONDS_TO_MILLISECONDS  # Convert to milliseconds
+
+    #Filter values
+    below_06_ms = ssrt_series_ms[ssrt_series_ms <= 600] #Filter values below 0.6s = 600ms
+
+    plt.figure(figsize=(10, 5))
+    plt.hist(below_06_ms, bins=np.arange(below_06_ms.min(), 530 + 5, 5), alpha=0.7)
+    plt.axvline(x=175, color='red', linestyle='dashed', linewidth=1, label='175ms')
+
+    plt.xlabel('SSRT (ms)')
+    plt.ylabel('Frequency')
+    plt.legend()
+    plt.gca().xaxis.set_major_locator(MultipleLocator(50))
+    plt.gca().xaxis.set_minor_locator(MultipleLocator(5))
+
+    plt.savefig(output_filename, dpi=300)
+    plt.show()
+
+def calculate_confidence_interval_for_figure_s3(data, confidence=0.95):
     """Calculates the confidence interval, ignoring NaN values."""
     a = np.array(data)
     valid_data = a[~np.isnan(a)]  #Filter out NaNs
@@ -489,3 +619,116 @@ def calculate_confidence_interval_for_intervals(data, confidence=0.95):
     m, se = np.mean(valid_data), stats.sem(valid_data)
     h = se * stats.t.ppf((1 + confidence) / 2., n - 1)
     return m - h, m + h
+
+def plot_figure_s3(dataframes, labels, colors, output_filename):
+    """Plots proportions with confidence intervals using pandas."""
+    time_intervals = dataframes[0].columns
+    plt.figure(figsize=(12, 6))
+
+    for df, label, color in zip(dataframes, labels, colors):
+        means = df.loc['mean across all subjects'].values
+        cis = []
+        for col in time_intervals:
+            lower, upper = calculate_confidence_interval_for_figure_s3(df[col])
+            cis.append((lower, upper))
+
+        lower_bounds = np.array([ci[0] for ci in cis])
+        upper_bounds = np.array([ci[1] for ci in cis])
+
+        plt.errorbar(x=time_intervals, y=means,
+                     yerr=[means - lower_bounds, upper_bounds - means],
+                     label=label, color=color, marker='o', capsize=5, fmt='o')
+
+    plt.xlabel('Time Intervals (ms)')
+    plt.ylabel("Proportion of 1s")
+    plt.xticks(rotation=90)
+    plt.ylim(0, 1)
+    plt.legend()
+    plt.grid()
+    plt.tight_layout()
+    plt.savefig(output_filename, dpi=300)
+    plt.show()
+
+def plot_figure_s4(survey_results, filename):
+    """Generate a grid of bar charts of responses for a list of survey questions."""
+    survey_df = pd.DataFrame(survey_results)
+    num_questions = len(QUESTION_LIST)
+    cols = 3  # Number of columns for the grid
+    rows = (num_questions + cols - 1) // cols  # Calculate number of rows needed for the grid
+
+    # Create a figure with subplots
+    fig, axes = plt.subplots(rows, cols, figsize=(15, rows * 4))
+    axes = axes.flatten()  # Flatten the axes array for easy indexing
+
+    for i, column_name in enumerate(QUESTION_LIST):
+        if column_name == "I trust companies that do not use AI over companies that do.":
+            survey_df[column_name] = 6 - survey_df[column_name]
+        numeric_responses = pd.to_numeric(survey_df[column_name], errors='coerce')
+        response_counts = np.bincount(numeric_responses.dropna().astype(int), minlength=6)[1:]
+        axes[i].bar(np.arange(1, 6), response_counts, color='skyblue', edgecolor='black', alpha=0.7)
+
+        axes[i].set_xticks(np.arange(1, 6))
+        axes[i].set_xlabel("Survey Response")
+        axes[i].set_ylabel("Frequency")
+        axes[i].set_title(f'Q{i + 1}')
+        axes[i].grid(axis='y')
+
+    for j in range(i + 1, len(axes)):
+        fig.delaxes(axes[j])
+
+    plt.tight_layout()
+    plt.savefig(filename, dpi=300)
+    plt.show()
+
+def plot_figure_s5(final_aggregated_results, output_filename):
+    """Plots SSD differences efficiently using pandas."""
+
+    # Efficiently flatten the data using pandas
+    melted_df = final_aggregated_results.explode('all_differences').rename(columns={'all_differences': 'Difference'})
+    
+    # Calculate mean differences per SSD efficiently using pandas
+    mean_data = melted_df.groupby('ssd')['Difference'].mean()
+
+    # Create the plot
+    plt.figure(figsize=(10, 6))
+    plt.scatter(melted_df['ssd'], melted_df['Difference'], color='blue', alpha=0.3, s=30)  # Plot individual data points
+
+    plt.plot(mean_data.index, mean_data.values, color='blue', linewidth=2)  # Plot mean differences
+
+    plt.axhline(0, color='red', linestyle='--')
+    plt.xticks(np.arange(0, 800, 50))
+    plt.xlabel('SSD (ms)')
+    plt.yticks(np.arange(-1000, 1250, 250))
+    plt.ylabel('Stop failure RT - No-stop RT (ms)')
+    plt.legend() # add legend if needed.
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(output_filename)
+    plt.show()
+
+def convert_formats(data):
+    """Recursively converts NumPy arrays and NumPy numeric types to lists within a nested dictionary."""
+    if isinstance(data, dict):
+        return {k: convert_formats(v) for k, v in data.items()}
+    elif isinstance(data, list):
+        return [convert_formats(item) for item in data]
+    elif isinstance(data, (np.ndarray, np.int64, np.int32, np.float64, np.float32)): #Handles various numpy numeric types
+        return data.tolist() if isinstance(data, np.ndarray) else data.item() #Handle numpy numeric types
+    elif isinstance(data, pd.DataFrame):
+        return data.to_dict(orient='records')
+    else:
+        return data
+    
+
+def convert_formats_back(data):
+    """Recursively converts lists to NumPy arrays if appropriate."""
+    if isinstance(data, dict):
+        return {k: convert_formats_back(v) for k, v in data.items()}
+    elif isinstance(data, list):
+        #Check if all elements are numbers. If so, convert to numpy array. Otherwise leave as a list
+        if all(isinstance(x, (int, float)) for x in data):
+            return np.array(data)
+        else:
+            return [convert_formats_back(item) for item in data] #Recursively convert nested lists/dicts
+    else:
+        return data
