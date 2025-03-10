@@ -1,0 +1,17 @@
+columns: 
+  - text:
+      Description: The question text
+      Type: String
+      Example: "I trust artificial intelligence."
+  - response:
+      Description: The subject's response for that question on a scale of 1 to 5.
+      Type: String
+      Example: "2"
+  - response_text:
+      Description: The subject's response in terms of what option they chose.
+      Type: String
+      Example: "Somewhat Disagree"
+  - options:
+      Description: The options the subject could choose from.
+      Type: String
+      Example: "Somewhat Disagree"

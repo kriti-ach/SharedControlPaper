@@ -1,8 +1,0 @@
-question_key,text,required,response,options
-ai_survey_3_options,I trust artificial intelligence.,1,2,Strongly Disagree;  Somewhat Disagree;  Equally Disagree/Agree;  Somewhat Agree;  Strongly Agree
-ai_survey_9_options,"More vehicles, software, and appliances should make use of AI.",1, 4,Strongly Disagree;  Somewhat Disagree;  Equally Disagree/Agree;  Somewhat Agree;  Strongly Agree
-ai_survey_5_options,I trust companies that do not use AI over companies that do.,1,2,Strongly Disagree;  Somewhat Disagree;  Equally Disagree/Agree;  Somewhat Agree;  Strongly Agree
-ai_survey_6_options,I would prefer to drive a self-driving car over a regular car.,1, 4,Strongly Disagree;  Somewhat Disagree;  Equally Disagree/Agree;  Somewhat Agree;  Strongly Agree
-ai_survey_7_options,I trust a self driving car to drive safer than I would normally.,1, 3,Strongly Disagree;  Somewhat Disagree;  Equally Disagree/Agree;  Somewhat Agree;  Strongly Agree
-ai_survey_8_options,I believe that increased use of artificial intelligence will make the world a safer place.,1, 3,Strongly Disagree;  Somewhat Disagree;  Equally Disagree/Agree;  Somewhat Agree;  Strongly Agree
-ai_survey_4_options,AI is making our daily lives easier.,1, 4,Strongly Disagree;  Somewhat Disagree;  Equally Disagree/Agree;  Somewhat Agree;  Strongly Agree

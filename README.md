@@ -39,14 +39,12 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
 
 - /data:  
     - /experiment:  
-      * Contains CSV files for the 'final' subjects for both the force-sensitive stopping task ('shared_control') and the simple stop task ('simple_stop').  
+      * Contains CSV files for the 'final' subjects for both the force-sensitive stopping task ('shared_control') and the simple stop task ('simple_stop'). Also contains .yml files to describe the structure of the files.
     - /surveys:  
-      * Contains CSV files for the 'final'subjects for both the AI trust survey and the demographics survey.  
+      * Contains CSV files for the 'final' subjects for the AI trust survey. Also contains .yml files to describe the structure of the files.
 - /experiments:  
     - [forceSensitiveStoppingTask.py](experiments/forceSensitiveStoppingTask.py)  
         * The script to run the force-sensitive stopping task.
-    - /libs/dylibs:
-        * Contains dylibs you will need to install to run the force-sensitive stopping task.
     - /simpleStop  
         * The scripts to run the simple stop task.  
         * Install PsychoPy GUI and click/run simpleStop.psyexp.
