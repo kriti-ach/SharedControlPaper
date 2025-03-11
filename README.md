@@ -64,7 +64,10 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
 Note: You will need the Wooting keyboard to run [forceSensitiveStoppingTask.py](experiments/forceSensitiveStoppingTask.py).
 
 1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
-2.  `cd sharedcontrolpaper/experiments/forceSensitiveStoppingTask`
+2. 
+```bash
+cd SharedControlPaper/experiments/forceSensitiveStoppingTask
+```
 3. Install appropriate dynamic libraries (dylibs). 
 
     2.1 install [libusb](https://libusb.info/):
