@@ -14,7 +14,7 @@ MAX_PRESSURE = 1 # Pressure when the subject is fully pressing the spacebar
 MIN_PRESSURE = 0 # Pressure when the subject is not pressing the spacebar
 THRESHOLD_REDUCTION = 0.30 # Check for this much reduction in pressure to start checking for SSRT
 INTERVAL_DURATION = 0.1 # Duration of a time interval, in seconds
-EXCLUSIONS = {"s027": ["AI", 80, 96]} # Force-sensitive stopping task exclusions
+EXCLUSIONS = {"s027": ["AI", 80, 96]} # Force-sensitive stopping task trial exclusions
 
 QUESTION_LIST = [
     "AI is making our daily lives easier.",
@@ -57,7 +57,7 @@ def calculate_interval_average(group):
 
 
 def calculate_intervals(time_stamps, pressures, stop_onset, interval_duration=INTERVAL_DURATION):
-    """Calculates average pressures at specified intervals until stop onset using Pandas."""
+    """Calculates average pressures at specified intervals until stop onset"""
 
     df = pd.DataFrame({'time_stamps': time_stamps, 'pressures': pressures})
 
@@ -83,17 +83,7 @@ def check_pressure_drop(series, threshold):
 
 
 def find_ssrt(time_stamps, pressures, start_index):
-    """
-    Finds the stop-signal reaction time (SSRT) using Pandas.
-
-    Args:
-        time_stamps: Array-like of timestamps.
-        pressures: Array-like of pressure measurements.
-        start_index: Index to start searching for SSRT.
-
-    Returns:
-        A tuple containing the SSRT (in time units) and its index, or (np.nan, None) if not found.
-    """
+    """Finds the stop-signal reaction time (SSRT)."""
     df = pd.DataFrame({'time_stamps': time_stamps, 'pressures': pressures})
 
     for i in range(start_index, len(pressures)):
@@ -155,7 +145,7 @@ def calculate_proportions(series, threshold):
 
 
 def calculate_go_task_metrics(relative_distances, stop_onset_idx, ring_radius_threshold=RING_RADIUS_THRESHOLD):
-    """Calculates go task accuracy metrics using Pandas."""
+    """Calculates go task accuracy metrics."""
 
     df = pd.Series(relative_distances) #Pandas Series for efficient operations
 
@@ -439,7 +429,7 @@ def calc_stats_ind(data1, data2):
     t_statistic, p_value = stats.ttest_ind(data1, data2)
     cohens_d = (np.mean(data1) - np.mean(data2)) / np.sqrt(((len(data1)-1)*np.std(data1)**2 + 
                                                             (len(data2)-1)*np.std(data2)**2)/(len(data1)+len(data2)-2))
-    print(f"Independent samples t-test:")
+    print("Independent samples t-test:")
     print(f"  t-statistic = {t_statistic:.2f}")
     print(f"  p-value = {p_value:.3f}")
     print(f"  Cohen's d = {cohens_d:.2f}")
@@ -480,17 +470,24 @@ def plot_trial_pressure_individual_for_figure_2(trial_data, trial_number, ax, co
     ax.plot(time_stamps, pressures, color=color)
 
     if stop_onset_time is not None:
-        ax.axvline(x=stop_onset_time, color='black', linestyle='dotted', linewidth=2, label='Stop Onset')
+        ax.axvline(x=stop_onset_time, color='#377eb8', linestyle='dotted', linewidth=2, label='Stop Onset')
     if ssrt is not None:
-        ax.axvline(x=ssrt+stop_onset_time, color='green', linestyle='dotted', linewidth=2, label='SSRT')
+        ax.axvline(x=ssrt+stop_onset_time, color='#984ea3', linestyle='dotted', linewidth=2, label='SSRT')
     if stop_moment is not None:
-        ax.axvline(x=stop_moment, color='red', linestyle='dotted', linewidth=2, label='Pressure on the Keyboard Reached 0')
+        ax.axvline(x=stop_moment, color='#4daf4a', linestyle='dotted', linewidth=2, label='Pressure on the Keyboard Reached 0')
     if minimum_ssrt is not None:
-        ax.axvline(x=minimum_ssrt, color='purple', linestyle='dotted', linewidth=2, label='Minimum SSRT')
+        ax.axvline(x=minimum_ssrt, color='#f781bf', linestyle='dotted', linewidth=2, label='Minimum SSRT')
 
     ax.set_xlabel('Time (seconds)')
     ax.set_ylabel('Raw Pressure')
-    ax.legend(loc="lower left")
+    handles, labels = plt.gca().get_legend_handles_labels() 
+  
+    # specify order 
+    order = [0, 3, 1, 2] 
+    
+    # pass handle & labels lists along with order as below 
+    plt.legend([handles[i] for i in order], [labels[i] for i in order], loc="lower left") 
+    #ax.legend(loc="lower left")
     ax.grid(True)
 
     ax.set_ylim(-0.05, 1.1)
@@ -546,7 +543,7 @@ def plot_figure_3_and_4(melted_df, summary_df, value_col, ylabel, filename, ylim
     plt.show()
 
 def plot_figure_s1(survey_results, output_filename):
-    """Plots the survey correlation matrix efficiently using pandas."""
+    """Plots the survey correlation matrix efficiently."""
 
     all_survey_data = []
     for subject_id, details in survey_results.items():
@@ -621,7 +618,7 @@ def calculate_confidence_interval_for_figure_s3(data, confidence=0.95):
     return m - h, m + h
 
 def plot_figure_s3(dataframes, labels, colors, output_filename):
-    """Plots proportions with confidence intervals using pandas."""
+    """Plots proportions with confidence intervals."""
     time_intervals = dataframes[0].columns
     plt.figure(figsize=(12, 6))
 
@@ -681,7 +678,7 @@ def plot_figure_s4(survey_results, filename):
     plt.show()
 
 def plot_figure_s5(final_aggregated_results, output_filename):
-    """Plots SSD differences efficiently using pandas."""
+    """Plots SSD differences efficiently."""
 
     # Efficiently flatten the data using pandas
     melted_df = final_aggregated_results.explode('all_differences').rename(columns={'all_differences': 'Difference'})

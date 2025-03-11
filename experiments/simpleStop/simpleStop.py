@@ -83,7 +83,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/poldracklab/Documents/jahrios/SharedControl/Code/SharedControl/simpleStop/simpleStop_lastrun.py',
+    originPath='/Users/kritiaxh/Documents/paperRepos/SharedControlPaper/experiments/simpleStop/simpleStop.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info

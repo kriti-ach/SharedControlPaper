@@ -1,5 +1,5 @@
 from psychopy import visual, gui, data, core
-from experiments.wooting_utils import WootingPython, HID_CODE_SPACE, HID_CODE_ENTER
+from experiments_utils.wooting_utils import WootingPython, HID_CODE_SPACE, HID_CODE_ENTER
 import numpy as np
 import sys
 import wx

@@ -27,11 +27,7 @@ sh setup_env.sh
 
 Select the `notebooks` directory.
 
-Select `sharedcontrolpaper` as the Kernel in the top right corner of the screen.
-
-Run all cells.
-
-Repeat this process for every Jupyter Notebook. 
+Select `sharedcontrolpaper` as the Kernel in the top right corner of the screen and run notebooks.
 
 If running the notebooks in VSCode, just select `sharedcontrolpaper` from the root directory as the kernel.
 
@@ -46,18 +42,20 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
     - [forceSensitiveStoppingTask.py](experiments/forceSensitiveStoppingTask.py)  
         * The script to run the force-sensitive stopping task.
     - /simpleStop  
-        * The scripts to run the simple stop task.  
-        * Install PsychoPy GUI and click/run simpleStop.psyexp.
-    - /src/experiments:
-        * [wooting_utils.py](src/experiments/wooting_utils.py): Contains the keyboard specific utility functions 
+        * The script to run the simple stop task along with relevant images etc.  
+        * Install PsychoPy GUI: https://www.psychopy.org/download.html and click/run simpleStop.psyexp.
 - /figures:  
     - Contains the figures in the paper. Note: Figures 1a and 1b were not generated with code and are not in this repository.  
 - /notebooks:  
     - The notebooks which run through the processing and analysis.  
     - The notebooks are numbered in the order in which they should be run.  
-- /src/sharedcontrolpaper:    
-    - [force_sensitive_stopping_task_utils.py](src/sharedcontrolpaper/force_sensitive_stopping_task_utils.py): Helper functions to condense force sensitive stopping task analysis in notebooks.  
-    - [simple_stop_utils.py](src/sharedcontrolpaper/simple_stop_utils.py): Helper functions to condense simple stop analysis in notebooks.  
+- /src:    
+    - /sharedcontrolpaper:
+        * [force_sensitive_stopping_task_utils.py](src/sharedcontrolpaper/force_sensitive_stopping_task_utils.py): Helper functions to condense force sensitive stopping task analysis in notebooks.  
+        * [simple_stop_utils.py](src/sharedcontrolpaper/simple_stop_utils.py): Helper functions to condense simple stop analysis in notebooks.  
+    - /experiment_utils:
+        * [wooting_utils.py](src/experiment_utils/wooting_utils.py): Contains the keyboard specific utility functions.
+    - /preprocessing:
 - /tables:  
     - Contains the tables in the paper.
 
@@ -66,7 +64,8 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
 Note: You will need the Wooting keyboard to run [forceSensitiveStoppingTask.py](experiments/forceSensitiveStoppingTask.py).
 
 1. Follow the Wooting [quickstart guide](https://wooting.io/quickstart).
-2. Install appropriate dynamic libraries (dylibs). 
+2.  `cd sharedcontrolpaper/experiments/forceSensitiveStoppingTask`
+3. Install appropriate dynamic libraries (dylibs). 
 
     2.1 install [libusb](https://libusb.info/):
             `brew install libusb` 
@@ -78,4 +77,5 @@ Note: You will need the Wooting keyboard to run [forceSensitiveStoppingTask.py](
             `brew install wootingkb/wooting/wooting-analog-sdk`
 
 or follow the instructions for manual installation on the Github Readme linked above.
+4. Run [forceSensitiveStoppingTask.py] using the PsychoPy GUI: https://www.psychopy.org/download.html.
 

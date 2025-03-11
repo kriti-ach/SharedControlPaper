@@ -1,0 +1,655 @@
+13.0783 	WARNING 	Font Manager failed to load file /System/Library/PrivateFrameworks/FontServices.framework/Resources/Reserved/PingFangUI.ttc
+15.8601 	DEBUG 	Fullscreen settings ignored as running in pilot mode.
+15.8610 	INFO 	Loaded monitor calibration from ['2025_01_07 12:59']
+16.0601 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x17471f010>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x17471f070>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=False, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x174680be0>, multiSample=False, name='window1', numSamples=2, pos=[356.0, 191.0], screen=0, size=array([1600, 1200]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+16.0602 	EXP 	window1: backgroundImage = ''
+16.0602 	EXP 	window1: backgroundFit = 'none'
+16.0701 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0706 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0710 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0716 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0721 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0724 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0728 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0734 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0737 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0739 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0743 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0747 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0750 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0754 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0758 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0762 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0766 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0768 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0771 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0776 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0779 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0782 	DEBUG 	Uploading Texture Font fontname to graphics card
+16.0814 	DEBUG 	Upload of Texture Font fontname complete
+16.0853 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0859 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0864 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+16.0865 	DEBUG 	Uploading Texture Font fontname to graphics card
+16.0882 	DEBUG 	Upload of Texture Font fontname complete
+16.0893 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+16.0894 	EXP 	window1: recordFrameIntervals = False
+16.2236 	EXP 	window1: recordFrameIntervals = True
+17.1090 	WARNING 	Couldn't measure a consistent frame rate!
+  - Is your graphics card set to sync to vertical blank?
+  - Are you running other processes on your computer?
+
+17.1184 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1190 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1200 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1214 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1226 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1239 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1245 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1255 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1266 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1276 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+17.1279 	DEBUG 	Uploading Texture Font fontname to graphics card
+17.1311 	DEBUG 	Upload of Texture Font fontname complete
+17.1502 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+19.5489 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5490 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5490 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5490 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5490 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5490 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5490 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5490 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5491 	INFO 	keyboard.Keyboard is using iohub backend.
+19.5491 	EXP 	simplestop_skeleton: status = STARTED
+19.5786 	EXP 	Created welcome = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.045, italic=False, languageStyle='LTR', name='welcome', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.6034 	EXP 	Created instrStopText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.025, italic=False, languageStyle='LTR', name='instrStopText', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.6059 	EXP 	Created fixation = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.15, italic=False, languageStyle='LTR', name='fixation', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+19.6267 	EXP 	Created goStim = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, image='default.png', interpolate=True, mask=None, maskParams=None, name='goStim', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([151., 151.]), texRes=128, units='pix', win=Window(...))
+19.6330 	EXP 	Created stopSignal = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-3.0, draggable=False, flipHoriz=False, flipVert=False, image='stopSignal.png', interpolate=True, mask=None, maskParams=None, name='stopSignal', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+19.6438 	EXP 	Created rules = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-4.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.03, italic=False, languageStyle='LTR', name='rules', opacity=1, ori=0.0, pos=array([-0.6,  0.4]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.6443 	EXP 	Created text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+19.6487 	EXP 	Created rules_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-2.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.03, italic=False, languageStyle='LTR', name='rules_2', opacity=1, ori=0.0, pos=array([-0.6,  0.4]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.6491 	EXP 	Created text_5 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.025, italic=False, languageStyle='LTR', name='text_5', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+19.6617 	EXP 	Created testText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.025, italic=False, languageStyle='LTR', name='testText', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.6631 	EXP 	Created test_fixation = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.15, italic=False, languageStyle='LTR', name='test_fixation', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+19.6657 	EXP 	Created goStim_test = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, image='default.png', interpolate=True, mask=None, maskParams=None, name='goStim_test', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([151., 151.]), texRes=128, units='pix', win=Window(...))
+19.6709 	EXP 	Created stopSignal_test = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-3.0, draggable=False, flipHoriz=False, flipVert=False, image='stopSignal.png', interpolate=True, mask=None, maskParams=None, name='stopSignal_test', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+19.6713 	EXP 	Created text_6 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.025, italic=False, languageStyle='LTR', name='text_6', opacity=1, ori=0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+19.6759 	EXP 	Created ending_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='ending_text', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+0.0823 	INFO 	Keyboard events cleared
+0.0819 	WARNING 	t of last frame was 77.22ms (=1/12)
+0.0819 	EXP 	welcome: autoDraw = True
+6.2739 	DATA 	Keypress: return
+6.2785 	INFO 	Keyboard events cleared
+6.2781 	WARNING 	t of last frame was 37.10ms (=1/26)
+6.2781 	EXP 	welcome: autoDraw = False
+6.2781 	EXP 	instrStopText: autoDraw = True
+6.2995 	WARNING 	t of last frame was 21.33ms (=1/46)
+9.8599 	EXP 	New trial (rep=0, index=0): <Trial 0 (0 in rep 0) data={'thisN': 0, 'thisTrialN': 0, 'thisRepN': 0}>
+9.8672 	DEBUG 	Read excel file with openpyxl: condition.xlsx
+9.8674 	EXP 	Imported condition.xlsx as conditions, 4 conditions, 2 params
+9.8678 	EXP 	New trial (rep=0, index=0): <Trial 0 (0 in rep 0) data={'corrGoResp': None, 'shape': None, 'thisN': 0, 'thisTrialN': 0, 'thisRepN': 0}>
+9.8806 	DATA 	Keypress: return
+9.8832 	WARNING 	t of last frame was 27.90ms (=1/35)
+9.8832 	EXP 	instrStopText: autoDraw = False
+9.8832 	EXP 	goStim: image = 'circleblack.png'
+9.8832 	EXP 	fixation: autoDraw = True
+9.8832 	EXP 	rules: autoDraw = True
+10.3789 	INFO 	Keyboard events cleared
+10.3789 	WARNING 	Multiple dropped frames have occurred - I'll stop bothering you about them!
+10.3784 	EXP 	goStim: autoDraw = True
+10.3912 	EXP 	fixation: autoDraw = False
+10.7101 	EXP 	stopSignal: autoDraw = True
+11.2078 	EXP 	stopSignal: autoDraw = False
+11.3746 	EXP 	goStim: autoDraw = False
+12.3779 	EXP 	rules: autoDraw = False
+12.3779 	EXP 	fixation: autoDraw = False
+12.3779 	EXP 	goStim: autoDraw = False
+12.3779 	EXP 	stopSignal: autoDraw = False
+12.3779 	EXP 	rules: autoDraw = False
+12.3779 	EXP 	text: height = 0.05
+12.3779 	EXP 	text: height = 0.05
+12.3779 	EXP 	text: height = 0.05
+12.3779 	EXP 	text: text = 'Respond Faster'
+12.3779 	EXP 	text: autoDraw = True
+12.3779 	EXP 	rules_2: autoDraw = True
+12.8639 	EXP 	New trial (rep=0, index=1): <Trial 1 (1 in rep 0) data={'corrGoResp': None, 'shape': None, 'thisN': 1, 'thisTrialN': 1, 'thisRepN': 0}>
+12.8688 	EXP 	text: autoDraw = False
+12.8688 	EXP 	rules_2: autoDraw = False
+12.8688 	EXP 	text: autoDraw = False
+12.8688 	EXP 	rules_2: autoDraw = False
+12.8688 	EXP 	goStim: image = 'circleblack.png'
+12.8688 	EXP 	fixation: autoDraw = True
+12.8688 	EXP 	rules: autoDraw = True
+13.3549 	INFO 	Keyboard events cleared
+13.3545 	EXP 	goStim: autoDraw = True
+13.3599 	EXP 	fixation: autoDraw = False
+13.7045 	EXP 	stopSignal: autoDraw = True
+14.2044 	EXP 	stopSignal: autoDraw = False
+14.3544 	EXP 	goStim: autoDraw = False
+15.3664 	EXP 	rules: autoDraw = False
+15.3664 	EXP 	fixation: autoDraw = False
+15.3664 	EXP 	goStim: autoDraw = False
+15.3664 	EXP 	stopSignal: autoDraw = False
+15.3664 	EXP 	rules: autoDraw = False
+15.3664 	EXP 	text: height = 0.05
+15.3664 	EXP 	text: height = 0.05
+15.3664 	EXP 	text: height = 0.05
+15.3664 	EXP 	text: text = 'Correct'
+15.3664 	EXP 	text: autoDraw = True
+15.3664 	EXP 	rules_2: autoDraw = True
+15.8542 	EXP 	New trial (rep=0, index=2): <Trial 2 (2 in rep 0) data={'corrGoResp': None, 'shape': None, 'thisN': 2, 'thisTrialN': 2, 'thisRepN': 0}>
+15.8607 	EXP 	text: autoDraw = False
+15.8607 	EXP 	rules_2: autoDraw = False
+15.8607 	EXP 	text: autoDraw = False
+15.8607 	EXP 	rules_2: autoDraw = False
+15.8607 	EXP 	goStim: image = 'squareblack.png'
+15.8607 	EXP 	fixation: autoDraw = True
+15.8607 	EXP 	rules: autoDraw = True
+16.3435 	INFO 	Keyboard events cleared
+16.3432 	EXP 	goStim: autoDraw = True
+16.3579 	EXP 	fixation: autoDraw = False
+16.6582 	DATA 	Keypress: period
+16.7460 	EXP 	stopSignal: autoDraw = True
+17.2349 	EXP 	stopSignal: autoDraw = False
+17.3376 	EXP 	goStim: autoDraw = False
+18.3525 	EXP 	rules: autoDraw = False
+18.3525 	EXP 	fixation: autoDraw = False
+18.3525 	EXP 	goStim: autoDraw = False
+18.3525 	EXP 	stopSignal: autoDraw = False
+18.3525 	EXP 	rules: autoDraw = False
+18.3525 	EXP 	text: height = 0.05
+18.3525 	EXP 	text: height = 0.05
+18.3525 	EXP 	text: height = 0.05
+18.3525 	EXP 	text: text = 'Respond Faster'
+18.3525 	EXP 	text: autoDraw = True
+18.3525 	EXP 	rules_2: autoDraw = True
+18.8433 	EXP 	New trial (rep=1, index=3): <Trial 3 (3 in rep 1) data={'corrGoResp': None, 'shape': None, 'thisN': 3, 'thisTrialN': 3, 'thisRepN': 1}>
+18.8484 	EXP 	text: autoDraw = False
+18.8484 	EXP 	rules_2: autoDraw = False
+18.8484 	EXP 	text: autoDraw = False
+18.8484 	EXP 	rules_2: autoDraw = False
+18.8484 	EXP 	goStim: image = 'circleblack.png'
+18.8484 	EXP 	fixation: autoDraw = True
+18.8484 	EXP 	rules: autoDraw = True
+18.9892 	DATA 	Keypress: comma
+19.3415 	INFO 	Keyboard events cleared
+19.3411 	EXP 	goStim: autoDraw = True
+19.3465 	EXP 	fixation: autoDraw = False
+19.7377 	EXP 	stopSignal: autoDraw = True
+20.2293 	EXP 	stopSignal: autoDraw = False
+20.3379 	EXP 	goStim: autoDraw = False
+21.0141 	DATA 	Keypress: period
+21.3380 	EXP 	rules: autoDraw = False
+21.3380 	EXP 	fixation: autoDraw = False
+21.3380 	EXP 	goStim: autoDraw = False
+21.3380 	EXP 	stopSignal: autoDraw = False
+21.3380 	EXP 	rules: autoDraw = False
+21.3380 	EXP 	text: text = 'Respond Faster'
+21.3380 	EXP 	text: autoDraw = True
+21.3380 	EXP 	rules_2: autoDraw = True
+21.8351 	EXP 	New trial (rep=2, index=4): <Trial 4 (4 in rep 2) data={'corrGoResp': None, 'shape': None, 'thisN': 4, 'thisTrialN': 4, 'thisRepN': 2}>
+21.8403 	EXP 	text: autoDraw = False
+21.8403 	EXP 	rules_2: autoDraw = False
+21.8403 	EXP 	text: autoDraw = False
+21.8403 	EXP 	rules_2: autoDraw = False
+21.8403 	EXP 	goStim: image = 'squareblack.png'
+21.8403 	EXP 	fixation: autoDraw = True
+21.8403 	EXP 	rules: autoDraw = True
+22.3331 	INFO 	Keyboard events cleared
+22.3328 	EXP 	goStim: autoDraw = True
+22.3381 	EXP 	fixation: autoDraw = False
+22.7265 	EXP 	stopSignal: autoDraw = True
+23.2206 	EXP 	stopSignal: autoDraw = False
+23.3291 	EXP 	goStim: autoDraw = False
+24.3551 	EXP 	rules: autoDraw = False
+24.3551 	EXP 	fixation: autoDraw = False
+24.3551 	EXP 	goStim: autoDraw = False
+24.3551 	EXP 	stopSignal: autoDraw = False
+24.3551 	EXP 	rules: autoDraw = False
+24.3551 	EXP 	text: text = 'Respond Faster'
+24.3551 	EXP 	text: autoDraw = True
+24.3551 	EXP 	rules_2: autoDraw = True
+24.8348 	EXP 	New trial (rep=1, index=5): <Trial 5 (5 in rep 1) data={'corrGoResp': None, 'shape': None, 'thisN': 5, 'thisTrialN': 5, 'thisRepN': 1}>
+24.8393 	EXP 	text: autoDraw = False
+24.8393 	EXP 	rules_2: autoDraw = False
+24.8393 	EXP 	goStim: image = 'squareblack.png'
+24.8393 	EXP 	fixation: autoDraw = True
+24.8393 	EXP 	rules: autoDraw = True
+25.3270 	INFO 	Keyboard events cleared
+25.3268 	EXP 	goStim: autoDraw = True
+25.3413 	EXP 	fixation: autoDraw = False
+25.7267 	EXP 	stopSignal: autoDraw = True
+26.2184 	EXP 	stopSignal: autoDraw = False
+26.3245 	EXP 	goStim: autoDraw = False
+27.3298 	EXP 	rules: autoDraw = False
+27.3298 	EXP 	fixation: autoDraw = False
+27.3298 	EXP 	goStim: autoDraw = False
+27.3298 	EXP 	stopSignal: autoDraw = False
+27.3298 	EXP 	rules: autoDraw = False
+27.3298 	EXP 	text: text = 'Respond Faster'
+27.3298 	EXP 	text: autoDraw = True
+27.3298 	EXP 	rules_2: autoDraw = True
+27.8184 	EXP 	New trial (rep=3, index=6): <Trial 6 (6 in rep 3) data={'corrGoResp': None, 'shape': None, 'thisN': 6, 'thisTrialN': 6, 'thisRepN': 3}>
+27.8237 	EXP 	text: autoDraw = False
+27.8237 	EXP 	rules_2: autoDraw = False
+27.8237 	EXP 	text: autoDraw = False
+27.8237 	EXP 	rules_2: autoDraw = False
+27.8237 	EXP 	goStim: image = 'circleblack.png'
+27.8237 	EXP 	fixation: autoDraw = True
+27.8237 	EXP 	rules: autoDraw = True
+28.3134 	INFO 	Keyboard events cleared
+28.3131 	EXP 	fixation: autoDraw = False
+28.3131 	EXP 	goStim: autoDraw = True
+28.7101 	EXP 	stopSignal: autoDraw = True
+29.2079 	EXP 	stopSignal: autoDraw = False
+29.3043 	EXP 	goStim: autoDraw = False
+30.3211 	EXP 	rules: autoDraw = False
+30.3211 	EXP 	fixation: autoDraw = False
+30.3211 	EXP 	goStim: autoDraw = False
+30.3211 	EXP 	stopSignal: autoDraw = False
+30.3211 	EXP 	rules: autoDraw = False
+30.3211 	EXP 	text: text = 'Respond Faster'
+30.3211 	EXP 	text: autoDraw = True
+30.3211 	EXP 	rules_2: autoDraw = True
+30.8101 	EXP 	New trial (rep=1, index=7): <Trial 7 (7 in rep 1) data={'corrGoResp': None, 'shape': None, 'thisN': 7, 'thisTrialN': 7, 'thisRepN': 1}>
+30.8150 	EXP 	text: autoDraw = False
+30.8150 	EXP 	rules_2: autoDraw = False
+30.8150 	EXP 	text: autoDraw = False
+30.8150 	EXP 	rules_2: autoDraw = False
+30.8150 	EXP 	goStim: image = 'squareblack.png'
+30.8150 	EXP 	fixation: autoDraw = True
+30.8150 	EXP 	rules: autoDraw = True
+31.3049 	INFO 	Keyboard events cleared
+31.3045 	EXP 	fixation: autoDraw = False
+31.3045 	EXP 	goStim: autoDraw = True
+31.7022 	EXP 	stopSignal: autoDraw = True
+32.1996 	EXP 	stopSignal: autoDraw = False
+32.2962 	EXP 	goStim: autoDraw = False
+33.3065 	EXP 	rules: autoDraw = False
+33.3065 	EXP 	fixation: autoDraw = False
+33.3065 	EXP 	goStim: autoDraw = False
+33.3065 	EXP 	stopSignal: autoDraw = False
+33.3065 	EXP 	rules: autoDraw = False
+33.3065 	EXP 	text: height = 0.05
+33.3065 	EXP 	text: height = 0.05
+33.3065 	EXP 	text: height = 0.05
+33.3065 	EXP 	text: text = 'Correct'
+33.3065 	EXP 	text: autoDraw = True
+33.3065 	EXP 	rules_2: autoDraw = True
+33.7936 	EXP 	New trial (rep=0, index=8): <Trial 8 (8 in rep 0) data={'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim', 'thisN': 8, 'thisTrialN': 8, 'thisRepN': 0}>
+33.7981 	EXP 	text: autoDraw = False
+33.7981 	EXP 	rules_2: autoDraw = False
+33.7981 	EXP 	text: autoDraw = False
+33.7981 	EXP 	rules_2: autoDraw = False
+33.7981 	EXP 	goStim: image = 'squareblack.png'
+33.7981 	EXP 	fixation: autoDraw = True
+33.7981 	EXP 	rules: autoDraw = True
+34.2854 	INFO 	Keyboard events cleared
+34.2851 	EXP 	goStim: autoDraw = True
+34.2997 	EXP 	fixation: autoDraw = False
+34.7350 	EXP 	stopSignal: autoDraw = True
+35.2267 	EXP 	stopSignal: autoDraw = False
+35.2830 	EXP 	goStim: autoDraw = False
+36.2963 	EXP 	rules: autoDraw = False
+36.2963 	EXP 	fixation: autoDraw = False
+36.2963 	EXP 	goStim: autoDraw = False
+36.2963 	EXP 	stopSignal: autoDraw = False
+36.2963 	EXP 	rules: autoDraw = False
+36.2963 	EXP 	text: text = 'Correct'
+36.2963 	EXP 	text: autoDraw = True
+36.2963 	EXP 	rules_2: autoDraw = True
+36.7934 	EXP 	New trial (rep=4, index=9): <Trial 9 (9 in rep 4) data={'corrGoResp': None, 'shape': None, 'thisN': 9, 'thisTrialN': 9, 'thisRepN': 4}>
+36.7984 	EXP 	text: autoDraw = False
+36.7984 	EXP 	rules_2: autoDraw = False
+36.7984 	EXP 	text: autoDraw = False
+36.7984 	EXP 	rules_2: autoDraw = False
+36.7984 	EXP 	goStim: image = 'circleblack.png'
+36.7984 	EXP 	fixation: autoDraw = True
+36.7984 	EXP 	rules: autoDraw = True
+37.2882 	INFO 	Keyboard events cleared
+37.2878 	EXP 	fixation: autoDraw = False
+37.2878 	EXP 	goStim: autoDraw = True
+37.7878 	EXP 	stopSignal: autoDraw = True
+38.2877 	EXP 	goStim: autoDraw = False
+38.2877 	EXP 	stopSignal: autoDraw = False
+39.2883 	EXP 	rules: autoDraw = False
+39.2883 	EXP 	fixation: autoDraw = False
+39.2883 	EXP 	goStim: autoDraw = False
+39.2883 	EXP 	stopSignal: autoDraw = False
+39.2883 	EXP 	rules: autoDraw = False
+39.2883 	EXP 	text: text = 'Correct'
+39.2883 	EXP 	text: autoDraw = True
+39.2883 	EXP 	rules_2: autoDraw = True
+39.7851 	EXP 	New trial (rep=2, index=10): <Trial 10 (10 in rep 2) data={'corrGoResp': None, 'shape': None, 'thisN': 10, 'thisTrialN': 10, 'thisRepN': 2}>
+39.7897 	EXP 	text: autoDraw = False
+39.7897 	EXP 	rules_2: autoDraw = False
+39.7897 	EXP 	text: autoDraw = False
+39.7897 	EXP 	rules_2: autoDraw = False
+39.7897 	EXP 	goStim: image = 'circleblack.png'
+39.7897 	EXP 	fixation: autoDraw = True
+39.7897 	EXP 	rules: autoDraw = True
+40.2799 	INFO 	Keyboard events cleared
+40.2796 	EXP 	fixation: autoDraw = False
+40.2796 	EXP 	goStim: autoDraw = True
+40.8300 	EXP 	stopSignal: autoDraw = True
+41.2683 	EXP 	goStim: autoDraw = False
+41.3183 	EXP 	stopSignal: autoDraw = False
+42.2902 	EXP 	rules: autoDraw = False
+42.2902 	EXP 	fixation: autoDraw = False
+42.2902 	EXP 	goStim: autoDraw = False
+42.2902 	EXP 	stopSignal: autoDraw = False
+42.2902 	EXP 	rules: autoDraw = False
+42.2902 	EXP 	text: height = 0.05
+42.2902 	EXP 	text: height = 0.05
+42.2902 	EXP 	text: height = 0.05
+42.2902 	EXP 	text: text = 'Respond Faster'
+42.2902 	EXP 	text: autoDraw = True
+42.2902 	EXP 	rules_2: autoDraw = True
+42.7786 	EXP 	New trial (rep=3, index=11): <Trial 11 (11 in rep 3) data={'corrGoResp': None, 'shape': None, 'thisN': 11, 'thisTrialN': 11, 'thisRepN': 3}>
+42.7846 	EXP 	text: autoDraw = False
+42.7846 	EXP 	rules_2: autoDraw = False
+42.7846 	EXP 	text: autoDraw = False
+42.7846 	EXP 	rules_2: autoDraw = False
+42.7846 	EXP 	goStim: image = 'squareblack.png'
+42.7846 	EXP 	fixation: autoDraw = True
+42.7846 	EXP 	rules: autoDraw = True
+43.2715 	INFO 	Keyboard events cleared
+43.2712 	EXP 	goStim: autoDraw = True
+43.2771 	EXP 	fixation: autoDraw = False
+43.8212 	EXP 	stopSignal: autoDraw = True
+44.2713 	EXP 	goStim: autoDraw = False
+44.3211 	EXP 	stopSignal: autoDraw = False
+45.2766 	EXP 	rules: autoDraw = False
+45.2766 	EXP 	fixation: autoDraw = False
+45.2766 	EXP 	goStim: autoDraw = False
+45.2766 	EXP 	stopSignal: autoDraw = False
+45.2766 	EXP 	rules: autoDraw = False
+45.2766 	EXP 	text: text = 'Respond Faster'
+45.2766 	EXP 	text: autoDraw = True
+45.2766 	EXP 	rules_2: autoDraw = True
+45.7619 	EXP 	New trial (rep=2, index=12): <Trial 12 (12 in rep 2) data={'corrGoResp': None, 'shape': None, 'thisN': 12, 'thisTrialN': 12, 'thisRepN': 2}>
+45.7747 	EXP 	text: autoDraw = False
+45.7747 	EXP 	rules_2: autoDraw = False
+45.7747 	EXP 	text: autoDraw = False
+45.7747 	EXP 	rules_2: autoDraw = False
+45.7747 	EXP 	goStim: image = 'squareblack.png'
+45.7747 	EXP 	fixation: autoDraw = True
+45.7747 	EXP 	rules: autoDraw = True
+46.2552 	INFO 	Keyboard events cleared
+46.2549 	EXP 	goStim: autoDraw = True
+46.2746 	EXP 	fixation: autoDraw = False
+46.8024 	EXP 	stopSignal: autoDraw = True
+47.2461 	EXP 	goStim: autoDraw = False
+47.2961 	EXP 	stopSignal: autoDraw = False
+48.2633 	EXP 	rules: autoDraw = False
+48.2633 	EXP 	fixation: autoDraw = False
+48.2633 	EXP 	goStim: autoDraw = False
+48.2633 	EXP 	stopSignal: autoDraw = False
+48.2633 	EXP 	rules: autoDraw = False
+48.2633 	EXP 	text: text = 'Respond Faster'
+48.2633 	EXP 	text: autoDraw = True
+48.2633 	EXP 	rules_2: autoDraw = True
+48.7603 	EXP 	New trial (rep=4, index=13): <Trial 13 (13 in rep 4) data={'corrGoResp': None, 'shape': None, 'thisN': 13, 'thisTrialN': 13, 'thisRepN': 4}>
+48.7648 	EXP 	text: autoDraw = False
+48.7648 	EXP 	rules_2: autoDraw = False
+48.7648 	EXP 	text: autoDraw = False
+48.7648 	EXP 	rules_2: autoDraw = False
+48.7648 	EXP 	goStim: image = 'squareblack.png'
+48.7648 	EXP 	fixation: autoDraw = True
+48.7648 	EXP 	rules: autoDraw = True
+49.2583 	INFO 	Keyboard events cleared
+49.2580 	EXP 	goStim: autoDraw = True
+49.2632 	EXP 	fixation: autoDraw = False
+49.8025 	EXP 	stopSignal: autoDraw = True
+50.2547 	EXP 	goStim: autoDraw = False
+50.2996 	EXP 	stopSignal: autoDraw = False
+51.2651 	EXP 	rules: autoDraw = False
+51.2651 	EXP 	fixation: autoDraw = False
+51.2651 	EXP 	goStim: autoDraw = False
+51.2651 	EXP 	stopSignal: autoDraw = False
+51.2651 	EXP 	rules: autoDraw = False
+51.2651 	EXP 	text: height = 0.05
+51.2651 	EXP 	text: height = 0.05
+51.2651 	EXP 	text: height = 0.05
+51.2651 	EXP 	text: text = 'Correct'
+51.2651 	EXP 	text: autoDraw = True
+51.2651 	EXP 	rules_2: autoDraw = True
+51.7601 	EXP 	New trial (rep=1, index=14): <Trial 14 (14 in rep 1) data={'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim', 'thisN': 14, 'thisTrialN': 14, 'thisRepN': 1}>
+51.7645 	EXP 	text: autoDraw = False
+51.7645 	EXP 	rules_2: autoDraw = False
+51.7645 	EXP 	text: autoDraw = False
+51.7645 	EXP 	rules_2: autoDraw = False
+51.7645 	EXP 	goStim: image = 'squareblack.png'
+51.7645 	EXP 	fixation: autoDraw = True
+51.7645 	EXP 	rules: autoDraw = True
+52.2552 	INFO 	Keyboard events cleared
+52.2548 	EXP 	fixation: autoDraw = False
+52.2548 	EXP 	goStim: autoDraw = True
+52.8547 	EXP 	stopSignal: autoDraw = True
+53.2434 	EXP 	goStim: autoDraw = False
+53.3433 	EXP 	stopSignal: autoDraw = False
+54.2574 	EXP 	rules: autoDraw = False
+54.2574 	EXP 	fixation: autoDraw = False
+54.2574 	EXP 	goStim: autoDraw = False
+54.2574 	EXP 	stopSignal: autoDraw = False
+54.2574 	EXP 	rules: autoDraw = False
+54.2574 	EXP 	text: height = 0.05
+54.2574 	EXP 	text: height = 0.05
+54.2574 	EXP 	text: height = 0.05
+54.2574 	EXP 	text: text = 'Respond Faster'
+54.2574 	EXP 	text: autoDraw = True
+54.2574 	EXP 	rules_2: autoDraw = True
+54.7435 	EXP 	New trial (rep=2, index=15): <Trial 15 (15 in rep 2) data={'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim', 'thisN': 15, 'thisTrialN': 15, 'thisRepN': 2}>
+54.7484 	EXP 	text: autoDraw = False
+54.7484 	EXP 	rules_2: autoDraw = False
+54.7484 	EXP 	text: autoDraw = False
+54.7484 	EXP 	rules_2: autoDraw = False
+54.7484 	EXP 	goStim: image = 'circleblack.png'
+54.7484 	EXP 	fixation: autoDraw = True
+54.7484 	EXP 	rules: autoDraw = True
+55.2358 	INFO 	Keyboard events cleared
+55.2355 	EXP 	goStim: autoDraw = True
+55.2497 	EXP 	fixation: autoDraw = False
+55.8350 	EXP 	stopSignal: autoDraw = True
+56.2299 	EXP 	goStim: autoDraw = False
+56.3292 	EXP 	stopSignal: autoDraw = False
+57.2467 	EXP 	rules: autoDraw = False
+57.2467 	EXP 	fixation: autoDraw = False
+57.2467 	EXP 	goStim: autoDraw = False
+57.2467 	EXP 	stopSignal: autoDraw = False
+57.2467 	EXP 	rules: autoDraw = False
+57.2467 	EXP 	text: text = 'Respond Faster'
+57.2467 	EXP 	text: autoDraw = True
+57.2467 	EXP 	rules_2: autoDraw = True
+57.7318 	EXP 	New trial (rep=5, index=16): <Trial 16 (16 in rep 5) data={'corrGoResp': None, 'shape': None, 'thisN': 16, 'thisTrialN': 16, 'thisRepN': 5}>
+57.7364 	EXP 	text: autoDraw = False
+57.7364 	EXP 	rules_2: autoDraw = False
+57.7364 	EXP 	text: autoDraw = False
+57.7364 	EXP 	rules_2: autoDraw = False
+57.7364 	EXP 	goStim: image = 'squareblack.png'
+57.7364 	EXP 	fixation: autoDraw = True
+57.7364 	EXP 	rules: autoDraw = True
+58.2304 	INFO 	Keyboard events cleared
+58.2300 	EXP 	fixation: autoDraw = False
+58.2300 	EXP 	goStim: autoDraw = True
+58.8212 	EXP 	stopSignal: autoDraw = True
+59.2212 	EXP 	goStim: autoDraw = False
+59.3128 	EXP 	stopSignal: autoDraw = False
+60.2295 	EXP 	rules: autoDraw = False
+60.2295 	EXP 	fixation: autoDraw = False
+60.2295 	EXP 	goStim: autoDraw = False
+60.2295 	EXP 	stopSignal: autoDraw = False
+60.2295 	EXP 	rules: autoDraw = False
+60.2295 	EXP 	text: text = 'Respond Faster'
+60.2295 	EXP 	text: autoDraw = True
+60.2295 	EXP 	rules_2: autoDraw = True
+60.7187 	EXP 	New trial (rep=3, index=17): <Trial 17 (17 in rep 3) data={'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim', 'thisN': 17, 'thisTrialN': 17, 'thisRepN': 3}>
+60.7239 	EXP 	text: autoDraw = False
+60.7239 	EXP 	rules_2: autoDraw = False
+60.7239 	EXP 	text: autoDraw = False
+60.7239 	EXP 	rules_2: autoDraw = False
+60.7239 	EXP 	goStim: image = 'circleblack.png'
+60.7239 	EXP 	fixation: autoDraw = True
+60.7239 	EXP 	rules: autoDraw = True
+61.2135 	INFO 	Keyboard events cleared
+61.2131 	EXP 	fixation: autoDraw = False
+61.2131 	EXP 	goStim: autoDraw = True
+61.8131 	EXP 	stopSignal: autoDraw = True
+62.2082 	EXP 	goStim: autoDraw = False
+62.3019 	EXP 	stopSignal: autoDraw = False
+63.2215 	EXP 	rules: autoDraw = False
+63.2215 	EXP 	fixation: autoDraw = False
+63.2215 	EXP 	goStim: autoDraw = False
+63.2215 	EXP 	stopSignal: autoDraw = False
+63.2215 	EXP 	rules: autoDraw = False
+63.2215 	EXP 	text: text = 'Respond Faster'
+63.2215 	EXP 	text: autoDraw = True
+63.2215 	EXP 	rules_2: autoDraw = True
+63.7102 	EXP 	New trial (rep=3, index=18): <Trial 18 (18 in rep 3) data={'corrGoResp': None, 'shape': None, 'thisN': 18, 'thisTrialN': 18, 'thisRepN': 3}>
+63.7152 	EXP 	text: autoDraw = False
+63.7152 	EXP 	rules_2: autoDraw = False
+63.7152 	EXP 	text: autoDraw = False
+63.7152 	EXP 	rules_2: autoDraw = False
+63.7152 	EXP 	goStim: image = 'squareblack.png'
+63.7152 	EXP 	fixation: autoDraw = True
+63.7152 	EXP 	rules: autoDraw = True
+64.2053 	INFO 	Keyboard events cleared
+64.2050 	EXP 	fixation: autoDraw = False
+64.2050 	EXP 	goStim: autoDraw = True
+64.8044 	EXP 	stopSignal: autoDraw = True
+65.1960 	EXP 	goStim: autoDraw = False
+65.3043 	EXP 	stopSignal: autoDraw = False
+66.2149 	EXP 	rules: autoDraw = False
+66.2149 	EXP 	fixation: autoDraw = False
+66.2149 	EXP 	goStim: autoDraw = False
+66.2149 	EXP 	stopSignal: autoDraw = False
+66.2149 	EXP 	rules: autoDraw = False
+66.2149 	EXP 	text: height = 0.05
+66.2149 	EXP 	text: height = 0.05
+66.2149 	EXP 	text: height = 0.05
+66.2149 	EXP 	text: text = 'Correct'
+66.2149 	EXP 	text: autoDraw = True
+66.2149 	EXP 	rules_2: autoDraw = True
+66.7102 	EXP 	New trial (rep=4, index=19): <Trial 19 (19 in rep 4) data={'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim', 'thisN': 19, 'thisTrialN': 19, 'thisRepN': 4}>
+66.7152 	EXP 	text: autoDraw = False
+66.7152 	EXP 	rules_2: autoDraw = False
+66.7152 	EXP 	text: autoDraw = False
+66.7152 	EXP 	rules_2: autoDraw = False
+66.7152 	EXP 	goStim: image = 'circleblack.png'
+66.7152 	EXP 	fixation: autoDraw = True
+66.7152 	EXP 	rules: autoDraw = True
+67.2030 	INFO 	Keyboard events cleared
+67.2027 	EXP 	goStim: autoDraw = True
+67.2165 	EXP 	fixation: autoDraw = False
+67.8545 	EXP 	stopSignal: autoDraw = True
+68.1959 	EXP 	goStim: autoDraw = False
+68.3435 	EXP 	stopSignal: autoDraw = False
+69.2877 	EXP 	rules: autoDraw = False
+69.2877 	EXP 	fixation: autoDraw = False
+69.2877 	EXP 	goStim: autoDraw = False
+69.2877 	EXP 	stopSignal: autoDraw = False
+69.2877 	EXP 	rules: autoDraw = False
+69.2877 	EXP 	text: height = 0.05
+69.2877 	EXP 	text: height = 0.05
+69.2877 	EXP 	text: height = 0.05
+69.2877 	EXP 	text: text = 'Respond Faster'
+69.2877 	EXP 	text: autoDraw = True
+69.2877 	EXP 	rules_2: autoDraw = True
+69.7063 	EXP 	New trial (rep=5, index=20): <Trial 20 (20 in rep 5) data={'corrGoResp': None, 'shape': None, 'thisN': 20, 'thisTrialN': 20, 'thisRepN': 5}>
+69.7110 	EXP 	text: autoDraw = False
+69.7110 	EXP 	rules_2: autoDraw = False
+69.7110 	EXP 	goStim: image = 'circleblack.png'
+69.7110 	EXP 	fixation: autoDraw = True
+69.7110 	EXP 	rules: autoDraw = True
+70.1969 	INFO 	Keyboard events cleared
+70.1965 	EXP 	goStim: autoDraw = True
+70.2025 	EXP 	fixation: autoDraw = False
+70.8581 	EXP 	stopSignal: autoDraw = True
+71.1042 	DATA 	Keypress: period
+71.1858 	EXP 	goStim: autoDraw = False
+71.3582 	EXP 	stopSignal: autoDraw = False
+72.2027 	EXP 	rules: autoDraw = False
+72.2027 	EXP 	fixation: autoDraw = False
+72.2027 	EXP 	goStim: autoDraw = False
+72.2027 	EXP 	stopSignal: autoDraw = False
+72.2027 	EXP 	rules: autoDraw = False
+72.2027 	EXP 	text: height = 0.05
+72.2027 	EXP 	text: height = 0.05
+72.2027 	EXP 	text: height = 0.05
+72.2027 	EXP 	text: text = 'Correct'
+72.2027 	EXP 	text: autoDraw = True
+72.2027 	EXP 	rules_2: autoDraw = True
+72.6899 	EXP 	New trial (rep=5, index=21): <Trial 21 (21 in rep 5) data={'corrGoResp': '$currentCorrectResponse', 'shape': '$currentGoStim', 'thisN': 21, 'thisTrialN': 21, 'thisRepN': 5}>
+72.6944 	EXP 	text: autoDraw = False
+72.6944 	EXP 	rules_2: autoDraw = False
+72.6944 	EXP 	text: autoDraw = False
+72.6944 	EXP 	rules_2: autoDraw = False
+72.6944 	EXP 	goStim: image = 'circleblack.png'
+72.6944 	EXP 	fixation: autoDraw = True
+72.6944 	EXP 	rules: autoDraw = True
+73.1882 	INFO 	Keyboard events cleared
+73.1879 	EXP 	fixation: autoDraw = False
+73.1879 	EXP 	goStim: autoDraw = True
+73.8916 	EXP 	stopSignal: autoDraw = True
+74.1794 	EXP 	goStim: autoDraw = False
+74.3916 	EXP 	stopSignal: autoDraw = False
+75.1858 	EXP 	rules: autoDraw = False
+75.1858 	EXP 	fixation: autoDraw = False
+75.1858 	EXP 	goStim: autoDraw = False
+75.1858 	EXP 	stopSignal: autoDraw = False
+75.1858 	EXP 	rules: autoDraw = False
+75.1858 	EXP 	text: text = 'Correct'
+75.1858 	EXP 	text: autoDraw = True
+75.1858 	EXP 	rules_2: autoDraw = True
+75.6746 	EXP 	New trial (rep=4, index=22): <Trial 22 (22 in rep 4) data={'corrGoResp': None, 'shape': None, 'thisN': 22, 'thisTrialN': 22, 'thisRepN': 4}>
+75.6794 	EXP 	text: autoDraw = False
+75.6794 	EXP 	rules_2: autoDraw = False
+75.6794 	EXP 	text: autoDraw = False
+75.6794 	EXP 	rules_2: autoDraw = False
+75.6794 	EXP 	goStim: image = 'circleblack.png'
+75.6794 	EXP 	fixation: autoDraw = True
+75.6794 	EXP 	rules: autoDraw = True
+76.1635 	INFO 	Keyboard events cleared
+76.1632 	EXP 	goStim: autoDraw = True
+76.1696 	EXP 	fixation: autoDraw = False
+76.9201 	EXP 	stopSignal: autoDraw = True
+77.1580 	EXP 	goStim: autoDraw = False
+77.4150 	EXP 	stopSignal: autoDraw = False
+78.1775 	EXP 	rules: autoDraw = False
+78.1775 	EXP 	fixation: autoDraw = False
+78.1775 	EXP 	goStim: autoDraw = False
+78.1775 	EXP 	stopSignal: autoDraw = False
+78.1775 	EXP 	rules: autoDraw = False
+78.1775 	EXP 	text: height = 0.05
+78.1775 	EXP 	text: height = 0.05
+78.1775 	EXP 	text: height = 0.05
+78.1775 	EXP 	text: text = 'Respond Faster'
+78.1775 	EXP 	text: autoDraw = True
+78.1775 	EXP 	rules_2: autoDraw = True
+78.6670 	EXP 	New trial (rep=5, index=23): <Trial 23 (23 in rep 5) data={'corrGoResp': None, 'shape': None, 'thisN': 23, 'thisTrialN': 23, 'thisRepN': 5}>
+78.6745 	EXP 	text: autoDraw = False
+78.6745 	EXP 	rules_2: autoDraw = False
+78.6745 	EXP 	text: autoDraw = False
+78.6745 	EXP 	rules_2: autoDraw = False
+78.6745 	EXP 	goStim: image = 'squareblack.png'
+78.6745 	EXP 	fixation: autoDraw = True
+78.6745 	EXP 	rules: autoDraw = True
+79.1615 	INFO 	Keyboard events cleared
+79.1611 	EXP 	goStim: autoDraw = True
+79.1749 	EXP 	fixation: autoDraw = False
+79.9114 	EXP 	stopSignal: autoDraw = True
+80.1529 	EXP 	goStim: autoDraw = False
+80.4031 	EXP 	stopSignal: autoDraw = False
+81.1781 	EXP 	rules: autoDraw = False
+81.1781 	EXP 	fixation: autoDraw = False
+81.1781 	EXP 	goStim: autoDraw = False
+81.1781 	EXP 	stopSignal: autoDraw = False
+81.1781 	EXP 	rules: autoDraw = False
+81.1781 	EXP 	text: text = 'Respond Faster'
+81.1781 	EXP 	text: autoDraw = True
+81.1781 	EXP 	rules_2: autoDraw = True
+81.6918 	DEBUG 	Saving data for simplestop_skeleton ExperimentHandler
+81.6940 	INFO 	saved data to /Users/kritiaxh/Documents/paperRepos/SharedControlPaper/experiments/simpleStop/data/392251_simplestop_skeleton_2025-03-11_11h27.51.024.psydat
+81.6985 	INFO 	saved data to '/Users/kritiaxh/Documents/paperRepos/SharedControlPaper/experiments/simpleStop/data/392251_simplestop_skeleton_2025-03-11_11h27.51.024.csv'
