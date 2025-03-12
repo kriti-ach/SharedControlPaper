@@ -5,7 +5,6 @@ import pandas as pd
 from scipy import stats
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sharedcontrolpaper.simple_stop_utils import SECONDS_TO_MILLISECONDS
 
 RING_RADIUS_THRESHOLD = 1.2 # Distance that needs to be cleared for the dot to be outside the ring
 MINIMUM_SSRT = 0.175 # The minimum delay after the stop signal before checking for inhibition, in seconds
@@ -15,6 +14,7 @@ MIN_PRESSURE = 0 # Pressure when the subject is not pressing the spacebar
 THRESHOLD_REDUCTION = 0.30 # Check for this much reduction in pressure to start checking for SSRT
 INTERVAL_DURATION = 0.1 # Duration of a time interval, in seconds
 EXCLUSIONS = {"s027": ["AI", 80, 96]} # Force-sensitive stopping task trial exclusions
+SECONDS_TO_MILLISECONDS = 1000
 
 QUESTION_LIST = [
     "AI is making our daily lives easier.",
@@ -29,7 +29,7 @@ QUESTION_LIST = [
 def get_subject_label(file):
     """Extract the subject label from a given file path."""
     
-    match = re.search(r'/sub-(s\d{3})/', file)
+    match = re.search(r'(s\d{3})', file)
     
     if match:
         subject_label = match.group(1)
