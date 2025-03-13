@@ -74,7 +74,7 @@ testBeginFlag = 0
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 # Store info about the experiment session
-psychopyVersion = '2023.1.2'
+psychopyVersion = '2022.2.2'
 expName = 'simplestop_skeleton'  # from the Builder filename that created this script
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",

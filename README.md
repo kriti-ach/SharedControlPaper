@@ -79,11 +79,11 @@ cd SharedControlPaper/experiments/forceSensitiveStoppingTask
             `brew install wootingkb/wooting/wooting-analog-sdk`
 
 or follow the instructions for manual installation on the Github Readme linked above.
-4. Run [forceSensitiveStoppingTask.py] using the PsychoPy GUI: https://www.psychopy.org/download.html.
+4. Run [forceSensitiveStoppingTask.py] after installing the PsychoPy standalone package: https://www.psychopy.org/download.html.
 
 ## Running the simple stop task:
 
-Install PsychoPy GUI: https://www.psychopy.org/download.html and click/run simpleStop.psyexp.
+Install the PsychoPy standalone package: https://www.psychopy.org/download.html and click/run simpleStop.psyexp.
 
 ## To preprocess newly acquired data:
 
