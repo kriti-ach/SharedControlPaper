@@ -5,6 +5,7 @@ import re
 from pathlib import Path
 import logging
 import numpy as np
+import shutil
 from force_sensitive_stopping_task_utils import get_subject_label
 
 def change_columns():
@@ -72,7 +73,7 @@ def change_columns():
 
         df = df.drop(columns=['condition_order_raw'], axis=1)
 
-        output_path = os.path.join(parent_directory, 'data', 'experiment', 'final', f'sub-{subject_label}',
+        output_path = os.path.join(parent_directory, 'data', 'experiment', 'final', f'unprocessed_sub-{subject_label}',
                                    'force_sensitive_stopping_task',
                                    f'{subject_label}_force_sensitive_stopping_task.csv')
         os.makedirs(os.path.dirname(output_path), exist_ok=True) # Create directories if they don't exist
@@ -154,13 +155,16 @@ def main():
     data_dir = Path("data", "experiment", "final")
     outdir = data_dir
     outdir.mkdir(parents=True, exist_ok=True)
-    subjects = sorted(data_dir.glob("sub-s*")) # Change this if you only want to run the script on some subjects
+    subjects = sorted(data_dir.glob("unprocessed_sub-s*")) 
     for subject in subjects:
         logging.info(f"Processing subject {subject}")
+        old_name = subject
+        new_name = subject.parent / subject.name.replace("unprocessed_sub-", "sub-")
+        os.rename(old_name, new_name)
+        subject = new_name
         sub_id = subject.name.replace("sub-", "")
         # input and output paths are now the same
         filepath = subject / "force_sensitive_stopping_task" / f'{sub_id}_force_sensitive_stopping_task.csv'
-
         assert filepath.exists(), f"Force sensitive task not found for {subject}"
         df = pd.read_csv(filepath)
 
@@ -192,6 +196,7 @@ def main():
         df_tidy = process_distance_data(df_tidy, ring_positions_raw)
         outpath = filepath
         df_tidy.to_csv(outpath, index=False)
+
 
     return
 
