@@ -8,7 +8,7 @@ which has the user control the movement of a dot inside a ring by using a pressu
 Clone the repository using:
 
 ```bash
-git clone https://github.com/kriti-a567/SharedControlPaper.git
+git clone https://github.com/kriti-ach/SharedControlPaper.git
 ```
 
 Go into the repo using:
