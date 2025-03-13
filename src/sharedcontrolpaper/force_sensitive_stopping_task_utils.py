@@ -14,7 +14,9 @@ MIN_PRESSURE = 0 # Pressure when the subject is not pressing the spacebar
 THRESHOLD_REDUCTION = 0.30 # Check for this much reduction in pressure to start checking for SSRT
 INTERVAL_DURATION = 0.1 # Duration of a time interval, in seconds
 EXCLUSIONS = {"s027": ["AI", 80, 96]} # Force-sensitive stopping task trial exclusions
-SECONDS_TO_MILLISECONDS = 1000
+SECONDS_TO_MILLISECONDS = 1000 # Seconds to milliseconds conversion
+SSRT_THRESHOLD_FIGURE_S2 = 600 # To plot figure S2, we excluded outliers above SSRT_THRESHOLD_FIGURE_S2.
+CONFIDENCE = .95 # The confidence level for confidence intervals
 
 QUESTION_LIST = [
     "AI is making our daily lives easier.",
@@ -27,15 +29,13 @@ QUESTION_LIST = [
 ]
 
 def get_subject_label(file):
-    """Extract the subject label from a given file path."""
-    
+    """Extract the subject label from a given file path. Raises ValueError if no label is found."""
     match = re.search(r'(s\d{3})', file)
-    
     if match:
         subject_label = match.group(1)
         return subject_label
     else:
-        return None
+        raise ValueError(f"Invalid file path: No subject label found in '{file}'")
     
 def aggregate_trial_data(df):
     """Aggregates trial data, handling AI-assisted and Non-AI conditions."""
@@ -54,7 +54,6 @@ def aggregate_trial_data(df):
 def calculate_interval_average(group):
     """Calculates the average pressure for a given time interval."""
     return np.mean(group['pressures'])
-
 
 def calculate_intervals(time_stamps, pressures, stop_onset, interval_duration=INTERVAL_DURATION):
     """Calculates average pressures at specified intervals until stop onset"""
@@ -80,7 +79,6 @@ def is_monotonic_decrease(series):
 def check_pressure_drop(series, threshold):
     """Checks if a pressure drop below a threshold occurs within a series."""
     return (series <= threshold).any()
-
 
 def find_ssrt(time_stamps, pressures, start_index):
     """Finds the stop-signal reaction time (SSRT)."""
@@ -117,7 +115,7 @@ def find_moment_pressure_reached_zero(ssrt_index, time_stamps, pressures):
     pressure_reached_zero = np.nan
     pressure_reached_zero_idx = None
     if ssrt_index is not None:
-        stop_moment_indices = [i for i in range(ssrt_index, len(pressures)) if pressures[i] == 0]
+        stop_moment_indices = [i for i in range(ssrt_index, len(pressures)) if pressures[i] == MIN_PRESSURE]
         if stop_moment_indices:
             pressure_reached_zero = time_stamps[stop_moment_indices[0]]
             pressure_reached_zero_idx = stop_moment_indices[0]
@@ -143,12 +141,10 @@ def calculate_proportions(series, threshold):
     total = len(series)
     return inside / total if total else np.nan, after / total if total else np.nan
 
-
 def calculate_go_task_metrics(relative_distances, stop_onset_idx, ring_radius_threshold=RING_RADIUS_THRESHOLD):
     """Calculates go task accuracy metrics."""
 
     df = pd.Series(relative_distances) #Pandas Series for efficient operations
-
     results = {}
 
     if stop_onset_idx is not None:
@@ -200,8 +196,6 @@ def find_stops_before_stop_onset(pressures, stop_onset_idx):
     relevant_pressures = pressures[:stop_onset_idx]
     num_zero_pressures = np.size(relevant_pressures) - np.count_nonzero(relevant_pressures)
     proportion_zero = num_zero_pressures / len(relevant_pressures) if len(relevant_pressures)>0 else np.nan
-
-
     return proportion_zero
 
 def process_trial_data(data, block):
@@ -252,10 +246,11 @@ def process_trial_data(data, block):
         # Find the pressures at time intervals until stop onset
         pressures_at_intervals_until_stop_onset = calculate_intervals(time_stamps, pressures, stop_onset)
 
-        #Find the first timestamp with non-zero pressure
+        # Find the first timestamp with non-zero pressure
         first_non_zero_pressure_timestamp = find_first_non_zero_pressure_timestamp(pressures, time_stamps)
         first_full_pressure_timestamp = find_first_full_pressure_timestamp(pressures, time_stamps)
 
+        # Find the proportion of stops before the stop onset
         proportion_stops_before_stop_onset = find_stops_before_stop_onset(pressures, stop_onset_idx)
 
         trial_results[trial_number] = {
@@ -325,7 +320,7 @@ def find_sum_of_intervals(trials_list, measures_dict, max_length, subject):
                                     lst in trials_list]
     # Calculate the proportion of 1s at each interval
     counts = np.count_nonzero(~np.isnan(np.vstack(trials)), axis=0)  # Count valid entries
-    measures_dict[subject] = np.nansum(np.vstack(trials) == 1, axis=0) / counts # Count number of pressures=1
+    measures_dict[subject] = np.nansum(np.vstack(trials) == MAX_PRESSURE, axis=0) / counts # Count number of pressures=1
     return measures_dict
 
 def convert_dict_to_df(data_dict, time_intervals):
@@ -415,13 +410,13 @@ def cohens_d_paired(x1, x2):
     d = (x1 - x2).mean() / np.sqrt(((x1 - x2).std(ddof=1) ** 2) / 2)
     return d
 
-def calculate_ci_for_difference(x1, x2, confidence=0.95):
+def calculate_ci_for_difference(x1, x2):
     """Calculate confidence interval for the mean difference between two paired samples (arrays)"""
     diff = x1 - x2
     n = len(diff)
     mean_diff = np.mean(diff)
     sem = stats.sem(diff)  # Standard error of the mean
-    ci = stats.t.interval(confidence, n-1, loc=mean_diff, scale=sem)
+    ci = stats.t.interval(CONFIDENCE, n-1, loc=mean_diff, scale=sem)
     return mean_diff, ci
 
 def calc_stats_ind(data1, data2):
@@ -446,14 +441,14 @@ def print_means_t_test(df, condition1, condition2, alpha=0.05):
     print(f"T-statistic: {t_test.statistic:.2f}, p-value: {t_test.pvalue:.2f}")
     print(f"Significant difference ({condition1} vs {condition2})? {'Yes' if t_test.pvalue < alpha else 'No'}")
 
-def print_effect_size_and_ci(df, condition1, condition2, confidence=0.95):
+def print_effect_size_and_ci(df, condition1, condition2):
     """Prints Cohen's d, mean difference, and confidence interval."""
     cohens_d_val = cohens_d_paired(df[condition1], df[condition2])
-    mean_diff, ci = calculate_ci_for_difference(df[condition1], df[condition2], confidence)
+    mean_diff, ci = calculate_ci_for_difference(df[condition1], df[condition2], CONFIDENCE)
 
     print(f"Cohen's d: {cohens_d_val:.2f}")
     print(f"Mean difference ({condition1} - {condition2}): {mean_diff:.2f} ms")
-    print(f"{confidence*100:.0f}% CI: [{ci[0]:.2f}, {ci[1]:.2f}] ms")
+    print(f"{CONFIDENCE*100:.0f}% CI: [{ci[0]:.2f}, {ci[1]:.2f}] ms")
 
 def plot_trial_pressure_individual_for_figure_2(trial_data, trial_number, ax, color):
     """Function to plot the pressure data for an individual trial. It includes vertical 
@@ -466,9 +461,7 @@ def plot_trial_pressure_individual_for_figure_2(trial_data, trial_number, ax, co
     
     stop_moment = trial_data.get('stop_moment', None)
     minimum_ssrt = trial_data.get('minimum_ssrt', None)
-
     ax.plot(time_stamps, pressures, color=color)
-
     if stop_onset_time is not None:
         ax.axvline(x=stop_onset_time, color='#377eb8', linestyle='dotted', linewidth=2, label='Stop Onset')
     if ssrt is not None:
@@ -484,12 +477,11 @@ def plot_trial_pressure_individual_for_figure_2(trial_data, trial_number, ax, co
   
     # specify order 
     order = [0, 3, 1, 2] 
-    
+
     # pass handle & labels lists along with order as below 
     plt.legend([handles[i] for i in order], [labels[i] for i in order], loc="lower left") 
     #ax.legend(loc="lower left")
     ax.grid(True)
-
     ax.set_ylim(-0.05, 1.1)
     ax.set_xlim(0, 3.5)
     ax.xaxis.set_major_locator(MultipleLocator(1))  # Major ticks at every second
@@ -534,7 +526,6 @@ def plot_figure_3_and_4(melted_df, summary_df, value_col, ylabel, filename, ylim
     # Significance annotation (adjust values as needed)
     plt.plot([0, 0, 1, 1], [ylim[1] * 0.95, ylim[1] * 0.96, ylim[1] * 0.96, ylim[1] * 0.95], color='black')  # Adjust y-coordinates as needed for annotation
     plt.text(0.5, ylim[1] * 0.965, "***", ha='center', fontsize=16)
-
     plt.ylim(ylim)
     plt.xlabel('Condition')
     plt.ylabel(ylabel)
@@ -589,22 +580,20 @@ def plot_figure_s2(shared_control_metrics, output_filename):
     ssrt_series_ms = ssrt_series * SECONDS_TO_MILLISECONDS  # Convert to milliseconds
 
     #Filter values
-    below_06_ms = ssrt_series_ms[ssrt_series_ms <= 600] #Filter values below 0.6s = 600ms
+    below_threshold_ms = ssrt_series_ms[ssrt_series_ms <= SSRT_THRESHOLD_FIGURE_S2] #Filter values below threshold ms
 
     plt.figure(figsize=(10, 5))
-    plt.hist(below_06_ms, bins=np.arange(below_06_ms.min(), 530 + 5, 5), alpha=0.7)
+    plt.hist(below_threshold_ms, bins=np.arange(below_threshold_ms.min(), 530 + 5, 5), alpha=0.7)
     plt.axvline(x=175, color='red', linestyle='dashed', linewidth=1, label='175ms')
-
     plt.xlabel('SSRT (ms)')
     plt.ylabel('Frequency')
     plt.legend()
     plt.gca().xaxis.set_major_locator(MultipleLocator(50))
     plt.gca().xaxis.set_minor_locator(MultipleLocator(5))
-
     plt.savefig(output_filename, dpi=300)
     plt.show()
 
-def calculate_confidence_interval_for_figure_s3(data, confidence=0.95):
+def calculate_confidence_interval_for_figure_s3(data):
     """Calculates the confidence interval, ignoring NaN values."""
     a = np.array(data)
     valid_data = a[~np.isnan(a)]  #Filter out NaNs
@@ -614,7 +603,7 @@ def calculate_confidence_interval_for_figure_s3(data, confidence=0.95):
         return (np.nan, np.nan)
 
     m, se = np.mean(valid_data), stats.sem(valid_data)
-    h = se * stats.t.ppf((1 + confidence) / 2., n - 1)
+    h = se * stats.t.ppf((1 + CONFIDENCE) / 2., n - 1)
     return m - h, m + h
 
 def plot_figure_s3(dataframes, labels, colors, output_filename):
