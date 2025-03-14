@@ -68,7 +68,7 @@ def calculate_intervals(time_stamps, pressures, stop_onset, interval_duration=IN
     df_before_stop.loc[:, 'interval'] = (df_before_stop['time_stamps'] // interval_duration).astype(int)
 
     # Group data by interval and calculate average pressure for each
-    pressures_at_intervals = df_before_stop.groupby('interval').apply(calculate_interval_average)
+    pressures_at_intervals = df_before_stop.groupby('interval').apply(calculate_interval_average, include_groups=False)
     return pressures_at_intervals.tolist()
 
 def is_monotonic_decrease(series):
@@ -88,7 +88,7 @@ def find_ssrt(time_stamps, pressures, start_index):
         target_pressure = current_pressure * (1 - THRESHOLD_REDUCTION)
 
         # Check if we have enough points for the next N
-        if i + NEXT_N_POINTS <= len(pressures):
+        if i + NEXT_N_POINTS < len(pressures):
             next_pressures = df['pressures'][i + 1:i + 1 + NEXT_N_POINTS]
             #Handle case where pressure is max:
             if next_pressures.eq(MAX_PRESSURE).any():
@@ -419,7 +419,7 @@ def print_means_t_test(df, condition1, condition2, alpha=0.05):
 def print_effect_size_and_ci(df, condition1, condition2):
     """Prints Cohen's d, mean difference, and confidence interval."""
     cohens_d_val = cohens_d_paired(df[condition1], df[condition2])
-    mean_diff, ci = calculate_ci_for_difference(df[condition1], df[condition2], CONFIDENCE)
+    mean_diff, ci = calculate_ci_for_difference(df[condition1], df[condition2])
 
     print(f"Cohen's d: {cohens_d_val:.2f}")
     print(f"Mean difference ({condition1} - {condition2}): {mean_diff:.2f} ms")
