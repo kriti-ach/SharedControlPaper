@@ -12,7 +12,7 @@ NEXT_N_POINTS = 4 # Check if the next N of these points follow the criteria to c
 MAX_PRESSURE = 1 # Pressure when the subject is fully pressing the spacebar
 MIN_PRESSURE = 0 # Pressure when the subject is not pressing the spacebar
 THRESHOLD_REDUCTION = 0.30 # Check for this much reduction in pressure to start checking for SSRT
-INTERVAL_DURATION = 0.1 # Duration of a time interval, in seconds
+INTERVAL_DURATION = 0.1 # Duration of a time interval, in seconds. Pressures at intervals are calculated with this interval duration.
 EXCLUSIONS = {"s027": ["AI", 80, 96]} # Force-sensitive stopping task trial exclusions
 SECONDS_TO_MILLISECONDS = 1000 # Seconds to milliseconds conversion
 SSRT_THRESHOLD_FIGURE_S2 = 600 # To plot figure S2, we excluded outliers above SSRT_THRESHOLD_FIGURE_S2.
@@ -69,7 +69,6 @@ def calculate_intervals(time_stamps, pressures, stop_onset, interval_duration=IN
 
     # Group data by interval and calculate average pressure for each
     pressures_at_intervals = df_before_stop.groupby('interval').apply(calculate_interval_average)
-
     return pressures_at_intervals.tolist()
 
 def is_monotonic_decrease(series):
@@ -170,24 +169,6 @@ def calculate_go_task_metrics(relative_distances, stop_onset_idx, ring_radius_th
 
     return results
 
-def find_first_non_zero_pressure_timestamp(pressures, time_stamps):
-    """Finds the timestamp of the first occurrence of a pressure exceeding the minimum pressure."""
-    first_non_zero_pressure_timestamp = np.nan
-    for i, pressure in enumerate(pressures):
-        if pressure > MIN_PRESSURE:
-            first_non_zero_pressure_timestamp = time_stamps[i]
-            break
-    return first_non_zero_pressure_timestamp
-
-def find_first_full_pressure_timestamp(pressures, time_stamps):
-    """Finds the timestamp of the first occurrence of a pressure at the maximum pressure."""
-    first_full_pressure_timestamp = np.nan
-    for i, pressure in enumerate(pressures):
-        if pressure == MAX_PRESSURE:
-            first_full_pressure_timestamp = time_stamps[i] 
-            break
-    return first_full_pressure_timestamp
-
 def find_stops_before_stop_onset(pressures, stop_onset_idx):
     """Calculates the proportion of times pressure drops to zero before the stop signal."""
     if stop_onset_idx is None or stop_onset_idx <= 0:
@@ -246,10 +227,6 @@ def process_trial_data(data, block):
         # Find the pressures at time intervals until stop onset
         pressures_at_intervals_until_stop_onset = calculate_intervals(time_stamps, pressures, stop_onset)
 
-        # Find the first timestamp with non-zero pressure
-        first_non_zero_pressure_timestamp = find_first_non_zero_pressure_timestamp(pressures, time_stamps)
-        first_full_pressure_timestamp = find_first_full_pressure_timestamp(pressures, time_stamps)
-
         # Find the proportion of stops before the stop onset
         proportion_stops_before_stop_onset = find_stops_before_stop_onset(pressures, stop_onset_idx)
 
@@ -270,8 +247,6 @@ def process_trial_data(data, block):
             'go_task_accuracy_after_stop_onset': results['go_task_accuracy_after_stop_onset'],
             'ball_after_ring_proportion_before_stop_onset': results['ball_after_ring_proportion_before_stop_onset'],
             'pressures_at_intervals_until_stop_onset': pressures_at_intervals_until_stop_onset,
-            'first_non_zero_pressure_timestamp': first_non_zero_pressure_timestamp,
-            'first_full_pressure_timestamp': first_full_pressure_timestamp,
             'proportion_stops_before_stop_onset': proportion_stops_before_stop_onset,
             'ssrt': ssrt,
             'ssrt_without_minimum_ssrt': ssrt_no_min
@@ -532,6 +507,13 @@ def plot_figure_3_and_4(melted_df, summary_df, value_col, ylabel, filename, ylim
     plt.tight_layout()
     plt.savefig(filename, dpi=300)
     plt.show()
+
+def numeric_sort_key(col_name):
+    match = re.match(r'(\d+)-', col_name)  # Extract the number before the hyphen
+    if match:
+        return int(match.group(1))
+    else:
+        return 0
 
 def plot_figure_s1(survey_results, output_filename):
     """Plots the survey correlation matrix efficiently."""
