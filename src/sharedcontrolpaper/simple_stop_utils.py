@@ -53,7 +53,8 @@ def compute_SSRT(df, without_short_ssd_trials=False): #Added SHORT_SSD_LIMIT
 
 
 def analyze_violations(df):
-    """Analyzes violations (trials where Stop Fail RT > Go RT)."""
+    """Analyzes violations (trials where Stop Fail RT > Go RT). Note: All Go trials followed by a Stop Fail trial 
+    are collected in 'violations'."""
     # Create shifted DataFrames for comparison
     df_shifted = df.shift(-1)
 

@@ -382,7 +382,8 @@ def rename_index_column(df):
 
 def cohens_d_paired(x1, x2):
     """Calculate Cohen's d for paired samples (arrays)"""
-    d = (x1 - x2).mean() / np.sqrt(((x1 - x2).std(ddof=1) ** 2) / 2)
+    differences = x1 - x2
+    d = np.mean(differences) / np.std(differences, ddof=1)
     return d
 
 def calculate_ci_for_difference(x1, x2):
@@ -413,7 +414,7 @@ def print_means_t_test(df, condition1, condition2, alpha=0.05):
 
     print(f'Mean {condition1}: {mean1:.2f}')
     print(f'Mean {condition2}: {mean2:.2f}')
-    print(f"T-statistic: {t_test.statistic:.2f}, p-value: {t_test.pvalue:.2f}")
+    print(f"T-statistic: {t_test.statistic:.2f}, p-value: {t_test.pvalue:.3f}")
     print(f"Significant difference ({condition1} vs {condition2})? {'Yes' if t_test.pvalue < alpha else 'No'}")
 
 def print_effect_size_and_ci(df, condition1, condition2):
