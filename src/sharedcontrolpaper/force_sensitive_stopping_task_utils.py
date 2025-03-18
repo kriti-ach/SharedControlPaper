@@ -531,7 +531,10 @@ def plot_figure_3_and_4(melted_df, summary_df, value_col, ylabel, filename, ylim
 
     # Significance annotation (adjust values as needed)
     plt.plot([0, 0, 1, 1], [ylim[1] * 0.95, ylim[1] * 0.96, ylim[1] * 0.96, ylim[1] * 0.95], color='black')  # Adjust y-coordinates as needed for annotation
-    plt.text(0.5, ylim[1] * 0.965, "***", ha='center', fontsize=16)
+    if value_col == 'SSRT':
+        plt.text(0.5, ylim[1] * 0.965, "***", ha='center', fontsize=16)
+    else:
+        plt.text(0.5, ylim[1] * 0.965, "**", ha='center', fontsize=16)
     plt.ylim(ylim)
     plt.xlabel('Condition')
     plt.ylabel(ylabel)
