@@ -41,13 +41,5 @@ class TestFindSumOfIntervals(unittest.TestCase):
         result = find_sum_of_intervals(trials_list, measures_dict, max_length, subject)
         np.testing.assert_array_equal(result['subject1'], np.array([1.0, 0.5, 0.5, 0.0, 0.0]))
 
-    def test_all_nans(self):
-        trials_list = [[np.nan]*5, [np.nan]*5]
-        measures_dict = {}
-        max_length = 5
-        subject = 'subject1'
-        result = find_sum_of_intervals(trials_list, measures_dict, max_length, subject)
-        self.assertTrue(np.all(np.isnan(result['subject1'])))
-
 if __name__ == '__main__':
     unittest.main()

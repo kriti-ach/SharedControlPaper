@@ -179,6 +179,24 @@ def find_stops_before_stop_onset(pressures, stop_onset_idx):
     proportion_zero = num_zero_pressures / len(relevant_pressures) if len(relevant_pressures)>0 else np.nan
     return proportion_zero
 
+def find_first_non_zero_pressure_timestamp(pressures, time_stamps):
+    """Finds the timestamp of the first occurrence of a pressure exceeding the minimum pressure."""
+    first_non_zero_pressure_timestamp = np.nan
+    for i, pressure in enumerate(pressures):
+        if pressure > MIN_PRESSURE:
+            first_non_zero_pressure_timestamp = time_stamps[i]
+            break
+    return first_non_zero_pressure_timestamp
+ 
+def find_first_full_pressure_timestamp(pressures, time_stamps):
+    """Finds the timestamp of the first occurrence of a pressure at the maximum pressure."""
+    first_full_pressure_timestamp = np.nan
+    for i, pressure in enumerate(pressures):
+        if pressure == MAX_PRESSURE:
+            first_full_pressure_timestamp = time_stamps[i] 
+            break
+    return first_full_pressure_timestamp
+
 def process_trial_data(data, block):
     """Process trial data for a specific block, calculating metrics including SSRT,
     moment of inhibition, and pressure measures."""
@@ -230,6 +248,10 @@ def process_trial_data(data, block):
         # Find the proportion of stops before the stop onset
         proportion_stops_before_stop_onset = find_stops_before_stop_onset(pressures, stop_onset_idx)
 
+        #Find the first non-zero and full pressure timestamps
+        first_non_zero_pressure_timestamp = find_first_non_zero_pressure_timestamp(pressures, time_stamps)
+        first_full_pressure_timestamp = find_first_full_pressure_timestamp(pressures, time_stamps)
+
         trial_results[trial_number] = {
             'stop_onset': stop_onset,
             'stop_moment': pressure_reached_zero,
@@ -248,6 +270,8 @@ def process_trial_data(data, block):
             'ball_after_ring_proportion_before_stop_onset': results['ball_after_ring_proportion_before_stop_onset'],
             'pressures_at_intervals_until_stop_onset': pressures_at_intervals_until_stop_onset,
             'proportion_stops_before_stop_onset': proportion_stops_before_stop_onset,
+            'first_non_zero_pressure_timestamp': first_non_zero_pressure_timestamp,
+            'first_full_pressure_timestamp': first_full_pressure_timestamp,
             'ssrt': ssrt,
             'ssrt_without_minimum_ssrt': ssrt_no_min
         }
@@ -324,6 +348,12 @@ def calculate_proportions_non_nan(results):
     total_counts[condition] = total_count
 
   return counts, total_counts
+
+def calculate_mean_ssd(results):
+    ssds = []
+    for condition, data_list in results.items():
+        ssds.extend(data_list)
+    return np.mean(ssds)
 
 def grab_mean_metric_by_halves(shared_control_metrics, measure):
     """Calculates mean metrics split by trial halves."""
@@ -455,7 +485,7 @@ def plot_trial_pressure_individual_for_figure_2(trial_data, trial_number, ax, co
     order = [0, 3, 1, 2] 
 
     # pass handle & labels lists along with order as below 
-    plt.legend([handles[i] for i in order], [labels[i] for i in order], loc="lower left") 
+    plt.legend([handles[i] for i in order], [labels[i] for i in order], loc="lower left", bbox_to_anchor=(0.1, 0)) 
     #ax.legend(loc="lower left")
     ax.grid(True)
     ax.set_ylim(-0.05, 1.1)
