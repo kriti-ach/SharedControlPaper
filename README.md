@@ -57,6 +57,9 @@ If running the notebooks in VSCode, just select `sharedcontrolpaper` from the ro
         * [preprocessing.py]: Run this script to preprocess data if you acquire any new data.
 - /tables:  
     - Contains the tables in the paper.
+-/tests:
+    - Contains tests for major functions.
+    - Run tests using `uv run pytest`
 
 ## Running the force-sensitive stopping task:
 
